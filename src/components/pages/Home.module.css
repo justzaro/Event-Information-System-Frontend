@@ -1,0 +1,23 @@
+.green-rectangle {
+    background-color: #191717; /* Light green color */
+    padding: 20px;
+    text-align: center;
+  }
+
+  .green-rectangle p {
+    font-size: 16px;
+    text-align: center;
+    color: #fff; /* White text color */
+  }
+  
+  .green-rectangle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .green-rectangle img {
+    height: 100px;
+    width: 100px;
+  }

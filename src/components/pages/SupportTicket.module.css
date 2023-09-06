@@ -1,0 +1,134 @@
+.support-ticket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+.support-ticket-container h1 {
+  margin-top: 100px;
+  font-size: 35px;
+}
+
+.support-ticket-container p {
+  margin-top: 0px;
+  font-size: 22px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.support-ticket-form {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  /* max-width: 750px; */
+  width: 750px; /*width:100% */
+}
+
+.form-row {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 5px;
+  width: 750px;
+}
+
+input[type="supportText"],
+textarea {
+  height: 10px;
+  flex: 1;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 18px;
+  outline: none;
+  font-family: inherit;
+}
+
+.email-input {
+  max-width: 350px;
+}
+
+.name-input {
+  max-width: 150px;
+}
+
+.description-input {
+  flex: 1;
+  height: 200px;
+  resize: none;
+  min-width: 200px;
+}
+
+.submit-button {
+  background-color: #191717;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 648px;
+  margin-top: 0px;
+}
+
+.submit-button:hover {
+  background-color: #383636;
+}
+
+.success-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+}
+
+.fail-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+@keyframes slide-in {
+  0% {
+    top: -80px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -80px;
+  }
+}
+
+.paragraph-wrapper {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.paragraph-wrapper p {
+  font-size: 20px;
+  text-align: justify;
+}

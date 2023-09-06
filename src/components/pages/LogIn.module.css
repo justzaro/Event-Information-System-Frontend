@@ -1,0 +1,177 @@
+.LogIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+.login-container {
+  background-color: #F4F4F4; 
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 400px;
+  height: 350px;
+  text-align: center;
+  position: relative;
+}
+
+.login-container p {
+ font-size: 20px;
+ margin-top: 15px;
+ color: #191717;
+ text-align: center;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  margin-right: -30px;
+  display: flex;
+  flex-direction: column; /* Change to a column layout */
+  width: 375px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.large-input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  margin-bottom: -10px; /* Add margin between input fields */
+}
+
+.large-button {
+  background-color: #FE6F57;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 25px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.large-button:hover {
+  background-color: #d04e37;
+}
+
+.line {
+  margin-top: 10px;
+  size: 300px;
+}
+
+.login-container a {
+text-decoration: none;
+font-size: 20px;
+margin-top: 20px;
+}
+
+.create-account-button {
+margin-right: 50px;
+margin-top: 12px;
+background-color: #FE6F57; /*#191717*/
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 25px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-weight: bold;
+
+}
+
+.create-account-button:hover {
+background-color: #d04e37;
+}
+
+.success-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 120px;
+}
+
+.fail-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+
+/* Animation for sliding the message box in */
+@keyframes slide-in {
+  0% {
+    top: -80px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+/* Animation for sliding the message box out */
+@keyframes slide-out {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -80px;
+  }
+}
+
+.large-input.show-password {
+  width: 375px; /* Adjust as needed to prevent resizing */
+  padding-right: 11px; /* Adjust as needed to prevent resizing */
+  padding-bottom: 11px; /* Adjust as needed to prevent resizing */
+  overflow: hidden;
+}
+
+@keyframes iconTransition {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.eye-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 35px;
+  top: 25.8%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+
+

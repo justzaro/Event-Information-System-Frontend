@@ -1,0 +1,93 @@
+.navbar {
+    position: fixed; /* Set the navigation bar to a fixed position */
+    top: 0; /* Position it at the top of the viewport */
+    width: 100%; /* Make it span the full width of the viewport */
+    background-color: #191717;
+    color: white;
+    height: 80px; /* Set a fixed height for the navigation bar */
+  display: flex; /* Use flexbox to center items vertically */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Add space between items */
+  padding: 0 20px; /* Adjust horizontal padding */
+  font-family: Tahoma;
+  }
+  
+  .nav-list {
+    list-style: none;
+    display: flex; /* Make the list items display horizontally */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin-right: 30px; /* Add spacing between navigation items */
+    margin-left: 0px; /* Add spacing between navigation items */
+    margin-top: 22px;
+    font-size: 20px;
+  }
+
+  
+  .nav-item:last-child {
+    margin-right: 0; /* Remove margin from the last item */
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: white;
+    
+  display: flex; /* Add this to enable flex layout */
+  align-items: center; /* Center items vertically */
+  }
+
+  .nav-image {
+    width: 70px; /* Set the desired width for the image */
+    height: 70px; /* Set the desired height for the image */
+    margin-right: 30px; /* Adjust spacing between the image and text */
+  }
+
+  .nav-image-container {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  /* Existing CSS styles for .navbar and other elements */
+
+/* Add this CSS for the hover effect */
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s; /* Add transition for text color change */
+  }
+  
+  /* Add a pseudo-element for the white bar */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0; /* Place the bar at the bottom of the link */
+    width: 100%;
+    height: 3px;
+    background-color: #FE6F57;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s; /* Add transition for scaling animation */
+    opacity: 0; /* Initially hide the bar */
+    bottom: -5px;
+  }
+  
+  /* Apply the hover effect */
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    opacity: 1; /* Show the bar on hover */
+  }
+  
+  .nav-right {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    margin-top: -20px;
+    /* Add any additional styles you want to position the right-aligned items */
+  }
+ 
