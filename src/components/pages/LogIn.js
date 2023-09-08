@@ -86,7 +86,6 @@ function LogIn() {
           <FontAwesomeIcon
             icon={showPassword ? solidEye : thinEye} // Use solid or thin version based on showPassword
             className={styles['eye-icon']}
-            style={{ width: '25px', height: '25px' }}
             onClick={togglePasswordVisibility}
           />
         </div>

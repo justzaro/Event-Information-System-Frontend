@@ -34,11 +34,16 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.input-container input::placeholder {
+  font-weight: 100;
+  color: black;
+}
+
 .large-input {
   width: 100%;
   padding: 15px;
   border: 1px solid #ccc;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: -10px; /* Add margin between input fields */
 }
 
@@ -142,9 +147,9 @@ background-color: #d04e37;
 }
 
 .large-input.show-password {
-  width: 375px; /* Adjust as needed to prevent resizing */
+  width: 379px; /* Adjust as needed to prevent resizing */
   padding-right: 11px; /* Adjust as needed to prevent resizing */
-  padding-bottom: 11px; /* Adjust as needed to prevent resizing */
+  padding-bottom: 15px; /* Adjust as needed to prevent resizing */
   overflow: hidden;
 }
 
@@ -167,8 +172,8 @@ background-color: #d04e37;
   width: 25px;
   height: 25px;
   position: absolute;
-  right: 35px;
-  top: 25.8%;
+  right: 32px;
+  top: 28.5%;
   transform: translateY(-50%);
   cursor: pointer;
 }

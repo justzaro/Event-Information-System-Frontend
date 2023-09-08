@@ -5,18 +5,19 @@
   border-radius: 2px; /* Remove rounded corners */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   height: auto;
   background-color: #f4f4f4;
   padding: 20px; /* Add some padding to the form */
-  margin-left: 750px;
-  margin-top: 200px;
-  width: 20%;
+  margin-left: 720px;
+  margin-top: 170px;
+  width: 25%;
 }
 
 .registration-form h2 {
-  font-size: 30px;
+  font-size: 35px;
+  text-align: center;
 }
 
 .form-group {
@@ -24,7 +25,8 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
-  width: 100%;
+  margin-right: 100px;
+  width: 100%; /*input fields length */
 }
 
 .form-group select {
@@ -41,18 +43,22 @@
   margin-right: 0;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.form-group input {
   flex: 1; /* Make the text input fields span 100% */
   padding: 11px; /* Increased padding */
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 18px; /* Increased font size */
+  font-size: 20px; /* Increased font size */
   margin-right: 10px; /* Add spacing between input fields */
   font-family: Arial, Helvetica, sans-serif;
+  height: 30px; /* input fields height */
+  font-weight: 100;
 }
 
+.form-group input::placeholder {
+  font-weight: 100;
+  color: black;
+}
 /* Remove spacing between text input fields */
 .form-group input:last-child {
   margin-right: 0;
@@ -70,4 +76,68 @@ input[type="password"] {
   width: 100%;
   margin-top: 20px;
   font-weight: bold;
+}
+
+.register-success-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+}
+
+.register-fail-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+@keyframes slide-in {
+  0% {
+    top: -80px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -80px;
+  }
+}
+
+.register-eye-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 720px;
+  top: 580px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.register-show-password {
+  width: 379px; /* Adjust as needed to prevent resizing */
+  padding-right: 11px; /* Adjust as needed to prevent resizing */
+  padding-bottom: 15px; /* Adjust as needed to prevent resizing */
+  overflow: hidden;
 }
