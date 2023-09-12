@@ -24,7 +24,7 @@ const Events = () => {
         console.log('Fetched eventData:', data);
         setEventData(data);
       })
-      .catch((error) => setError(error.message));
+       .catch((error) => setError(error.message));
   }, []);
 
   return (

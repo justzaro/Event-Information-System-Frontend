@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styles from './LogIn.module.css'; // Import CSS module
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
 import { faEye as thinEye } from '@fortawesome/free-regular-svg-icons';
 
 function LogIn() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -18,6 +18,8 @@ function LogIn() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const confirmationStatus = queryParams.get('confirmationStatus');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (confirmationStatus === 'success') {
@@ -35,10 +37,29 @@ function LogIn() {
     }
   }, [confirmationStatus]);
 
-  const handleLogin = () => {
-    if (email && password) {
-      // Handle the login logic here, e.g., send a request to your backend
-      alert(`Logged in with Email: ${email} and Password: ${password}`);
+  const handleLogin = async () => {
+    if (username && password) {
+      try {
+        const response = await fetch('http://localhost:8080/auth/authenticate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }), // Send email and password in the request body
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          const jwtToken = data.token; // Assuming the token is returned as 'token' in the response
+  
+          localStorage.setItem('jwtToken', jwtToken);
+          navigate('/events');
+        } else {
+          alert('Login failed. Please check your credentials.');
+        }
+      } catch (error) {
+        console.error('An error occurred during login:', error);
+      }
     } else {
       alert('Please fill in both fields.');
     }
@@ -65,9 +86,9 @@ function LogIn() {
         <div className={styles['input-container']}>
           <input
             type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className={styles['large-input']} // Use styles from the module
           />
         </div>

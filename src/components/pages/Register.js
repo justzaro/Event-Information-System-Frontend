@@ -255,6 +255,9 @@ const Register = () => {
             Register
           </button>
         </div>
+        <p className="information-paragraph">Please enter an email address that you frequently
+           use since all order and purchase information, as well as ticket information,
+            will be sent to this email!</p>
       </form>
     </div>
   );

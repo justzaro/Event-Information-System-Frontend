@@ -91,3 +91,31 @@
     /* Add any additional styles you want to position the right-aligned items */
   }
  
+  .my-profile-arrow {
+    font-size: 20px; /* Adjust the size of the arrow as needed */
+    vertical-align: middle; /* Vertically align the arrow with the text */
+    margin-left: 10px; /* Add some spacing between the text and arrow */
+  }
+
+  .shopping-bag {
+    margin-top: -5px; /*adjust shopping bag position - change nav-right margin top as well*/
+    font-size: 30px;
+    vertical-align: middle; /* Vertically align the arrow with the text */
+  }
+
+  .shopping-bag-dot {
+    position: absolute;
+    margin-top: 30px; /* Adjust the top position to place the dot correctly */
+    margin-left: 10px; /* Adjust the right position to place the dot correctly */
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%; /* Create a circular shape for the dot */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Tahoma;
+  }
