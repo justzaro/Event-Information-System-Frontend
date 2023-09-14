@@ -1,0 +1,224 @@
+/* EventDetail.css */
+
+.event-detail-container {
+    margin-top: 200px;
+    margin-left: 500px;
+    max-width: 1200px;
+    padding: 20px;
+    font-family: Tahoma;
+  }
+  
+  .event-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-left: -500px;
+    margin-top: -100px;
+  }
+  
+  .event-header .small-icon {
+    font-size: 18px;
+    margin-right: 5px;
+    color: #d11212;
+  }
+  
+  .event-link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #d11212;
+  }
+
+  .event-link:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color: #d11212;
+  }
+  
+  .event-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #191919;
+  }
+  
+  .event-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .event-image {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+  }
+  
+  .event-image img {
+    max-width: 800px;
+    max-height: 800px;
+    border-radius: 5px;
+    margin-top: 20px; /* Adjust as needed */
+  }
+  
+  .event-info {
+    flex: 1;
+    margin-left: 15px;
+  }
+  
+  .event-name-big {
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: -1315px;
+    margin-top: -5px;
+  }
+  
+  .price-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 300px;
+    height: 250px;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
+  }
+  
+    .ticket-price-info {
+        font-size: 18px;
+        margin-left: -90px;
+        padding-top: 15px;
+    }
+
+  .ticket-price {
+    font-size: 30px;
+    padding-top: -5px;
+    padding-bottom: 25px;
+    font-weight: bold;
+    color: #ff6600;
+    margin-right: 130px;
+  }
+  
+  .divider {
+    margin: 10px -20px;
+    border: none;
+    border-top: 1px solid #ddd;
+  }
+  
+  .ticket-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .control-button {
+    background: #191919;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  
+  .ticket-input {
+    width: 50px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 7px;
+  }
+  
+  .buy-button {
+    background: #191919;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    font-size: 19px;
+    cursor: pointer;
+    margin-right: 75px;
+  }
+  
+  .event-location {
+    font-size: 20px;
+    text-align: left;
+    padding-top: 8px;
+    margin-left: 10px;
+  }
+  
+  .event-location img {
+    width: 16px;
+    height: 20px;
+  }
+
+  .event-description-heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .event-description {
+    font-size: 16px;
+  }
+  
+  .event-artists-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .event-artists {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .artist-name {
+    margin-right: 10px;
+  }
+  
+ /* EventDetail.css */
+
+/* ... (previous styles) */
+
+.event-link,
+.small-icon {
+  position: relative; /* Create a relative positioning context */
+  text-decoration: none; /* Remove the default underline */
+  transition: color 0.3s ease; /* Smoothly transition text color */
+}
+
+.event-link::before,
+.small-icon::before {
+  content: ''; /* Create a pseudo-element for the line */
+  position: absolute;
+  width: 0px;
+  height: 100%; /* Set the initial line thickness */
+  transition: background-color 0.8s ease, width 0.4s ease; /* Smoothly transition line color and height */
+  z-index: -1;
+}
+
+.event-link::before,
+.small-icon::before {
+  content: ''; /* Create a pseudo-element for the line */
+  position: absolute;
+  width: 0px;
+  height: 100%; /* Set the initial line thickness */
+  transition: background-color 0.8s ease, width 0.4s ease; /* Smoothly transition line color and height */
+  z-index: -1;
+}
+
+.event-link:hover::before,
+.small-icon:hover::before {
+  width: 100%; /* Expand the line to encapsulate the text */
+  background: #d11212; /* Line color when hovered */
+}
+
+.event-link:hover,
+.small-icon:hover {
+  color: #191919; /* Change text color to white when hovered */
+}

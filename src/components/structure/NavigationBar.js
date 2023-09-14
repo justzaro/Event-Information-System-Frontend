@@ -22,7 +22,6 @@ const NavigationBar = () => {
   useEffect(() => {
     // Update the loggedIn state whenever the location changes
     setLoggedIn(isAuthenticated());
-    console.log(getUsernameFromToken());
 
     // Make a GET request to fetch the cart item count
     if (loggedIn) {
@@ -116,10 +115,10 @@ const NavigationBar = () => {
               </li>
 
               <li className={styles['nav-item']}>
-                <Link to="/cart-items"
+                <Link to="/cart"
                 >
                   <FontAwesomeIcon icon={faBagShopping} className={styles['shopping-bag']} />
-                  <div className={styles['shopping-bag-dot']}>{cartItemCount}</div> {/* Change the number to represent the item count */}
+                  <div className={styles['shopping-bag-dot']}>{cartItemCount}</div>
                 </Link>
               </li>
 

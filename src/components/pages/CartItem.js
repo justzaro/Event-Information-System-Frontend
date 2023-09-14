@@ -46,10 +46,10 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
         <div className="item-quantity">{ticketQuantity}</div>
       </div>
       <div className="cart-column">
-        <div className="item-price">{ticketPrice}</div>
+        <div className="item-price">{ticketPrice.toFixed(2)} лв.</div>
       </div>
       <div className="cart-column">
-        <div className="item-total">{totalPrice}</div>
+        <div className="item-total">{totalPrice.toFixed(2)} лв.</div>
       </div>
       <div className="cart-column">
       <div className="item-actions">

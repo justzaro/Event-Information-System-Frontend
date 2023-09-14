@@ -8,6 +8,7 @@ import NavigationBar from './components/structure/NavigationBar';
 import LogIn from './components/pages/LogIn';
 import Register from './components/pages/Register';
 import CartItems from './components/pages/CartItems';
+import EventDetail from './components/pages/EventDetail';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <Route path="/support-tickets" element={<SupportTicket />} />
           <Route path="/log-in" element={<LogIn />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/cart-items" element={<CartItems />} />
+          <Route path="/cart" element={<CartItems />} />
+          <Route path="/event/:eventId" element={<EventDetail />} />
         </Routes>
         <NavigationBar />
       </div>

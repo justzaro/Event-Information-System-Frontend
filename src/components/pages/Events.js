@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Events.module.css'; // Import CSS module
 import Layout from '../structure/Layout';
+import { Link } from 'react-router-dom';
+
 
 const Events = () => {
   const [eventData, setEventData] = useState([]);
@@ -30,13 +32,14 @@ const Events = () => {
   return (
     <Layout>
       <div>
-        <h1>Events</h1>
+        <h1>Eventsss</h1>
         {error ? (
           <p>Error: {error}</p>
         ) : eventData.length > 0 ? (
           <div className={styles['event-cards-container']}>
             {eventData.map((event, index) => (
               <div key={index} className={styles['event-card']}>
+                <Link to={`/event/${event.id}`}>                
                 <img
                   src={`http://localhost:8080/events/event-picture/${event.name}`}
                   alt={`${event.name}'s Event`}
@@ -76,6 +79,7 @@ const Events = () => {
                   </div>
                   <p>{event.description}</p>
                 </div>
+                </Link>
               </div>
             ))}
           </div>
