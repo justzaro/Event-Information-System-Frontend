@@ -93,6 +93,11 @@ const NavigationBar = () => {
               </Link>
             </li>
             <li className={styles['nav-item']}>
+              <Link to="/posts" className={styles['nav-link']}>
+                Posts
+              </Link>
+            </li>
+            <li className={styles['nav-item']}>
               <Link to="/support-tickets" className={styles['nav-link']}>
                 Support
               </Link>

@@ -11,7 +11,7 @@ import CartItems from './components/pages/CartItems';
 import EventDetail from './components/pages/EventDetail';
 import MyOrders from './components/pages/MyOrders';
 import OrderDetails from './components/pages/OrderDetails';
-
+import PostsPage from './components/pages/PostsPage';
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
           <Route path="/event/:eventId" element={<EventDetail />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/order/:orderId" element={<OrderDetails />} />
+          <Route path="/posts" element={<PostsPage />} />
         </Routes>
         <NavigationBar />
         {/* <Footer /> */}

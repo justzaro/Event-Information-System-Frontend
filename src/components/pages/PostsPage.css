@@ -1,0 +1,141 @@
+/* PostsPage.css */
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  
+  .post {
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+  
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 416px;
+    padding-bottom: 5px;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .post-date {
+    color: #888;
+  }
+  
+  .post-image {
+    width: 600px;
+    height: 550px;
+  }
+  
+  .comments-button {
+    display: flex;
+    justify-content: flex-start; /* Align the button to the left below the image */
+    margin-top: 10px; /* Adjust the spacing between the image and the button */
+  }
+  
+  .view-comments-button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    cursor: pointer;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+  
+  hr {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 20px 0;
+  }
+  
+  .comments-window {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    z-index: 9999;
+    width: 400px;
+    height: 600px;
+    overflow-y: auto;
+  }
+  
+  .show-comments {
+    display: block;
+  }
+  
+  .close-comments-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+  }
+  
+  .comment {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    margin-bottom: 10px;
+  }
+  
+  .comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .comment-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .comment-username {
+    font-weight: bold;
+    color: #f49519;
+    margin-top: -5px;
+  }
+  
+  .comment-body {
+    margin-left: 2px;
+    margin-top: 10px;
+    max-width: 350px;
+    word-wrap: break-word;
+  }
+  
+  .comment-date {
+    color: #888;
+    font-size: 12px;
+    margin-left: auto;
+  }
