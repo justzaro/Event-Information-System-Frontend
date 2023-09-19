@@ -14,6 +14,7 @@ const CartItems = () => {
   const [couponResult, setCouponResult] = useState(null); 
   const navigate = useNavigate();
   const [showEmptyPromoCodeField, setShowEmptyPromoCodeField] = useState(false);
+  const [showSuccessfulOrderMessage, setShowSuccessfulOrderMessage] = useState(false);
 
   useEffect(() => {
     const username = getUsernameFromToken();
@@ -74,9 +75,18 @@ const CartItems = () => {
     const jwtToken = localStorage.getItem('jwtToken');
 
     if (username && jwtToken) {
+
+      let orderCreationUrl = `http://localhost:8080/orders/create/${username}`;
+
+      // Check if a coupon value is provided
+      if (couponValue.trim() !== '') {
+        // Append the couponCode query parameter if a coupon value is present
+        orderCreationUrl += `?couponCode=${couponValue}`;
+      }
+
         // Make a POST request to create the order
         try {
-          const response = await fetch(`http://localhost:8080/orders/create/${username}`, {
+          const response = await fetch(orderCreationUrl, {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${jwtToken}`,
@@ -88,14 +98,33 @@ const CartItems = () => {
           if (response.ok) {
             // Check if the response contains JSON data before parsing
             const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-              const data = await response.json();
-              // Handle the response from the order creation, e.g., show a success message
-              console.log('Order created:', data);
-            } else {
-              // Handle the case where the response is not JSON (e.g., empty response)
-              console.error('Error creating order: Invalid or empty response');
-            }
+            // if (contentType && contentType.includes('application/json')) {
+            //   const data = await response.json();
+            //   // Handle the response from the order creation, e.g., show a success message
+            //   console.log('Order created:', data);
+            // } else {
+            //   // Handle the case where the response is not JSON (e.g., empty response)
+            //   console.error('Error creating order: Invalid or empty response');
+            // }
+        
+            
+
+        // Wait for a few seconds (e.g., 3 seconds) before showing the success message
+        
+        setShowSuccessfulOrderMessage(true);
+        
+        setTimeout(() => {
+          // Reload the page after the wait time
+          setShowSuccessfulOrderMessage(false);
+        }, 3000);    
+
+        setTimeout(() => {
+          // Reload the page after the wait time
+          window.location.reload();
+        }, 4000);
+
+        // Wait for a few more seconds (e.g., 4 seconds) before showing the success message
+        
           } else {
             const errorData = await response.json();
             const errorMessage = errorData.message;
@@ -121,8 +150,8 @@ const CartItems = () => {
       <div className="empty-cart-message">
         <h1><FontAwesomeIcon icon={faBagShopping} size="1xl" className="empty-cart-bag" />Your cart is empty</h1>
         <p>Browse our vast selection of events to find your favourites!</p>
-        <Link to="/" className="white-button">
-          Home page
+        <Link to="/events" className="white-button">
+          Events page
         </Link>
       </div>
     );
@@ -135,6 +164,17 @@ const CartItems = () => {
           Coupon code is empty!
         </div>
       )}
+
+{showSuccessfulOrderMessage && (
+        <div className="successful-order-message">
+          Your order has been successful!
+        </div>
+      )}
+
+          <div className="cart-page-heading">
+            <h1>Shopping Cart</h1>
+          </div>
+
       <div className="cart-header">
         <div className="header-image">Image</div>
         <div className="header-name">Event Name</div>

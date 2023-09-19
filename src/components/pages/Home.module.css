@@ -1,7 +1,8 @@
-.green-rectangle {
+  .green-rectangle {
     background-color: #191717; /* Light green color */
     padding: 20px;
     text-align: center;
+    margin-bottom: -40px;
   }
 
   .green-rectangle p {
@@ -20,4 +21,105 @@
   .green-rectangle img {
     height: 100px;
     width: 100px;
+  }
+
+  .events-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .arrow {
+    font-size: 30px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  
+  .events-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  }
+  
+  .event-box {
+    border: 1px solid #ccc;
+    margin: 5px;
+    margin-top: 10px;
+    width: 320px;
+    height: 470px;
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+    background-color: #fff;
+    
+  }
+  
+  .event-box.hovered {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .event-box img {
+    width: 320px;
+    height: 250px;
+  }
+  
+  .event-details {
+    padding: 10px;
+  }
+  
+  .event-name {
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: -200px;
+    margin-right: 40px;
+  }
+  
+  .event-price {
+    font-size: 24px;
+    margin-top: 70px;
+    font-weight: bold;
+    color: #FE6F57;
+  }
+  
+  .event-location {
+    font-size: 18px;
+    margin-top: -25px;
+    margin-left: 28px;
+  }
+  
+  .event-details .location-icon {
+    width: 15px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
+  .buy-tickets-button {
+    margin-left: 188px;
+    margin-top: 170px;
+    background-color: #FE6F57;
+    color: #fff;
+    border: none;
+    width: 120px;
+    height: 34px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .buy-tickets-button:hover {
+    background-color: #f65f44;
+  }
+
+  .main-event-heading {
+    margin-top: 100px;
+    margin-left: 750px;
+  }
+
+  .main-event-slogan {
+    margin-top: -10px;
+    margin-left: 530px;
+    font-size: 22px;
   }

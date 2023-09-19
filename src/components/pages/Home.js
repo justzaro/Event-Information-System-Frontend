@@ -1,11 +1,100 @@
-import React from 'react';
-import styles from './Home.module.css'; // Import CSS module
+import React, { useState, useEffect } from 'react';
+import styles from './Home.module.css';
 
 const Home = () => {
+  const [events, setEvents] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [startIndex, setStartIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0); // Track the current index manually
+
+
+  useEffect(() => {
+    // Fetch event data from the API endpoint
+    fetch('http://localhost:8080/events')
+      .then((response) => response.json())
+      .then((data) => setEvents(data))
+      .catch((error) => console.error('Error fetching events:', error));
+  }, []);
+
+  const navigateLeft = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 1);
+    } else {
+      setStartIndex(events.length - 6);
+    }
+  };
+
+  const navigateRight = () => {
+    if (startIndex + 6 < events.length) {
+      setStartIndex(startIndex + 1);
+    } else {
+      setStartIndex(0);
+    }
+  };
+
   return (
     <div className={styles['home-container']}>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is a basic home page component.</p>
+
+      <h1 className={styles['main-event-heading']}>Our Most Prominent Events</h1>
+      <p className={styles['main-event-slogan']}>Browse our vast selection of events, choose your favourites and reserve your tickets!</p>
+
+      {/* Event Carousel */}
+      <div className={styles['events-carousel']}>
+        <div className={styles['arrow']} onClick={navigateLeft}>
+          &lt;
+        </div>
+        <div className={styles['events-container']}>
+          {events.slice(startIndex, startIndex + 5).map((event, index) => (
+            <div
+              key={event.id}
+              className={`${styles['event-box']} ${
+                hoveredIndex === index + startIndex ? styles['hovered'] : ''
+              }`}
+              onClick={() => {
+                // Redirect to /event/id
+                // You can implement the redirection logic here
+              }}
+              onMouseEnter={() => setHoveredIndex(index + startIndex)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <img
+                src={`http://localhost:8080/events/event-picture/${event.name}`}
+                alt={event.name}
+              />
+              <button className={styles['buy-tickets-button']} onClick={() => {
+                    
+                  }}>
+                    Buy Tickets
+                  </button>
+              <div className={styles['event-details']}>
+                <p className={styles['event-name']}>{event.name}</p>
+                <p className={styles['event-price']}>{event.ticketPrice.toFixed(2)} лв.</p>
+                <img
+                      src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
+                      alt="Location Icon"
+                      className={styles['location-icon']}
+                  />
+                <p className={styles['event-location']}>
+                  
+                  {event.location.split(',')[0]}
+                </p>
+                
+                
+                
+              </div>
+              {/* <button className={styles['buy-tickets-button']} onClick={() => {
+                    
+                  }}>
+                    Buy Tickets
+                  </button> */}
+            </div>
+          ))}
+        </div>
+        <div className={styles['arrow']} onClick={navigateRight}>
+          &gt;
+        </div>
+      </div>
+
       <div className={styles['green-rectangle']}>
         <img
           src="https://www.freeiconspng.com/thumbs/hd-tickets/download-ticket-ticket-free-entertainment-icon-orange-ticket-design-0.png"

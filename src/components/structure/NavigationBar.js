@@ -118,6 +118,7 @@ const NavigationBar = () => {
                 <Link to="/cart"
                 >
                   <FontAwesomeIcon icon={faBagShopping} className={styles['shopping-bag']} />
+                  {/* maybe remove red dot if count is 0 */}
                   <div className={styles['shopping-bag-dot']}>{cartItemCount}</div>
                 </Link>
               </li>
