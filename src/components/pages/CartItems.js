@@ -29,6 +29,7 @@ const CartItems = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setCartItems(data);
         })
         .catch((error) => {

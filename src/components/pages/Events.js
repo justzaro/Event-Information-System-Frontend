@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Events.module.css'; // Import CSS module
-import Layout from '../structure/Layout';
 import { Link } from 'react-router-dom';
 
 
@@ -30,7 +29,7 @@ const Events = () => {
   }, []);
 
   return (
-    <Layout>
+    
       <div>
         <h1>Eventsss</h1>
         {error ? (
@@ -87,7 +86,7 @@ const Events = () => {
           <p>Loading event data...</p>
         )}
       </div>
-    </Layout>
+   
   );
 };
 

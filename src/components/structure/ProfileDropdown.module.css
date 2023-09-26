@@ -1,17 +1,47 @@
 /* ProfileDropdown.module.css */
-.dropdown {
+/* .dropdown {
     position: absolute;
-    top: 100%; /* Position the dropdown just below the "My Profile" tab */
-    right: 7.9%; /* right-left position */
+    top: 100%;
+    right: 7.9%; 
     background-color: #fff;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1;
-    margin-top: -10px; /* change distance from 'My Profile' text to end start of the menu */
+
     border-radius: 5px;
-    opacity: 0; /* Start with opacity at 0 to hide the dropdown */
-    transition:opacity 0.3s ease; /* Add a transition for opacity with a opacity with a 0.3s duration */
-  }
+    opacity: 0; 
+    transition:opacity 0.3s ease;
+  } */
   
+  /* ProfileDropdown.module.css */
+.dropdownContainer {
+  position: relative;
+  display: inline-block; /* Make the container inline-block */
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none; /* Initially hide the dropdown */
+  margin-top: 0px; 
+  margin-right: -135px;
+}
+
+/* Use :hover on the container to control the dropdown visibility */
+.dropdownContainer:hover .dropdown {
+  display: block;
+  opacity: 1;
+}
+
+/* Rest of your CSS styles remain the same */
+
+
   .dropdown.active {
     display: block;
     opacity: 1;
@@ -22,6 +52,7 @@
     padding: 0;
     margin: 0;
     font-size: 20px;
+    width: 160px;
   }
   
   .dropdown-list li {

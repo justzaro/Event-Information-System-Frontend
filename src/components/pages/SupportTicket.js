@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Layout from '../structure/Layout';
 import styles from './SupportTicket.module.css';
 
 const SupportTicket = () => {

@@ -87,7 +87,7 @@
     display: flex;
     align-items: center;
     margin-right: 50px;
-    margin-top: -20px;
+    margin-top: 0px;
     /* Add any additional styles you want to position the right-aligned items */
   }
  
@@ -99,6 +99,12 @@
 
   .shopping-bag {
     margin-top: -5px; /*adjust shopping bag position - change nav-right margin top as well*/
+    font-size: 30px;
+    vertical-align: middle; /* Vertically align the arrow with the text */
+  }
+
+  .notification-bell {
+    margin-top: -20px; /*adjust shopping bag position - change nav-right margin top as well*/
     font-size: 30px;
     vertical-align: middle; /* Vertically align the arrow with the text */
   }
@@ -119,3 +125,103 @@
     font-weight: bold;
     font-family: Tahoma;
   }
+  
+  .custom-notification-bell {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  .notification-count {
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 4px 8px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  
+  .notification-menu {
+    position: absolute;
+  top: 40px; /* Adjust the top position as needed */
+  right: 0;
+  max-height: 500px; /* Set the maximum height to 500px */
+  width: 420px; /* Set the width to 300px */
+  background-color: #3e3e3e;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1;
+  overflow-y: auto; /* Add a scroll bar if content overflows */
+  margin-right: 170px;
+  margin-top: 30px;
+  }
+  
+  .notification-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .notification-profile-image {
+    width: 50px;
+    height: 52px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .notification-text {
+    flex: 1;
+  }
+
+  .notification-username {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .notification-comment {
+    color: white;
+  }
+
+  .notification-date {
+    color: orange;
+    font-weight: bold;
+  }
+
+  /* Existing CSS styles */
+
+/* Add these styles for the ellipsis icon and options menu */
+.ellipsis-icon {
+  font-size: 24px; /* Adjust the size of the ellipsis icon */
+  cursor: pointer;
+  position: absolute; /* Use absolute positioning relative to the nearest positioned ancestor (.notification-item) */
+  margin-left: 380px;
+  margin-top: -20px;
+}
+
+.notification-options {
+  position: absolute;
+  right: 60px;
+  background-color: #000000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1;
+  width: 140px; /* Adjust the width as needed */
+  font-size: 19px; /* Adjust the font size of options */
+}
+
+/* Style for the buttons within the options menu */
+.notification-options button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 5px 0;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 17px;
+  font-family: Tahoma;
+}
+
+.notification-options button:hover {
+  background-color: #3e3e3e;
+}

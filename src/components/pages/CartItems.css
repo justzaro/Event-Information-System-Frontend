@@ -83,8 +83,10 @@
     background-color: red; /* Blue color for the update button */
   }
 
+  .view-event {
+    background-color: rgb(35, 122, 236); /* Blue color for the update button */
+  }
 
-  
   /* CartItems.css */
 
 /* ... previous styles ... */
