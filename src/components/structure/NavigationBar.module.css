@@ -113,8 +113,8 @@
     position: absolute;
     margin-top: 30px; /* Adjust the top position to place the dot correctly */
     margin-left: 10px; /* Adjust the right position to place the dot correctly */
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     background-color: red;
     border-radius: 50%; /* Create a circular shape for the dot */
     display: flex;
@@ -129,6 +129,7 @@
   .custom-notification-bell {
     font-size: 30px;
     cursor: pointer;
+    /* Add animation properties */
   }
   
   .notification-count {
@@ -143,10 +144,10 @@
   
   .notification-menu {
     position: absolute;
-  top: 40px; /* Adjust the top position as needed */
+  top: 45px; /* Adjust the top position as needed */
   right: 0;
   max-height: 500px; /* Set the maximum height to 500px */
-  width: 420px; /* Set the width to 300px */
+  width: 440px; /* Set the width to 300px */
   background-color: #3e3e3e;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
@@ -162,6 +163,12 @@
     margin-bottom: 10px;
   }
   
+  .notification-item:hover {
+    background-color: #4c4c4c;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
   .notification-profile-image {
     width: 50px;
     height: 52px;
@@ -171,6 +178,8 @@
   
   .notification-text {
     flex: 1;
+    max-width: 300px; 
+    word-wrap: break-word;
   }
 
   .notification-username {
@@ -181,6 +190,7 @@
   .notification-comment {
     color: white;
   }
+  
 
   .notification-date {
     color: orange;
@@ -191,11 +201,11 @@
 
 /* Add these styles for the ellipsis icon and options menu */
 .ellipsis-icon {
-  font-size: 24px; /* Adjust the size of the ellipsis icon */
+  font-size: 26px; /* Adjust the size of the ellipsis icon */
   cursor: pointer;
   position: absolute; /* Use absolute positioning relative to the nearest positioned ancestor (.notification-item) */
-  margin-left: 380px;
-  margin-top: -20px;
+  margin-left: 400px;
+  margin-top: -16px;
 }
 
 .notification-options {
@@ -224,4 +234,108 @@
 
 .notification-options button:hover {
   background-color: #3e3e3e;
+}
+
+.success-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 1.0s ease-in-out forwards, slide-out 1.0s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 120px;
+}
+
+.fail-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 1.0s ease-in-out forwards, slide-out 1.0s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+
+/* Animation for sliding the message box in */
+@keyframes slide-in {
+  0% {
+    top: -150px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+/* Animation for sliding the message box out */
+@keyframes slide-out {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -250px;
+  }
+}
+
+.custom-notification-dot {
+  position: absolute;
+  margin-top: -15px; /* Adjust the top position to place the dot correctly */
+  margin-left: 16px; /* Adjust the right position to place the dot correctly */
+  width: 28px;
+  height: 28px;
+  background-color: red;
+  border-radius: 50%; /* Create a circular shape for the dot */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Tahoma;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 1s ease-in-out infinite;
+}
+
+/* Add this CSS code to your existing styles */
+.unread-message-dot {
+  position: absolute;
+  margin-top: -20px; /* Adjust the top position to place the dot correctly */
+  margin-left: 360px; /* Adjust the left position to place the dot correctly */
+  width: 16px; /* Set the desired width for the dot */
+  height: 16px; /* Set the desired height for the dot */
+  background-color: orange; /* Change the background color to orange */
+  border-radius: 50%; /* Create a circular shape for the dot */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px; /* Set the font size for the dot */
+  font-weight: bold;
+  font-family: Tahoma;
+}
+
+
+.no-notifications-message {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }

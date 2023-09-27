@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import styles from './NavigationBar.module.css'; // Import CSS module
 import { Link, useLocation } from 'react-router-dom';
 import { isAuthenticated, getUsernameFromToken } from '../utility/AuthUtils';
@@ -20,12 +20,44 @@ const NavigationBar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
-  const notificationMenuRef = useRef(null);
-
   const [notificationOptionsVisible, setNotificationOptionsVisible] = useState(Array(notifications.length).fill(false));
 
+  const [showCommentSuccessfullyRemovedMessage, setCommentSuccessfullyRemovedMessage] = useState(false);
+  const [showCommentUnsuccessfullyRemovedMessage, setCommentUnsuccessfullyRemovedMessage] = useState(false);
 
-  // Function to fetch notifications when the page is initially rendered
+  const [showCommentSuccessfullyMarkedAsRead, setCommentSuccessfullyMarkedAsRead] = useState(false);
+  const [showCommentUnsuccessfullyMarkedAsRead, setCommentUnsuccessfullyMarkedAsRead] = useState(false);
+
+  const unreadCommentCount = notifications.filter((comment) => !comment.isRead).length;
+
+  const [isBellShaking, setIsBellShaking] = useState(false);
+
+  const notificationMenuRef = useRef(null);
+  const bellIconRef = useRef(null);
+  const toggleOptionsMenuRef = useRef(null);
+  const ellipsisIconRef = useRef(null); // Ref for the ellipsis icon
+
+  useEffect(() => {
+    const handleDocumentClick = (event) => {
+      // Check if the click target is the bell icon or within the notification menu
+      if (
+        notificationMenuRef.current &&
+        !notificationMenuRef.current.contains(event.target) &&
+        !bellIconRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false); // Hide the notification menu
+        setNotificationOptionsVisible(Array(notifications.length).fill(false));
+      }
+    };
+  
+    document.addEventListener('click', handleDocumentClick);
+  
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+  
+  
 
   const toggleNotificationOptions = (index) => {
     const newVisibility = [...notificationOptionsVisible];
@@ -33,37 +65,113 @@ const NavigationBar = () => {
     setNotificationOptionsVisible(newVisibility);
   };
 
-  const markAsRead = (notification) => {
-    // Implement the logic to mark the notification as read here
-    // You can send a request to your server to update the notification status
-    console.log('Mark as Read:', notification);
+  const triggerShakeAnimation = () => {
+    setIsBellShaking(true);
+
+    setTimeout(() => {
+      setIsBellShaking(false);
+    }, 1000);
   };
-  
-  const removeComment = (notification) => {
-    // Implement the logic to remove the comment here
-    // You can send a request to your server to delete the comment
-    console.log('Remove Comment:', notification);
+
+  const handleMarkAsReadClick = (index) => {
+    markAsRead(notifications[index].id); // Call your markAsRead function
+    hideNotificationOptions(index); // Hide the notification menu
   };
-  // Function to handle notification bell icon click
+
+  const handleRemoveCommentClick = (index) => {
+    removeComment(notifications[index].id); // Call your removeComment function
+    hideNotificationOptions(index); // Hide the notification menu
+  };
+
+  const hideNotificationOptions = (index) => {
+    const newVisibility = [...notificationOptionsVisible];
+    newVisibility[index] = false;
+    setNotificationOptionsVisible(newVisibility);
+  };
+
+  const markAsRead = async (commentId) => {
+    try {
+      const jwtToken = localStorage.getItem('jwtToken');
+      const response = await fetch(`http://localhost:8080/comments/${commentId}/is-read`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+
+      if (response.ok) {
+        triggerShakeAnimation();
+
+        setCommentSuccessfullyMarkedAsRead(true);
+
+        setTimeout(() => {
+          setCommentSuccessfullyMarkedAsRead(false);
+        }, 4000);
+
+        fetchNotifications();
+      } else {
+        setCommentUnsuccessfullyMarkedAsRead(true);
+
+        setTimeout(() => {
+          setCommentUnsuccessfullyMarkedAsRead(false);
+        }, 4000);
+      }
+    } catch (error) {
+      console.error('Error marking comment as read:', error);
+    }
+  };
+
+  const removeComment = async (commentId) => {
+
+    try {
+      const jwtToken = localStorage.getItem('jwtToken');
+      const response = await fetch(`http://localhost:8080/comments/${commentId}/is-removed`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+
+      if (response.ok) {
+        triggerShakeAnimation();
+
+        setCommentSuccessfullyRemovedMessage(true);
+
+        setTimeout(() => {
+          setCommentSuccessfullyRemovedMessage(false);
+        }, 4000);
+
+        fetchNotifications();
+      } else {
+        setCommentUnsuccessfullyRemovedMessage(true);
+
+        setTimeout(() => {
+          setCommentUnsuccessfullyRemovedMessage(false);
+        }, 4000);
+      }
+    } catch (error) {
+      console.error('Error removing comment:', error);
+    }
+  };
 
   const calculateTimeDifference = (postedAt) => {
     const currentDate = new Date();
     const [time, date] = postedAt.split(' ');
     const [hours, minutes] = time.split(':').map(Number);
     const [day, month, year] = date.split('-').map(Number);
-  
+
     if (!isNaN(hours) && !isNaN(minutes) && !isNaN(day) && !isNaN(month) && !isNaN(year)) {
       // Create a Date object for the post's date and time
       const postDate = new Date(year, month - 1, day, hours, minutes); // Months are zero-based (0-11)
-  
+
       // Calculate the time difference in milliseconds
       const timeDifference = currentDate - postDate;
-  
+
       // Calculate days, hours, and minutes
       const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hoursDifference = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutesDifference = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-  
+
       if (daysDifference > 0) {
         // Display days if difference is greater than 0
         return `${daysDifference}d`;
@@ -78,71 +186,55 @@ const NavigationBar = () => {
         return 'Just now';
       }
     }
-  
+
     // Handle invalid date or time format
     return 'Invalid Date or Time Format';
   };
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      if (loggedIn) {
-        try {
-          const username = getUsernameFromToken();
-          const jwtToken = localStorage.getItem('jwtToken');
+  const fetchNotifications = async () => {
+    if (loggedIn) {
+      console.log("Test");
+      try {
+        const username = getUsernameFromToken();
+        const jwtToken = localStorage.getItem('jwtToken');
 
-          const response = await fetch(`http://localhost:8080/posts/${username}/comments`, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          });
+        const response = await fetch(`http://localhost:8080/posts/${username}/comments`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
 
-          if (response.ok) {
-            const data = await response.json();
-            setNotifications(data);
-            console.log(data);
-          } else {
-            console.error('Error fetching notifications:', response.status);
-          }
-        } catch (error) {
-          console.error('Error fetching notifications:', error);
+        if (response.ok) {
+          const data = await response.json();
+
+          const filteredComments =
+            data.filter((comment) => !comment.isRemoved);
+
+          setNotifications(filteredComments);
+        } else {
+          console.error('Error fetching notifications:', response.status);
         }
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
       }
+    }
+  };
+
+  useEffect(() => {
+    const fetchNotificationsInterval = async () => {
+      await fetchNotifications();
     };
 
-    // Fetch notifications initially
-    fetchNotifications();
+    fetchNotificationsInterval();
 
-    // Set up an interval to fetch notifications every 5 seconds
-    const intervalId = setInterval(fetchNotifications, 5000);
+    const intervalId = setInterval(fetchNotificationsInterval, 5000);
 
-    // Clean up the interval when the component unmounts or when loggedIn changes
     return () => {
       clearInterval(intervalId);
     };
-  }, [loggedIn]);
+  }, []); // Empty dependency array to run once on mount
 
-  useEffect(() => {
-    // Add a click event listener to the document
-    const handleClickOutside = (event) => {
-      if (
-        notificationMenuRef.current &&
-        !notificationMenuRef.current.contains(event.target) &&
-        showNotifications // Close the menu only if it's currently open
-      ) {
-        // Click occurred outside the open notification menu
-        setShowNotifications(false); // Close the menu
-      }
-    };
-
-    // Attach the event listener when the component mounts
-    document.addEventListener('click', handleClickOutside);
-
-    // Remove the event listener when the component unmounts
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [showNotifications]);
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
@@ -184,35 +276,34 @@ const NavigationBar = () => {
   };
 
   const handleBellClick = () => {
-    setShowNotifications(!showNotifications); // Toggle the visibility of the notifications box
+    setShowNotifications(!showNotifications);
   };
-  
-  useEffect(() => {
-    // Add a global click event listener
-    const handleGlobalClick = (event) => {
-      if (
-        showNotifications &&
-        notificationMenuRef.current &&
-        !notificationMenuRef.current.contains(event.target)
-      ) {
-        // Click occurred outside the notification menu while it's open
-        setShowNotifications(false); // Close the menu
-      }
-    };
 
-    // Attach the global click event listener when the component mounts
-    document.addEventListener('click', handleGlobalClick);
-
-    // Remove the global click event listener when the component unmounts
-    return () => {
-      document.removeEventListener('click', handleGlobalClick);
-    };
-  }, [showNotifications]);
 
   return (
 
     <div>
 
+      {showCommentSuccessfullyRemovedMessage && (
+        <div className={styles['success-message']}>
+          Comment was successfully removed!
+        </div>
+      )}
+      {showCommentUnsuccessfullyRemovedMessage && (
+        <div className={styles['fail-message']}>
+          There was a problem removing the desired comment!
+        </div>
+      )}
+      {showCommentSuccessfullyMarkedAsRead && (
+        <div className={styles['success-message']}>
+          Comment was successfully marked as read!
+        </div>
+      )}
+      {showCommentUnsuccessfullyMarkedAsRead && (
+        <div className={styles['fail-message']}>
+          There was a problem marking the desired comment as read!
+        </div>
+      )}
 
       {/* LEFT SIDE */}
 
@@ -260,51 +351,60 @@ const NavigationBar = () => {
           <div className={styles['nav-right']}>
             <ul className={styles['nav-list']}>
 
-            <li className={styles['nav-item']} onClick={handleBellClick}>
-            <FontAwesomeIcon icon={faBell} className={styles['custom-notification-bell']} />
-            
-          </li>
+              <li className={styles['nav-item']} onClick={handleBellClick} ref={bellIconRef}>
+                <FontAwesomeIcon
+                  icon={faBell}
+                  className={`${styles['custom-notification-bell']} ${isBellShaking ? styles['shake'] : ''}`}
+                />
+                {unreadCommentCount > 0 && (
+                  <div className={styles['custom-notification-dot']}>{unreadCommentCount}</div>
+                )}
+              </li>
 
-          {showNotifications && (
-                    
-                    
-        <div className={styles['notification-menu']}>
-          {notifications.map((notification, index) => (
-                    
-
-            <div key={index} className={styles['notification-item']}>
-              <img
-                src={`http://localhost:8080/users/profile-picture/${notification.user.username}`}
-                alt={`${notification.user.username}'s profile`}
-                className={styles['notification-profile-image']}
-              />
-              
-              <div className={styles['notification-text']}>
-                <p className={styles['notification-username']}>{notification.user.username}
-                  <span className={styles['notification-comment']}> commented on your post!</span>
-                </p>
-                {/* <p className={styles['notification-comment']}></p> */}
-                <p className={styles['notification-date']}>
-                  {calculateTimeDifference(notification.postedAt)}
-                  {calculateTimeDifference(notification.postedAt) !== 'Just now' ? ' ago' : ''}
-                </p>
-              </div>
-              <FontAwesomeIcon
-                icon={faEllipsisVertical}
-                className={styles['ellipsis-icon']}
-                onClick={() => toggleNotificationOptions(index)} // Toggle options menu visibility
-              />
-              {notificationOptionsVisible[index] && (
-                <div className={styles['notification-options']}>
-                  <button onClick={() => markAsRead(notification)}>Mark as Read</button>
-                  <button onClick={() => removeComment(notification)}>Remove Comment</button>
+              {showNotifications && (
+                <div className={styles['notification-menu']} ref={notificationMenuRef}>
+                  {notifications.length === 0 ? (
+                    <p className={styles['no-notifications-message']}>There are no notifications for you yet.</p>
+                  ) : (
+                    notifications.map((notification, index) => (
+                      <div key={index} className={styles['notification-item']}>
+                        <img
+                          src={`http://localhost:8080/users/profile-picture/${notification.user.username}`}
+                          alt={`${notification.user.username}'s profile`}
+                          className={styles['notification-profile-image']}
+                        />
+                        <div className={styles['notification-text']}>
+                          <p className={styles['notification-username']}>{notification.user.username}
+                            <span className={styles['notification-comment']}> commented on your post!</span>
+                          </p>
+                          <p className={styles['notification-date']}>
+                            {calculateTimeDifference(notification.postedAt)}
+                            {calculateTimeDifference(notification.postedAt) !== 'Just now' ? ' ago' : ''}
+                          </p>
+                        </div>
+                        <FontAwesomeIcon
+                          icon={faEllipsisVertical}
+                          className={styles['ellipsis-icon']}
+                          onClick={(e) => {
+                            toggleNotificationOptions(index); // Toggle options menu visibility
+                          }}
+                          ref={ellipsisIconRef}
+                        />
+                        {notification.isRead ? null : (
+                          <div className={styles['unread-message-dot']}></div>
+                        )}
+                        {notificationOptionsVisible[index] && (
+                          <div className={styles['notification-options']} ref={toggleOptionsMenuRef}>
+                            <button onClick={() => handleMarkAsReadClick(index)}>Mark as Read</button>
+                            <button onClick={() => handleRemoveCommentClick(index)}>Remove Comment</button>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
                 </div>
               )}
-              </div>
-          ))}
-        
-        </div>
-      )}
+
 
 
               <li className={styles['nav-item']}>
@@ -361,7 +461,6 @@ const NavigationBar = () => {
                 Events
               </Link>
             </li>
-
           </ul>
 
           <div className={styles['nav-right']}>

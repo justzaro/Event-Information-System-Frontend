@@ -1,22 +1,22 @@
-// authUtils.js (a separate utility file)
 import jwt_decode from 'jwt-decode';
 
 export const isAuthenticated = () => {
     const token = localStorage.getItem('jwtToken');
   
   if (!token) {
-    return false; // Token doesn't exist
+    return false;
   }
 
   try {
     const decodedToken = jwt_decode(token);
     const currentTime = Date.now() / 1000; // Convert to seconds
 
-    console.log(decodedToken.exp);
-    console.log(currentTime);
+    // console.log(decodedToken.exp);
+    // console.log(currentTime);
 
     // Check if the token has expired
     if (decodedToken.exp < currentTime) {
+     
       return false; // Token has expired
     }
 
@@ -44,7 +44,7 @@ export const isAuthenticated = () => {
           // Check if the payload contains a "username" property
           if (payload.sub) {
             // Return the username
-            console.log(payload.sub);
+            //console.log(payload.sub);
             return payload.sub;
           } else {
             // If "username" property is not found in payload, return null or handle accordingly

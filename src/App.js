@@ -29,6 +29,7 @@ function App() {
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route path="/posts" element={<PostsPage />} />
+          <Route path="/posts/:postId" element={<PostsPage />} />
         </Routes>
         <NavigationBar />
         {/* <Footer /> */}

@@ -31,9 +31,6 @@ function PostsPage() {
   
   const [commentTexts, setCommentTexts] = useState({});
 
-
-  // ... rest of the code ...
-
   const handleAddComment = (postId) => {
     const commentText = commentTexts[postId];
     console.log("comment text - " + commentText);
@@ -181,40 +178,6 @@ const calculateTimeDifference = (postedAt) => {
     }));
   };
   
-
-  const renderComments = (comments, postId) => {
-    // Show all comments if there are 3 or fewer, otherwise, show 3 comments and a "View All Comments" button
-    if (comments.length <= 3) {
-      return (
-        <div className="comments-window">
-          {comments.map((comment) => (
-            <div key={comment.id} className="comment">
-              {/* Render comment content */}
-            </div>
-          ))}
-        </div>
-      );
-    } else {
-      const visibleComments = comments.slice(0, 3);
-      const remainingComments = comments.length - 3;
-      return (
-        <div className="comments-window">
-          {visibleComments.map((comment) => (
-            <div key={comment.id} className="comment">
-              {/* Render comment content */}
-            </div>
-          ))}
-          <button
-            className="view-all-comments-button"
-            onClick={() => toggleComments(postId)}
-          >
-            View All {remainingComments} Comments
-          </button>
-        </div>
-      );
-    }
-  };
-
   const handleAddPostClick = () => {
     // Open the "Add Post" popup
     setAddingPost(true);
@@ -347,8 +310,7 @@ const calculateTimeDifference = (postedAt) => {
     setPostToDelete(null);
     setShowDeleteConfirmation(false);
   };
-
-
+  
   return (
     <div className="posts-container">
 
@@ -382,7 +344,10 @@ const calculateTimeDifference = (postedAt) => {
         )}
 
       {posts.map((post, index) => (
-        <div key={post.postId} className="post">
+        <div
+        key={post.postId}
+        className="post"
+        >
           <div className="user-info">
             <img
               src={`http://localhost:8080/users/profile-picture/${post.user.username}`}
