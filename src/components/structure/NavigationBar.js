@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef  } from 'react';
+import React, { useState, useEffect, useRef, useCallback  } from 'react';
 import styles from './NavigationBar.module.css'; // Import CSS module
 import { Link, useLocation } from 'react-router-dom';
 import { isAuthenticated, getUsernameFromToken } from '../utility/AuthUtils';
@@ -57,8 +57,6 @@ const NavigationBar = () => {
     };
   }, []);
   
-  
-
   const toggleNotificationOptions = (index) => {
     const newVisibility = [...notificationOptionsVisible];
     newVisibility[index] = !newVisibility[index];
@@ -191,9 +189,8 @@ const NavigationBar = () => {
     return 'Invalid Date or Time Format';
   };
 
-  const fetchNotifications = async () => {
+  const fetchNotifications = useCallback(async () => {
     if (loggedIn) {
-      console.log("Test");
       try {
         const username = getUsernameFromToken();
         const jwtToken = localStorage.getItem('jwtToken');
@@ -208,8 +205,7 @@ const NavigationBar = () => {
         if (response.ok) {
           const data = await response.json();
 
-          const filteredComments =
-            data.filter((comment) => !comment.isRemoved);
+          const filteredComments = data.filter((comment) => !comment.isRemoved);
 
           setNotifications(filteredComments);
         } else {
@@ -219,7 +215,7 @@ const NavigationBar = () => {
         console.error('Error fetching notifications:', error);
       }
     }
-  };
+  }, [loggedIn]); // Make sure to list any dependencies that this function relies on
 
   useEffect(() => {
     const fetchNotificationsInterval = async () => {
@@ -227,13 +223,13 @@ const NavigationBar = () => {
     };
 
     fetchNotificationsInterval();
-
+    console.log("Called fetch notifications");
     const intervalId = setInterval(fetchNotificationsInterval, 5000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, []); // Empty dependency array to run once on mount
+  }, [fetchNotifications]); // Empty dependency array to run once on mount
 
 
   const handleLogout = () => {

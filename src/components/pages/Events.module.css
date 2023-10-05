@@ -78,3 +78,13 @@
 .event-card a {
     text-decoration: none;
 }
+
+.events-page-center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure the container takes the full viewport height */
+    overflow: hidden; /* Hide overflow to prevent scrollbars when zooming */
+    /* Add any additional styling you need for your layout */
+}

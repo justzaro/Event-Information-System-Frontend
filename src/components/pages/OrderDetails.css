@@ -1,6 +1,10 @@
 /* OrderDetails.css */
 
 /* Container for the entire order details section */
+body {
+  zoom: 100%; /* You can adjust the zoom level as needed */
+}
+
 .order-details-container {
     background-color: #F7F7F7;
     padding: 20px;
@@ -8,9 +12,11 @@
     margin-right: 250px;
     margin-top: 30px;
     margin-bottom: 50px;
+    /* margin: 30px auto 50px; 
+    width: 65%; */
     font-family: Tahoma;
   }
-  
+
   .order-details-additional-information {
     background-color: #F7F7F7;
     padding: 20px;
@@ -34,7 +40,7 @@
     height: 2px;
     background-color: #D2D2D2;
     margin: 0px 20px;
-    width: 1335px;
+    width: 97%;
   }
   
   .additional-order-details-horizontal-line {
@@ -43,7 +49,7 @@
     background-color: #D2D2D2;
     margin-top: -20px;
     margin-left: 20px;
-    width: 1335px;
+    width: 97%;
   }
 
   /* Container for the order details content */
@@ -110,7 +116,7 @@
 
   
   /* Responsive design for smaller screens */
-  @media screen and (max-width: 1024px) {
+  /* @media screen and (max-width: 1024px) {
     .order-details-container {
       margin-left: 50px;
       margin-right: 50px;
@@ -162,7 +168,7 @@
       width: 180px;
       height: 45px;
     }
-  }
+  } */
 
   .payment-heading {
     margin-top: 30px;

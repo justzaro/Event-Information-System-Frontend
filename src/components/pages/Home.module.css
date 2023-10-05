@@ -6,7 +6,7 @@
   }
 
   .green-rectangle p {
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
     color: #fff; /* White text color */
   }
@@ -19,8 +19,8 @@
   }
 
   .green-rectangle img {
-    height: 100px;
-    width: 100px;
+    height: 110px;
+    width: 110px;
   }
 
   .events-carousel {
@@ -41,7 +41,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    
   }
   
   .event-box {
@@ -53,7 +52,6 @@
     transition: box-shadow 0.3s ease;
     cursor: pointer;
     background-color: #fff;
-    
   }
   
   .event-box.hovered {
@@ -114,12 +112,24 @@
   }
 
   .main-event-heading {
-    margin-top: 100px;
-    margin-left: 750px;
+    margin-top: 120px;
   }
 
   .main-event-slogan {
     margin-top: -10px;
-    margin-left: 530px;
     font-size: 22px;
+  }
+
+  .no-underline-link {
+    text-decoration: none; /* Remove underlines */
+    color: inherit; /* Use the parent element's text color */
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 200px; /* You can adjust the height as needed */
   }

@@ -1,13 +1,14 @@
 /* EventDetail.css */
 
-.event-detail-container {
+  
+  .event-detail-container {
     margin-top: 200px;
     margin-left: 500px;
     max-width: 1200px;
     padding: 20px;
     font-family: Tahoma;
   }
-  
+
   .event-header {
     font-size: 18px;
     margin-bottom: 10px;
@@ -392,3 +393,5 @@
 }
 
 /* POP-UP MESSAGES */
+
+

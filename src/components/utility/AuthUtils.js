@@ -44,7 +44,7 @@ export const isAuthenticated = () => {
           // Check if the payload contains a "username" property
           if (payload.sub) {
             // Return the username
-            //console.log(payload.sub);
+            console.log(payload.sub);
             return payload.sub;
           } else {
             // If "username" property is not found in payload, return null or handle accordingly

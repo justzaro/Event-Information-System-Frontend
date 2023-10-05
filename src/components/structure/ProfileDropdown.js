@@ -9,7 +9,7 @@ const ProfileDropdown = ({ showDropdown }) => {
         <ul className={styles['dropdown-list']}>
           {/* Add dropdown menu items here */}
           <li>
-            <Link to="/profile/settings">Profile Settings</Link>
+            <Link to="/profile-settings">Profile Settings</Link>
           </li>
           <li>
             <Link to="/my-orders">My Orders</Link>

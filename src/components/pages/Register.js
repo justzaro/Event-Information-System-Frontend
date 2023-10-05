@@ -46,7 +46,7 @@ const Register = () => {
     });
   };
 
-  const [showPassword, setShowPassword] = useState(false); // State to control password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailMessage, setShowFailMessage] = useState(false);
@@ -60,7 +60,6 @@ const Register = () => {
     e.preventDefault();
     const { day, month, year } = formData;
     const monthValue = monthNameToValue[month];
-    // Perform your registration logic here with formData
 
     if (!monthValue) {
       console.error('Invalid month selected');
@@ -116,6 +115,7 @@ const Register = () => {
         const errorMessage = errorData.message;
         setErrorMessage(errorMessage);
         // Registration failed, handle error here
+        console.log("fail");
         setShowFailMessage(true);
 
         setTimeout(() => {
@@ -133,7 +133,6 @@ const Register = () => {
 
   return (
     <div className={styles['registration-form']}>
-
 
         {showSuccessMessage && (
           <div className={styles['register-success-message']}>Registration is successful!</div>

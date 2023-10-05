@@ -12,6 +12,7 @@ import EventDetail from './components/pages/EventDetail';
 import MyOrders from './components/pages/MyOrders';
 import OrderDetails from './components/pages/OrderDetails';
 import PostsPage from './components/pages/PostsPage';
+import ProfileSettings from './components/pages/ProfileSettings';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route path="/posts" element={<PostsPage />} />
           <Route path="/posts/:postId" element={<PostsPage />} />
+          <Route path="/profile-settings" element={<ProfileSettings />} />
         </Routes>
         <NavigationBar />
         {/* <Footer /> */}

@@ -226,7 +226,6 @@
 
 .white-button {
   display: block;
-  margin-left: 740px;
   width: 360px;
   height: 30px;
   padding: 10px 20px;
@@ -248,4 +247,11 @@
 
 .shopping-cart-heading {
   margin-top: 100px;
+}
+
+.center-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adjust the margin as needed */
 }

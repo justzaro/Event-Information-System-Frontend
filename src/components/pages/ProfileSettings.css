@@ -1,0 +1,399 @@
+/* ProfileSettings.css */
+
+.profile-settings {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 140px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+}
+
+.profile-settings-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Vertically center the content */
+}
+
+.profile-settings h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.profile-settings hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.profile-settings-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-settings-left {
+  width: 45%;
+}
+
+.profile-settings-right {
+  width: 50%;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 24px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+  width: 96%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 22px;
+  height: 34px;
+}
+
+.date-of-birth {
+  display: flex;
+}
+
+.date-of-birth select {
+  margin-right: 5px;
+  margin-bottom: 10px;
+  /* Add margin to create equal spacing in the right part */
+}
+
+.date-of-birth select[name="day"],
+.date-of-birth select[name="month"],
+.date-of-birth select[name="year"] {
+  font-size: 22px;
+  /* Adjust the font size as needed */
+  height: 52px;
+  width: 100%;
+}
+
+/* #email {
+    width: 100%;
+}
+
+#address {
+    width: 100%;
+} */
+
+.profile-image img {
+  width: 444px;
+  /* Set the desired width for the profile image */
+  height: 450px;
+  /* Set the desired height for the profile image */
+  margin-right: 20px;
+  /* Add some spacing between the image and other information */
+  transition: filter 0.3s ease;
+  /* Add a blur transition effect */
+}
+
+.profile-image:hover img {
+  filter: blur(5px);
+  /* You can adjust the blur amount */
+}
+
+.reset-image-button {
+  position: absolute;
+  top: 78%;
+  /* Center vertically */
+  left: 36%;
+  /* Center horizontally */
+  transform: translate(-50%, -50%);
+  background-color: #191919;
+  /* Semi-transparent background */
+  color: white;
+  padding: 8px 16px;
+  /* Add padding to make it easier to hover over */
+  font-size: 22px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+  z-index: 1;
+  /* Ensure the button appears above the image */
+}
+
+/* Show the reset image button when hovering over the image */
+.profile-image-container:hover .reset-image-button,
+.reset-image-button:hover {
+  opacity: 1;
+}
+
+.profile-image-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.profile-image-upload {
+  margin-top: -230px;
+  /* Adjust the margin as needed */
+  margin-right: 140px;
+}
+
+.profile-image-upload label {
+  font-weight: bold;
+  display: block;
+  font-size: 24px;
+  /* Increase font size */
+  margin-left: 10px;
+}
+
+.profile-image-upload input[type="file"] {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.update-button,
+.delete-button {
+  margin: 0px 10px;
+  /* Center-align the buttons vertically */
+}
+
+.update-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 24px;
+  margin-right: 10px;
+  /* Add spacing between buttons */
+  cursor: pointer;
+}
+
+.update-button:hover {
+  background-color: rgb(1, 107, 1);
+}
+
+.delete-button {
+  background-color: #d74004;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #a83000;
+}
+
+.update-profile-success-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+}
+
+.update-profile-fail-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.success-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+}
+
+.fail-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+
+@keyframes slide-in {
+  0% {
+    top: -80px;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -80px;
+  }
+}
+
+.change-password-section {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
+  /* Adjust the top margin as needed */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+
+.change-password-section h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.change-password-section hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.change-password-section .form-group {
+  margin-bottom: 10px;
+}
+
+.change-password-section .form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 24px;
+}
+
+.change-password-section .form-group input[type="password"],
+.change-password-section .form-group input[type="text"] {
+  width: 70%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 22px;
+  height: 34px;
+}
+
+.password-match-icon {
+  color: green;
+  margin-left: 10px;
+  /* Add some spacing between the input and the icon */
+  margin-bottom: -5px;
+  /* Add some spacing between the input and the icon */
+  height: 25px;
+  width: 25px;
+}
+
+.change-password-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 24px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.change-password-button:hover {
+  background-color: rgb(1, 107, 1);
+}
+
+.old-password-eye-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 30%;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.old-confirmed-password-eye-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 30%;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.new-password-eye-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 30%;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.old-password-input-container {
+  position: relative;
+}
+
+.old-confirmed-password-input-container {
+  position: relative;
+}
+
+.new-password-input-container {
+  position: relative;
+}

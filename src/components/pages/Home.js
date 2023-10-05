@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Home.module.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -14,6 +15,7 @@ const Home = () => {
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error('Error fetching events:', error));
+    console.log(events.length);
   }, []);
 
   const navigateLeft = () => {
@@ -35,8 +37,11 @@ const Home = () => {
   return (
     <div className={styles['home-container']}>
 
-      <h1 className={styles['main-event-heading']}>Our Most Prominent Events</h1>
-      <p className={styles['main-event-slogan']}>Browse our vast selection of events, choose your favourites and reserve your tickets!</p>
+      <div className={styles['header-text']}>
+        <h1 className={styles['main-event-heading']}>Our Most Prominent Events</h1>
+        <p className={styles['main-event-slogan']}>Browse our vast selection of events, choose your favourites and reserve your tickets!</p>
+      </div>
+
 
       {/* Event Carousel */}
       <div className={styles['events-carousel']}>
@@ -45,11 +50,11 @@ const Home = () => {
         </div>
         <div className={styles['events-container']}>
           {events.slice(startIndex, startIndex + 5).map((event, index) => (
+            
             <div
               key={event.id}
-              className={`${styles['event-box']} ${
-                hoveredIndex === index + startIndex ? styles['hovered'] : ''
-              }`}
+              className={`${styles['event-box']} ${hoveredIndex === index + startIndex ? styles['hovered'] : ''
+                }`}
               onClick={() => {
                 // Redirect to /event/id
                 // You can implement the redirection logic here
@@ -57,36 +62,44 @@ const Home = () => {
               onMouseEnter={() => setHoveredIndex(index + startIndex)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
+              <Link
+                      to={{
+                        pathname: `/event/${event.id}`
+                      }}
+                      className={styles['no-underline-link']}
+                    >
               <img
                 src={`http://localhost:8080/events/event-picture/${event.name}`}
                 alt={event.name}
               />
               <button className={styles['buy-tickets-button']} onClick={() => {
-                    
-                  }}>
-                    Buy Tickets
-                  </button>
+
+              }}>
+                Buy Tickets
+              </button>
               <div className={styles['event-details']}>
                 <p className={styles['event-name']}>{event.name}</p>
                 <p className={styles['event-price']}>{event.ticketPrice.toFixed(2)} лв.</p>
                 <img
-                      src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
-                      alt="Location Icon"
-                      className={styles['location-icon']}
-                  />
+                  src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
+                  alt="Location Icon"
+                  className={styles['location-icon']}
+                />
                 <p className={styles['event-location']}>
-                  
+
                   {event.location.split(',')[0]}
                 </p>
-                
-                
-                
+
+
+
               </div>
+              
               {/* <button className={styles['buy-tickets-button']} onClick={() => {
                     
                   }}>
                     Buy Tickets
                   </button> */}
+                  </Link>
             </div>
           ))}
         </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getUsernameFromToken } from '../utility/AuthUtils';
 import CartItem from './CartItem';
 import './CartItems.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
@@ -11,8 +11,7 @@ import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 const CartItems = () => {
   const [cartItems, setCartItems] = useState([]);
   const [couponValue, setCouponValue] = useState('');
-  const [couponResult, setCouponResult] = useState(null); 
-  const navigate = useNavigate();
+  const [couponResult, setCouponResult] = useState(null);
   const [showEmptyPromoCodeField, setShowEmptyPromoCodeField] = useState(false);
   const [showSuccessfulOrderMessage, setShowSuccessfulOrderMessage] = useState(false);
 
@@ -98,7 +97,6 @@ const CartItems = () => {
     
           if (response.ok) {
             // Check if the response contains JSON data before parsing
-            const contentType = response.headers.get('content-type');
             // if (contentType && contentType.includes('application/json')) {
             //   const data = await response.json();
             //   // Handle the response from the order creation, e.g., show a success message
@@ -122,7 +120,7 @@ const CartItems = () => {
         setTimeout(() => {
           // Reload the page after the wait time
           window.location.reload();
-        }, 4000);
+        }, 1000);
 
         // Wait for a few more seconds (e.g., 4 seconds) before showing the success message
         
@@ -151,9 +149,11 @@ const CartItems = () => {
       <div className="empty-cart-message">
         <h1><FontAwesomeIcon icon={faBagShopping} size="1xl" className="empty-cart-bag" />Your cart is empty</h1>
         <p>Browse our vast selection of events to find your favourites!</p>
-        <Link to="/events" className="white-button">
-          Events page
-        </Link>
+        <div className="center-button-container">
+          <Link to="/events" className="white-button">
+            Events page
+          </Link>
+        </div>
       </div>
     );
   }

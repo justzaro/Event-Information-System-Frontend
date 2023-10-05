@@ -211,7 +211,6 @@ const toggleEventInfo = () => {
         <p>Loading event data...</p>
       )}
     </div>
-    
   );
 };
 

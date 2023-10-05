@@ -23,6 +23,7 @@ function PostsPage() {
   const [showFailAddingComment, setFailAddingComment] = useState(false);
   const [showCommentBodyIsEmptyMessage, setCommentBodyIsEmptyMessage] = useState(false);
   const [showNoPostImageIsAttached, setNoPostImageIsAttached] = useState(false);
+  const [showCommentDeletedSuccessfully, setCommentDeletedSuccessfully] = useState(false);
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
@@ -30,6 +31,7 @@ function PostsPage() {
   const [commentInput, setCommentInput] = useState('');
   
   const [commentTexts, setCommentTexts] = useState({});
+  const [showBackdrop, setShowBackdrop] = useState(false);
 
   const handleAddComment = (postId) => {
     const commentText = commentTexts[postId];
@@ -52,6 +54,7 @@ function PostsPage() {
         // Handle successful comment submission
         // You may want to refresh the comments for the specific post here
         // Clear the comment input field
+        fetchPosts();
         setCommentTexts((prevCommentTexts) => ({
           ...prevCommentTexts,
           [postId]: '',
@@ -62,9 +65,6 @@ function PostsPage() {
         setTimeout(() => {
           setCommentAddedSuccessfully(false);
         }, 4000);
-
-        // Fetch the updated posts after adding a new comment
-        fetchPosts();
       })
 
       .catch((error) => {
@@ -93,6 +93,31 @@ function PostsPage() {
       });
   };
 
+  const handleDeleteComment = (commentId) => {
+    // Send a request to delete the comment with commentId
+    axios
+      .delete(`http://localhost:8080/comments/${commentId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+        },
+      })
+      .then(() => {
+        
+        setCommentDeletedSuccessfully(true);
+  
+        setTimeout(() => {
+          setCommentDeletedSuccessfully(false);
+        }, 4000);
+
+        fetchPosts();
+      })
+      .catch((error) => {
+        // Handle errors if needed
+        console.error(error);
+      });
+  };
+  
+
   const handleDeletePost = (postId) => {
     setPostToDelete(postId);
     setShowDeleteConfirmation(true);
@@ -116,7 +141,6 @@ function PostsPage() {
   useEffect(() => {
     // Fetch posts data when the component mounts
     fetchPosts();
-
     // Refresh and fetch posts every minute
     const refreshInterval = setInterval(fetchPosts, 60000); // 60000 milliseconds = 1 minute
 
@@ -313,7 +337,9 @@ const calculateTimeDifference = (postedAt) => {
   
   return (
     <div className="posts-container">
-
+        {selectedPost && (
+      <div className="blur-background"></div>
+    )}
         {showPostAddedSuccessfullyMessage && (
           <div className="post-added-successfully">Post added successfully!</div>
         )}
@@ -341,6 +367,10 @@ const calculateTimeDifference = (postedAt) => {
 
         {showNoPostImageIsAttached && (
           <div className="comment-added-unsuccessfully">You have to upload a picture before uploading!</div>
+        )}
+
+        {showCommentDeletedSuccessfully && (
+          <div className="comment-added-successfully">Comment deleted!</div>
         )}
 
       {posts.map((post, index) => (
@@ -423,7 +453,7 @@ const calculateTimeDifference = (postedAt) => {
             
           </div>
 
-          {index !== posts.length - 1 && <hr />}
+          {index !== posts.length - 1 && <hr className="posts-dividing-hr" />}
           <div className={`comments-window ${selectedPost === post ? 'show-comments' : ''}`}>
             <button
               className="close-comments-button"
@@ -431,7 +461,8 @@ const calculateTimeDifference = (postedAt) => {
             >
               X
             </button>
-            {post.comments.map((comment) => (
+            
+            {post.comments.slice().reverse().map((comment) => (
               <div key={comment.id} className="comment">
                 <img
                   src={`http://localhost:8080/users/profile-picture/${comment.user.username}`}
@@ -448,14 +479,21 @@ const calculateTimeDifference = (postedAt) => {
                   </span>
                   
                   <p className="comment-body">{comment.commentBody}</p>
-                  
-                </div>
-                <div><hr className="comment-horizontal-line"></hr></div>
-                
-              </div>
-            ))}
-          </div>
+                  {/* <div className="posts-comments-dividing-hr" >
                     
+                  </div> */}
+                
+                </div>
+                {comment.user.username === currentUser && (
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="delete-comment-icon"
+                    onClick={() => handleDeleteComment(comment.id)}
+                  />
+                )}
+              </div>           
+            ))}
+          </div>               
         </div>
       ))}
       <div onClick={handleAddPostClick} className="add-post-button">

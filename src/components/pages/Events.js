@@ -30,7 +30,7 @@ const Events = () => {
 
   return (
     
-      <div>
+      <div className={styles['events-page-center-container']}>
         <h1>Eventsss</h1>
         {error ? (
           <p>Error: {error}</p>
