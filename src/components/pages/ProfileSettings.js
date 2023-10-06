@@ -241,7 +241,7 @@ const ProfileSettings = () => {
 
         const fullFormData = new FormData();
 
-        fullFormData.append('userDto', new Blob([JSON.stringify(updatedData)], { type: 'application/json' }));
+        fullFormData.append('userUpdateDto', new Blob([JSON.stringify(updatedData)], { type: 'application/json' }));
 
         fullFormData.append('profilePicture', selectedImage);
 
