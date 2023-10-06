@@ -1,0 +1,382 @@
+/* Update your project's stylesheet */
+
+.order-container {
+  background-color: #F7F7F7;
+  padding: 20px;
+  margin-left: 250px;
+  margin-right: 250px;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  font-family: Tahoma;
+}
+
+.order {
+  padding: 20px 0;
+}
+
+.order-heading {
+  font-size: 26px;
+  font-weight: bold;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.my-orders-horizontal-line {
+  border: 0;
+  height: 2px;
+  background-color: #D2D2D2;
+  margin: 0px 20px;
+  width: 1335px;
+}
+
+.order-details {
+  display: flex;
+  align-items: center;
+}
+
+.my-order-event-image {
+  width: 380px; /* Increase the height of the image */
+  height: 270px; /* Increase the height of the image */
+  margin-right: 40px;
+  margin-bottom: 52px;
+  margin-top: 45px;
+  padding-left: 20px;
+}
+
+.order-info {
+  font-size: 20px;
+  margin-top: -45px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.order-result-id {
+  margin-left: 120px;
+}
+.order-result-tickets {
+  margin-left: 59px;
+}
+.order-result-total-price {
+  margin-left: 102px;
+}
+.order-result-date {
+  margin-left: 74px;
+}
+.order-result-concerts-count {
+  margin-left: 39px;
+}
+
+.order-details-button {
+  background-color: transparent;
+  border: 1px solid #000;
+  color: #000;
+  width: 245px;
+  height: 55px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background-color 0.6s, color 0.3s;
+  margin-bottom: -15px;
+  margin-bottom: -15px;
+}
+
+.order-details-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.empty-my-orders-message {
+  text-align: center;
+  padding: 20px;
+  margin-top: 300px;
+  font-family: Tahoma;
+}
+
+.empty-my-orders-bag {
+  padding-right: 15px;
+}
+
+.empty-my-orders-message p {
+  margin: 10px 0;
+  font-size: 22px;
+  padding: 5px;
+}
+
+.empty-my-orders-message h1 {
+  margin: 10px 0;
+  font-size: 24px;
+  padding: 5px;
+}
+
+.my-order-white-button {
+  display: block;
+  margin-left: 740px;
+  width: 360px;
+  height: 30px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000; /* Black text */
+  font-size: 22px;
+  cursor: pointer;
+  transition: font-weight 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 2px solid #000; /* Black border */
+  text-decoration: none;
+}
+
+.my-order-white-button:hover {
+  box-shadow: inset 0 0 0 2px #000; /* Inward border on hover */
+  margin-left: 740px;
+  width: 360px;
+  height: 30px;
+}
+
+/* .pagination-button-right,
+.pagination-button-left {
+  display: block;
+  width: 150px;
+  height: 40px;
+  padding: 9px 20px;
+  background-color: #fff;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  transition: font-weight 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 2px solid #000; 
+  text-decoration: none;
+}
+
+.pagination-button-right:hover,
+.pagination-button-left:hover {
+  box-shadow: inset 0 0 0 2px #000; 
+  width: 150px;
+  height: 40px;
+}
+
+.pagination-button-right {
+  margin-left: 1090px;
+  margin-bottom: 80px;
+  margin-top: -40px;
+}
+
+.pagination-button-left {
+  margin-left: 920px;
+  margin-top: 60px;
+}
+
+.pagination-button-left.disabled,
+.pagination-button-right.disabled {
+  background-color: #ccc; 
+  color: #999; 
+  cursor: not-allowed; 
+  
+}
+
+.pagination-button-right.disabled:hover,
+.pagination-button-left.disabled:hover {
+  box-shadow: inset 0 0 0 0px #000; 
+  width: 150px;
+  height: 40px;
+} */
+
+
+/* Update your project's stylesheet */
+
+/* Update your project's stylesheet */
+
+/*
+ .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px; 
+  margin-bottom: 30px;
+}
+
+.pagination-button {
+  width: 40px;
+  background-color: #fff;
+  color: #000; 
+  font-size: 22px;
+  cursor: pointer;
+  transition: font-weight 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 2px solid #000; 
+  text-decoration: none;
+  border-radius: 50%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px; 
+}
+
+.pagination-button:hover {
+  box-shadow: inset 0 0 0 2px #000; 
+}
+
+.pagination-button.active {
+  background-color: #000;
+}
+
+.pagination-button-icon {
+  font-size: 20px;
+} */
+
+/* Pagination styling */
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+/* Buttons for going to the first and previous pages */
+.pagination-button-first {
+  display: inline-block;
+  width: 40px; /* Reduced width */
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.pagination-button-previous {
+  display: inline-block;
+  width: 40px; /* Reduced width */
+  height: 40px;
+  padding: 3px;
+  background-color: #fff;
+  color: #000;
+  font-size: 28px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.pagination-button-next {
+  display: inline-block;
+  width: 40px; /* Reduced width */
+  height: 40px;
+  padding: 3px;
+  background-color: #fff;
+  color: #000;
+  font-size: 28px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 10px; /* Adjusted margin */
+}
+
+/* Buttons for going to the next and last pages */
+.pagination-button-last {
+  display: inline-block;
+  width: 40px; /* Reduced width */
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 10px; /* Adjusted margin */
+}
+
+/* Normal pagination button styling */
+.pagination-button {
+  display: inline-block;
+  width: 80px; /* Standard width */
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.pagination-button-first:hover,
+.pagination-button-previous:hover, 
+.pagination-button-next:hover, 
+.pagination-button-last:hover {
+  box-shadow: inset 0 0 0 2px #000; 
+}
+
+/* Add this to your CSS */
+.pagination-button-previous.disabled, 
+.pagination-button-next.disabled,
+.pagination-button-first.disabled, 
+.pagination-button-last.disabled {
+  background-color: #ccc; /* Gray background */
+  color: #888; /* Gray text */
+  cursor: not-allowed; /* Not a clickable cursor */
+  border: 0px solid #000;
+}
+
+.pagination-button-previous.disabled:hover, 
+.pagination-button-next.disabled:hover,
+.pagination-button-first.disabled, 
+.pagination-button-last.disabled {
+  box-shadow: inset 0 0 0 0px #000; 
+}
+
+/* Input field styling */
+.page-input-container {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.page-input-container input {
+  width: 28px; /* Slightly reduced width */
+  height: 28px;
+  margin: 0 5px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #000;
+  font-size: 20px;
+}
+
+/* Additional styling for input placeholder */
+.page-input-container input::placeholder {
+  color: #aaa;
+}
+
+.page-input-container input:focus {
+  outline: none;
+}
+
+.page-input-container input[type="number"]::-webkit-inner-spin-button,
+.page-input-container input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-input-container input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.page-input-container input[type="number"]:focus {
+  outline: none;
+}

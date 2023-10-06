@@ -4,7 +4,7 @@
     border: none;
     padding: 0;
     /* Reset padding */
-    margin: 16px;
+    margin: 19px;
     width: 18%;
     background-color: #243d52;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -73,4 +73,18 @@
     cursor: pointer;
     /* Change the cursor to indicate interactivity */
     /* You can add additional hover styles here, like text color or box shadow */
+}
+
+.event-card a {
+    text-decoration: none;
+}
+
+.events-page-center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure the container takes the full viewport height */
+    overflow: hidden; /* Hide overflow to prevent scrollbars when zooming */
+    /* Add any additional styling you need for your layout */
 }

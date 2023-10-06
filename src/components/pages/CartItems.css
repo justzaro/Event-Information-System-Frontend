@@ -1,0 +1,257 @@
+/* CartItems.css */
+
+.cart-items {
+    width: 80%;
+    margin: 0 auto;;
+  }
+  
+  .cart-page-heading {
+    margin-top: 110px;
+  }
+
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    margin-top: 50px;
+    font-size: 20px;
+  }
+  
+  .cart-header > div {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    height: 100px;
+    font-size: 21px;
+    font-family: Tahoma;
+  }
+  
+  .cart-column img {
+    width: 200px;
+    height: 100px;
+    height: 100px;
+  }
+  
+  .cart-column {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .cart-column .item-name, .item-location {
+    white-space: normal; /* Allows text to wrap within the column */
+    overflow-wrap: break-word; /* Specifies how to break lines within words */
+  }
+
+  .cart-column .item-actions button {
+    width: 40px; /* Adjust the width to make them square */
+    height: 40px; /* Adjust the height to make them square */
+    border-radius: 5px;
+    color: white;
+    border: none;
+    padding: 0; /* Remove padding to make them square */
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 30px;
+    transform: scale(1); /* Initial scale */
+    transition: transform 0.2s; /* Add a transition for smooth animation */
+  }
+  
+  .cart-column .item-actions button:hover {
+    transform: scale(0.85); /* Scale down on hover */
+  }
+
+  .increase-button {
+    background-color: green; /* Blue color for the update button */
+  }
+  
+  .decrease-button {
+    background-color: orange; /* Blue color for the update button */
+  }
+
+  .remove-button {
+    background-color: red; /* Blue color for the update button */
+  }
+
+  .view-event {
+    background-color: rgb(35, 122, 236); /* Blue color for the update button */
+  }
+
+  /* CartItems.css */
+
+/* ... previous styles ... */
+
+.promo-code-input {
+    width: 500px;
+    padding-top: 50px;
+    margin-left: 600px;
+    align-items: center;
+    margin-left: 580px;
+  }
+  
+  .promo-code-input input {
+    height: 40px;
+    width: 300px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+  }
+  
+ .promo-code-input button {
+    margin-left: 0px;
+    height: 42px;
+    width: 100px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .promo-code-input button:hover {
+    background-color: #0056b3;
+  }
+  
+  .make-order-button {
+    margin-left: 700px;
+    margin-top: 10px;
+    height: 50px;
+    width: 130px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .successful-order-message {
+    width: 250px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+  }
+
+  .empty-promo-code-message {
+    width: 250px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+  }
+  
+  /* Animation for sliding the message box in */
+  @keyframes slide-in {
+    0% {
+      top: -80px;
+    }
+    100% {
+      top: 0;
+    }
+  }
+  
+  /* Animation for sliding the message box out */
+  @keyframes slide-out {
+    0% {
+      top: 0;
+    }
+    100% {
+      top: -100px;
+    }
+  }
+
+/* @font-face {
+  font-family: 'Euclid Circular A';
+  src: url('https://fonts.cdnfonts.com/s/euclid-circular-a/euclid-circular-a.woff2') format('woff2'),
+       url('https://fonts.cdnfonts.com/s/euclid-circular-a/euclid-circular-a.woff') format('woff');
+} */
+
+  .empty-cart-message {
+    text-align: center;
+    padding: 20px;
+    margin-top: 300px;
+    font-family: Tahoma;
+  }
+  
+  .empty-cart-bag {
+    padding-right: 15px;
+  }
+
+  .empty-cart-message p {
+    margin: 10px 0;
+    font-size: 22px;
+    padding: 5px;
+  }
+  
+  .empty-cart-message h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    padding: 5px;
+  }
+
+  /* CartItems.css */
+
+/* ... Previous styles ... */
+
+.white-button {
+  display: block;
+  width: 360px;
+  height: 30px;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000; /* Black text */
+  font-size: 22px;
+  cursor: pointer;
+  transition: font-weight 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: 2px solid #000; /* Black border */
+  text-decoration: none;
+}
+
+.white-button:hover {
+  box-shadow: inset 0 0 0 2px #000; /* Inward border on hover */
+  margin-left: 740px;
+  width: 360px;
+  height: 30px;
+}
+
+.shopping-cart-heading {
+  margin-top: 100px;
+}
+
+.center-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+}

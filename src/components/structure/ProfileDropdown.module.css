@@ -1,0 +1,72 @@
+/* ProfileDropdown.module.css */
+/* .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 7.9%; 
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+
+    border-radius: 5px;
+    opacity: 0; 
+    transition:opacity 0.3s ease;
+  } */
+  
+  /* ProfileDropdown.module.css */
+.dropdownContainer {
+  position: relative;
+  display: inline-block; /* Make the container inline-block */
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none; /* Initially hide the dropdown */
+  margin-top: 0px; 
+  margin-right: -135px;
+}
+
+/* Use :hover on the container to control the dropdown visibility */
+.dropdownContainer:hover .dropdown {
+  display: block;
+  opacity: 1;
+}
+
+/* Rest of your CSS styles remain the same */
+
+
+  .dropdown.active {
+    display: block;
+    opacity: 1;
+  }
+  
+  .dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    width: 160px;
+  }
+  
+  .dropdown-list li {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc; /* Add a border-bottom to create dividing lines */
+  }
+  
+  .dropdown-list li:last-child {
+    border-bottom: none; /* Remove the border-bottom for the last item */
+  }
+
+  .dropdown-list li a {
+    text-decoration: none;
+    color: #333;
+  }
+  

@@ -1,0 +1,220 @@
+/* OrderDetails.css */
+
+/* Container for the entire order details section */
+body {
+  zoom: 100%; /* You can adjust the zoom level as needed */
+}
+
+.order-details-container {
+    background-color: #F7F7F7;
+    padding: 20px;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    /* margin: 30px auto 50px; 
+    width: 65%; */
+    font-family: Tahoma;
+  }
+
+  .order-details-additional-information {
+    background-color: #F7F7F7;
+    padding: 20px;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-top: 150px;
+    font-family: Tahoma;
+  }
+  /* Heading for the order details section */
+  .order-details-heading {
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    padding-left: 20px;
+  }
+  
+  /* Horizontal line separator */
+  .order-details-horizontal-line {
+    border: 0;
+    height: 2px;
+    background-color: #D2D2D2;
+    margin: 0px 20px;
+    width: 97%;
+  }
+  
+  .additional-order-details-horizontal-line {
+    border: 0;
+    height: 2px;
+    background-color: #D2D2D2;
+    margin-top: -20px;
+    margin-left: 20px;
+    width: 97%;
+  }
+
+  /* Container for the order details content */
+  .order-details-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Image for the event */
+  .order-details-image {
+    width: 450px; /* Increase the height of the image */
+    height: 330px; /* Increase the height of the image */
+    margin-right: 40px;
+    margin-bottom: 52px;
+    margin-top: 45px;
+    padding-left: 20px;
+  }
+  
+  /* Container for order information */
+  .order-details-info {
+    font-size: 20px;
+    margin-top: -10px;
+  }
+
+  .order-details-created-at {
+    margin-left: 15px;
+  }
+
+  .order-details-additional-information-content {
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: 20px;
+  }
+  
+  /* Bold text in order information */
+  .order-details-bold-text {
+    font-weight: bold;
+  }
+  
+  .order-details-event-name {
+    margin-left: 100px;
+  }
+  .order-details-event-location {
+    margin-left: 135px;
+  }
+  .order-details-event-start-date {
+    margin-left: 117px;
+  }
+  .order-details-event-end-date {
+    margin-left: 130px;
+  }
+  .order-details-event-artists {
+    margin-left: 156px;
+  }
+  .order-details-event-tickets {
+    margin-left: 72px;
+  }
+  .order-details-event-ticket-price {
+    margin-left: 36px;
+  }
+  .order-details-event-total-price {
+    margin-left: 115px;
+  }
+
+  
+  /* Responsive design for smaller screens */
+  /* @media screen and (max-width: 1024px) {
+    .order-details-container {
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+  
+    .order-details-heading {
+      font-size: 24px;
+      padding-bottom: 20px;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+  
+    .order-details-image {
+      width: 250px;
+      height: 180px;
+      margin-right: 30px;
+      margin-bottom: 30px;
+      margin-top: 25px;
+      padding-left: 10px;
+    }
+  
+    .order-details-info {
+      font-size: 18px;
+      margin-top: -30px;
+    }
+  
+    .order-details-result-id {
+      margin-left: 80px;
+    }
+  
+    .order-details-result-concerts-count {
+      margin-left: 40px;
+    }
+  
+    .order-details-result-tickets {
+      margin-left: 68px;
+    }
+  
+    .order-details-result-total-price {
+      margin-left: 52px;
+    }
+  
+    .order-details-result-date {
+      margin-left: 26px;
+    }
+  
+    .order-details-button {
+      font-size: 18px;
+      width: 180px;
+      height: 45px;
+    }
+  } */
+
+  .payment-heading {
+    margin-top: 30px;
+    margin-left: 854px;
+    font-size: 24px;
+    padding-bottom: 20px;
+  }
+  
+  .order-total-price {
+    font-size: 20px;
+    margin-left: 885px;
+  }
+  .order-total-price-value {
+    font-size: 20px;
+    margin-left: 88px;
+  }
+
+  .order-coupon-code-discount {
+    font-size: 20px;
+    margin-left: 840px;
+  }
+  .order-coupon-code-discount-value {
+    font-size: 20px;
+    margin-left: 89px;
+  }
+
+  .order-coupon-code {
+    font-size: 20px;
+    margin-left: 870px;
+  }
+  .order-coupon-code-value {
+    font-size: 20px;
+    margin-left: 90px;
+  }
+
+  .order-amount-to-pay {
+    font-size: 20px;
+    margin-left: 840px;
+    font-weight: bold;
+  }
+  .order-amount-to-pay-value {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 92px;
+  }
+
+ .amount-to-pay-section {
+    margin-top: 35px;
+ }

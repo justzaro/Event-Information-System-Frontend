@@ -1,0 +1,441 @@
+/* PostsPage.css */
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.post {
+  margin: 20px 0;
+  text-align: center;
+  position: relative;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-right: 140px;
+  width: 400px;
+  padding-bottom: 5px;
+}
+
+.post-username {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.post-location {
+  font-size: 20px;
+}
+
+.post-date {
+  color: #191919;
+}
+
+.post-image {
+  width: 600px;
+  height: 600px;
+}
+
+.post-description {
+  max-width: 600px; /* Maximum width for the description */
+  margin: -20px auto; /* Center the description horizontally */
+  text-align: left; /* Align text to the left within the description */
+  overflow-wrap: break-word; /* Enable word wrapping for long text */
+  padding: 10px 0; /* Add padding for spacing */
+  font-size: 19px;
+  font-family: Tahoma;
+}
+
+.comments-button {
+  display: flex;
+  justify-content: flex-start; /* Align the button to the left below the image */
+  margin-top: 10px; /* Adjust the spacing between the image and the button */
+}
+
+.view-comments-button {
+  background-color: transparent;
+  color: #191919;
+  border: none;
+  cursor: pointer;
+  padding: 2px 2px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Tahoma;
+}
+
+.posts-dividing-hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 20px 0;
+}
+
+.comments-window {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 9999;
+  width: 530px;
+  height: auto;
+  max-height: 600px;
+  overflow-y: auto;
+  font-family: Tahoma;
+}
+
+.show-comments {
+  display: block;
+}
+
+.close-comments-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start; /* Align items at the top */
+  margin-bottom: 10px;
+  margin-top: 30px;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.comment-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.comment-username {
+  font-weight: bold;
+  color: #ffad42;
+  margin-top: -5px;
+  font-size: 19px;
+}
+
+.comment-body {
+  margin-left: 2px;
+  margin-top: 10px;
+  max-width: 380px;
+  font-size: 19px;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+.comment-date {
+  color: #191919;
+  font-size: 17px;
+  margin-left: auto;
+}
+
+/* Add Post Popup Styles */
+/* Add Post Popup Styles */
+.add-post-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffad42;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 25px;
+}
+
+.add-post-button:hover {
+  background-color: #f49519;
+  animation: spin 2s infinite linear;
+}
+
+.add-post-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 9999;
+  width: 400px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-post-header span {
+  font-size: 18px;
+  font-weight: bold;
+  font-size: 22px;
+  font-family: Tahoma;
+}
+
+.add-post-header svg {
+  cursor: pointer;
+  font-size: 24px;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.add-post-header svg:hover {
+  color: #f49519;
+}
+
+.add-post-input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: Tahoma;
+}
+
+.add-post-upload-button {
+  font-family: Tahoma;
+  background-color: #ffad42;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-post-upload-button:hover {
+  background-color: #f49519;
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.post-added-successfully,
+.post-deleted-successfully,
+.comment-added-successfully {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+}
+
+.post-added-unsuccessfully,
+.post-deleted-unsuccessfully,
+.comment-added-unsuccessfully {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+@keyframes slide-in {
+  0% {
+    top: -80px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -80px;
+  }
+}
+
+.delete-post-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-right: -10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.delete-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 9999;
+  width: 300px;
+  text-align: center;
+}
+
+.delete-confirmation p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.delete-confirm,
+.delete-cancel {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.delete-confirm {
+  background-color: #e74c3c; /* Red color for confirmation */
+  color: #fff;
+}
+
+.delete-cancel {
+  background-color: #3498db; /* Blue color for cancel */
+  color: #fff;
+}
+
+.delete-confirm:hover,
+.delete-cancel:hover {
+  opacity: 0.9;
+}
+
+.comment-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.add-comment-input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: Tahoma;
+  font-family: Tahoma;
+}
+
+.add-comment-button {
+  background-color: #ffad42;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 26px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 20px;
+  font-family: Tahoma;
+}
+
+.add-comment-button:hover {
+  background-color: #f49519;
+}
+
+.delete-comment-icon {
+  color: red;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  position: absolute; /* Position the icon absolutely within the comment container */
+  top: px; /* Adjust the top position as needed */
+  right: 10px; /* Adjust the right position as needed */
+}
+
+.posts-comments-dividing-hr {
+  border-top: 1px solid #191919; /* Replace #ff0000 with your desired color code */
+  width: 530px;
+  margin-left: -70px;
+  margin-top: 10px;
+}
+
+.blur-background {
+  backdrop-filter: blur(5px); /* Apply a blur effect */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}

@@ -10,8 +10,9 @@
   height: auto;
   background-color: #f4f4f4;
   padding: 20px; /* Add some padding to the form */
-  margin-left: 720px;
-  margin-top: 170px;
+  margin-left: 710px;
+  margin-top: 120px;
+  margin-bottom: 70px;
   width: 25%;
 }
 
@@ -27,6 +28,11 @@
   margin-bottom: 10px;
   margin-right: 100px;
   width: 100%; /*input fields length */
+}
+
+.registration-form p {
+  font-size: 18px;
+  text-align: justify;
 }
 
 .form-group select {
@@ -129,8 +135,8 @@
   width: 25px;
   height: 25px;
   position: absolute;
-  right: 720px;
-  top: 580px;
+  right: 730px;
+  top: 530px;
   transform: translateY(-50%);
   cursor: pointer;
 }
