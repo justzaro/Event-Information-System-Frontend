@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback  } from 'react';
 import styles from './NavigationBar.module.css'; // Import CSS module
 import { Link, useLocation } from 'react-router-dom';
-import { isAuthenticated, getUsernameFromToken } from '../utility/AuthUtils';
+import { isAuthenticated, getUsernameFromToken, isAdmin } from '../utility/AuthUtils';
 import ProfileDropdown from './ProfileDropdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 const NavigationBar = () => {
 
   const [loggedIn, setLoggedIn] = useState(isAuthenticated());
+  const userIsAdmin = isAdmin();
   const location = useLocation();
   const [cartItemCount, setCartItemCount] = useState(0); // Default value, you can change it
 
@@ -347,6 +348,16 @@ const NavigationBar = () => {
           <div className={styles['nav-right']}>
             <ul className={styles['nav-list']}>
 
+              
+              {userIsAdmin && ( // Conditionally render the new nav-item only if isAdmin is true
+                <li className={styles['nav-item']}>
+                  {/* Content for the admin nav-item */}
+                  <Link to="/dashboard" className={styles['nav-link']}>
+                      Dashboard
+                  </Link>
+                </li>
+
+              )}
               <li className={styles['nav-item']} onClick={handleBellClick} ref={bellIconRef}>
                 <FontAwesomeIcon
                   icon={faBell}

@@ -13,6 +13,8 @@ import MyOrders from './components/pages/MyOrders';
 import OrderDetails from './components/pages/OrderDetails';
 import PostsPage from './components/pages/PostsPage';
 import ProfileSettings from './components/pages/ProfileSettings';
+import Dashboard from './components/pages/Dashboard';
+import CreateEvent from './components/pages/dashboard/CreateEvent';
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
           <Route path="/posts" element={<PostsPage />} />
           <Route path="/posts/:postId" element={<PostsPage />} />
           <Route path="/profile-settings" element={<ProfileSettings />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <NavigationBar />
         {/* <Footer /> */}

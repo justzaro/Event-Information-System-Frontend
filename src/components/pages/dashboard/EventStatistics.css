@@ -1,0 +1,91 @@
+.event-statistics-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 100px;
+    font-family: Tahoma;
+  }
+  
+  .event-statistics-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .event-statistics-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #FE6F57;
+    color: #fff;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    margin: 0 90px; /* Even spacing between circles */
+  }
+  
+  .event-statistics-number {
+    font-size: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .event-statistics-text {
+    font-size: 26px;
+    margin-top: 10px;
+  }
+  
+  .event-statistics-subtext {
+    font-size: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+    color: #FE6F57;
+  }
+  
+  /* Adjust vertical alignment for circles without subtext */
+  .event-statistics-item:nth-child(3) .event-statistics-circle,
+  .event-statistics-item:nth-child(4) .event-statistics-circle {
+    align-items: center;
+  }
+  
+  /* .event-statistics-item:nth-child(3) .event-statistics-circle {
+    margin-bottom: 20px;
+  }
+  
+  .event-statistics-item:nth-child(4) .event-statistics-circle {
+    margin-bottom: 20px; 
+  } */
+
+  /* ... (Previous CSS) */
+
+  
+  /* Add styles for the menu */
+  .event-statistics-menu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 385px; /* Adjust the distance from the subtext */
+    right: 50;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .event-statistics-menu-item {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .event-statistics-menu-item:hover {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ccc;
+  }
+  
+  /* ... (Rest of the CSS) */
+  
