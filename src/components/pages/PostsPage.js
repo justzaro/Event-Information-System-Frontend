@@ -98,7 +98,7 @@ function PostsPage() {
         },
       })
       .then(() => {
-        
+        setSelectedPost(false);
         setCommentDeletedSuccessfully(true);
   
         setTimeout(() => {

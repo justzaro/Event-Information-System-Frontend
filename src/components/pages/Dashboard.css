@@ -1,7 +1,8 @@
 /* Dashboard Container */
 .dashboard-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    flex-grow: 1;
   }
   
   /* Dashboard Menu */
@@ -11,7 +12,7 @@
     color: #fff;
     padding: 20px;
     margin-top: 70px;
-    height: 100%;
+    /* height: 200%; */
   }
   
   .dashboard-menu-item {
@@ -85,5 +86,3 @@
     flex: 1;
     padding: 25px;
   }
-  
-  

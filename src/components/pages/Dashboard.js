@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGears, faPerson, faCalendarDays, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faGears, faPerson, faCalendarDays, faEnvelope, faTag } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import CreateEvent from './dashboard/CreateEvent';
 import EventStatistics from './dashboard/EventStatistics';
@@ -50,7 +50,7 @@ const Dashboard = () => {
           </div>
 
           <div className="dashboard-menu-subitem">Overview</div>
-          <br></br>
+          <br />
           <div
             className="dashboard-menu-subitem"
              onClick={() => setSelectedSection('EventStatistics')}
@@ -67,6 +67,20 @@ const Dashboard = () => {
           <div className="dashboard-menu-hr">
             <hr />
          </div>
+
+         <div className="dashboard-menu-item">
+          <FontAwesomeIcon icon={faTag} className="support-tickets-icon" />
+            <span className="support-tickets-text">Coupons</span>
+          </div>
+
+          <div className="dashboard-menu-subitem">View</div>
+          <br />
+          <div className="dashboard-menu-subitem">Generate</div>
+
+          <div className="dashboard-menu-hr">
+            <hr />
+         </div>
+
 
           <div className="dashboard-menu-item">
           <FontAwesomeIcon icon={faEnvelope} className="support-tickets-icon" />
