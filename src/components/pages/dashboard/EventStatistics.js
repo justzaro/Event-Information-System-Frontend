@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
   Label,
-  ResponsiveContainer,
   PieChart,
   Pie,
   Cell
@@ -35,6 +34,9 @@ const EventStatistics = () => {
 
   const [attendanceMenuVisible, setAttendanceMenuVisible] = useState(false);
   const [attendanceNumberMenuVisible, setAttendanceNumberMenuVisible] = useState(false);
+  const [ordersMenuVisible, setOrdersMenuVisible] = useState(false);
+  const [ticketsMenuVisible, setTicketsMenuVisible] = useState(false);
+
   const [eventsList, setEventsList] = useState([]);
 
   const [selectedConcert, setSelectedConcert] = useState(null);
@@ -42,6 +44,29 @@ const EventStatistics = () => {
 
   const [selectedNumberConcert, setSelectedNumberConcert] = useState('');
   const [selectedNumberConcertName, setSelectedNumberConcertName] = useState('');
+
+  const [selectedOrdersCount, setSelectedOrdersCount] = useState(30); // Default selection is 30 orders
+  const [selectedTicketsCount, setSelectedTicketsCount] = useState(30); // Default selection is 30 orders
+
+  const setTicketDaysCount = (count) => {
+    setSelectedTicketsCount(count);
+    setTicketsMenuVisible(false);
+    fetchTicketsData(count);
+  };
+
+  const setOrdersCount = (count) => {
+    setSelectedOrdersCount(count);
+    setOrdersMenuVisible(false);
+    fetchOrderData(count);
+  };
+
+  const toggleTicketsMenu = () => {
+    setTicketsMenuVisible(!ticketsMenuVisible);
+  };
+
+  const toggleOrdersMenu = () => {
+    setOrdersMenuVisible(!ordersMenuVisible);
+  };
 
   const toggleAttendanceMenu = () => {
     setAttendanceMenuVisible(!attendanceMenuVisible);
@@ -51,31 +76,47 @@ const EventStatistics = () => {
     setAttendanceNumberMenuVisible(!attendanceNumberMenuVisible);
   };
 
-  useEffect(() => {
+  const fetchOrderData = async (count) => {
     const jwtToken = localStorage.getItem('jwtToken');
+    try {
+      // Fetch order data with the updated count
+      const orderResponse = await axios.get(`http://localhost:8080/orders/prices/last/${count}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
 
-    const fetchData = async () => {
-      try {
-        // Fetch ticket data
-        const ticketsResponse = await axios.get('http://localhost:8080/tickets/sold-per-day-in-last-thirty-days', {
+      // The orders are expected to be returned in the most recent to the last order, so we need to reverse the order for display.
+      const reversedOrderData = orderResponse.data.reverse();
+      setOrderData(reversedOrderData);
+    } catch (error) {
+      console.error('Error fetching order data: ', error);
+    }
+  };
+
+  const fetchTicketsData = async (count) => {
+    const jwtToken = localStorage.getItem('jwtToken');
+    try {
+      // Fetch order data with the updated count
+      const ticketsResponse = await axios.get(`http://localhost:8080/tickets/sold-per-day-in-last-days/${count}`, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
           },
         });
 
         setTicketsData(ticketsResponse.data);
+    } catch (error) {
+      console.error('Error fetching order data: ', error);
+    }
+  };
+  
+  useEffect(() => {
+    const jwtToken = localStorage.getItem('jwtToken');
 
-        // Fetch order data
-        const orderResponse = await axios.get('http://localhost:8080/orders/prices/last-thirty', {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        });
-
-        // The orders are expected to be returned in the most recent to the last order, so we need to reverse the order for display.
-        const reversedOrderData = orderResponse.data.reverse();
-
-        setOrderData(reversedOrderData);
+    const fetchData = async () => {
+      try {
+        fetchTicketsData(30);
+        fetchOrderData(30);
 
         // Fetch the list of events
         const eventsResponse = await axios.get('http://localhost:8080/events', {
@@ -120,7 +161,7 @@ const EventStatistics = () => {
       .catch((error) => {
         console.error('Error fetching attendance data for the second chart: ', error);
       });
-  };  
+  };
 
   const handleConcertSelect = (concert) => {
     setSelectedConcertName(concert.name);
@@ -141,26 +182,6 @@ const EventStatistics = () => {
         console.error('Error fetching attendance data: ', error);
       });
   };
-
-  // useEffect(() => {
-  //   const jwtToken = localStorage.getItem('jwtToken');
-
-  //   const fetchData = async () => {
-  //     try {
-  //       const orderResponse = await axios.get('http://localhost:8080/events/2/attendance', {
-  //         headers: {
-  //           Authorization: `Bearer ${jwtToken}`,
-  //         },
-  //       });
-
-  //       setAttendanceData(orderResponse.data);
-  //     } catch (error) {
-  //       console.error('Error fetching order data: ', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const chartData = orderData.map((order, index) => ({
     day: `${orderData.length - index}`, // Display order number
@@ -379,18 +400,40 @@ const EventStatistics = () => {
         </div>
       </div>
 
-      <h1 
+      <h1
         className="event-statistics-heading"
       >
-        Prices of Last 30 Orders:
+        Prices of Last {selectedOrdersCount} Orders:
       </h1>
-      {/* <div className="event-statistics-filter-icon-container">
-          <FontAwesomeIcon
-            icon={faArrowDownShortWide}
-            className="event-statistics-filter-icon"
-            onClick={toggleAttendanceMenu}
-          />
-      </div> */}
+      <div className="event-statistics-filter-icon-container">
+        <FontAwesomeIcon
+          icon={faArrowDownShortWide}
+          className="event-statistics-filter-orders-icon"
+          onClick={toggleOrdersMenu}
+        />
+        {ordersMenuVisible && (
+          <div className="event-statistics-orders-menu">
+            <div
+              className="event-statistics-orders-menu-item"
+              onClick={() => setOrdersCount(30)}
+            >
+              30 orders
+            </div>
+            <div
+              className="event-statistics-orders-menu-item"
+              onClick={() => setOrdersCount(60)}
+            >
+              60 orders
+            </div>
+            <div
+              className="event-statistics-orders-menu-item"
+              onClick={() => setOrdersCount(90)}
+            >
+              90 orders
+            </div>
+          </div>
+        )}
+      </div>
       <div>
         <LineChart width={1500} height={400} data={chartData}>
           <XAxis dataKey="day">
@@ -420,12 +463,40 @@ const EventStatistics = () => {
         </LineChart>
       </div>
 
-      <h1 
+      <h1
         className="event-statistics-heading"
       >
-        Tickets Sold Every Day for the Last 30 Days:
+        Tickets Sold Every Day for the Last {selectedTicketsCount} Days:
       </h1>
-
+      <div className="event-statistics-filter-icon-container">
+        <FontAwesomeIcon
+          icon={faArrowDownShortWide}
+          className="event-statistics-filter-orders-icon"
+          onClick={toggleTicketsMenu}
+        />
+        {ticketsMenuVisible && (
+          <div className="event-statistics-orders-menu">
+            <div
+              className="event-statistics-orders-menu-item"
+              onClick={() => setTicketDaysCount(30)}
+            >
+              30 days
+            </div>
+            <div
+              className="event-statistics-orders-menu-item"
+              onClick={() => setTicketDaysCount(60)}
+            >
+              60 days
+            </div>
+            <div
+              className="event-statistics-orders-menu-item"
+              onClick={() => setTicketDaysCount(90)}
+            >
+              90 days
+            </div>
+          </div>
+        )}
+      </div>
       <div>
         <LineChart width={1500} height={400} data={ticketsChartData}>
           <XAxis dataKey="day">
@@ -455,7 +526,7 @@ const EventStatistics = () => {
         </LineChart>
       </div>
 
-      <h1 
+      <h1
         className="event-statistics-heading"
       >
         Event Booking Statistics in Sold Tickets as Percentage and Numbers:
@@ -495,7 +566,7 @@ const EventStatistics = () => {
                 return (
                   <text x={entry.x} y={yPosition} fill={colors[entry.index]} textAnchor="middle">
                     {`${(entry.percent * 100).toFixed(2)}%`}
-                    
+
                   </text>
                 );
               }}
@@ -564,7 +635,7 @@ const EventStatistics = () => {
                 contentStyle={{ fontSize: '28px' }}
               />
             </PieChart>
-          </div>  
+          </div>
         </div>
         <br />
       </div>
