@@ -6,7 +6,9 @@
     font-family: Tahoma;
     height: 100vh;
     margin-right: 700px;
-    margin-top: 20px;
+    margin-top: 40px;
+    padding-top: 100px;
+    padding-bottom: 200px;
   }
   
   .dashboard-create-event-input-container {
@@ -222,4 +224,114 @@
   font-size: 40px;
   cursor: pointer;
   color: red;
+}
+
+.artist-dropdown {
+  max-height: 100px; /* Set a fixed maximum height for the dropdown */
+  overflow-y: auto; /* Enable vertical scrolling for overflow */
+  font-size: 24px; /* Increase the font size for artists */
+  width: 105px;
+}
+
+/* CreateEvent.css */
+.artist-dropdown.artist-dropdown-select {
+  font-size: 20px;  /* Increase the font size for artists */
+  width: 105%;
+  font-family: Tahoma;
+}
+
+
+.artist-dropdown-heading {
+  font-size: 22px;
+}
+
+/* CreateEvent.css */
+.artist-dropdown-button {
+  background-color: #FE6F57;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 24px; /* Increase the font size */
+  width: 105%;
+  font-family: Tahoma;
+  margin-top: 10px; /* Add some top margin for spacing */
+}
+
+.artist-dropdown-button:hover {
+  background-color: #d04e37;
+}
+
+.selected-artist {
+  font-size: 20px;
+  font-family: Tahoma;
+}
+
+.remove-artist-button {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 30px; /* Increase the font size */
+  height: 40px;
+  width: 70px;
+} 
+
+.selected-artists {
+  width: 105%;
+}
+
+
+/* Add this CSS to your CreateEvent.css or a separate CSS file */
+/* Style for the artist dropdown container */
+.artist-dropdown-container {
+  margin-top: 10px;
+}
+
+/* Style for the artist dropdown label */
+.artist-dropdown-label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Style for the artist dropdown */
+.artist-dropdown {
+  width: 100%;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Style for each selected artist item */
+.selected-artist {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: #f5f5f5;
+}
+
+/* Style for the remove button within each selected artist item */
+.remove-artist-button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 20px;
+  width: 100px;
+  font-family: Tahoma;
+}
+
+/* Hover effect for the remove button */
+.remove-artist-button:hover {
+  background-color: #c9302c;
 }

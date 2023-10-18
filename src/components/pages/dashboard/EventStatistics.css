@@ -192,3 +192,21 @@
 .event-statistics-orders-menu-item:hover {
   background-color: #ccc;
 }
+
+.dashboard-create-event-input-row {
+  display: flex;
+  width: 105%;
+}
+
+.dashboard-location-input {
+  margin-right: 10px; /* Add margin only to "Location" and "Event Type" elements */
+}
+
+.dashboard-create-event-input:hover {
+  border: 1px solid #000000; /* Add a border */
+}
+
+.dashboard-create-event-input:hover:disabled {
+  cursor: not-allowed;
+  border: 1px solid #000000; /* Add a border */
+}

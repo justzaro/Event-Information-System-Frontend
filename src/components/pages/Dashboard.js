@@ -4,6 +4,7 @@ import { faGears, faPerson, faCalendarDays, faEnvelope, faTag } from '@fortaweso
 import './Dashboard.css';
 import CreateEvent from './dashboard/CreateEvent';
 import EventStatistics from './dashboard/EventStatistics';
+import EventsOverview from './dashboard/EventsOverview';
 
 const Dashboard = () => {
 
@@ -15,6 +16,8 @@ const Dashboard = () => {
         return <CreateEvent />;
       case 'EventStatistics':
         return <EventStatistics />;
+      case 'EventsOverview':
+          return <EventsOverview />;
       default:
         return null;
     }
@@ -49,9 +52,16 @@ const Dashboard = () => {
             <span className="events-text">Events</span>
           </div>
 
-          <div className="dashboard-menu-subitem">Overview</div>
+          <div
+             className="dashboard-menu-subitem"
+             onClick={() => setSelectedSection('EventsOverview')}
+          >
+            Overview
+          </div>
+
           <br />
           <div
+
             className="dashboard-menu-subitem"
              onClick={() => setSelectedSection('EventStatistics')}
           >    

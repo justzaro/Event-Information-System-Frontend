@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
 import './EventDetail.css';
@@ -14,12 +13,17 @@ const EventDetail = () => {
   const [ticketQuantity, setTicketQuantity] = useState(1);
 
   const [showEventInfo, setShowEventInfo] = useState(false);
+  const [showArtistInfo, setShowArtistInfo] = useState(false);
 
   const [showNotLoggedInMessage, setShowNotLoggedInMessage] = useState(false);
   const [showItemSuccessfullyAddedToCart, setShowItemSuccessfullyAddedToCart] = useState(false);
 
 const toggleEventInfo = () => {
   setShowEventInfo(!showEventInfo);
+};
+
+const toggleArtistInfo = () => {
+  setShowArtistInfo(!showArtistInfo);
 };
 
 
@@ -170,23 +174,43 @@ const toggleEventInfo = () => {
 
               <div className="event-description-heading">Description</div>
 
-              <div className="event-artists-heading"><FontAwesomeIcon icon={faMusic}/> Artists:</div>
-              <div className="event-artists">
-                {event.artists.map((artist, index) => (
+              
+              <div className="event-starting-hour">
+                <FontAwesomeIcon icon={faClock} color="#ff6600"/>
+                <span className="orange-text"> Starts at:</span> {event.startDate}
+              </div>
+              <div className="event-closing-hour">
+                <FontAwesomeIcon icon={faClock} color="#ff6600"/>
+                <span className="orange-text"> Ends at:</span> {event.endDate}
+              </div>
+{/* {event.artists.map((artist, index) => (
+                  <span key={index} className="artist-name">
+                    {artist.firstName} {artist.lastName}
+                  </span>
+                ))}    */}
+
+              <div className="event-info-toggle">
+                <div className="horizontal-line above"></div>
+                <div className="event-info-header">Artists Information</div>
+                <div className="see-more" onClick={toggleArtistInfo}>
+                  {showArtistInfo ? 'See Less' : 'See More'}
+                </div>
+                
+
+                {showArtistInfo && (
+                  <div className={`extra-info ${showArtistInfo ? 'show-info' : ''}`}>
+                  {/* Add the extra text you want to display */}
+                  {event.artists.map((artist, index) => (
                   <span key={index} className="artist-name">
                     {artist.firstName} {artist.lastName}
                   </span>
                 ))}
+                  </div>
+                )}
+
+                <div className={`horizontal-line below ${showArtistInfo ? 'expanded' : ''}`}></div>
               </div>
-              <div className="event-starting-hour">
-  <FontAwesomeIcon icon={faClock} color="#ff6600"/>
-  <span className="orange-text"> Starts at:</span> {event.startDate}
-</div>
-<div className="event-closing-hour">
-  <FontAwesomeIcon icon={faClock} color="#ff6600"/>
-  <span className="orange-text"> Ends at:</span> {event.endDate}
-</div>
-                  
+
               <div className="event-info-toggle">
                 <div className="horizontal-line above"></div>
                 <div className="event-info-header">Event Information</div>
@@ -201,6 +225,9 @@ const toggleEventInfo = () => {
                   {event.description}
                   </div>
                 )}
+
+
+
                 <div className={`horizontal-line below ${showEventInfo ? 'expanded' : ''}`}></div>
               </div>
 

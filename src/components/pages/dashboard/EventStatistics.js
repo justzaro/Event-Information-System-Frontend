@@ -119,7 +119,7 @@ const EventStatistics = () => {
         fetchOrderData(30);
 
         // Fetch the list of events
-        const eventsResponse = await axios.get('http://localhost:8080/events', {
+        const eventsResponse = await axios.get('http://localhost:8080/events/concerts', {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
           },

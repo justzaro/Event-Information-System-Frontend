@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateEvent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,37 @@ const CreateEvent = () => {
   const [imageFile, setImageFile] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showImageModal, setShowImageModal] = useState(false);
+  const [eventType, setEventType] = useState('Concert');
+  const [selectedArtists, setSelectedArtists] = useState([]);
+  const [availableArtists, setAvailableArtists] = useState([]);
+  const [showArtistDropdown, setShowArtistDropdown] = useState(false);
+
+
+  useEffect(() => {
+    fetch('http://localhost:8080/artists')
+      .then((response) => response.json())
+      .then((data) => setAvailableArtists(data));
+  }, []);
+
+  const toggleArtistDropdown = () => {
+    setShowArtistDropdown(!showArtistDropdown);
+  };
+  
+
+  const handleArtistSelection = (artist) => {
+    // Check if the artist is already selected
+    if (!selectedArtists.find((selectedArtist) => selectedArtist.id === artist.id)) {
+      setSelectedArtists([...selectedArtists, artist]);
+    }
+  };
+
+  // Function to remove a selected artist
+  const removeSelectedArtist = (artist) => {
+    const updatedSelectedArtists = selectedArtists.filter(
+      (selectedArtist) => selectedArtist.id !== artist.id
+    );
+    setSelectedArtists(updatedSelectedArtists);
+  };
 
   const toggleImageModal = () => {
     setShowImageModal(!showImageModal);
@@ -29,6 +60,8 @@ const CreateEvent = () => {
   };
 
   const resetForm = () => {
+    setShowArtistDropdown(false);
+    setSelectedArtists([]);
     setStartingTime('');
     setEndingTime('');
     setEventData({
@@ -39,7 +72,7 @@ const CreateEvent = () => {
       endDate: '',
       ticketPrice: '',
       capacity: '',
-      isActive: '',
+      isActive: 'true',
       currency: 'EUR'
     });
     setImageFile(null);
@@ -71,11 +104,13 @@ const CreateEvent = () => {
     name: '',
     description: '',
     location: '',
+    eventType: '',
     startDate: '',
     endDate: '',
     ticketPrice: '',
     capacity: '',
-    isActive: '',
+    isActive: 'true',
+    artists: [],
     currency: 'EUR'
   });
 
@@ -90,18 +125,20 @@ const CreateEvent = () => {
     // Validate and update the state based on the input field
     if (name === 'ticketPrice') {
       // Ensure that the value is a valid floating-point number
-      const floatValue = parseFloat(value.replace(',', '.')); // Handle decimal separator
+      
+        const floatValue = parseFloat(value.replace(',', '.')); // Handle decimal separator
 
-      if (!isNaN(floatValue)) {
-        // Prevent negative values and set a maximum of two decimal places
-        const nonNegativeValue = Math.max(0, floatValue);
-        const roundedValue = Number(nonNegativeValue.toFixed(2));
-
-        setEventData({
-          ...eventData,
-          [name]: roundedValue.toString(), // Handle double values with 2 decimal places
-        });
-      }
+        if (!isNaN(floatValue)) {
+          // Prevent negative values and set a maximum of two decimal places
+          const nonNegativeValue = Math.max(0, floatValue);
+          const roundedValue = Number(nonNegativeValue.toFixed(2));
+  
+          setEventData({
+            ...eventData,
+            [name]: roundedValue.toString(), // Handle double values with 2 decimal places
+          });
+        }
+      
     } else if (name === 'capacity') {
       // Ensure that the value is a valid integer
       const intValue = parseInt(value);
@@ -138,8 +175,16 @@ const CreateEvent = () => {
     const formattedEndDate = `${endingTime}:${endingMinutes} ${eventData.endDate}`;
     eventData.startDate = formattedStartDate;
     eventData.endDate = formattedEndDate;
+    eventData.eventType = eventType.toUpperCase();
 
-    console.log(eventData);
+    eventData.artists = selectedArtists;
+
+    if (eventType === 'Festival') {
+      eventData.ticketPrice = 0;
+      eventData.capacity = 0;
+    }
+
+    console.log('->>>>' + eventData.isActive);
 
     // Assuming 'jwtToken' is stored locally
     const jwtToken = localStorage.getItem('jwtToken');
@@ -157,6 +202,8 @@ const CreateEvent = () => {
         },
         body: formData,
       });
+
+      console.log(eventData);
 
       if (response.ok) {
         setShowEventCreatedSuccessfullyMessage(true);
@@ -211,14 +258,33 @@ const CreateEvent = () => {
             rows="4"
             className="dashboard-create-event-textarea"
           />
-          <input
+          {/* <input
             type="text"
             name="location"
             placeholder="Location"
             value={eventData.location}
             onChange={handleChange}
             className="dashboard-create-event-input"
-          />
+          />        */}
+          <div className="dashboard-create-event-input-row">
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={eventData.location}
+              onChange={handleChange}
+              className="dashboard-create-event-input dashboard-location-input"
+            />
+            <select
+              name="eventType"
+              value={eventType}
+              onChange={(e) => setEventType(e.target.value)}
+              className="dashboard-create-event-input"
+            >
+              <option value="Festival">Festival</option>
+              <option value="Concert">Concert</option>
+            </select>
+            </div>
           <div className="dashboard-create-event-inline-inputs">
             <input
               type="number"
@@ -227,6 +293,7 @@ const CreateEvent = () => {
               value={eventData.ticketPrice}
               onChange={handleChange}
               className="dashboard-create-event-input"
+              disabled={eventType === 'Festival'}
             />
             <input
               type="number"
@@ -235,16 +302,69 @@ const CreateEvent = () => {
               value={eventData.capacity}
               onChange={handleChange}
               className="dashboard-create-event-input"
+              disabled={eventType === 'Festival'}
             />
-            <input
+            {/* <input
               type="text"
               name="isActive"
               placeholder="Status"
               value={eventData.isActive}
               onChange={handleChange}
               className="dashboard-create-event-input"
-            />
+            /> */}
+            <select
+              name="isActive"
+              value={eventData.isActive}
+              onChange={handleChange}
+              className="dashboard-create-event-input"
+            >
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+
           </div>
+
+          <div className="artist-dropdown-container">
+            <h1 className="artist-dropdown-heading">Choose Artists:</h1>
+            <button onClick={toggleArtistDropdown} className="artist-dropdown-button">Show Artists</button>
+            {showArtistDropdown && (
+              <select
+                name="artists"
+                className="artist-dropdown artist-dropdown-select"
+                multiple={true}
+                onChange={(e) => {
+                  const artistId = parseInt(e.target.value); // Convert the artist ID to a number
+                  const selectedArtist = availableArtists.find((artist) => artist.id === artistId);
+                  handleArtistSelection(selectedArtist);
+                }}
+              >
+                {/* Render the artists dynamically based on your data */}
+                
+                  {availableArtists.map((artist) => (
+                    <option key={artist.id} value={artist.id}>
+                      {artist.firstName} {artist.lastName}
+                    </option>
+                  ))}
+                
+              </select>
+            )}
+          </div>
+
+        {/* Display selected artists */}
+        <div className="selected-artists">
+          {selectedArtists.map((artist) => (
+            <div key={artist.id} className="selected-artist">
+              {artist.firstName} {artist.lastName}
+              <button
+                onClick={() => removeSelectedArtist(artist)}
+                className="remove-artist-button"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+
           <hr className="dashboard-create-event-hr" />
           <div className="dashboard-create-event-date-inputs">
             <div className="dashboard-create-event-date-label">Starts at - </div>
@@ -335,19 +455,19 @@ const CreateEvent = () => {
             </button>
           )}
           {showImageModal && (
-      <div className="image-modal-overlay">
-        <div className="image-modal">
-          <img
-            src={URL.createObjectURL(imageFile)}
-            alt="Preview"
-            className="image-modal-content"
-          />
-          <button className="close-image-modal" onClick={toggleImageModal}>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-        </div>
-      </div>
-    )}
+            <div className="image-modal-overlay">
+              <div className="image-modal">
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  alt="Preview"
+                  className="image-modal-content"
+                />
+                <button className="close-image-modal" onClick={toggleImageModal}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
+            </div>
+          )}
           <hr className="dashboard-create-event-hr" /> {/* Horizontal line */}
           <button
             className="dashboard-create-event-button"
@@ -355,9 +475,9 @@ const CreateEvent = () => {
           >
             Create Event
           </button>
-        </div>
+        </div>  
       </div>
-    </div>
+ </div>
   );
 };
 
