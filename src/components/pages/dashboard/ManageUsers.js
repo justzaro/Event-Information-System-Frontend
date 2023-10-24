@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faGear, faCircleXmark, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faGear, faCircleXmark, faTimes, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye as thinEye } from '@fortawesome/free-regular-svg-icons';
 import './ManageUsers.css';
 
 const ManageUsers = () => {
@@ -14,10 +16,42 @@ const ManageUsers = () => {
   const [showUserDeleteUnsuccessfullyMessage, setUserDeletedUnsuccessfullyMessage] = useState(false);
 
   const [showUserSettings, setShowUserSettings] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(false);
   const [showDimmedBackground, setShowDimmedBackground] = useState(false);
   const [showUserSuccessfulEditMessage, setShowUserSuccessfulEditMessage] = useState(false);
   const [showModifyUserProfile, setShowModifyUserProfile] = useState(false);
+
+  const [attachedImage, setAttachedImage] = useState(null);
+
+  // Function to handle image attachment
+  const handleImageAttachment = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+        // Set the attached image to the state or wherever you want to store it
+        setAttachedImage(imageUrl);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Clear the attached image if no file is selected
+      setAttachedImage(null);
+    }
+  };
+
+  // Function to remove the attached image
+  const removeAttachedImage = () => {
+    setAttachedImage(null);
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
 
   useEffect(() => {
     // Fetch all users from 'http://localhost:8080/users/'
@@ -37,6 +71,43 @@ const ManageUsers = () => {
     password: '',
   });
 
+  const extractDay = (dateOfBirth) => {
+    const parts = dateOfBirth.split('-');
+    return parts.length === 3 ? parts[0] : '';
+  };
+
+  const extractMonth = (dateOfBirth) => {
+    const parts = dateOfBirth.split('-');
+    return parts.length === 3 ? parts[1] : '';
+  };
+
+  const extractYear = (dateOfBirth) => {
+    const parts = dateOfBirth.split('-');
+    return parts.length === 3 ? parts[2] : '';
+  };
+
+  const [dobDay, setDobDay] = useState('');
+  const [dobMonth, setDobMonth] = useState('');
+  const [dobYear, setDobYear] = useState('');
+
+
+  // Function to handle changes in date of birth fields
+  const handleDateOfBirthChange = (e) => {
+    const { name, value } = e.target;
+  
+    // Ensure value is a two-digit string (with leading zero if needed)
+    const formattedValue = value.length === 1 ? `0${value}` : value;
+  
+    if (name === 'dobDay') {
+      setDobDay(formattedValue);
+    } else if (name === 'dobMonth') {
+      setDobMonth(formattedValue);
+    } else if (name === 'dobYear') {
+      setDobYear(value);
+    }
+  };
+  
+
   const handleProfileFieldChange = (e) => {
     const { name, value } = e.target;
     setProfileFields({
@@ -46,28 +117,106 @@ const ManageUsers = () => {
   };
 
   const saveModifiedUserProfile = () => {
-    // You can send a PATCH request to update the user's profile using the values in profileFields
-    // Make sure to include the JWT token in the headers of the request
-    // After a successful update, close the modification window
-    console.log('Saving profile changes:', profileFields);
-    // Implement your fetch request here
+    // Create a FormData object to send the data as multipart/form-data
+    const formData = new FormData();
 
+    const dateOfBirthFormatted = `${dobDay}-${dobMonth}-${dobYear}`;
+    console.log(dateOfBirthFormatted);
+
+    profileFields.dateOfBirth = dateOfBirthFormatted;
+
+    console.log(profileFields);
+
+    // Add the userUpdateDto (profileFields) as a JSON blob to the FormData
+    formData.append('userUpdateDto', new Blob([JSON.stringify(profileFields)], { type: 'application/json' }));
+
+    // Add the profilePicture (attachedImage) to the FormData
+    if (attachedImage) {
+      const blob = dataURItoBlob(attachedImage);
+      formData.append('profilePicture', blob);
+    }
+
+    // Retrieve the JWT token from localStorage
+    const jwtToken = localStorage.getItem('jwtToken');
+
+    // Check if the token exists
+    if (jwtToken) {
+      // Send a PUT request to update the user's profile
+      fetch(`http://localhost:8080/users/${profileFields.username}`, {
+        method: 'PUT',
+        body: formData,
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            // Profile updated successfully
+            setShowUserSuccessfulEditMessage(true);
+
+            setTimeout(() => {
+              setShowUserSuccessfulEditMessage(false);
+            }, 4000);
+            // You may want to add a success message or update the user's profile image here
+          } else {
+            // Handle errors here
+            console.error('Failed to update user profile');
+          }
+        });
+    } else {
+      console.error('JWT token not found in localStorage');
+    }
     closeModifyUserProfile();
   };
+
+  // Helper function to convert data URI to Blob
+  function dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
 
   const openModifyUserProfile = () => {
     setShowModifyUserProfile(true);
     closeUserSettings();
   };
-  
+
   const closeModifyUserProfile = () => {
     setShowModifyUserProfile(false);
     setShowDimmedBackground(false);
     // Reset any form input fields if needed
   };
-  
 
   const openUserSettings = (user) => {
+    const setDateOfBirthField = (dob) => {
+      if (dob) {
+        const [day, month, year] = dob.split('-');
+        return `${day}-${month}-${year}`;
+      }
+      return '';
+    };
+
+
+    setProfileFields({
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
+      username: user.username || '',
+      email: user.email || '',
+      dateOfBirth: setDateOfBirthField(user.dateOfBirth) || '',
+      password: user.password || '',
+      address: user.address || ''
+    });
+
+    const dobParts = user.dateOfBirth ? user.dateOfBirth.split('-') : ['', '', ''];
+  setDobDay(dobParts.length === 3 ? dobParts[0] : '');
+  setDobMonth(dobParts.length === 3 ? dobParts[1] : '');
+  setDobYear(dobParts.length === 3 ? dobParts[2] : '');
+
     setSelectedUser(user);
     setShowUserSettings(true);
     setShowDimmedBackground(true);
@@ -83,7 +232,7 @@ const ManageUsers = () => {
     const updatedUser = { ...user, isEnabled: !user.isEnabled };
     // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
-    
+
     // Check if the token exists
     if (jwtToken) {
       // Include the token in the headers of the PATCH request
@@ -105,7 +254,7 @@ const ManageUsers = () => {
             );
 
             setShowUserSuccessfulEditMessage(true);
-  
+
             setTimeout(() => {
               setShowUserSuccessfulEditMessage(false);
             }, 4000);
@@ -118,12 +267,12 @@ const ManageUsers = () => {
     }
     closeUserSettings();
   };
-  
+
   const toggleLockUserProfile = (user) => {
     const updatedUser = { ...user, isLocked: !user.isLocked };
     // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
-    
+
     // Check if the token exists
     if (jwtToken) {
       // Include the token in the headers of the PATCH request
@@ -144,7 +293,7 @@ const ManageUsers = () => {
               prevSortedUsers.map((u) => (u.username === updatedUser.username ? updatedUser : u))
             );
             setShowUserSuccessfulEditMessage(true);
-  
+
             setTimeout(() => {
               setShowUserSuccessfulEditMessage(false);
             }, 4000);
@@ -157,24 +306,24 @@ const ManageUsers = () => {
     }
     closeUserSettings();
   };
-  
+
 
   const sortUsers = (field) => {
     let direction = sortDirection;
-  
+
     // If sorting by the same field, toggle the sort direction
     if (sortField === field) {
       direction = sortDirection === 'asc' ? 'desc' : 'asc';
     }
-  
+
     let sorted = [...sortedUsers];
-  
+
     if (field === 'id') {
       // For numeric sorting, convert to numbers and then sort
       sorted.sort((a, b) => {
         const numA = parseInt(a[field], 10);
         const numB = parseInt(b[field], 10);
-  
+
         if (numA < numB) return direction === 'asc' ? -1 : 1;
         if (numA > numB) return direction === 'asc' ? 1 : -1;
         return 0;
@@ -187,7 +336,7 @@ const ManageUsers = () => {
         return 0;
       });
     }
-  
+
     setSortField(field);
     setSortDirection(direction);
     setSortedUsers(sorted);
@@ -196,41 +345,41 @@ const ManageUsers = () => {
   const deleteUser = (username) => {
     // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
-    
+
     // Check if the token exists
     if (jwtToken) {
-        
-        // Include the token in the headers of the DELETE request
-        fetch(`http://localhost:8080/users/${username}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${jwtToken}`
-            },
-        })
+
+      // Include the token in the headers of the DELETE request
+      fetch(`http://localhost:8080/users/${username}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`
+        },
+      })
         .then((response) => {
-            if (response.status === 204) {
-                // If the user was successfully deleted, you can remove them from your state.
-                const updatedUsers = users.filter((user) => user.username !== username);
-                setUsers(updatedUsers);
-                setSortedUsers(updatedUsers);
+          if (response.status === 204) {
+            // If the user was successfully deleted, you can remove them from your state.
+            const updatedUsers = users.filter((user) => user.username !== username);
+            setUsers(updatedUsers);
+            setSortedUsers(updatedUsers);
 
-                setUserDeletedSuccessfullyMessage(true);
+            setUserDeletedSuccessfullyMessage(true);
 
-                setTimeout(() => {
-                    setUserDeletedSuccessfullyMessage(false);
-                }, 4000);
-            } else {
-                setUserDeletedUnsuccessfullyMessage(true);
-                setTimeout(() => {
-                    setUserDeletedUnsuccessfullyMessage(false);
-                }, 4000);
-                console.error('Failed to delete the user');
-            }
+            setTimeout(() => {
+              setUserDeletedSuccessfullyMessage(false);
+            }, 4000);
+          } else {
+            setUserDeletedUnsuccessfullyMessage(true);
+            setTimeout(() => {
+              setUserDeletedUnsuccessfullyMessage(false);
+            }, 4000);
+            console.error('Failed to delete the user');
+          }
         });
     } else {
-        console.error('JWT token not found in localStorage');
+      console.error('JWT token not found in localStorage');
     }
-};
+  };
 
 
   const openDeleteConfirmation = (username) => {
@@ -253,7 +402,7 @@ const ManageUsers = () => {
 
   return (
     <div className="user-dashboard-users-table">
-     {showDimmedBackground && <div className="dimmed-background"></div>}
+      {showDimmedBackground && <div className="dimmed-background"></div>}
 
       {showUserSuccessfulEditMessage && (
         <div className="register-success-message">
@@ -286,7 +435,7 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {sortedUsers.map((user) => (    
+          {sortedUsers.map((user) => (
             <tr key={user.id} className="user-dashboard-table">
               <td className="user-id">{user.id}</td>
               <td className="user-name">{user.firstName} {user.lastName}</td>
@@ -300,13 +449,13 @@ const ManageUsers = () => {
               </td>
               <td className="user-actions">
                 <button className="user-action-button user-settings-button">
-                  <FontAwesomeIcon icon={faGear} onClick={() => openUserSettings(user)}/>
+                  <FontAwesomeIcon icon={faGear} onClick={() => openUserSettings(user)} />
                 </button>
                 <button className="user-action-button user-delete-button">
                   <FontAwesomeIcon icon={faCircleXmark} onClick={() => openDeleteConfirmation(user.username)} />
-                </button>      
+                </button>
               </td>
-            </tr>          
+            </tr>
           ))}
         </tbody>
       </table>
@@ -388,23 +537,129 @@ const ManageUsers = () => {
             />
           </div>
           <div className="profile-field">
+            <label>Date of Birth:</label>
+            <div className="modify-user-dob-input">
+  <select
+    name="dobDay"
+    value={dobDay}
+    onChange={handleDateOfBirthChange}
+  >
+    {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+      <option key={day} value={day < 10 ? `0${day}` : day}>
+        {day < 10 ? `0${day}` : day}
+      </option>
+    ))}
+  </select>
+
+  <select
+    name="dobMonth"
+    value={dobMonth}
+    onChange={handleDateOfBirthChange}
+  >
+    {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+      <option key={month} value={month < 10 ? `0${month}` : month}>
+        {month < 10 ? `0${month}` : month}
+      </option>
+    ))}
+  </select>
+
+  <select
+    name="dobYear"
+    value={dobYear}
+    onChange={handleDateOfBirthChange}
+  >
+    {Array.from({ length: 151 }, (_, i) => 1900 + i).map((year) => (
+      <option key={year} value={year}>
+        {year}
+      </option>
+    ))}
+  </select>
+</div>
+</div>
+
+
+          <div className="profile-field">
             <label htmlFor="password">Password:</label>
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password"
               value={profileFields.password}
+              onChange={handleProfileFieldChange}
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? solidEye : thinEye}
+              onClick={togglePasswordVisibility}
+              className="save-user-settings-password-toggle"
+            />
+          </div>
+          <div className="profile-field">
+            <label htmlFor="address">Address:</label>
+            <input
+              type="text"
+              name="address"
+              value={profileFields.address}
               onChange={handleProfileFieldChange}
             />
           </div>
           <button className="close-button" onClick={closeModifyUserProfile}>
             <FontAwesomeIcon icon={faTimes} />
           </button>
+
+          {attachedImage ? (
+            <img
+              src={attachedImage}
+              alt="Attached Image"
+            />
+          ) : (
+            <img
+              src={`http://localhost:8080/users/profile-picture/${profileFields.username}`}
+              alt="Profile Picture"
+            />
+          )}
+
+          {/* Input to attach an image from the PC */}
+          <p className="save-user-attach-image-label">Attach Image: </p>
+          <input
+            id="file-input"
+            type="file"
+            accept="image/*"
+            onChange={handleImageAttachment}
+            className="custom-file-input"
+          />
+
+          {attachedImage && (
+            <button
+              onClick={() => {
+                setAttachedImage(null);
+                const fileInput = document.getElementById('file-input'); // Add an `id` to your file input element
+                if (fileInput) {
+                  fileInput.value = ''; // Reset the file input value to an empty string
+                }
+
+              }}
+              className="remove-image-button"
+            >
+              Remove Attached Image
+            </button>
+          )}
+          <hr />
+
           <div className="profile-actions">
-            <button onClick={saveModifiedUserProfile}>Save Changes</button>
-            <button onClick={closeModifyUserProfile}>Cancel</button>
+            <button
+              onClick={saveModifiedUserProfile}
+              className="save-profile-changes-button"
+            >
+              Save Changes
+            </button>
+            <button
+              onClick={closeModifyUserProfile}
+              className="discard-profile-changes-button"
+            >
+              Cancel
+            </button>
           </div>
         </div>
-        
+
       )}
     </div>
   );

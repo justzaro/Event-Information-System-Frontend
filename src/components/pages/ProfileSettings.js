@@ -246,7 +246,7 @@ const ProfileSettings = () => {
         fullFormData.append('profilePicture', selectedImage);
 
         axios
-            .put(`http://localhost:8080/users/update/${getUsernameFromToken()}`, fullFormData, {
+            .put(`http://localhost:8080/users/${getUsernameFromToken()}`, fullFormData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
                     'Content-Type': 'multipart/form-data',

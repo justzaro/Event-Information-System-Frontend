@@ -260,18 +260,16 @@
   padding: 20px;
   border-radius: 5px;
   text-align: left;
-  font-size: 18px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative; /*absolute*/
+  transform: translate(-15%, -85%); /* Adjust the second value (-30%) to control vertical position */
   width: 600px;
 }
 
 .modify-user-profile h3 {
   text-align: center;
+  font-size: 30px;
 }
 
 .profile-field {
@@ -282,7 +280,7 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 22px;
 }
 
 .profile-field input {
@@ -290,23 +288,131 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 22px;
 }
 
 /* CSS for the "Modify User Profile" button */
 .modify-user-settings-button.modify-profile-button {
-  background-color: #007bff;
+  background-color: #191919;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.modify-user-settings-button.modify-profile-button:hover {
+  background-color: #353535;
+}
+
+.save-profile-changes-button {
+  background-color: #FE6F57;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 30px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.save-profile-changes-button:hover {
+  background-color: #ef5338;
+}
+
+.discard-profile-changes-button {
+  background-color: #FE6F57;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 30px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.discard-profile-changes-button:hover {
+  background-color: #ef5338;
+
+}
+
+.modify-user-profile img {
+  width: 50%;
+  height: 50%;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  transform: translate(50%, 0%);
+  max-height: 350px;
+}
+
+/* Style for the file input to attach an image */
+.modify-user-profile input[type="file"] {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+/* Style for the attached image */
+.modify-user-profile img.attached-image {
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+/* Style for the button to remove the attached image */
+.modify-user-profile button.remove-image-button {
+  background-color: #ff4444;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.remove-image-button {
+  background-color: #ff0000;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 24px;
+  font-family: Tahoma;
+  margin-left: 25%;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-.modify-user-settings-button.modify-profile-button:hover {
-  background-color: #0056b3;
+.custom-file-input {
+  font-size: 22px;
 }
 
-/* ... (Other CSS rules for your components) */
+.save-user-attach-image-label {
+  margin-left: 35%;
+}
+
+.save-user-settings-password-toggle {
+  position: absolute;
+  right: 10px; /* Adjust the right position as needed */
+  top: 50%;
+  transform: translate(-80%, -200%); /* Adjust the second value (-30%) to control vertical position */
+
+  cursor: pointer;
+  font-size: 26px; /* Set the icon size */
+}
+
+.modify-user-dob-input {
+  display: flex; /* Use flexbox to align the input boxes horizontally */
+}
+
+.modify-user-dob-input input {
+  width: 50px; /* Adjust the width as needed */
+  margin-right: 5px; /* Add some spacing between the input boxes */
+}
+
+
+.modify-user-dob-input select {
+  font-size: 22px;
+  font-family: Tahoma;
+  padding: 5px;
+}
