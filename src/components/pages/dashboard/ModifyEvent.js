@@ -1,110 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import './CreateEvent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import './ModifyEvent.css';
 
-const CreateEvent = () => {
+const EventDropdown = ({ events, selectedEvent, onSelectEvent }) => {
+  return (
+    <div>
+      <h2 className="choose-event-heading">Choose event: </h2>
+    <select value={selectedEvent ? selectedEvent.id : ''} onChange={onSelectEvent} className="choose-event-dropdown">
+      <option value="">Select an event</option>
+      {events.map(event => (
+        <option key={event.id} value={event.id}>
+          {event.name}
+        </option>
+      ))}
+    </select>
+    </div>
+  );
+};
+
+const ModifyEvent = () => {
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [availableArtists, setAvailableArtists] = useState([]);
+  const [selectedArtists, setSelectedArtists] = useState([]);
+  const [showArtistDropdown, setShowArtistDropdown] = useState(false);
 
   const [startingTime, setStartingTime] = useState('');
   const [startingMinutes, setStartingMinutes] = useState('');
   const [endingTime, setEndingTime] = useState('');
   const [endingMinutes, setEndingMinutes] = useState('');
-  const [showShowEventCreatedSuccessfullyMessage, setShowEventCreatedSuccessfullyMessage] = useState(false);
-  const [showShowEventCreatedUnsuccessfullyMessage, setShowEventCreatedUnsuccessfullyMessage] = useState(false);
-  const [imageFile, setImageFile] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+
+  const [formattedStartDate, setFormattedStartDate] = useState('');
+  const [formattedEndDate, setFormattedEndDate] = useState('');
+
+  const [eventImage, setEventImage] = useState(null);
+
   const [showImageModal, setShowImageModal] = useState(false);
-  const [eventType, setEventType] = useState('Concert');
-  const [selectedArtists, setSelectedArtists] = useState([]);
-  const [availableArtists, setAvailableArtists] = useState([]);
-  const [showArtistDropdown, setShowArtistDropdown] = useState(false);
 
-
-  useEffect(() => {
-    fetch('http://localhost:8080/artists')
-      .then((response) => response.json())
-      .then((data) => setAvailableArtists(data));
-  }, []);
-
-  const toggleArtistDropdown = () => {
-    setShowArtistDropdown(!showArtistDropdown);
-  };
+  const [showEventModifiedSuccessfullyMessage, setShowEventModifiedSuccessfullyMessage] = useState(false);
+  const [showEventModifiedUnsuccessfullyMessage, setShowEventModifiedUnsuccessfullyMessage] = useState(false);
   
-
-  const handleArtistSelection = (artist) => {
-    // Check if the artist is already selected
-    if (!selectedArtists.find((selectedArtist) => selectedArtist.id === artist.id)) {
-      setSelectedArtists([...selectedArtists, artist]);
-    }
-  };
-
-  // Function to remove a selected artist
-  const removeSelectedArtist = (artist) => {
-    const updatedSelectedArtists = selectedArtists.filter(
-      (selectedArtist) => selectedArtist.id !== artist.id
-    );
-    setSelectedArtists(updatedSelectedArtists);
-  };
-
-  const toggleImageModal = () => {
-    setShowImageModal(!showImageModal);
-  };
-
-  const handleClearImage = () => {
-    setImageFile(null);
-    // Clear the input field by selecting it and setting its value to an empty string
-    const imageInput = document.querySelector('input[name="image"]');
-    if (imageInput) {
-      imageInput.value = '';
-    }
-  };
-
-  const resetForm = () => {
-    setShowArtistDropdown(false);
-    setSelectedArtists([]);
-    setStartingTime('');
-    setEndingTime('');
-    setEventData({
-      name: '',
-      description: '',
-      location: '',
-      startDate: '',
-      endDate: '',
-      ticketPrice: '',
-      capacity: '',
-      isActive: 'true',
-      currency: 'EUR'
-    });
-    setImageFile(null);
-    setStartingMinutes('');
-    setEndingMinutes('');
-    const imageInput = document.querySelector('input[name="image"]');
-    if (imageInput) {
-      imageInput.value = '';
-    }
-  };
-
-  const handleStartingMinutesChange = (e) => {
-    setStartingMinutes(e.target.value);
-  };
-
-  const handleEndingMinutesChange = (e) => {
-    setEndingMinutes(e.target.value);
-  };
-
-  const handleStartingTimeChange = (e) => {
-    setStartingTime(e.target.value);
-  };
-
-  const handleEndingTimeChange = (e) => {
-    setEndingTime(e.target.value);
-  };
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [eventData, setEventData] = useState({
     name: '',
     description: '',
     location: '',
-    eventType: 'Concert',
+    eventType: '',
     startDate: '',
     endDate: '',
     ticketPrice: '',
@@ -113,11 +56,6 @@ const CreateEvent = () => {
     artists: [],
     currency: 'EUR'
   });
-
-  const handleImageChange = (e) => {
-    const image = e.target.files[0];
-    setImageFile(image); // Store the selected image separately
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -167,19 +105,185 @@ const CreateEvent = () => {
     }
   };
 
+  // After you fetch and set selectedEvent, you can parse its start and end times
+  useEffect(() => {
+    if (selectedEvent) {
+      const [startDateTime, endDateTime] = [selectedEvent.startDate, selectedEvent.endDate].map(dateTimeString => {
+        const [time, date] = dateTimeString.split(' ');
+        const [hours, minutes] = time.split(':');
+        return { hours, minutes, date };
+      });
+
+      setStartingTime(startDateTime.hours);
+      setStartingMinutes(startDateTime.minutes);
+      setEndingTime(endDateTime.hours);
+      setEndingMinutes(endDateTime.minutes);
+
+      // Reformat and set the date parts in eventData
+      setFormattedStartDate(startDateTime.date.split('/').reverse().join('-'));
+      setFormattedEndDate(endDateTime.date.split('/').reverse().join('-'));
+
+      setEventData({
+        ...eventData,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      });
+    }
+  }, [selectedEvent, formattedStartDate, formattedEndDate]);
+
+
+
+  useEffect(() => {
+    // Fetch the list of events from 'http://localhost:8080/events'
+    fetch('http://localhost:8080/events')
+      .then((response) => response.json())
+      .then((data) => setEvents(data));
+  }, []);
+
+  const handleStartingMinutesChange = (e) => {
+    setStartingMinutes(e.target.value);
+  };
+
+  const handleEndingMinutesChange = (e) => {
+    setEndingMinutes(e.target.value);
+  };
+
+  const handleStartingTimeChange = (e) => {
+    setStartingTime(e.target.value);
+  };
+
+  const handleEndingTimeChange = (e) => {
+    setEndingTime(e.target.value);
+  };
+
+  const handleImageChange = (e) => {
+    const image = e.target.files[0];
+    setEventImage(image); // Store the selected image separately
+  };
+
+  const toggleImageModal = () => {
+    setShowImageModal(!showImageModal);
+  };
+
+  const handleClearImage = () => {
+    setEventImage(null);
+    // Clear the input field by selecting it and setting its value to an empty string
+    const imageInput = document.querySelector('input[name="image"]');
+    if (imageInput) {
+      imageInput.value = '';
+    }
+  };
+
+  const handleEventSelection = (e) => {
+    const selectedEventId = parseInt(e.target.value, 10);
+    const event = events.find((event) => event.id === selectedEventId);
+  
+    if (event) {
+      setSelectedEvent(event);
+      setSelectedArtists(event.artists);
+  
+      // Update eventData with the selected event's information
+      setEventData({
+        ...eventData,
+        name: event.name,
+        description: event.description,
+        location: event.location,
+        eventType: event.eventType,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        ticketPrice: event.ticketPrice,
+        capacity: event.capacity,
+        isActive: event.isActive,
+      });
+  
+      fetch(`http://localhost:8080/events/event-picture/${event.name}`)
+        .then((response) => {
+          if (response.ok) {
+            return response.blob();
+          } else {
+            return null; // Handle this case as needed
+          }
+        })
+        .then((imageBlob) => {
+          if (imageBlob) {
+            // Convert the image blob to a URL
+            setEventImage(imageBlob);
+          } else {
+            console.error("Failed to fetch the image.");
+          }
+        });
+    }
+  };
+  
+
+  useEffect(() => {
+    if (selectedEvent) {
+      console.log('Fetching artists...');
+      fetch(`http://localhost:8080/artists`)
+        .then(response => response.json())
+        .then(data => setAvailableArtists(data));
+    }
+  }, [selectedEvent]);
+  const toggleArtistDropdown = () => {
+    console.log('Toggling artist dropdown...');
+
+    setShowArtistDropdown(!showArtistDropdown);
+  };
+
+  const handleArtistSelection = (e) => {
+    const artistId = parseInt(e.target.value); // Convert the artist ID to a number
+    console.log('Selected artist ID:', artistId);
+
+    if (!selectedArtists.some((artist) => artist.id === artistId)) {
+      const selectedArtist = availableArtists.find((artist) => artist.id === artistId);
+  
+      if (selectedArtist) {
+        setSelectedArtists([...selectedArtists, selectedArtist]);
+      }
+    }
+  };
+
+  const removeSelectedArtist = (artist) => {
+    const updatedSelectedArtists = selectedArtists.filter(selectedArtist => selectedArtist.id !== artist.id);
+    setSelectedArtists(updatedSelectedArtists);
+  };
+
+  const resetForm = () => {
+    setShowArtistDropdown(false);
+    setSelectedArtists([]);
+    setStartingTime('');
+    setEndingTime('');
+    setEventData({
+      name: '',
+      description: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      ticketPrice: '',
+      capacity: '',
+      isActive: 'true',
+      currency: 'EUR'
+    });
+    setStartingMinutes('');
+    setEndingMinutes('');
+    const imageInput = document.querySelector('input[name="image"]');
+    if (imageInput) {
+      imageInput.value = '';
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log('asd');
     // Format startDate and endDate
     const formattedStartDate = `${startingTime}:${startingMinutes} ${eventData.startDate}`;
     const formattedEndDate = `${endingTime}:${endingMinutes} ${eventData.endDate}`;
     eventData.startDate = formattedStartDate;
     eventData.endDate = formattedEndDate;
-    eventData.eventType = eventType.toUpperCase();
 
     eventData.artists = selectedArtists;
 
-    if (eventType === 'Festival') {
+    if (eventData.eventType === 'FESTIVAL') {
       eventData.ticketPrice = 0;
       eventData.capacity = 0;
     }
@@ -192,11 +296,11 @@ const CreateEvent = () => {
     // Prepare the request data
     const formData = new FormData();
     formData.append('eventDto', new Blob([JSON.stringify(eventData)], { type: 'application/json' }));
-    formData.append('eventPicture', imageFile);
+    formData.append('eventPicture', eventImage);
 
     try {
-      const response = await fetch('http://localhost:8080/events/add', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:8080/events/update/${selectedEvent.id}`, {
+        method: 'PUT',
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -206,10 +310,10 @@ const CreateEvent = () => {
       console.log(eventData);
 
       if (response.ok) {
-        setShowEventCreatedSuccessfullyMessage(true);
+        setShowEventModifiedSuccessfullyMessage(true);
 
         setTimeout(() => {
-          setShowEventCreatedSuccessfullyMessage(false);
+          setShowEventModifiedSuccessfullyMessage(false);
         }, 4000);
       } else {
         const errorData = await response.json();
@@ -217,56 +321,63 @@ const CreateEvent = () => {
 
         setErrorMessage(errorMessage);
 
-        setShowEventCreatedUnsuccessfullyMessage(true);
+        setShowEventModifiedUnsuccessfullyMessage(true);
 
         setTimeout(() => {
-          setShowEventCreatedUnsuccessfullyMessage(false);
+          setShowEventModifiedUnsuccessfullyMessage(false);
         }, 4000);
       }
     } catch (error) {
       console.error('Error:', error);
+      setShowEventModifiedUnsuccessfullyMessage(true);
+
+      setTimeout(() => {
+        setShowEventModifiedUnsuccessfullyMessage(false);
+      }, 4000);
     }
 
     resetForm();
+    setSelectedEvent(null);
   };
 
   return (
-<div className={`dashboard-create-event-container${imageFile || selectedArtists.length > 0 ? '-expanded' : ''}`}>
+<div className={`dashboard-create-event-container${eventImage || selectedArtists.length > 0 ? '-expanded' : ''}`}>
 
-      {showShowEventCreatedSuccessfullyMessage && (
-        <div className="register-success-message">Event created successfully!</div>
+{showEventModifiedSuccessfullyMessage && (
+        <div className="register-success-message">Event modified successfully!</div>
       )}
-      {showShowEventCreatedUnsuccessfullyMessage && (
+      {showEventModifiedUnsuccessfullyMessage && (
+        <div className="register-success-message">There was an error modifying the event!</div>
+      )}
+      {showEventModifiedUnsuccessfullyMessage && (
         <div className="register-fail-message">{errorMessage}</div>
       )}
 
       <div className="dashboard-create-event-wrapper">
+      <EventDropdown events={events} selectedEvent={selectedEvent} onSelectEvent={handleEventSelection} />
+
+        {/* <form onSubmit={handleSubmit}> */}
         <div className="dashboard-create-event-input-container">
-          <input
-            type="text"
-            name="name"
-            placeholder="Event Name"
-            value={eventData.name}
-            onChange={handleChange}
-            className="dashboard-create-event-input"
-          />
+        <input
+  type="text"
+  name="name"
+  placeholder="Event Name"
+  value={eventData.name}
+  onChange={handleChange}
+  className="dashboard-create-event-input"
+/>
+
           <textarea
             name="description"
             placeholder="Event Description"
             value={eventData.description}
-            onChange={handleChange}
             rows="4"
+            onChange={handleChange}
+
             className="dashboard-create-event-textarea"
           />
-          {/* <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={eventData.location}
-            onChange={handleChange}
-            className="dashboard-create-event-input"
-          />        */}
           <div className="dashboard-create-event-input-row">
+
             <input
               type="text"
               name="location"
@@ -275,17 +386,22 @@ const CreateEvent = () => {
               onChange={handleChange}
               className="dashboard-create-event-input dashboard-location-input"
             />
-            <select
-              name="eventType"
-              value={eventData.eventType}
-              onChange={(e) => setEventType(e.target.value)}
-              className="dashboard-create-event-input"
-            >
-              <option value="Festival">Festival</option>
-              <option value="Concert">Concert</option>
-            </select>
-            </div>
+
+<select
+  name="eventType"
+  value={eventData.eventType}
+  // onChange={(e) => setEventType(e.target.value)}
+  onChange={handleChange}
+
+  className="dashboard-create-event-input"
+>
+  <option value="FESTIVAL">Festival</option>
+  <option value="CONCERT">Concert</option>
+</select>
+
+          </div>
           <div className="dashboard-create-event-inline-inputs">
+
             <input
               type="number"
               name="ticketPrice"
@@ -293,25 +409,20 @@ const CreateEvent = () => {
               value={eventData.ticketPrice}
               onChange={handleChange}
               className="dashboard-create-event-input"
-              disabled={eventType === 'Festival'}
+              disabled={selectedEvent && eventData.eventType === 'FESTIVAL'}
             />
+
             <input
-              type="number"
+              type="text"
               name="capacity"
               placeholder="Capacity"
               value={eventData.capacity}
               onChange={handleChange}
               className="dashboard-create-event-input"
-              disabled={eventType === 'Festival'}
+              disabled={selectedEvent && eventData.eventType === 'FESTIVAL'}
+
             />
-            {/* <input
-              type="text"
-              name="isActive"
-              placeholder="Status"
-              value={eventData.isActive}
-              onChange={handleChange}
-              className="dashboard-create-event-input"
-            /> */}
+
             <select
               name="isActive"
               value={eventData.isActive}
@@ -321,54 +432,42 @@ const CreateEvent = () => {
               <option value="true">Active</option>
               <option value="false">Inactive</option>
             </select>
-
           </div>
 
           <div className="artist-dropdown-container">
             <h1 className="artist-dropdown-heading">Choose Artists:</h1>
-            <button onClick={toggleArtistDropdown} className="artist-dropdown-button">Show Artists</button>
+            <button onClick={toggleArtistDropdown} className="artist-dropdown-button">
+              Show Artists
+            </button>
             {showArtistDropdown && (
               <select
                 name="artists"
                 className="artist-dropdown artist-dropdown-select"
                 multiple={true}
-                onChange={(e) => {
-                  const artistId = parseInt(e.target.value); // Convert the artist ID to a number
-                  const selectedArtist = availableArtists.find((artist) => artist.id === artistId);
-                  handleArtistSelection(selectedArtist);
-                }}
+                onChange={handleArtistSelection}
+                value={selectedArtists.map(artist => artist.id)}
               >
-                {/* Render the artists dynamically based on your data */}
-                
-                  {availableArtists.map((artist) => (
-                    <option key={artist.id} value={artist.id}>
-                      {artist.firstName} {artist.lastName}
-                    </option>
-                  ))}
-                
+                {availableArtists.map(artist => (
+                  <option key={artist.id} value={artist.id}>
+                    {artist.firstName} {artist.lastName}
+                  </option>
+                ))}
               </select>
             )}
           </div>
-
-        {/* Display selected artists */}
-{/* Display selected artists in a scrollable container */}
-<div className="selected-artists-container">
+          <div className="selected-artists-container">
   <div className="selected-artists">
-    {selectedArtists.map((artist) => (
-      <div key={artist.id} className="selected-artist">
-        {artist.firstName} {artist.lastName}
-        <button
-          onClick={() => removeSelectedArtist(artist)}
-          className="remove-artist-button"
-        >
-          Remove
-        </button>
-      </div>
-    ))}
+  {selectedArtists.map((artist) => (
+  <div key={artist.id} className="selected-artist">
+    {artist.firstName} {artist.lastName}
+    <button onClick={() => removeSelectedArtist(artist)} className="remove-artist-button">
+      Remove
+    </button>
+  </div>
+))}
+
   </div>
 </div>
-
-
           <hr className="dashboard-create-event-hr" />
           <div className="dashboard-create-event-date-inputs">
             <div className="dashboard-create-event-date-label">Starts at - </div>
@@ -398,7 +497,7 @@ const CreateEvent = () => {
               type="date"
               name="startDate"
               placeholder="Start Date"
-              value={eventData.startDate}
+              value={formattedStartDate}
               onChange={handleChange}
               className="dashboard-create-event-date-input-date"
             />
@@ -431,11 +530,12 @@ const CreateEvent = () => {
               type="date"
               name="endDate"
               placeholder="End Date"
-              value={eventData.endDate}
+              value={formattedEndDate}
               onChange={handleChange}
               className="dashboard-create-event-date-input-date"
             />
           </div>
+
           <div className="dashboard-create-event-date-inputs">
             <div className="dashboard-create-event-date-label">Event Image - </div>
             <input
@@ -445,12 +545,12 @@ const CreateEvent = () => {
               onChange={handleImageChange}
               className="dashboard-create-event-input"
             />
-            {imageFile && (
+            {eventImage && (
               <FontAwesomeIcon icon={faTimes} onClick={handleClearImage} className="clear-image-icon" />
             )}
           </div>
 
-          {imageFile && (
+          {eventImage && (
             <button
               className="dashboard-create-event-button"
               onClick={toggleImageModal}
@@ -462,7 +562,7 @@ const CreateEvent = () => {
             <div className="image-modal-overlay">
               <div className="image-modal">
                 <img
-                  src={URL.createObjectURL(imageFile)}
+                  src={typeof eventImage === 'string' ? eventImage : URL.createObjectURL(eventImage)}
                   alt="Preview"
                   className="image-modal-content"
                 />
@@ -473,16 +573,18 @@ const CreateEvent = () => {
             </div>
           )}
           <hr className="dashboard-create-event-hr" /> {/* Horizontal line */}
+
           <button
             className="dashboard-create-event-button"
             onClick={handleSubmit}
           >
-            Create Event
+            Modify Event
           </button>
-        </div>  
+        </div>
       </div>
- </div>
+      {/* </form> */}
+    </div>
   );
 };
 
-export default CreateEvent;
+export default ModifyEvent;

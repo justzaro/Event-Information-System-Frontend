@@ -17,6 +17,16 @@ const Events = () => {
     return { time: '', date: '' };
   }
 
+  function truncateDescription(description, wordLimit) {
+    const words = description.split(' ');
+    if (words.length <= wordLimit) {
+      return description;
+    } else {
+      const truncatedWords = words.slice(0, wordLimit);
+      return truncatedWords.join(' ') + ' ...';
+    }
+  }  
+
   useEffect(() => {
     // Fetch events data
     fetch('http://localhost:8080/events')
@@ -30,7 +40,7 @@ const Events = () => {
 
   return (
     
-      <div className={styles['events-page-center-container']}>
+      <div>
         <h1>Eventsss</h1>
         {error ? (
           <p>Error: {error}</p>
@@ -76,7 +86,7 @@ const Events = () => {
                     />
                     <p>{event.location}</p>
                   </div>
-                  <p>{event.description}</p>
+                  <p>{truncateDescription(event.description, 40)}</p> {/* Adjust 20 to your desired word limit */}
                 </div>
                 </Link>
               </div>

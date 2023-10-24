@@ -5,10 +5,20 @@
     align-items: center;
     font-family: Tahoma;
     height: 100vh;
-    margin-right: 700px;
+    margin-right: 900px;
+    margin-top: 150px;
+    padding-bottom: 200px;  }
+
+  .dashboard-create-event-container-expanded {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Tahoma;
+    height: 100vh;
+    margin-right: 900px;
     margin-top: 40px;
-    padding-top: 100px;
-    padding-bottom: 200px;
+    padding-top: 200px;
+    padding-bottom: 400px;
   }
   
   .dashboard-create-event-input-container {
@@ -46,6 +56,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 19px;
+    resize: none;
   }
   
   .dashboard-create-event-textarea::placeholder {
@@ -334,4 +345,10 @@
 /* Hover effect for the remove button */
 .remove-artist-button:hover {
   background-color: #c9302c;
+}
+
+.selected-artists-container {
+  max-height: 200px; /* Adjust this value as needed to control the height of the container */
+  width: 105%;
+  overflow: auto;
 }

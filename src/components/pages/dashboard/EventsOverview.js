@@ -117,24 +117,37 @@ const EventsOverview = () => {
                         ))}
                         </div>
                         <div className="event-overview-location"> Location: {event.location}</div>
-                        {event.eventType === 'CONCERT' ? (
-                            <div className="event-overview-concert-rectangle">
-                                <span className="event-overview-event-text">Concert</span>
-                            </div>
-                        ) : (
-                            <div className="event-overview-festival-rectangle">
-                                <span className="event-overview-event-text">Festival</span>
-                            </div>
-                        )}
-                        {event.isActive ? (
-                            <div className="event-overview-isActive-rectangle">
-                                <span className="event-overview-isActive-text">Active</span>
-                            </div>
-                        ) : (
-                            <div className="event-overview-isInactive-rectangle">
-                                <span className="event-overview-isActive-text">Inactive</span>
-                            </div>
-                        )}
+                        <div className="event-overview-rectangles">
+
+                            {event.isActive ? (
+                                <div className="event-overview-isActive-rectangle">
+                                    <span className="event-overview-isActive-text">Active</span>
+                                    {event.eventType === 'CONCERT' ? (
+                                <div className="event-overview-concert-rectangle">
+                                    <span className="event-overview-event-text">Concert</span>
+                                </div>
+                            ) : (
+                                <div className="event-overview-festival-rectangle">
+                                    <span className="event-overview-event-text">Festival</span>
+                                </div>
+                            )}
+                                </div>
+                            ) : (
+                                <div className="event-overview-isInactive-rectangle">
+                                    <span className="event-overview-isActive-text">Inactive</span>
+                                    {event.eventType === 'CONCERT' ? (
+                                <div className="event-overview-concert-rectangle">
+                                    <span className="event-overview-event-text">Concert</span>
+                                </div>
+                            ) : (
+                                <div className="event-overview-festival-rectangle">
+                                    <span className="event-overview-event-text">Festival</span>
+                                </div>
+                            )}
+                                </div>
+                                
+                            )}
+                        </div>
                         <div className="event-overview-icon">
                             <FontAwesomeIcon
                                 icon={faAngleDown}

@@ -65,6 +65,7 @@
     overflow: visible;
     opacity: 1;
     /* Show the description */
+    max-width: 620px;
 }
 
 /*   
@@ -111,9 +112,9 @@
 
 .event-overview-concert-rectangle {
     position: absolute;
-    top: 24%;
+    top: 130%;
     /* Adjust the top position */
-    right: 1.8%;
+    right: 0%;
     /* Adjust the right position */
     background-color: #FE6F57;
     color: #fff;
@@ -123,9 +124,9 @@
 
 .event-overview-festival-rectangle {
     position: absolute;
-    top: 32%;
+    top: 130%;
     /* Adjust the top position */
-    right: 1.8%;
+    right: 0%;
     /* Adjust the right position */
     background-color: rgb(122, 11, 137);
     color: #fff;

@@ -1,0 +1,312 @@
+.user-dashboard-users-table {
+    width: 100%;
+    margin: 1em 0;
+    margin-top: 70px;
+    font-size: 24px;
+    font-family: Tahoma;
+  }
+  
+  .user-dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #333;
+    color: white;
+  }
+  
+  .user-dashboard-table th {
+    background-color: #333;
+    color: skyblue;
+    text-align: center;
+    padding: 10px 35px;
+  }
+  
+  .user-dashboard-table th.sortable-header:hover {
+    cursor: pointer;
+  }
+  
+  .user-dashboard-table td {
+    text-align: center;
+    justify-content: center;
+    padding: 20px 15px;
+  }
+
+  .user-dashboard-table tr {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .user-id,
+  .user-name,
+  .user-username,
+  .user-email,
+  .user-dob,
+  .user-role,
+  .user-status,
+  .user-locked,
+  .user-actions {
+    padding: 10px 15px;
+  }
+  
+  .user-dashboard-table .user-status .user-locked {
+    display: flex;
+  }
+  
+  .user-dashboard-table .user-status.active,
+  .user-status.unlocked {
+    color: rgb(11, 182, 11);
+  }
+  
+  .user-dashboard-table .user-status.inactive,
+  .user-status.locked {
+    color: orange;
+  }
+  
+  .user-dashboard-table .user-action-button {
+    background: none;
+    border: none;
+    font-size: 30px;
+    margin-right: 5px;
+  }
+  
+  .user-settings-button {
+    color: wheat;
+  }
+
+  .user-delete-button:hover {
+    color: rgb(218, 6, 6);
+  }
+
+  .user-settings-button:hover {
+    color: rgb(237, 206, 149);
+  }
+
+  .user-delete-button {
+    color: red;
+  }
+
+  .user-dashboard-table .user-action-button:hover {
+    cursor: pointer;
+  }
+  
+  .user-dashboard-table .user-name,
+  .user-dashboard-table .user-username,
+  .user-dashboard-table .user-email {
+    position: relative;
+    padding-right: 20px;
+  }
+  
+  .user-dashboard-table .user-name .fa,
+  .user-dashboard-table .user-username .fa,
+  .user-dashboard-table .user-email .fa {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: blue;
+  }
+  
+  .user-dashboard-table .user-name .fa:hover,
+  .user-dashboard-table .user-username .fa:hover,
+  .user-dashboard-table .user-email .fa:hover {
+    cursor: pointer;
+    color: darkblue;
+  }
+  
+  .user-dashboard-table .user-name .fa.down,
+  .user-dashboard-table .user-username .fa.down,
+  .user-dashboard-table .user-email .fa.down {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  
+  .user-dashboard-table .user-name .fa.up,
+  .user-dashboard-table .user-username .fa.up,
+  .user-dashboard-table .user-email .fa.up {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  /* Add this CSS to your ManageUsers.css file */
+
+.delete-user-confirmation-dialog {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.delete-user-confirmation-dialog p {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.delete-user-confirmation-dialog button {
+  margin: 10px;
+  margin-top: 30px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.delete-user-confirmation-dialog button:first-child {
+  background: #ff4444;
+  color: #fff;
+}
+
+.delete-user-confirmation-dialog button:last-child {
+  background: #4CAF50;
+  color: #fff;
+}
+
+/* ... Existing styles ... */
+
+.dimmed-background {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.user-settings-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  padding-right: 25px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20%;
+}
+
+.modify-user-settings-button {
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  font-family: Tahoma;
+}
+
+.enable-button,
+.unlock-button {
+  background-color: #28812b;
+  color: white;
+}
+
+.enable-button:hover,
+.unlock-button:hover {
+  background-color: #25a029;
+  cursor: pointer;
+}
+
+.disable-button,
+.lock-button {
+  background-color: #ff4444;
+  color: white;
+}
+
+.disable-button:hover,
+.lock-button:hover {
+  background-color: #a94040;
+  cursor: pointer;
+}
+
+.close-button {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  cursor: pointer;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+/* ... (Previous CSS) */
+
+/* CSS for the input fields in the Modify User Profile section */
+/* ... (Previous CSS) */
+
+/* CSS for the input fields in the Modify User Profile section */
+.modify-user-profile {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;
+  font-size: 18px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+}
+
+.modify-user-profile h3 {
+  text-align: center;
+}
+
+.profile-field {
+  margin-bottom: 15px;
+}
+
+.profile-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.profile-field input {
+  width: 96%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* CSS for the "Modify User Profile" button */
+.modify-user-settings-button.modify-profile-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modify-user-settings-button.modify-profile-button:hover {
+  background-color: #0056b3;
+}
+
+/* ... (Other CSS rules for your components) */

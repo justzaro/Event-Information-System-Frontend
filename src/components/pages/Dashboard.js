@@ -5,6 +5,8 @@ import './Dashboard.css';
 import CreateEvent from './dashboard/CreateEvent';
 import EventStatistics from './dashboard/EventStatistics';
 import EventsOverview from './dashboard/EventsOverview';
+import ModifyEvent from './dashboard/ModifyEvent';
+import ManageUsers from './dashboard/ManageUsers';
 
 const Dashboard = () => {
 
@@ -12,12 +14,16 @@ const Dashboard = () => {
 
   const renderSection = () => {
     switch (selectedSection) {
-      case 'CreateEvent':
-        return <CreateEvent />;
+      case 'ManageUsers':
+        return <ManageUsers />;
+      case 'EventsOverview':
+        return <EventsOverview />;
       case 'EventStatistics':
         return <EventStatistics />;
-      case 'EventsOverview':
-          return <EventsOverview />;
+      case 'CreateEvent':
+          return <CreateEvent />;
+      case 'ModifyEvent':
+          return <ModifyEvent />;
       default:
         return null;
     }
@@ -41,7 +47,12 @@ const Dashboard = () => {
           </div>
 
           <div className="dashboard-menu-subitem">General Information</div>
-          <div className="dashboard-menu-subitem">Manage Profiles</div>
+          <div 
+            className="dashboard-menu-subitem"
+            onClick={() => setSelectedSection('ManageUsers')}
+          >
+            Manage Profiles
+          </div>
 
           <div className="dashboard-menu-hr">
             <hr />
@@ -69,10 +80,16 @@ const Dashboard = () => {
           </div>
           <div
             className="dashboard-menu-subitem"
-             onClick={() => setSelectedSection('CreateEvent')}
+            onClick={() => setSelectedSection('CreateEvent')}
           >
             Create Event</div>
-          <div className="dashboard-menu-subitem">Modify Event</div>
+
+          <div 
+            className="dashboard-menu-subitem"
+            onClick={() => setSelectedSection('ModifyEvent')}
+          >
+            Modify Event
+          </div>
 
           <div className="dashboard-menu-hr">
             <hr />

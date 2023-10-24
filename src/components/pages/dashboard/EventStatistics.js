@@ -435,7 +435,7 @@ const EventStatistics = () => {
         )}
       </div>
       <div>
-        <LineChart width={1500} height={400} data={chartData}>
+        <LineChart width={1600} height={400} data={chartData}>
           <XAxis dataKey="day">
             <Label
               value="Day"
@@ -498,7 +498,7 @@ const EventStatistics = () => {
         )}
       </div>
       <div>
-        <LineChart width={1500} height={400} data={ticketsChartData}>
+        <LineChart width={1600} height={400} data={ticketsChartData}>
           <XAxis dataKey="day">
             <Label
               value="Day"
