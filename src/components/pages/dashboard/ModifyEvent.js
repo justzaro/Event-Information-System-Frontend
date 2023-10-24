@@ -299,7 +299,7 @@ const ModifyEvent = () => {
     formData.append('eventPicture', eventImage);
 
     try {
-      const response = await fetch(`http://localhost:8080/events/update/${selectedEvent.id}`, {
+      const response = await fetch(`http://localhost:8080/events/${selectedEvent.id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${jwtToken}`,
@@ -401,7 +401,6 @@ const ModifyEvent = () => {
 
           </div>
           <div className="dashboard-create-event-inline-inputs">
-
             <input
               type="number"
               name="ticketPrice"
@@ -411,7 +410,6 @@ const ModifyEvent = () => {
               className="dashboard-create-event-input"
               disabled={selectedEvent && eventData.eventType === 'FESTIVAL'}
             />
-
             <input
               type="text"
               name="capacity"
@@ -420,9 +418,7 @@ const ModifyEvent = () => {
               onChange={handleChange}
               className="dashboard-create-event-input"
               disabled={selectedEvent && eventData.eventType === 'FESTIVAL'}
-
             />
-
             <select
               name="isActive"
               value={eventData.isActive}
@@ -456,16 +452,15 @@ const ModifyEvent = () => {
             )}
           </div>
           <div className="selected-artists-container">
-  <div className="selected-artists">
-  {selectedArtists.map((artist) => (
-  <div key={artist.id} className="selected-artist">
-    {artist.firstName} {artist.lastName}
-    <button onClick={() => removeSelectedArtist(artist)} className="remove-artist-button">
-      Remove
-    </button>
-  </div>
-))}
-
+            <div className="selected-artists">
+            {selectedArtists.map((artist) => (
+            <div key={artist.id} className="selected-artist">
+              {artist.firstName} {artist.lastName}
+              <button onClick={() => removeSelectedArtist(artist)} className="remove-artist-button">
+                Remove
+          </button>
+        </div>
+      ))}
   </div>
 </div>
           <hr className="dashboard-create-event-hr" />

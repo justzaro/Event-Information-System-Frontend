@@ -258,12 +258,14 @@
 .modify-user-profile {
   background: #fff;
   padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   border-radius: 5px;
   text-align: left;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   position: relative; /*absolute*/
-  transform: translate(-15%, -85%); /* Adjust the second value (-30%) to control vertical position */
+  transform: translate(-15%, -75%); /* -15, -75 */
   width: 600px;
 }
 
@@ -395,8 +397,7 @@
   position: absolute;
   right: 10px; /* Adjust the right position as needed */
   top: 50%;
-  transform: translate(-80%, -200%); /* Adjust the second value (-30%) to control vertical position */
-
+  transform: translate(-80%, -220%); /* Adjust the second value (-30%) to control vertical position */
   cursor: pointer;
   font-size: 26px; /* Set the icon size */
 }

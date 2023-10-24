@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faGear, faCircleXmark, faTimes, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faGear, faCircleXmark, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
 import { faEye as thinEye } from '@fortawesome/free-regular-svg-icons';
 import './ManageUsers.css';
@@ -13,7 +13,9 @@ const ManageUsers = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
   const [showUserDeletedSuccessfullyMessage, setUserDeletedSuccessfullyMessage] = useState(false);
-  const [showUserDeleteUnsuccessfullyMessage, setUserDeletedUnsuccessfullyMessage] = useState(false);
+  const [showUserDeletedUnsuccessfullyMessage, setUserDeletedUnsuccessfullyMessage] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const [showUserSettings, setShowUserSettings] = useState(false);
   const [selectedUser, setSelectedUser] = useState(false);
@@ -40,27 +42,23 @@ const ManageUsers = () => {
     }
   };
 
-  // Function to remove the attached image
-  const removeAttachedImage = () => {
-    setAttachedImage(null);
-  };
-
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-
-
-  useEffect(() => {
-    // Fetch all users from 'http://localhost:8080/users/'
+  const fetchUserList = () => {
     fetch('http://localhost:8080/users')
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
         setSortedUsers(data);
       });
+  };
+
+  useEffect(() => {
+    fetchUserList();
   }, []);
 
   const [profileFields, setProfileFields] = useState({
@@ -71,33 +69,17 @@ const ManageUsers = () => {
     password: '',
   });
 
-  const extractDay = (dateOfBirth) => {
-    const parts = dateOfBirth.split('-');
-    return parts.length === 3 ? parts[0] : '';
-  };
-
-  const extractMonth = (dateOfBirth) => {
-    const parts = dateOfBirth.split('-');
-    return parts.length === 3 ? parts[1] : '';
-  };
-
-  const extractYear = (dateOfBirth) => {
-    const parts = dateOfBirth.split('-');
-    return parts.length === 3 ? parts[2] : '';
-  };
-
   const [dobDay, setDobDay] = useState('');
   const [dobMonth, setDobMonth] = useState('');
   const [dobYear, setDobYear] = useState('');
 
-
   // Function to handle changes in date of birth fields
   const handleDateOfBirthChange = (e) => {
     const { name, value } = e.target;
-  
+
     // Ensure value is a two-digit string (with leading zero if needed)
     const formattedValue = value.length === 1 ? `0${value}` : value;
-  
+
     if (name === 'dobDay') {
       setDobDay(formattedValue);
     } else if (name === 'dobMonth') {
@@ -106,7 +88,6 @@ const ManageUsers = () => {
       setDobYear(value);
     }
   };
-  
 
   const handleProfileFieldChange = (e) => {
     const { name, value } = e.target;
@@ -157,10 +138,21 @@ const ManageUsers = () => {
             setTimeout(() => {
               setShowUserSuccessfulEditMessage(false);
             }, 4000);
+
+            fetchUserList();
             // You may want to add a success message or update the user's profile image here
           } else {
-            // Handle errors here
-            console.error('Failed to update user profile');
+            response.json().then((errorData) => {
+              // Handle error response from the server
+              setErrorMessage({ message: errorData.message });
+              setUserDeletedUnsuccessfullyMessage(true);
+  
+              setTimeout(() => {
+                setUserDeletedUnsuccessfullyMessage(false);
+              }, 4000);
+            }).catch((error) => {
+              console.error('Error parsing the error response:', error);
+            });
           }
         });
     } else {
@@ -213,9 +205,9 @@ const ManageUsers = () => {
     });
 
     const dobParts = user.dateOfBirth ? user.dateOfBirth.split('-') : ['', '', ''];
-  setDobDay(dobParts.length === 3 ? dobParts[0] : '');
-  setDobMonth(dobParts.length === 3 ? dobParts[1] : '');
-  setDobYear(dobParts.length === 3 ? dobParts[2] : '');
+    setDobDay(dobParts.length === 3 ? dobParts[0] : '');
+    setDobMonth(dobParts.length === 3 ? dobParts[1] : '');
+    setDobYear(dobParts.length === 3 ? dobParts[2] : '');
 
     setSelectedUser(user);
     setShowUserSettings(true);
@@ -369,11 +361,17 @@ const ManageUsers = () => {
               setUserDeletedSuccessfullyMessage(false);
             }, 4000);
           } else {
-            setUserDeletedUnsuccessfullyMessage(true);
-            setTimeout(() => {
-              setUserDeletedUnsuccessfullyMessage(false);
-            }, 4000);
-            console.error('Failed to delete the user');
+            response.json().then((errorData) => {
+              // Handle error response from the server
+              setErrorMessage({ message: errorData.message });
+              setUserDeletedUnsuccessfullyMessage(true);
+  
+              setTimeout(() => {
+                setUserDeletedUnsuccessfullyMessage(false);
+              }, 4000);
+            }).catch((error) => {
+              console.error('Error parsing the error response:', error);
+            });
           }
         });
     } else {
@@ -412,6 +410,10 @@ const ManageUsers = () => {
 
       {showUserDeletedSuccessfullyMessage && (
         <div className="register-success-message">User deleted successfully!</div>
+      )}
+      
+      {showUserDeletedUnsuccessfullyMessage && (
+        <div className="register-fail-message">{errorMessage}</div>
       )}
 
       <table className="user-dashboard-table">
@@ -539,43 +541,43 @@ const ManageUsers = () => {
           <div className="profile-field">
             <label>Date of Birth:</label>
             <div className="modify-user-dob-input">
-  <select
-    name="dobDay"
-    value={dobDay}
-    onChange={handleDateOfBirthChange}
-  >
-    {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-      <option key={day} value={day < 10 ? `0${day}` : day}>
-        {day < 10 ? `0${day}` : day}
-      </option>
-    ))}
-  </select>
+              <select
+                name="dobDay"
+                value={dobDay}
+                onChange={handleDateOfBirthChange}
+              >
+                {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+                  <option key={day} value={day < 10 ? `0${day}` : day}>
+                    {day < 10 ? `0${day}` : day}
+                  </option>
+                ))}
+              </select>
 
-  <select
-    name="dobMonth"
-    value={dobMonth}
-    onChange={handleDateOfBirthChange}
-  >
-    {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-      <option key={month} value={month < 10 ? `0${month}` : month}>
-        {month < 10 ? `0${month}` : month}
-      </option>
-    ))}
-  </select>
+              <select
+                name="dobMonth"
+                value={dobMonth}
+                onChange={handleDateOfBirthChange}
+              >
+                {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+                  <option key={month} value={month < 10 ? `0${month}` : month}>
+                    {month < 10 ? `0${month}` : month}
+                  </option>
+                ))}
+              </select>
 
-  <select
-    name="dobYear"
-    value={dobYear}
-    onChange={handleDateOfBirthChange}
-  >
-    {Array.from({ length: 151 }, (_, i) => 1900 + i).map((year) => (
-      <option key={year} value={year}>
-        {year}
-      </option>
-    ))}
-  </select>
-</div>
-</div>
+              <select
+                name="dobYear"
+                value={dobYear}
+                onChange={handleDateOfBirthChange}
+              >
+                {Array.from({ length: 151 }, (_, i) => 1900 + i).map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
 
           <div className="profile-field">
