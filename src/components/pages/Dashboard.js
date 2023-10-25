@@ -7,6 +7,7 @@ import EventStatistics from './dashboard/EventStatistics';
 import EventsOverview from './dashboard/EventsOverview';
 import ModifyEvent from './dashboard/ModifyEvent';
 import ManageUsers from './dashboard/ManageUsers';
+import CreateCoupons from './dashboard/CreateCoupons';
 
 const Dashboard = () => {
 
@@ -24,6 +25,8 @@ const Dashboard = () => {
           return <CreateEvent />;
       case 'ModifyEvent':
           return <ModifyEvent />;
+      case 'CreateCoupons':
+        return <CreateCoupons />;
       default:
         return null;
     }
@@ -101,7 +104,13 @@ const Dashboard = () => {
 
           <div className="dashboard-menu-subitem">View</div>
           <br />
-          <div className="dashboard-menu-subitem">Generate</div>
+
+          <div 
+            className="dashboard-menu-subitem"
+            onClick={() => setSelectedSection('CreateCoupons')}
+          >
+            Generate
+          </div>
 
           <div className="dashboard-menu-hr">
             <hr />

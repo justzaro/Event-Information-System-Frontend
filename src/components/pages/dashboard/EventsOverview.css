@@ -343,3 +343,20 @@
     border-radius: 4px;
     font-family: Tahoma;
 }
+
+/* Event Close Icon */
+.event-close-icon {
+    position: absolute;
+    /* top: 220px;
+    right: 52px; */
+    top: 20px;
+    right: 150px;
+    font-size: 29px;
+    color: red; /* Customize the color as desired */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.event-close-icon:hover {
+    transform: scale(1.2); /* Add a hover effect to the icon */
+}
