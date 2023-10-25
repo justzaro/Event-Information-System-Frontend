@@ -329,8 +329,11 @@ const NavigationBar = () => {
               </Link>
             </li>
             <li className={styles['nav-item']}>
-              <Link to="/users" className={styles['nav-link']}>
-                Users
+              <Link
+                to="/festivals"
+                className={styles['nav-link']}
+              >
+                Festivals
               </Link>
             </li>
             <li className={styles['nav-item']}>
@@ -466,6 +469,14 @@ const NavigationBar = () => {
                 className={styles['nav-link']}
               >
                 Events
+              </Link>
+            </li>
+            <li className={styles['nav-item']}>
+              <Link
+                to="/festivals"
+                className={styles['nav-link']}
+              >
+                Festivals
               </Link>
             </li>
           </ul>

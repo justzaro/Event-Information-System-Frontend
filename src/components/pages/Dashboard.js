@@ -46,7 +46,6 @@ const Dashboard = () => {
             <span className="users-text">Users</span>
           </div>
 
-          <div className="dashboard-menu-subitem">General Information</div>
           <div 
             className="dashboard-menu-subitem"
             onClick={() => setSelectedSection('ManageUsers')}
