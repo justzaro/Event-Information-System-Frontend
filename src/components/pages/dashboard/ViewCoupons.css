@@ -1,0 +1,120 @@
+.view-coupons-page {
+    font-family: Tahoma;
+    background-color: #333; /* Greyish background color */
+    color: white; /* White text color */
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 80px;
+    font-size: 26px;
+  }
+  
+  .view-coupons-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .view-coupons-header {
+    background-color: #333; /* Dark grey background for headers */
+    color: white; /* White text color for headers */
+  }
+  
+  .view-coupons-data {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    color: white; /* White text color for data cells */
+  }
+  
+  .view-coupons-status {
+    font-weight: bold;
+  }
+  
+  .green-text {
+    color: rgb(11, 182, 11);
+  }
+  
+  .orange-text {
+    color: orange;
+  }
+  
+  .view-coupons-actions {
+    text-align: center;
+  }
+  
+  .view-coupons-delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 30px;
+    right: 20%;
+  }
+  
+  .view-coupons-delete-button:hover {
+    color: darkred;
+  }
+
+  .view-coupons-delete-confirmation-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .view-coupons-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .view-coupons-dialog {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .view-coupons-button-container {
+    margin-top: 20px;
+  }
+
+  .view-coupons-confirm-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 24px;
+    font-family: Tahoma;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .view-coupons-confirm-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .view-coupons-cancel-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 24px;
+    font-family: Tahoma;    
+    cursor: pointer;
+  }
+  
+  .view-coupons-cancel-button:hover {
+    background-color: #c0392b;
+  }
