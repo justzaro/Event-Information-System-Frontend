@@ -4,7 +4,7 @@
     color: white; /* White text color */
     width: 100%;
     overflow-x: auto;
-    margin-top: 80px;
+    margin-top: 20px;
     font-size: 26px;
   }
   
@@ -118,3 +118,228 @@
   .view-coupons-cancel-button:hover {
     background-color: #c0392b;
   }
+
+  .view-coupons-search-and-filter {
+    margin-top: 100px;
+  }
+
+  .view-coupons-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .view-coupons-pagination-button-first {
+  display: inline-block;
+  width: 40px; 
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.view-coupons-pagination-button-previous {
+  display: inline-block;
+  width: 40px; 
+  height: 40px;
+  padding: 3px;
+  background-color: #fff;
+  color: #000;
+  font-size: 28px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.view-coupons-pagination-button-next {
+  display: inline-block;
+  width: 40px; 
+  height: 40px;
+  padding: 3px;
+  background-color: #fff;
+  color: #000;
+  font-size: 28px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.view-coupons-pagination-button-last {
+  display: inline-block;
+  width: 40px; 
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 10px; 
+}
+
+.view-coupons-pagination-button {
+  display: inline-block;
+  width: 80px; 
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  border: 2px solid #000;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.view-coupons-pagination-button-first:hover,
+.view-coupons-pagination-button-previous:hover, 
+.view-coupons-pagination-button-next:hover, 
+.view-coupons-pagination-button-last:hover {
+  box-shadow: inset 0 0 0 2px #000; 
+}
+
+.view-coupons-pagination-button-previous.disabled, 
+.view-coupons-pagination-button-next.disabled,
+.view-coupons-pagination-button-first.disabled, 
+.view-coupons-pagination-button-last.disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed; 
+  border: 0px solid #000;
+}
+
+.view-coupons-pagination-button-previous.disabled:hover, 
+.view-coupons-pagination-button-next.disabled:hover,
+.view-coupons-pagination-button-first.disabled, 
+.view-coupons-pagination-button-last.disabled {
+  box-shadow: inset 0 0 0 0px #000; 
+}
+
+.view-coupons-page-input-container {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.view-coupons-page-input-container input {
+  width: 28px;
+  height: 28px;
+  margin: 0 5px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #000;
+  font-size: 20px;
+}
+
+.view-coupons-page-input-container input::placeholder {
+  color: #aaa;
+}
+
+.view-coupons-page-input-container input:focus {
+  outline: none;
+}
+
+.view-coupons-page-input-container input[type="number"]::-webkit-inner-spin-button,
+.view-coupons-page-input-container input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.view-coupons-page-input-container input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.view-coupons-page-input-container input[type="number"]:focus {
+  outline: none;
+} 
+
+.view-coupons-search-bar {
+  /* Styles for the entire search bar container */
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 50%;
+  margin-top: 80px;
+  font-family: Tahoma;
+}
+
+.view-coupons-search-bar input {
+  /* Styles for the search input */
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  font-size: 22px;
+}
+
+.view-coupons-search-bar-icon {
+  /* Styles for the icons within the search bar */
+  color: #000;
+  margin-right: 15px;
+  font-size: 30px;
+}
+
+.view-coupons-select {
+  /* Styles for the select elements */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  margin-right: 1rem;
+  font-size: 26px;
+}
+
+/* Add these styles to your ViewCoupons.css file */
+
+.view-coupons-toggle-price-scrollbar {
+  display: flex;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.view-coupons-scrollbar-track {
+  width: 80px;
+  height: 10px;
+  background-color: #ccc;
+  position: relative;
+}
+
+.view-coupons-scrollbar-fill {
+  height: 100%;
+  background-color: #007bff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.view-coupons-scrollbar-circle {
+  width: 20px;
+  height: 20px;
+  background-color: #007bff;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  left: 0;
+  cursor: pointer;
+}

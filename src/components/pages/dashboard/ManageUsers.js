@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faGear, faCircleXmark, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleDown, faGear, faCircleXmark, faTimes,
+  faCaretLeft,
+  faBackwardStep, faSort, faFilter, faMagnifyingGlass
+} from '@fortawesome/free-solid-svg-icons';
 import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
 import { faEye as thinEye } from '@fortawesome/free-regular-svg-icons';
 import './ManageUsers.css';
@@ -24,6 +28,30 @@ const ManageUsers = () => {
   const [showModifyUserProfile, setShowModifyUserProfile] = useState(false);
 
   const [attachedImage, setAttachedImage] = useState(null);
+
+  const ITEMS_PER_PAGE = 10; // Number of users to display per page
+  const usersPerPage = 10; // Number of users to display per page
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+
+
+  const [searchType, setSearchType] = useState('name'); // Default search type
+  const [isLockedFilter, setIsLockedFilter] = useState('all'); // 'all', 'locked', 'unlocked'
+  const [isEnabledFilter, setIsEnabledFilter] = useState('all'); // 'all', 'enabled', 'disabled'
+  // Calculate the start and end indices for the current page
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  // Function to change the current page
+  const changePage = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(sortedUsers.length / ITEMS_PER_PAGE);
+
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   // Function to handle image attachment
   const handleImageAttachment = (e) => {
@@ -54,12 +82,30 @@ const ManageUsers = () => {
       .then((data) => {
         setUsers(data);
         setSortedUsers(data);
+        setFilteredUsers(data);
       });
   };
 
   useEffect(() => {
     fetchUserList();
   }, []);
+
+  useEffect(() => {
+    filterUsers();
+  }, [searchQuery, searchType, isLockedFilter, isEnabledFilter]);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // Optionally, you can scroll to the top of the page here.
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      // Optionally, you can scroll to the top of the page here.
+    }
+  };
+
 
   const [profileFields, setProfileFields] = useState({
     firstName: '',
@@ -146,7 +192,7 @@ const ManageUsers = () => {
               // Handle error response from the server
               setErrorMessage({ message: errorData.message });
               setUserDeletedUnsuccessfullyMessage(true);
-  
+
               setTimeout(() => {
                 setUserDeletedUnsuccessfullyMessage(false);
               }, 4000);
@@ -365,7 +411,7 @@ const ManageUsers = () => {
               // Handle error response from the server
               setErrorMessage({ message: errorData.message });
               setUserDeletedUnsuccessfullyMessage(true);
-  
+
               setTimeout(() => {
                 setUserDeletedUnsuccessfullyMessage(false);
               }, 4000);
@@ -377,6 +423,40 @@ const ManageUsers = () => {
     } else {
       console.error('JWT token not found in localStorage');
     }
+  };
+
+  const filterUsers = () => {
+    const filtered = sortedUsers.filter((user) => {
+      const query = searchQuery.toLowerCase();
+      const fullName = (user.firstName + ' ' + user.lastName).toLowerCase();
+
+      const userValue = searchType === 'name' ? fullName : user[searchType]?.toLowerCase() || ''; // Default to an empty string if undefined
+
+      const isLocked = user.isLocked;
+      const isEnabled = user.isEnabled;
+
+      const nameMatch = searchType === 'name' && userValue.toLowerCase().includes(query);
+      const usernameMatch = searchType === 'username' && userValue.includes(query);
+      const emailMatch = searchType === 'email' && userValue.includes(query);
+
+      let lockedFilterMatch = true;
+      if (isLockedFilter === 'locked') {
+        lockedFilterMatch = !isLocked;
+      } else if (isLockedFilter === 'unlocked') {
+        lockedFilterMatch = isLocked;
+      }
+
+      // Filter based on isEnabled
+      let activeFilterMatch = true;
+      if (isEnabledFilter === 'active') {
+        activeFilterMatch = isEnabled;
+      } else if (isEnabledFilter === 'inactive') {
+        activeFilterMatch = !isEnabled;
+      }
+
+      return (nameMatch || usernameMatch || emailMatch) && lockedFilterMatch && activeFilterMatch;
+    });
+    setFilteredUsers(filtered);
   };
 
 
@@ -411,10 +491,40 @@ const ManageUsers = () => {
       {showUserDeletedSuccessfullyMessage && (
         <div className="register-success-message">User deleted successfully!</div>
       )}
-      
+
       {showUserDeletedUnsuccessfullyMessage && (
         <div className="register-fail-message">{errorMessage}</div>
       )}
+
+      <div className="manage-users-search-bar">
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="manage-users-search-bar-icon" />
+        <input
+          type="text"
+          placeholder={`Search by ${searchType}`}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <FontAwesomeIcon icon={faSort} className="manage-users-search-bar-icon" />
+        <select onChange={(e) => setSearchType(e.target.value)} value={searchType} className="manage-users-select">
+          <option value="name">Name</option>
+          <option value="username">Username</option>
+          <option value="email">Email</option>
+        </select>
+        <FontAwesomeIcon icon={faFilter} className="manage-users-search-bar-icon" />
+        <select onChange={(e) => setIsLockedFilter(e.target.value)} value={isLockedFilter} className="manage-users-select">
+          <option value="all">All</option>
+          <option value="locked">Locked</option>
+          <option value="unlocked">Unlocked</option>
+        </select>
+        <FontAwesomeIcon icon={faFilter} className="manage-users-search-bar-icon" />
+        <select onChange={(e) => setIsEnabledFilter(e.target.value)} value={isEnabledFilter} className="manage-users-select">
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+
+
 
       <table className="user-dashboard-table">
         <thead>
@@ -437,7 +547,7 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {sortedUsers.map((user) => (
+          {filteredUsers.slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage).map((user) => (
             <tr key={user.id} className="user-dashboard-table">
               <td className="user-id">{user.id}</td>
               <td className="user-name">{user.firstName} {user.lastName}</td>
@@ -461,6 +571,69 @@ const ManageUsers = () => {
           ))}
         </tbody>
       </table>
+
+      {/* {totalPages > 1 && (
+        <div className="manage-users-pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={`manage-users-page-button ${currentPage === index + 1 ? 'manage-users-current-page' : ''}`}
+              onClick={() => changePage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )} */}
+      {totalPages > 1 && filteredUsers.length > 10 && (
+        <div className="manage-users-pagination">
+          <button
+            onClick={() => paginate(1)}
+            disabled={currentPage === 1}
+            className={`pagination-button-first ${currentPage === 1 ? 'disabled' : ''}`}
+          >
+            <FontAwesomeIcon icon={faBackwardStep} />
+          </button>
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`pagination-button-previous ${currentPage === 1 ? 'disabled' : ''
+              }`}
+          >
+            <FontAwesomeIcon icon={faCaretLeft} />
+          </button>
+          {/* Replace number buttons with page input */}
+          <div className="page-input-container">
+            Page
+            <input
+              type="number"
+              min="1"
+              max={totalPages}
+              value={currentPage}
+              onChange={(e) => handlePageChange(parseInt(e.target.value, 10))}
+            />
+            of {totalPages}
+          </div>
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`pagination-button-next ${currentPage === totalPages ? 'disabled' : ''
+              }`}
+          >
+            <FontAwesomeIcon icon={faCaretLeft} rotation={180} />
+          </button>
+          <button
+            onClick={() => paginate(totalPages)}
+            disabled={currentPage === totalPages}
+            className={`pagination-button-last ${currentPage === totalPages ? 'disabled' : ''
+              }`}
+          >
+            <FontAwesomeIcon icon={faBackwardStep} rotation={180} />
+          </button>
+        </div>
+      )}
+
+
       {showConfirmation && (
         <div className="delete-user-confirmation-dialog">
           <p>
