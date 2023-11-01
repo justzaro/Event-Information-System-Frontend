@@ -48,7 +48,7 @@ const Events = () => {
           <div className={styles['event-cards-container']}>
             {eventData.map((event, index) => (
               <div key={index} className={styles['event-card']}>
-                <Link to={`/events/${event.id}`}>                
+                <Link to={`/concerts/${event.id}`}>                
                 <img
                   src={`http://localhost:8080/events/event-picture/${event.name}`}
                   alt={`${event.name}'s Event`}

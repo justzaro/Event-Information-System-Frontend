@@ -1,10 +1,10 @@
-.support-ticket-container {
+/* .support-ticket-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
   background-color: #f7f7f7;
-}
+} */
 
 .support-ticket-container h1 {
   margin-top: 200px;
@@ -53,9 +53,13 @@ textarea {
   padding: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 20px;
   outline: none;
   font-family: inherit;
+}
+
+.form-row input::placeholder, textarea::placeholder {
+  color: #000;
 }
 
 /* input[type="text"],
@@ -164,4 +168,56 @@ textarea {
 .paragraph-wrapper p {
   font-size: 20px;
   text-align: justify;
+}
+
+/* Existing styles ... */
+
+
+.support-ticket-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+.contact-section {
+  flex: 1;
+  padding: 20px;
+  max-width: 700px;
+  text-align: center;
+  text-align: left;
+  margin-left: 200px;
+}
+
+.contact-section h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.contact-section p {
+  font-size: 24px;
+  text-align: justify;
+}
+
+.contact-details {
+  font-size: 18px;
+}
+
+.form-section {
+  flex: 1;
+  padding: 20px;
+  margin-top: -120px;
+}
+
+.form-section p {
+  margin-right: 100px;
+}
+
+.vertical-dividing-line {
+  width: 2px; /* Adjust the width as needed */
+  background-color: #000; /* Color of the vertical line */
+  height: 44%; /* Full height of the container */
+  margin-top: 45px;
 }

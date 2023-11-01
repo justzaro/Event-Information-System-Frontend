@@ -139,35 +139,44 @@
 }
 
 .delete-user-confirmation-dialog p {
-  background: #fff;
+  background: #333;
+  color: white;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
-  font-size: 24px;
+  font-size: 28px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .delete-user-confirmation-dialog button {
-  margin: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-left: 11px;
+  margin-right: 11px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 24px;
+  font-family: Tahoma;
 }
 
 .delete-user-confirmation-dialog button:first-child {
-  background: #ff4444;
-  color: #fff;
-}
-
-.delete-user-confirmation-dialog button:last-child {
   background: #4CAF50;
   color: #fff;
 }
 
-/* ... Existing styles ... */
+.delete-user-confirmation-dialog button:hover:first-child {
+  background: #319134;
+}
+
+.delete-user-confirmation-dialog button:last-child {
+  background: #ff4444;
+  color: #fff;
+}
+
+.delete-user-confirmation-dialog button:hover:last-child {
+  background: #c0392b;
+}
 
 .dimmed-background {
   background-color: rgba(0, 0, 0, 0.5);

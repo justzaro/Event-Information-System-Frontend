@@ -55,7 +55,7 @@ function LogIn() {
           const jwtToken = data.token; // Assuming the token is returned as 'token' in the response
   
           localStorage.setItem('jwtToken', jwtToken);
-          navigate('/events');
+          navigate('/concerts');
         } else {
           const errorData = await response.json();
           setErrorMessage(errorData.message);

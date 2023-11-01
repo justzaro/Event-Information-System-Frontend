@@ -10,6 +10,8 @@ import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
+import { cartItemsCount } from '../utility/AuthUtils';
+
 const NavigationBar = () => {
 
   const [loggedIn, setLoggedIn] = useState(isAuthenticated());
@@ -255,7 +257,7 @@ const NavigationBar = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          setCartItemCount(data); // Update the cart item count from the response
+          setCartItemCount(data);
         })
         .catch((error) => {
           console.error('Error fetching cart item count:', error);
@@ -322,10 +324,10 @@ const NavigationBar = () => {
             </li>
             <li className={styles['nav-item']}>
               <Link
-                to="/events"
+                to="/concerts"
                 className={styles['nav-link']}
               >
-                Events
+                Concerts
               </Link>
             </li>
             <li className={styles['nav-item']}>
@@ -342,8 +344,13 @@ const NavigationBar = () => {
               </Link>
             </li>
             <li className={styles['nav-item']}>
-              <Link to="/support-tickets" className={styles['nav-link']}>
-                Support
+              <Link to="/contact-us" className={styles['nav-link']}>
+                Contact us
+              </Link>
+            </li>
+            <li className={styles['nav-item']}>
+              <Link to="/about-us" className={styles['nav-link']}>
+                About us
               </Link>
             </li>
           </ul>
@@ -465,10 +472,10 @@ const NavigationBar = () => {
             </li>
             <li className={styles['nav-item']}>
               <Link
-                to="/events"
+                to="/concerts"
                 className={styles['nav-link']}
               >
-                Events
+                Concerts
               </Link>
             </li>
             <li className={styles['nav-item']}>
@@ -477,6 +484,22 @@ const NavigationBar = () => {
                 className={styles['nav-link']}
               >
                 Festivals
+              </Link>
+            </li>
+            <li className={styles['nav-item']}>
+              <Link
+                to="/contact-us"
+                className={styles['nav-link']}
+              >
+                Contact us
+              </Link>
+            </li>
+            <li className={styles['nav-item']}>
+              <Link
+                to="/about-us"
+                className={styles['nav-link']}
+              >
+                About us
               </Link>
             </li>
           </ul>

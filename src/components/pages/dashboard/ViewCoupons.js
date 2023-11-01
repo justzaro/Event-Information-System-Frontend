@@ -5,10 +5,9 @@ import { faTimesCircle,
   faBackwardStep,
    faCaretLeft,
     faFilter,
-     faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+     faMagnifyingGlass, 
+     faSort} from '@fortawesome/free-solid-svg-icons';
 import './ViewCoupons.css';
-
-
 
 function CouponPage() {
   const [coupons, setCoupons] = useState([]);
@@ -22,7 +21,6 @@ function CouponPage() {
   const [filterIsUsed, setFilterIsUsed] = useState('all'); // 'all', 'unused', 'u
 
   const [searchDiscountPercentage, setSearchDiscountPercentage] = useState('');
-
 
   const fetchCoupons = () => {
     const jwtToken = localStorage.getItem('jwtToken');
@@ -82,7 +80,6 @@ function CouponPage() {
     setDeleteCouponId(null);
   };
 
-  const totalPages = Math.ceil(coupons.length / couponsPerPage);
 
   // Calculate the indexes for slicing coupons
   const indexOfLastCoupon = currentPage * couponsPerPage;
@@ -95,27 +92,30 @@ function CouponPage() {
     }
   };
 
+  const filterAndSearchCoupons = () => {
+    // Filtering coupons based on isUsed
+    const filteredCoupons = filterIsUsed === 'all' ? coupons : coupons.filter(coupon => coupon.isUsed === (filterIsUsed === 'unused'));
 
-  // Filtering coupons based on isUsed
-  const filteredCoupons = filterIsUsed === 'all' ? currentCoupons : currentCoupons.filter(coupon => coupon.isUsed === (filterIsUsed === 'unused'));
+    // Filtering coupons based on search query
+    return filteredCoupons.filter(coupon => {
+      const isCouponCodeMatch = coupon.couponCode.toLowerCase().includes(searchQuery.toLowerCase());
+      const isDiscountPercentageMatch = searchDiscountPercentage !== '' && coupon.discountPercentage.toString().includes(searchDiscountPercentage);
 
-  // Filtering coupons based on search query
-  const filteredAndSearchedCoupons = filteredCoupons.filter(coupon => {
-    const isCouponCodeMatch = coupon.couponCode.toLowerCase().includes(searchQuery.toLowerCase());
-    const isDiscountPercentageMatch = searchDiscountPercentage !== '' && coupon.discountPercentage.toString().includes(searchDiscountPercentage);
-  
-    if (searchQuery && searchDiscountPercentage !== '') {
-      return isCouponCodeMatch && isDiscountPercentageMatch;
-    } else if (searchQuery) {
-      return isCouponCodeMatch;
-    } else if (searchDiscountPercentage !== '') {
-      return isDiscountPercentageMatch;
-    } else {
-      return true; // No filters applied
-    }
-  });
-  
+      if (searchQuery && searchDiscountPercentage !== '') {
+        return isCouponCodeMatch && isDiscountPercentageMatch;
+      } else if (searchQuery) {
+        return isCouponCodeMatch;
+      } else if (searchDiscountPercentage !== '') {
+        return isDiscountPercentageMatch;
+      } else {
+        return true; // No filters applied
+      }
+    });
+  };
 
+  // Use the filterAndSearchCoupons function
+  const filteredAndSearchedCoupons = filterAndSearchCoupons();
+  const totalPages = Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage);
 
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage); i++) {
@@ -123,8 +123,6 @@ function CouponPage() {
   }
   return (
     <div>
-  
-
       <div className="view-coupons-search-bar">
         <FontAwesomeIcon icon={faMagnifyingGlass} className="view-coupons-search-bar-icon" />
         <input
@@ -133,12 +131,13 @@ function CouponPage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <FontAwesomeIcon icon={faFilter} className="view-coupons-search-bar-icon" />
+        <FontAwesomeIcon icon={faSort} className="view-coupons-search-bar-icon" />
         <select onChange={(e) => setFilterIsUsed(e.target.value)} value={filterIsUsed} className="view-coupons-select">
           <option value="all">All</option>
           <option value="unused">Unused</option>
           <option value="used">Used</option>
         </select>
+        <FontAwesomeIcon icon={faFilter} className="view-coupons-search-bar-icon" />
         <input
           type="number"
           placeholder="Coupon Discount %"
@@ -172,7 +171,7 @@ function CouponPage() {
           <tbody>
             {filteredAndSearchedCoupons.map((coupon, index) => (
               <tr key={coupon.couponId}>
-                <td className="view-coupons-data">{index + 1}</td>
+                <td className="view-coupons-data">{coupon.couponId}</td>
                 <td className="view-coupons-data">{coupon.couponCode}</td>
                 <td className="view-coupons-data">{coupon.discountPercentage}%</td>
                 <td className="view-coupons-data">{coupon.createdAt}</td>

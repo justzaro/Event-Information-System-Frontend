@@ -565,7 +565,8 @@ const EventStatistics = () => {
 
                 return (
                   <text x={entry.x} y={yPosition} fill={colors[entry.index]} textAnchor="middle">
-                    {`${(entry.percent * 100).toFixed(2)}%`}
+                    {/* {`${(entry.percent * 100).toFixed(2)}%`} */}
+                    {`${(entry.percent * 100)}%`}
 
                   </text>
                 );

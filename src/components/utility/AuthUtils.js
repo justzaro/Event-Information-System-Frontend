@@ -1,5 +1,10 @@
 import jwt_decode from 'jwt-decode';
 
+// globals.js
+// Define cartItemsCount as a regular variable
+export let cartItemsCount = 0;
+
+
 export function isAdmin() {
   // Get the JWT token from local storage
   const jwtToken = localStorage.getItem('jwtToken');

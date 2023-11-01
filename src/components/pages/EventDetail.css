@@ -10,14 +10,14 @@
 }
 
 .event-header {
-  font-size: 18px;
+  font-size: 22px;
   margin-bottom: 10px;
   margin-left: -500px;
   margin-top: -100px;
 }
 
 .event-header .small-icon {
-  font-size: 18px;
+  font-size: 24px;
   margin-right: 5px;
   color: #d11212;
 }
@@ -26,6 +26,7 @@
   font-weight: bold;
   text-decoration: none;
   color: #d11212;
+  font-size: 18px;
 }
 
 .event-link:hover {
@@ -35,7 +36,7 @@
 }
 
 .event-name {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   color: #191919;
 }

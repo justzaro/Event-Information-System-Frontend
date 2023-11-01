@@ -79,6 +79,7 @@
   .view-coupons-dialog {
     background-color: #333;
     padding: 20px;
+    padding-top: 0px;
     border-radius: 8px;
     text-align: center;
     z-index: 2;
@@ -89,11 +90,13 @@
   }
 
   .view-coupons-confirm-button {
-    background-color: #3498db;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px;
+    padding-right: 18px;
+    padding-left: 18px;
     font-size: 24px;
     font-family: Tahoma;
     margin-right: 10px;
@@ -101,7 +104,7 @@
   }
   
   .view-coupons-confirm-button:hover {
-    background-color: #2980b9;
+    background-color: #319134;
   }
   
   .view-coupons-cancel-button {
@@ -109,7 +112,10 @@
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px;
+    padding-right: 18px;
+    padding-left: 18px;
+    margin-left: 5px;
     font-size: 24px;
     font-family: Tahoma;    
     cursor: pointer;
@@ -312,34 +318,3 @@
 
 /* Add these styles to your ViewCoupons.css file */
 
-.view-coupons-toggle-price-scrollbar {
-  display: flex;
-  align-items: center;
-  margin-top: 80px;
-}
-
-.view-coupons-scrollbar-track {
-  width: 80px;
-  height: 10px;
-  background-color: #ccc;
-  position: relative;
-}
-
-.view-coupons-scrollbar-fill {
-  height: 100%;
-  background-color: #007bff;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.view-coupons-scrollbar-circle {
-  width: 20px;
-  height: 20px;
-  background-color: #007bff;
-  border-radius: 50%;
-  position: absolute;
-  top: -5px;
-  left: 0;
-  cursor: pointer;
-}

@@ -266,6 +266,7 @@ const ModifyEvent = () => {
     });
     setStartingMinutes('');
     setEndingMinutes('');
+    setEventImage(null);
     const imageInput = document.querySelector('input[name="image"]');
     if (imageInput) {
       imageInput.value = '';

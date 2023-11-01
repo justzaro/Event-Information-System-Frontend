@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
+import { cartItemsCount, getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
 import './EventDetail.css';
 
 const EventDetail = () => {
@@ -93,6 +93,7 @@ const toggleArtistInfo = () => {
               setShowItemSuccessfullyAddedToCart(false);
             }, 4000);
             console.log('Item added to cart successfully');
+            console.log(cartItemsCount);
           } else {
             // Handle error (e.g., show an error message)
             console.error('Error adding item to cart:', response.statusText);

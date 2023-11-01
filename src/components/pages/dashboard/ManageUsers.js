@@ -284,13 +284,13 @@ const ManageUsers = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            setUsers((prevUsers) =>
-              prevUsers.map((u) => (u.username === updatedUser.username ? updatedUser : u))
-            );
-            setSortedUsers((prevSortedUsers) =>
-              prevSortedUsers.map((u) => (u.username === updatedUser.username ? updatedUser : u))
-            );
-
+            const updatedIndex = sortedUsers.findIndex((u) => u.username === user.username);
+            if (updatedIndex !== -1) {
+              const newSortedUsers = [...sortedUsers];
+              newSortedUsers[updatedIndex].isEnabled = !user.isEnabled;
+              setSortedUsers(newSortedUsers);
+            }
+            
             setShowUserSuccessfulEditMessage(true);
 
             setTimeout(() => {
@@ -324,12 +324,13 @@ const ManageUsers = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            setUsers((prevUsers) =>
-              prevUsers.map((u) => (u.username === updatedUser.username ? updatedUser : u))
-            );
-            setSortedUsers((prevSortedUsers) =>
-              prevSortedUsers.map((u) => (u.username === updatedUser.username ? updatedUser : u))
-            );
+            const updatedIndex = sortedUsers.findIndex((u) => u.username === user.username);
+            if (updatedIndex !== -1) {
+              const newSortedUsers = [...sortedUsers];
+              newSortedUsers[updatedIndex].isLocked = !user.isLocked;
+              setSortedUsers(newSortedUsers);
+            }
+
             setShowUserSuccessfulEditMessage(true);
 
             setTimeout(() => {
@@ -585,7 +586,7 @@ const ManageUsers = () => {
           ))}
         </div>
       )} */}
-      {totalPages > 1 && filteredUsers.length > 10 && (
+      {totalPages > 1 && (
         <div className="manage-users-pagination">
           <button
             onClick={() => paginate(1)}

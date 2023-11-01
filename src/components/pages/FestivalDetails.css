@@ -17,7 +17,7 @@
   }
   
   .event-header .small-icon {
-    font-size: 18px;
+    font-size: 24px;
     margin-right: 5px;
     color: #d11212;
   }
@@ -26,6 +26,7 @@
     font-weight: bold;
     text-decoration: none;
     color: #d11212;
+    font-size: 24px;
   }
   
   .event-link:hover {
@@ -35,7 +36,7 @@
   }
   
   .event-name {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: bold;
     color: #191919;
   }

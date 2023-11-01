@@ -195,7 +195,7 @@ const CreateEvent = () => {
     formData.append('eventPicture', imageFile);
 
     try {
-      const response = await fetch('http://localhost:8080/events/add', {
+      const response = await fetch('http://localhost:8080/events', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${jwtToken}`,
@@ -258,14 +258,6 @@ const CreateEvent = () => {
             rows="4"
             className="dashboard-create-event-textarea"
           />
-          {/* <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={eventData.location}
-            onChange={handleChange}
-            className="dashboard-create-event-input"
-          />        */}
           <div className="dashboard-create-event-input-row">
             <input
               type="text"
@@ -304,14 +296,6 @@ const CreateEvent = () => {
               className="dashboard-create-event-input"
               disabled={eventType === 'Festival'}
             />
-            {/* <input
-              type="text"
-              name="isActive"
-              placeholder="Status"
-              value={eventData.isActive}
-              onChange={handleChange}
-              className="dashboard-create-event-input"
-            /> */}
             <select
               name="isActive"
               value={eventData.isActive}

@@ -15,6 +15,7 @@ import PostsPage from './components/pages/PostsPage';
 import ProfileSettings from './components/pages/ProfileSettings';
 import Dashboard from './components/pages/Dashboard';
 import Festivals from './components/pages/Festivals';
+import AboutUs from './components/pages/AboutUs';
 
 function App() {
   return (
@@ -22,14 +23,13 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/concerts" element={<Events />} />
           <Route path="/festivals" element={<Festivals />} />
-          <Route path="/support-tickets" element={<SupportTicket />} />
           <Route path="/log-in" element={<LogIn />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<CartItems />} />
 
-          <Route path="/events/:eventId" element={<EventDetail />} />
+          <Route path="/concerts/:eventId" element={<EventDetail />} />
           <Route path="/festivals/:eventId" element={<FestivalDetails />} />
 
           <Route path="/my-orders" element={<MyOrders />} />
@@ -38,6 +38,9 @@ function App() {
           <Route path="/posts/:postId" element={<PostsPage />} />
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<SupportTicket />} />
+
         </Routes>
         <NavigationBar />
         {/* <Footer /> */}

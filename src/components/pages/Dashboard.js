@@ -9,6 +9,7 @@ import ModifyEvent from './dashboard/ModifyEvent';
 import ManageUsers from './dashboard/ManageUsers';
 import CreateCoupons from './dashboard/CreateCoupons';
 import ViewCoupons from './dashboard/ViewCoupons';
+import ViewSupportTickets from './dashboard/ViewSupportTickets';
 
 const Dashboard = () => {
 
@@ -30,6 +31,8 @@ const Dashboard = () => {
         return <CreateCoupons />;
       case 'ViewCoupons':
         return <ViewCoupons />;
+        case 'ViewSupportTickets':
+          return <ViewSupportTickets />;
       default:
         return null;
     }
@@ -130,7 +133,12 @@ const Dashboard = () => {
             <span className="support-tickets-text">Support Tickets</span>
           </div>
 
-          <div className="dashboard-menu-subitem">View</div>
+          <div 
+            className="dashboard-menu-subitem"
+            onClick={() => setSelectedSection('ViewSupportTickets')}
+          >
+            View
+          </div>
 
         </div>
 
