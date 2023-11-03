@@ -24,14 +24,10 @@ function PostsPage() {
   const [showCommentBodyIsEmptyMessage, setCommentBodyIsEmptyMessage] = useState(false);
   const [showNoPostImageIsAttached, setNoPostImageIsAttached] = useState(false);
   const [showCommentDeletedSuccessfully, setCommentDeletedSuccessfully] = useState(false);
-
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
-
-  const [commentInput, setCommentInput] = useState('');
-  
+  const [commentInput] = useState('');
   const [commentTexts, setCommentTexts] = useState({});
-  const [showBackdrop, setShowBackdrop] = useState(false);
 
   const handleAddComment = (postId) => {
     const commentText = commentTexts[postId];
@@ -102,7 +98,7 @@ function PostsPage() {
         },
       })
       .then(() => {
-        
+        setSelectedPost(false);
         setCommentDeletedSuccessfully(true);
   
         setTimeout(() => {
@@ -155,9 +151,7 @@ function PostsPage() {
       setSelectedPost(post);
     }
   };
-
-  // Function to calculate the time difference in hours between two dates
-// Function to calculate and format the time difference
+  
 const calculateTimeDifference = (postedAt) => {
     const currentDate = new Date();
     const [time, date] = postedAt.split(' ');
@@ -338,8 +332,8 @@ const calculateTimeDifference = (postedAt) => {
   return (
     <div className="posts-container">
         {selectedPost && (
-      <div className="blur-background"></div>
-    )}
+          <div className="blur-background"></div>
+        )}
         {showPostAddedSuccessfullyMessage && (
           <div className="post-added-successfully">Post added successfully!</div>
         )}
@@ -431,8 +425,10 @@ const calculateTimeDifference = (postedAt) => {
                 >
                     View All {post.comments.length} Comments
                 </button>
+                
              )}
           </div>
+
           <div className="comments-button">
             
               <div className="comment-input-container">

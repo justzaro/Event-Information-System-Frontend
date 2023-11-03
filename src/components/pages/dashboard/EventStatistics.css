@@ -1,0 +1,212 @@
+.event-statistics-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 100px;
+  font-family: Tahoma;
+}
+
+.event-statistics-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.event-statistics-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #FE6F57;
+  color: #fff;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  padding: 15px;
+  margin: 0 90px;
+  /* Even spacing between circles */
+}
+
+.event-statistics-number {
+  font-size: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.event-statistics-text {
+  font-size: 26px;
+  margin-top: 10px;
+}
+
+.event-statistics-subtext {
+  font-size: 20px;
+  margin-top: 5px;
+  cursor: pointer;
+  color: #FE6F57;
+}
+
+/* Adjust vertical alignment for circles without subtext */
+.event-statistics-item:nth-child(3) .event-statistics-circle,
+.event-statistics-item:nth-child(4) .event-statistics-circle {
+  align-items: center;
+}
+
+/* .event-statistics-item:nth-child(3) .event-statistics-circle {
+    margin-bottom: 20px;
+  }
+  
+  .event-statistics-item:nth-child(4) .event-statistics-circle {
+    margin-bottom: 20px; 
+  } */
+
+/* ... (Previous CSS) */
+
+
+/* Add styles for the menu */
+.event-statistics-menu {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 385px;
+  /* Adjust the distance from the subtext */
+  right: 50;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-statistics-menu-item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.event-statistics-menu-item:hover {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #ccc;
+}
+
+.event-statistics-pie-chart {
+  font-size: 24px;
+  font-family: Tahoma;
+}
+
+.right-pie-chart {
+  margin-left: 750px;
+  margin-top: -484px;
+}
+
+.event-statistics-filter-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.event-statistics-filter-icon {
+  position: absolute;
+  top: -10px;
+  /* Adjust the top value as needed */
+  left: 100px;
+  /* Adjust the right value as needed */
+  z-index: 1;
+  /* Ensures the icon is on top of the pie chart */
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.event-statistics-attendance-menu {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: -150px;
+  transform: translateY(50%);
+  left: -40px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 400px;
+  width: 300px;
+}
+
+.event-statistics-attendance-menu-item {
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.event-statistics-attendance-menu-item:hover {
+  background-color: #ccc;
+}
+
+.selected-concert-name {
+  margin-left: 160px;
+  padding-bottom: 20px;
+  max-width: 500px;
+  text-align: center;
+  font-family: Tahoma;
+  font-size: 24px;
+}
+
+.event-statistics-heading {
+  font-family: Tahoma;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  margin-left: 60px;
+}
+
+.event-statistics-filter-orders-icon {
+  position: absolute;
+  top: -60px;
+  /* Adjust the top value as needed */
+  left: 60px;
+  /* Adjust the right value as needed */
+  z-index: 1;
+  /* Ensures the icon is on top of the pie chart */
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.event-statistics-orders-menu {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 0px;
+  /* Adjust the distance from the subtext */
+  right: -150px;
+  z-index: 1;
+  display: flex;
+  width: 130px;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.event-statistics-orders-menu-item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.event-statistics-orders-menu-item:hover {
+  background-color: #ccc;
+}
+
+.dashboard-create-event-input-row {
+  display: flex;
+  width: 105%;
+}
+
+.dashboard-location-input {
+  margin-right: 10px; /* Add margin only to "Location" and "Event Type" elements */
+}
+
+.dashboard-create-event-input:hover {
+  border: 1px solid #000000; /* Add a border */
+}
+
+.dashboard-create-event-input:hover:disabled {
+  cursor: not-allowed;
+  border: 1px solid #000000; /* Add a border */
+}

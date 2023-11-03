@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styles from './SupportTicket.module.css';
+import { getUsernameFromToken } from '../utility/AuthUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
 
 const SupportTicket = () => {
   const [formData, setFormData] = useState({
@@ -31,19 +34,19 @@ const SupportTicket = () => {
       customerPhoneNumber: formData.customerPhoneNumber,
     };
 
-    const username = 'zaro';
+    const username = getUsernameFromToken();
+    const jwtToken = localStorage.getItem('jwtToken');
 
-    fetch(`http://localhost:8080/support-tickets/create/${username}`, {
+    fetch(`http://localhost:8080/support-tickets/${username}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwtToken}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(ticketData),
     })
       .then((response) => {
         if (response.ok) {
-          console.log('Ticket submitted successfully');
-          console.log(ticketData);
           setShowSuccessMessage(true);
           setFormData({
             subject: '',
@@ -58,13 +61,11 @@ const SupportTicket = () => {
             setShowSuccessMessage(false);
           }, 4000);
         } else {
-          console.error('Ticket submission failed');
           setFailMessage(true);
 
           setTimeout(() => {
             setFailMessage(false);
           }, 4000);
-          console.log(ticketData);
         }
       })
       .catch((error) => {
@@ -75,81 +76,102 @@ const SupportTicket = () => {
   return (
     // <Layout>
       <div className={styles['support-ticket-container']}>
-        <h1>Support Ticket</h1>
-        <div className={styles['paragraph-wrapper']}>
-          <p>
-            If you encountered any problems while using our website, please
-            feel free to leave a support ticket and our colleagues will get in
-            touch with you via the form email or phone number within 48 hours.
-            Thank you for your cooperation!
+
+        <div className={styles['contact-section']}>
+          <h2>Contact us</h2>
+          <br />
+          <p>If you have any questions or need assistance, please contact us:</p>
+          <p>If you have any general issues or administrative questions,
+            plase free feel to contact us via phone or email. In case of
+            a more in-depth question, you can always use your support ticket
+            form and we will respond to your query as soon as possible. 
           </p>
+          <div className={styles['contact-details']}>
+            <p>Call us at: +1-123-456-7890 / +1-321-654-0987 </p>
+            <p>Email: support@example.com</p>
+          </div>
         </div>
-        {showSuccessMessage && (
-          <div className={styles['success-message']}>Ticket sent successfully!</div>
-        )}
-        {showFailMessage && (
-          <div className={styles['fail-message']}>There was an error sending your ticket!</div>
-        )}
-        <form onSubmit={handleSubmit} className={styles['support-ticket-form']}>
-          <div className={styles['form-row']}>
-            <input
-              type="text"
-              name="customerEmail"
-              value={formData.customerEmail}
-              onChange={handleChange}
-              placeholder="Email"
-              className={styles['email-input']}
-            />
-            <input
-              type="text"
-              name="customerFirstName"
-              value={formData.customerFirstName}
-              onChange={handleChange}
-              placeholder="First Name"
-              className={styles['name-input']}
-            />
-            <input
-              type="text"
-              name="customerLastName"
-              value={formData.customerLastName}
-              onChange={handleChange}
-              placeholder="Last Name"
-              className={styles['name-input']}
-            />
+
+        <div className={styles['vertical-dividing-line']}></div>
+
+        <div className={styles['form-section']}>
+
+          <h1>Support Ticket</h1>
+          <div className={styles['paragraph-wrapper']}>
+            {/* <p>
+              If you encountered any problems while using our website, please
+              feel free to leave a support ticket and our colleagues will get in
+              touch with you via the form email or phone number within 48 hours.
+              Thank you for your cooperation!
+            </p> */}
           </div>
-          <div className={styles['form-row']}>
-            <input
-              type="text"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              placeholder="Subject"
-              className={styles['subject-input']}
-            />
-            <input
-              type="text"
-              name="customerPhoneNumber"
-              value={formData.customerPhoneNumber}
-              onChange={handleChange}
-              placeholder="Phone number"
-              className={styles['phone-number-input']}
-            />
-          </div>
-          <div className={styles['form-row']}>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Problem Description"
-              className={styles['description-input']}
-            />
-          </div>
-          <div className={styles['form-row']}>
-            <button type="submit" className={styles['submit-button']}>
-              Submit
-            </button>
-          </div>
-        </form>
+          {showSuccessMessage && (
+            <div className={styles['success-message']}>Ticket sent successfully!</div>
+          )}
+          {showFailMessage && (
+            <div className={styles['fail-message']}>There was an error sending your ticket!</div>
+          )}
+          <form onSubmit={handleSubmit} className={styles['support-ticket-form']}>
+            <div className={styles['form-row']}>
+              <input
+                type="text"
+                name="customerEmail"
+                value={formData.customerEmail}
+                onChange={handleChange}
+                placeholder="Email"
+                className={styles['email-input']}
+              />
+              <input
+                type="text"
+                name="customerFirstName"
+                value={formData.customerFirstName}
+                onChange={handleChange}
+                placeholder="First Name"
+                className={styles['name-input']}
+              />
+              <input
+                type="text"
+                name="customerLastName"
+                value={formData.customerLastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+                className={styles['name-input']}
+              />
+            </div>
+            <div className={styles['form-row']}>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="Subject"
+                className={styles['subject-input']}
+              />
+              <input
+                type="text"
+                name="customerPhoneNumber"
+                value={formData.customerPhoneNumber}
+                onChange={handleChange}
+                placeholder="Phone number"
+                className={styles['phone-number-input']}
+              />
+            </div>
+            <div className={styles['form-row']}>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Problem Description"
+                className={styles['description-input']}
+              />
+            </div>
+            <div className={styles['form-row']}>
+              <button type="submit" className={styles['submit-button']}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     // </Layout>
   );

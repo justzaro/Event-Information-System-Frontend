@@ -13,6 +13,8 @@ function LogIn() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailMessage, setShowFailMessage] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false); // State to control password visibility
 
   const location = useLocation();
@@ -53,9 +55,16 @@ function LogIn() {
           const jwtToken = data.token; // Assuming the token is returned as 'token' in the response
   
           localStorage.setItem('jwtToken', jwtToken);
-          navigate('/events');
+          navigate('/concerts');
         } else {
-          alert('Login failed. Please check your credentials.');
+          const errorData = await response.json();
+          setErrorMessage(errorData.message);
+
+          setShowFailMessage(true);
+
+          setTimeout(() => {
+            setShowFailMessage(false);
+          }, 4000);
         }
       } catch (error) {
         console.error('An error occurred during login:', error);
@@ -78,7 +87,7 @@ function LogIn() {
       )}
       {showFailMessage && (
         <div className={styles['fail-message']}>
-          There was a problem confirming your account!
+          {errorMessage}
         </div>
       )}
 

@@ -50,7 +50,7 @@ const Home = () => {
         </div>
         <div className={styles['events-container']}>
           {events.slice(startIndex, startIndex + 5).map((event, index) => (
-            
+
             <div
               key={event.id}
               className={`${styles['event-box']} ${hoveredIndex === index + startIndex ? styles['hovered'] : ''
@@ -63,43 +63,35 @@ const Home = () => {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <Link
-                      to={{
-                        pathname: `/event/${event.id}`
-                      }}
-                      className={styles['no-underline-link']}
-                    >
-              <img
-                src={`http://localhost:8080/events/event-picture/${event.name}`}
-                alt={event.name}
-              />
-              <button className={styles['buy-tickets-button']} onClick={() => {
-
-              }}>
-                Buy Tickets
-              </button>
-              <div className={styles['event-details']}>
-                <p className={styles['event-name']}>{event.name}</p>
-                <p className={styles['event-price']}>{event.ticketPrice.toFixed(2)} лв.</p>
+                  to={{
+                    pathname: event.eventType === "CONCERT" ? `/concerts/${event.id}` : `/festivals/${event.id}`
+                  }}
+                  className={styles['no-underline-link']}
+                >
                 <img
-                  src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
-                  alt="Location Icon"
-                  className={styles['location-icon']}
+                  src={`http://localhost:8080/events/event-picture/${event.name}`}
+                  alt={event.name}
                 />
-                <p className={styles['event-location']}>
+                <button className={styles['buy-tickets-button']} onClick={() => {
 
-                  {event.location.split(',')[0]}
-                </p>
+                }}>
+                  Buy Tickets
+                </button>
+                <div className={styles['event-details']}>
+                  <p className={styles['event-name']}>{event.name}</p>
+                  <p className={styles['event-price']}>{event.ticketPrice.toFixed(2)} лв.</p>
+                  <img
+                    src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
+                    alt="Location Icon"
+                    className={styles['location-icon']}
+                  />
+                  <p className={styles['event-location']}>
 
+                    {event.location.split(',')[0]}
+                  </p>
+                </div>
 
-
-              </div>
-              
-              {/* <button className={styles['buy-tickets-button']} onClick={() => {
-                    
-                  }}>
-                    Buy Tickets
-                  </button> */}
-                  </Link>
+              </Link>
             </div>
           ))}
         </div>

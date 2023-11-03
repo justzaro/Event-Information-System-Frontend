@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Events.module.css'; // Import CSS module
+import styles from './Festivals.module.css'; // Import CSS module
 import { Link } from 'react-router-dom';
 
-
-const Events = () => {
+const Festivals = () => {
   const [eventData, setEventData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -29,7 +28,7 @@ const Events = () => {
 
   useEffect(() => {
     // Fetch events data
-    fetch('http://localhost:8080/events?type=CONCERT')
+    fetch('http://localhost:8080/events?type=FESTIVAL')
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched eventData:', data);
@@ -48,7 +47,7 @@ const Events = () => {
           <div className={styles['event-cards-container']}>
             {eventData.map((event, index) => (
               <div key={index} className={styles['event-card']}>
-                <Link to={`/concerts/${event.id}`}>                
+                <Link to={`/festivals/${event.id}`}>                
                 <img
                   src={`http://localhost:8080/events/event-picture/${event.name}`}
                   alt={`${event.name}'s Event`}
@@ -100,4 +99,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Festivals;

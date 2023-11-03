@@ -56,7 +56,7 @@ const ProfileSettings = () => {
             };
     
             axios
-                .put(`http://localhost:8080/users/password/${username}`, passwordData, {
+                .patch(`http://localhost:8080/users/password/${username}`, passwordData, {
                     headers: {
                         Authorization: `Bearer ${jwtToken}`,
                     },
@@ -113,7 +113,7 @@ const ProfileSettings = () => {
 
         // Make a PUT request to reset the profile image to the default
         axios
-            .put(`http://localhost:8080/users/profile-picture/default/${username}`, updatedData, {
+            .patch(`http://localhost:8080/users/profile-picture/default/${username}`, updatedData, {
                 headers: {
                     Authorization: `Bearer ${jwtToken}`,
                 },
@@ -246,7 +246,7 @@ const ProfileSettings = () => {
         fullFormData.append('profilePicture', selectedImage);
 
         axios
-            .put(`http://localhost:8080/users/update/${getUsernameFromToken()}`, fullFormData, {
+            .put(`http://localhost:8080/users/${getUsernameFromToken()}`, fullFormData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
                     'Content-Type': 'multipart/form-data',
@@ -430,8 +430,6 @@ const ProfileSettings = () => {
                             onMouseEnter={() => setShowResetButton(true)}
                             onMouseLeave={() => setShowResetButton(false)}
                         />
-
-
                         <div
                             className="reset-image-button"
                             onClick={handleResetImage}

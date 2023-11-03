@@ -14,9 +14,6 @@ const ProfileDropdown = ({ showDropdown }) => {
           <li>
             <Link to="/my-orders">My Orders</Link>
           </li>
-          <li>
-            <Link to="/profile/favorites">Favorites</Link>
-          </li>
         </ul>
       </div>
     </div>

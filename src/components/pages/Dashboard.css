@@ -1,0 +1,88 @@
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    flex-grow: 1;
+  }
+  
+  /* Dashboard Menu */
+  .dashboard-menu {
+    width: 300px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin-top: 70px;
+    /* height: 200%; */
+  }
+  
+  .dashboard-menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  
+  .dashboard-menu-item > svg {
+    margin-right: 15px;
+  }
+  
+  .users-icon {
+    margin-left: 10px;
+  }
+
+  .events-icon {
+    margin-left: 8px;
+  }
+
+  .support-tickets-icon {
+    margin-left: 8px;
+  }
+
+  .users-text {
+    margin-left: 7px;
+  }
+
+  .events-text {
+    margin-left: 2px;
+  }
+
+  .support-tickets-text {
+    margin-left: 0px;
+  }
+
+  .dashboard-menu-subitem {
+    margin-left: 49px;
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 5px;
+    position: relative;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    overflow: hidden; /* Hide the sliding line overflow */
+    display: inline-block; /* Make subitems inline-block to match text width */
+
+  }
+  
+  .dashboard-menu-subitem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: #FE6F57;
+    transition: width 0.3s; /* Add a transition for width change */
+  }
+  
+  .dashboard-menu-subitem:hover::before {
+    width: 100%; /* Expand the sliding line to match the text width on hover */
+  }
+
+  .dashboard-menu-hr hr {
+    margin-top: 20px;
+  }
+  /* Dashboard Content */
+  .dashboard-content {
+    flex: 1;
+    padding: 25px;
+  }

@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { cartItemsCount, getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
-import './EventDetail.css';
+import { getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
+import './FestivalDetails.css';
 
-const EventDetail = () => {
+const FestivalDetails = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
   const [ticketQuantity, setTicketQuantity] = useState(1);
@@ -93,7 +93,6 @@ const toggleArtistInfo = () => {
               setShowItemSuccessfullyAddedToCart(false);
             }, 4000);
             console.log('Item added to cart successfully');
-            console.log(cartItemsCount);
           } else {
             // Handle error (e.g., show an error message)
             console.error('Error adding item to cart:', response.statusText);
@@ -140,7 +139,7 @@ const toggleArtistInfo = () => {
             <div className="event-info">
               <h1 className="event-name-big">{event.name}</h1>
 
-              <div className="price-box">
+              {/* <div className="price-box">
                 <div className="ticket-price-info"><FontAwesomeIcon icon={faCircleInfo} /> Exclusive Online Price</div>
                 <div className="ticket-price">{(event.ticketPrice).toFixed(2)} BGN</div>
                 <hr className="divider" />
@@ -171,7 +170,9 @@ const toggleArtistInfo = () => {
                     />
                     <span className="location-text"> Location:</span> {event.location}
                 </div>
-              </div>
+              </div> */}
+
+              <div className="event-description-whole-part">
 
               <div className="event-description-heading">Description</div>
 
@@ -184,11 +185,6 @@ const toggleArtistInfo = () => {
                 <FontAwesomeIcon icon={faClock} color="#ff6600"/>
                 <span className="orange-text"> Ends at:</span> {event.endDate}
               </div>
-{/* {event.artists.map((artist, index) => (
-                  <span key={index} className="artist-name">
-                    {artist.firstName} {artist.lastName}
-                  </span>
-                ))}    */}
 
               <div className="event-info-toggle">
                 <div className="horizontal-line above"></div>
@@ -232,6 +228,8 @@ const toggleArtistInfo = () => {
                 <div className={`horizontal-line below ${showEventInfo ? 'expanded' : ''}`}></div>
               </div>
 
+                    </div>
+
             </div>
           </div>
         </div>
@@ -242,4 +240,4 @@ const toggleArtistInfo = () => {
   );
 };
 
-export default EventDetail;
+export default FestivalDetails;

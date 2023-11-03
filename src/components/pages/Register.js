@@ -192,12 +192,13 @@ const Register = () => {
             onChange={handleChange}
             required
           />
-        </div>
-        <FontAwesomeIcon
-            icon={showPassword ? solidEye : thinEye} // Use solid or thin version based on showPassword
+          <FontAwesomeIcon
+            icon={showPassword ? solidEye : thinEye}
             className={styles['register-eye-icon']}
             onClick={togglePasswordVisibility}
-        />
+          />
+        </div>
+
         <div className={styles['form-group']}>
           <select
             name="day"
