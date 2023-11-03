@@ -1,0 +1,20 @@
+/* CartSummary.css */
+
+.cart-summary-container {
+    background-color: #f2f2f2;
+    margin-top: 10px;
+    padding-left: 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: flex-start;
+    width: 25%;
+    font-family: Tahoma;
+    font-size: 22px;
+  }
+  
+  .cart-summary-price-to-pay {
+    font-weight: bold;
+  }
+  

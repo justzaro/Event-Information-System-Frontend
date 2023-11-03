@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SupportTicket.module.css';
 import { getUsernameFromToken } from '../utility/AuthUtils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
+import LoadingScreen from '../utility/LoadingScreen';
 
 const SupportTicket = () => {
   const [formData, setFormData] = useState({
@@ -16,15 +15,16 @@ const SupportTicket = () => {
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailMessage, setFailMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const ticketData = {
       subject: formData.subject,
       description: formData.description,
@@ -33,45 +33,50 @@ const SupportTicket = () => {
       customerEmail: formData.customerEmail,
       customerPhoneNumber: formData.customerPhoneNumber,
     };
-
+  
     const username = getUsernameFromToken();
     const jwtToken = localStorage.getItem('jwtToken');
-
-    fetch(`http://localhost:8080/support-tickets/${username}`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${jwtToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(ticketData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          setShowSuccessMessage(true);
-          setFormData({
-            subject: '',
-            description: '',
-            customerFirstName: '',
-            customerLastName: '',
-            customerEmail: '',
-            customerPhoneNumber: '',
-          });
-
-          setTimeout(() => {
-            setShowSuccessMessage(false);
-          }, 4000);
-        } else {
-          setFailMessage(true);
-
-          setTimeout(() => {
-            setFailMessage(false);
-          }, 4000);
-        }
-      })
-      .catch((error) => {
-        console.error('An error occurred:', error);
+  
+    try {
+      setIsLoading(true); // Set isLoading to true before the fetch request
+  
+      const response = await fetch(`http://localhost:8080/support-tickets/${username}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ticketData),
       });
+  
+      if (response.ok) {
+        setShowSuccessMessage(true);
+        setFormData({
+          subject: '',
+          description: '',
+          customerFirstName: '',
+          customerLastName: '',
+          customerEmail: '',
+          customerPhoneNumber: '',
+        });
+  
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+        }, 4000);
+      } else {
+        setFailMessage(true);
+  
+        setTimeout(() => {
+          setFailMessage(false);
+        }, 4000);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      setIsLoading(false); // Ensure that isLoading is set to false, even in case of an error
+    }
   };
+  
 
   return (
     // <Layout>
@@ -80,9 +85,9 @@ const SupportTicket = () => {
         <div className={styles['contact-section']}>
           <h2>Contact us</h2>
           <br />
-          <p>If you have any questions or need assistance, please contact us:</p>
+          <p>Looking for contact with us or just want to send a support ticket?</p>
           <p>If you have any general issues or administrative questions,
-            plase free feel to contact us via phone or email. In case of
+            please free feel to contact us via phone or email. In case of
             a more in-depth question, you can always use your support ticket
             form and we will respond to your query as soon as possible. 
           </p>
@@ -97,16 +102,10 @@ const SupportTicket = () => {
         <div className={styles['form-section']}>
 
           <h1>Support Ticket</h1>
-          <div className={styles['paragraph-wrapper']}>
-            {/* <p>
-              If you encountered any problems while using our website, please
-              feel free to leave a support ticket and our colleagues will get in
-              touch with you via the form email or phone number within 48 hours.
-              Thank you for your cooperation!
-            </p> */}
-          </div>
+
           {showSuccessMessage && (
-            <div className={styles['success-message']}>Ticket sent successfully!</div>
+            <div className={styles['success-message']}>Ticket sent successfully!
+            </div>
           )}
           {showFailMessage && (
             <div className={styles['fail-message']}>There was an error sending your ticket!</div>
@@ -170,6 +169,7 @@ const SupportTicket = () => {
                 Submit
               </button>
             </div>
+            <LoadingScreen isLoading={isLoading} />
           </form>
         </div>
       </div>
