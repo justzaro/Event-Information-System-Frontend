@@ -85,7 +85,7 @@ function CouponPage() {
   const indexOfLastCoupon = currentPage * couponsPerPage;
   const indexOfFirstCoupon = indexOfLastCoupon - couponsPerPage;
   const currentCoupons = coupons.slice(indexOfFirstCoupon, indexOfLastCoupon);
-
+  
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -169,7 +169,7 @@ function CouponPage() {
             </tr>
           </thead>
           <tbody>
-            {filteredAndSearchedCoupons.map((coupon, index) => (
+            {currentCoupons.map((coupon, index) => (
               <tr key={coupon.couponId}>
                 <td className="view-coupons-data">{coupon.couponId}</td>
                 <td className="view-coupons-data">{coupon.couponCode}</td>
@@ -177,7 +177,7 @@ function CouponPage() {
                 <td className="view-coupons-data">{coupon.createdAt}</td>
                 <td className="view-coupons-data">{coupon.expiresAt}</td>
                 <td className={`view-coupons-data view-coupons-status ${coupon.isUsed ? 'green-text' : 'orange-text'}`}>
-                  {coupon.isUsed ? 'Unused' : 'Used'}
+                  {coupon.isUsed ? 'Used' : 'Unused'}
                 </td>
                 <td className="view-coupons-data view-coupons-actions">
                   <button

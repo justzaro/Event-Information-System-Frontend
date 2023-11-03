@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faEye, faSort, faMagnifyingGlass, faCaretLeft, faBackwardStep, faL } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faEye, faSort, faMagnifyingGlass, faCaretLeft, faBackwardStep } from '@fortawesome/free-solid-svg-icons';
 import './ViewSupportTickets.css'
 import { getUsernameFromToken } from '../../utility/AuthUtils';
+import LoadingScreen from '../../utility/LoadingScreen';
 
 const ViewSupportTickets = () => {
   const [supportTickets, setSupportTickets] = useState([]);
@@ -31,12 +32,11 @@ const ViewSupportTickets = () => {
 
   const [replySentSuccessfully, setReplySentSuccessfully] = useState(false);
   const [showPreviousReplies, setShowPreviousReplies] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleReply = () => {
     setIsReplying(!isReplying);
     setReplyText(''); // Clear the reply text when toggling
-    console.log(selectedTicket);
   };
 
   const handleReplyTextChange = (event) => {
@@ -98,7 +98,64 @@ const ViewSupportTickets = () => {
       });
   };
 
-  const sendSupportTicketReply = () => {
+  // const sendSupportTicketReply = () => {
+  //   const jwtToken = localStorage.getItem('jwtToken');
+  //   const username = getUsernameFromToken(jwtToken);
+  
+  //   const url = `http://localhost:8080/support-ticket-replies/${username}`;
+  
+  //   const dtoObject = {
+  //     text: replyText,
+  //     supportTicket: selectedTicket,
+  //   };
+  
+  //   const headers = {
+  //     'Authorization': `Bearer ${jwtToken}`,
+  //     'Content-Type': 'application/json',
+  //   };
+  
+  //   const body = JSON.stringify(dtoObject);
+
+  //   fetch(url, {
+  //     method: 'POST',
+  //     headers: headers,
+  //     body: body,
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         setIsLoading(true);
+  //         console.log(isLoading);
+  //         setReplySentSuccessfully(true);
+
+  //         setTimeout(() => {
+  //           setReplySentSuccessfully(false);
+  //         }, 4000);
+
+  //         setIsLoading(false);
+  //         fetchSupportTickets();
+  //       } else {
+  //         response.json().then((errorData) => {
+  //           setErrorMessage(errorData.message || 'An error occurred while sending the reply!');
+  //         });
+
+  //         setTimeout(() => {
+  //           setErrorMessage(false);
+  //         }, 4000);
+
+  //         setIsLoading(false);
+  //         console.log(isLoading);
+
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('An error occurred:', error);
+  //       setIsLoading(false);
+  //     });
+  //     handleToggleReply();
+  //     setShowTicketDetails(false);
+  // };
+
+  const sendSupportTicketReply = async () => {
     const jwtToken = localStorage.getItem('jwtToken');
     const username = getUsernameFromToken(jwtToken);
   
@@ -115,37 +172,42 @@ const ViewSupportTickets = () => {
     };
   
     const body = JSON.stringify(dtoObject);
-
-    fetch(url, {
-      method: 'POST',
-      headers: headers,
-      body: body,
-    })
-      .then((response) => {
-        if (response.ok) {
-          setReplySentSuccessfully(true);
-
-          setTimeout(() => {
-            setReplySentSuccessfully(false);
-          }, 4000);
-
-          fetchSupportTickets();
-        } else {
-          response.json().then((errorData) => {
-            setErrorMessage(errorData.message || 'An error occurred while sending the reply!');
-          });
-
-          setTimeout(() => {
-            setErrorMessage(false);
-          }, 4000);
-        }
-      })
-      .catch((error) => {
-        console.error('An error occurred:', error);
+  
+    try {
+      setIsLoading(true); // Set isLoading to true before the fetch request
+  
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: body,
       });
-      handleToggleReply();
-      setShowTicketDetails(false);
+  
+      if (response.ok) {
+        setReplySentSuccessfully(true);
+  
+        setTimeout(() => {
+          setReplySentSuccessfully(false);
+        }, 4000);
+  
+        fetchSupportTickets();
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || 'An error occurred while sending the reply!');
+  
+        setTimeout(() => {
+          setErrorMessage(false);
+        }, 4000);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      setIsLoading(false); // Ensure that isLoading is set to false, even in case of an error
+    }
+  
+    handleToggleReply();
+    setShowTicketDetails(false);
   };
+  
 
   useEffect(() => {
     fetchSupportTickets();
@@ -402,6 +464,7 @@ const ViewSupportTickets = () => {
                    >
                      Send
                    </button>
+                   <LoadingScreen isLoading={isLoading} />
                    {selectedTicket.supportTicketReplies.length >= 1 && (
                       <button
                         className="support-tickets-reply-button"
