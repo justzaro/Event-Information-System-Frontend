@@ -4,6 +4,7 @@ import styles from './Register.module.css'; // Import CSS module
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
 import { faEye as thinEye } from '@fortawesome/free-regular-svg-icons';
+import LoadingScreen from '../utility/LoadingScreen';
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -52,6 +53,8 @@ const Register = () => {
   const [showFailMessage, setShowFailMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -81,7 +84,9 @@ const Register = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/users/register', {
+      setIsLoading(true);
+
+      const response = await fetch('http://localhost:8080/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,6 +130,8 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Error during registration:', error);
+    } finally {
+      setIsLoading(false);
     }
     
 
@@ -257,7 +264,9 @@ const Register = () => {
         </div>
         <p className="information-paragraph">Please enter an email address that you frequently
            use since all order and purchase information, as well as ticket information,
-            will be sent to this email!</p>
+            will be sent to this email!
+        </p>
+        <LoadingScreen isLoading={isLoading} />
       </form>
     </div>
   );

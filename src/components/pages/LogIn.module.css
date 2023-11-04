@@ -174,11 +174,11 @@ background-color: #d04e37;
 }
 
 .eye-icon {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   position: absolute;
   right: 32px;
-  top: 28.5%;
+  top: 29%;
   transform: translateY(-50%);
   cursor: pointer;
 }

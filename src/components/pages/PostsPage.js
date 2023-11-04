@@ -3,7 +3,7 @@ import axios from 'axios';
 import './PostsPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { getUsernameFromToken } from '../utility/AuthUtils';
+import { getUsernameFromToken, isAdmin } from '../utility/AuthUtils';
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -262,7 +262,7 @@ const calculateTimeDifference = (postedAt) => {
     formData.append('postPicture', selectedImage);
   
     axios
-      .post(`http://localhost:8080/posts/add/${getUsernameFromToken()}`, formData, {
+      .post(`http://localhost:8080/posts/${getUsernameFromToken()}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
           'Content-Type': 'multipart/form-data',
@@ -293,7 +293,7 @@ const calculateTimeDifference = (postedAt) => {
   const confirmDelete = () => {
     // Send a request to delete the post with postToDelete as the post ID
     axios
-      .delete(`http://localhost:8080/posts/self/${postToDelete}/${currentUser}`, {
+      .delete(`http://localhost:8080/posts/${postToDelete}/${currentUser}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
         },
@@ -396,7 +396,7 @@ const calculateTimeDifference = (postedAt) => {
             className="post-image"
           />
 
-          {post.user.username === currentUser && (
+          {(post.user.username === currentUser || isAdmin()) && (
             <button className="delete-post-button" onClick={() => handleDeletePost(post.postId)}>
               <FontAwesomeIcon icon={faTimes} /> {/* Use the appropriate icon */}
             </button>
