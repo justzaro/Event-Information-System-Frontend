@@ -407,6 +407,8 @@ const ManageUsers = () => {
             setTimeout(() => {
               setUserDeletedSuccessfullyMessage(false);
             }, 4000);
+
+            fetchUserList();
           } else {
             response.json().then((errorData) => {
               // Handle error response from the server
@@ -554,8 +556,8 @@ const ManageUsers = () => {
               <td className="user-name">{user.firstName} {user.lastName}</td>
               <td className="user-username">{user.username}</td>
               <td className="user-email">{user.email}</td>
-              <td className={`user-status ${user.isLocked ? 'active' : 'inactive'}`}>
-                {user.isLocked ? 'Unlocked' : 'Locked'}
+              <td className={`user-status ${user.isLocked ? 'inactive' : 'active'}`}>
+                {user.isLocked ? 'Locked' : 'Unlocked'}
               </td>
               <td className={`user-status ${user.isEnabled ? 'active' : 'inactive'}`}>
                 {user.isEnabled ? 'Active' : 'Inactive'}
@@ -655,10 +657,10 @@ const ManageUsers = () => {
             {selectedUser.isEnabled ? 'Disable User Profile' : 'Enable User Profile'}
           </button>
           <button
-            className={`modify-user-settings-button ${selectedUser.isLocked ? 'lock-button' : 'unlock-button'}`}
+            className={`modify-user-settings-button ${selectedUser.isLocked ? 'unlock-button' : 'lock-button'}`}
             onClick={() => toggleLockUserProfile(selectedUser)}
           >
-            {selectedUser.isLocked ? 'Lock User Profile' : 'Unlock User Profile'}
+            {selectedUser.isLocked ? 'Unlock User Profile' : 'Lock User Profile'}
           </button>
           <button
             className="modify-user-settings-button modify-profile-button"
