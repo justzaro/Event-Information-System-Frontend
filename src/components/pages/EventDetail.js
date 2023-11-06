@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faComment, faMusic } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { cartItemsCount, getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
@@ -12,19 +12,65 @@ const EventDetail = () => {
   const [event, setEvent] = useState(null);
   const [ticketQuantity, setTicketQuantity] = useState(1);
 
-  const [showEventInfo, setShowEventInfo] = useState(false);
-  const [showArtistInfo, setShowArtistInfo] = useState(false);
-
   const [showNotLoggedInMessage, setShowNotLoggedInMessage] = useState(false);
   const [showItemSuccessfullyAddedToCart, setShowItemSuccessfullyAddedToCart] = useState(false);
 
-const toggleEventInfo = () => {
-  setShowEventInfo(!showEventInfo);
-};
+  const [showArtistInfo, setShowArtistInfo] = useState(false);
+  const [showInfoIndex, setShowInfoIndex] = useState(null);
+  const [showEventInfo, setShowEventInfo] = useState(null);
 
-const toggleArtistInfo = () => {
-  setShowArtistInfo(!showArtistInfo);
-};
+  // Inside your JavaScript/React code
+let mouseX;
+let mouseY;
+
+// Function to handle mouse move
+function handleMouseMove(event) {
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+}
+
+// Function to show the artist-info-box
+function showArtistInfoBox(index) {
+  const artistInfoBox = document.querySelectorAll('.artist-info-box')[index];
+  artistInfoBox.style.display = 'block';
+  artistInfoBox.style.top = mouseY - artistInfoBox.offsetHeight + 'px';
+  artistInfoBox.style.left = mouseX + 'px';
+}
+
+// Function to hide the artist-info-box
+function hideArtistInfoBox(index) {
+  const artistInfoBox = document.querySelectorAll('.artist-info-box')[index];
+  artistInfoBox.style.display = 'none';
+}
+
+// Add event listeners to the artist-container elements
+const artistContainers = document.querySelectorAll('.artist-container');
+artistContainers.forEach((container, index) => {
+  container.addEventListener('mouseenter', () => showArtistInfoBox(index));
+  container.addEventListener('mouseleave', () => hideArtistInfoBox(index));
+});
+
+// Add event listener for mousemove to track mouse position
+document.addEventListener('mousemove', handleMouseMove);
+
+
+  const handleMouseEnter = (index) => {
+    setShowInfoIndex(index); // Set the index of the artist being hovered over
+  };
+
+  const handleMouseLeave = () => {
+    setShowInfoIndex(null); // Clear the index when mouse leaves
+  };
+
+
+
+  const toggleEventInfo = () => {
+    setShowEventInfo(!showEventInfo);
+  };
+
+  const toggleArtistInfo = () => {
+    setShowArtistInfo(!showArtistInfo);
+  };
 
 
   useEffect(() => {
@@ -58,23 +104,23 @@ const toggleArtistInfo = () => {
 
       setShowNotLoggedInMessage(true);
 
-        setTimeout(() => {
-          setShowNotLoggedInMessage(false);
-        }, 4000);
+      setTimeout(() => {
+        setShowNotLoggedInMessage(false);
+      }, 4000);
 
       return;
     }
-  
+
     const username = getUsernameFromToken();
     const jwtToken = localStorage.getItem('jwtToken');
-  
+
     if (username && jwtToken) {
       const cartItem = {
         eventName: event.name,
         username: username,
         ticketQuantity: ticketQuantity,
       };
-  
+
       // Make a POST request to add the item to the cart
       fetch('http://localhost:8080/cart', {
         method: 'POST',
@@ -93,6 +139,7 @@ const toggleArtistInfo = () => {
               setShowItemSuccessfullyAddedToCart(false);
             }, 4000);
             console.log('Item added to cart successfully');
+            cartItemsCount = 2;
             console.log(cartItemsCount);
           } else {
             // Handle error (e.g., show an error message)
@@ -108,12 +155,12 @@ const toggleArtistInfo = () => {
   return (
     <div className="event-detail-container">
 
-        {showNotLoggedInMessage && (
-          <div className="not-logged-in-message">Log in before adding items to the cart!</div>
-        )}
-        {showItemSuccessfullyAddedToCart && (
-          <div className="successful-cart-addition-message">Item added successfully!</div>
-        )}
+      {showNotLoggedInMessage && (
+        <div className="not-logged-in-message">Log in before adding items to the cart!</div>
+      )}
+      {showItemSuccessfullyAddedToCart && (
+        <div className="successful-cart-addition-message">Item added successfully!</div>
+      )}
 
       {event ? (
         <div>
@@ -164,27 +211,27 @@ const toggleArtistInfo = () => {
                 </div>
                 <hr className="divider" />
                 <div className="event-location">
-                    <img
-                      src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
-                      alt="Location Icon"
-                      className="event-details-location"
-                    />
-                    <span className="location-text"> Location:</span> {event.location}
+                  <img
+                    src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
+                    alt="Location Icon"
+                    className="event-details-location"
+                  />
+                  <span className="location-text"> Location:</span> {event.location}
                 </div>
               </div>
 
               <div className="event-description-heading">Description</div>
 
-              
+
               <div className="event-starting-hour">
-                <FontAwesomeIcon icon={faClock} color="#ff6600"/>
+                <FontAwesomeIcon icon={faClock} color="#ff6600" />
                 <span className="orange-text"> Starts at:</span> {event.startDate}
               </div>
               <div className="event-closing-hour">
-                <FontAwesomeIcon icon={faClock} color="#ff6600"/>
+                <FontAwesomeIcon icon={faClock} color="#ff6600" />
                 <span className="orange-text"> Ends at:</span> {event.endDate}
               </div>
-{/* {event.artists.map((artist, index) => (
+              {/* {event.artists.map((artist, index) => (
                   <span key={index} className="artist-name">
                     {artist.firstName} {artist.lastName}
                   </span>
@@ -196,18 +243,44 @@ const toggleArtistInfo = () => {
                 <div className="see-more" onClick={toggleArtistInfo}>
                   {showArtistInfo ? 'See Less' : 'See More'}
                 </div>
-                
+
 
                 {showArtistInfo && (
                   <div className={`extra-info ${showArtistInfo ? 'show-info' : ''}`}>
-                  {/* Add the extra text you want to display */}
-                  {event.artists.map((artist, index) => (
-                  <span key={index} className="artist-name">
-                    {artist.firstName} {artist.lastName}
-                  </span>
-                ))}
+                    {event.artists.map((artist, index) => (
+                      <div
+                        key={index}
+                        className="artist-container"
+                        onMouseEnter={() => handleMouseEnter(index)} // Handle mouse enter event
+                        onMouseLeave={() => handleMouseLeave()} // Handle mouse leave event
+                      >
+                        <span className="artist-name">{artist.firstName} {artist.lastName}</span>
+                        <div className="artist-info-box">
+                          {showInfoIndex === index && ( // Check if the mouse is over this artist
+                            <div className="artist-info">
+                              <div className="artist-photo">
+                                <img
+                                  src={`http://localhost:8080/artists/profile-picture/${artist.id}`}
+                                  alt="Artist Photo"
+                                />
+                              </div>
+                              <div className="artist-details">
+                                <div className="artist-name">
+                                  - {artist.firstName} {artist.lastName}
+                                </div>
+                                <div className="artist-description">
+                                  - {artist.description}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
+
+
 
                 <div className={`horizontal-line below ${showArtistInfo ? 'expanded' : ''}`}></div>
               </div>
@@ -216,14 +289,14 @@ const toggleArtistInfo = () => {
                 <div className="horizontal-line above"></div>
                 <div className="event-info-header">Event Information</div>
                 <div className="see-more" onClick={toggleEventInfo}>
-                {showEventInfo ? 'See Less' : 'See More'}
+                  {showEventInfo ? 'See Less' : 'See More'}
 
                 </div>
-                
+
                 {showEventInfo && (
                   <div className={`extra-info ${showEventInfo ? 'show-info' : ''}`}>
-                  {/* Add the extra text you want to display */}
-                  {event.description}
+                    {/* Add the extra text you want to display */}
+                    {event.description}
                   </div>
                 )}
 

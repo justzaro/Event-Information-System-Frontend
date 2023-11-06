@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGears, faPerson, faCalendarDays, faEnvelope, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faGears, faPerson, faCalendarDays, faEnvelope, faTag, faMusic } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import CreateEvent from './dashboard/CreateEvent';
 import EventStatistics from './dashboard/EventStatistics';
@@ -10,6 +10,7 @@ import ManageUsers from './dashboard/ManageUsers';
 import CreateCoupons from './dashboard/CreateCoupons';
 import ViewCoupons from './dashboard/ViewCoupons';
 import ViewSupportTickets from './dashboard/ViewSupportTickets';
+import ViewArtists from './dashboard/ViewArtists';
 
 const Dashboard = () => {
 
@@ -33,6 +34,8 @@ const Dashboard = () => {
         return <ViewCoupons />;
         case 'ViewSupportTickets':
           return <ViewSupportTickets />;
+          case 'ViewArtists':
+            return <ViewArtists />;
       default:
         return null;
     }
@@ -97,6 +100,29 @@ const Dashboard = () => {
             onClick={() => setSelectedSection('ModifyEvent')}
           >
             Modify Event
+          </div>
+
+          <div className="dashboard-menu-hr">
+            <hr />
+         </div>
+
+         <div className="dashboard-menu-item">
+          <FontAwesomeIcon icon={faMusic} className="support-tickets-icon" />
+            <span className="support-tickets-text">Artists</span>
+          </div>
+
+          <div 
+            className="dashboard-menu-subitem"
+            onClick={() => setSelectedSection('ViewArtists')}
+          >
+            Manage Profiles
+          </div>
+
+          <div 
+            className="dashboard-menu-subitem"
+            onClick={() => setSelectedSection('AddArtists')}
+          >
+            Add
           </div>
 
           <div className="dashboard-menu-hr">

@@ -1,0 +1,352 @@
+/* CSS for the container of the artist table */
+.view-artists-container {
+    width: 100%;
+    margin: 1em 0;
+    margin-top: 70px;
+    font-size: 24px;
+    font-family: Tahoma;
+  }
+  
+  /* CSS for the artist table */
+  .view-artists-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #333;
+    color: white;
+  }
+  
+  /* CSS for table header (th) elements */
+  .view-artists-table th {
+    background-color: #333;
+    color: skyblue;
+    text-align: center;
+    padding: 10px 35px;
+  }
+  
+  /* Hover effect for sortable headers */
+  .view-artists-table th.sortable-header:hover {
+    cursor: pointer;
+  }
+  
+  /* CSS for table data (td) elements */
+  .view-artists-table td {
+    text-align: center;
+    justify-content: center;
+    padding: 20px 15px;
+  }
+  
+  /* CSS for table rows (tr) - add a bottom border */
+  .view-artists-table tr {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* CSS for the ID, first name, last name, and description columns */
+  .view-artists-id,
+  .view-artists-first-name,
+  .view-artists-last-name,
+  .view-artists-description {
+    padding: 10px 15px;
+  }
+  
+  /* CSS for the action icons and buttons */
+  .view-artists-action-icon {
+    background: none;
+    border: none;
+    font-size: 30px;
+    margin-right: 5px;
+    color: white;
+  }
+  
+  .view-artists-edit-icon {
+    color: wheat;
+  }
+  
+  .view-artists-edit-icon:hover {
+    color: rgb(214, 186, 134);
+  }
+
+  .view-artists-delete-icon {
+    color: red;
+  }
+  
+  .view-artists-delete-icon:hover {
+    color: rgb(138, 20, 20);
+  }
+
+  .view-artists-action-icon:hover {
+    cursor: pointer;
+  }
+  
+  .manage-artists-search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 30%;
+    font-family: Tahoma;
+  }
+  
+  .manage-artists-search-bar input {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    font-size: 22px;
+  }
+  
+  .manage-artists-search-bar-icon {
+    color: #000;
+    margin-right: 15px;
+    font-size: 30px;
+  }
+  
+  .manage-artists-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.3rem 0.5rem;
+    margin-right: 1rem;
+    font-size: 26px;
+  }
+
+  .manage-artists-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .manage-artists-pagination-button-first {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    background-color: #fff;
+    color: #000;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    border: 2px solid #000;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  .manage-artists-pagination-button-previous {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    background-color: #fff;
+    color: #000;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    border: 2px solid #000;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  .manage-artists-pagination-button-next {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    background-color: #fff;
+    color: #000;
+    font-size: 28px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    border: 2px solid #000;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  .manage-artists-pagination-button-last {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    background-color: #fff;
+    color: #000;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    border: 2px solid #000;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  .manage-artists-tickets-pagination-button {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    padding: 5px;
+    background-color: #fff;
+    color: #000;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    border: 2px solid #000;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  .manage-artists-pagination-button-first:hover,
+  .manage-artists-pagination-button-previous:hover,
+  .manage-artists-pagination-button-next:hover,
+  .manage-artists-pagination-button-last:hover {
+    box-shadow: inset 0 0 0 2px #000;
+  }
+  
+  .manage-artists-pagination-button-previous.disabled,
+  .manage-artists-pagination-button-next.disabled,
+  .manage-artists-pagination-button-first.disabled,
+  .manage-artists-pagination-button-last.disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    border: 0px solid #000;
+  }
+  
+  .manage-artists-pagination-button-previous.disabled:hover,
+  .manage-artists-pagination-button-next.disabled:hover,
+  .manage-artists-pagination-button-first.disabled,
+  .manage-artists-pagination-button-last.disabled {
+    box-shadow: inset 0 0 0 0px #000;
+  }
+  
+  .manage-artists-page-input-container {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    font-size: 20px;
+  }
+  
+  .manage-artists-page-input-container input {
+    width: 28px;
+    height: 28px;
+    margin: 0 5px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #000;
+    font-size: 20px;
+  }
+  
+  .manage-artists-page-input-container input::placeholder {
+    color: #aaa;
+  }
+  
+  .manage-artists-page-input-container input:focus {
+    outline: none;
+  }
+  
+  .manage-artists-page-input-container input[type="number"]::-webkit-inner-spin-button,
+  .manage-artists-page-input-container input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .manage-artists-page-input-container input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
+  .manage-artists-page-input-container input[type="number"]:focus {
+    outline: none;
+  }
+
+  /* Add these styles to your CSS file */
+
+/* Style for the edit artist modal */
+.edit-artist-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    max-width: 500px;
+    text-align: center;
+    font-family: Tahoma;
+  }
+  
+  .edit-artist-modal h2 {
+    font-size: 34px;
+  }
+  
+  /* Input fields and buttons within the modal */
+  .edit-artist-modal input {
+    width: 96%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+  }
+  
+   /* Style for the artist's profile picture */
+   .edit-artist-modal img {
+    width: 100%;
+    height: 360px;
+    margin-top: 20px;
+  }
+ 
+  
+ /* Style for the buttons within the modal */
+/* Style for the buttons container within the modal */
+/* Style for the buttons container within the modal */
+.edit-artist-modal .button-container {
+    display: flex;
+    justify-content: center; /* To evenly space the buttons */
+    margin-top: 10px;
+    margin-left: 10px; /* Adjust the margin as needed */
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
+  
+  .edit-artist-modal .button-container button {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 26px;
+    margin-left: 10px;
+    color: #fff;
+  }
+  
+  .edit-artist-modal button.save-artists-button {
+    background-color: #FE6F57;
+  }
+  
+  .edit-artist-modal button.save-artists-button:hover {
+    background-color: #d84e36;
+  }
+  
+  .edit-artist-modal button.close-artists-button {
+    background-color: #FE6F57;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 26px;
+  }
+  
+  .edit-artist-modal button.close-artists-button:hover {
+    background-color: #d84e36;
+  }
+  
+  .remove-image-icon {
+    position: absolute;
+    top: 88%;
+    right: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+  }
+  

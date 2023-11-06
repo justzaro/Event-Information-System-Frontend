@@ -395,3 +395,64 @@ font-size: 20px;
 }
 
 /* POP-UP MESSAGES */
+
+/* Add the following styles to your CSS */
+.artist-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Add the following styles to your CSS */
+.artist-info-box {
+  position: fixed; /* Use fixed positioning to overlay everything */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 340px; /* Adjust the width as needed */
+  height: 360px; /* Adjust the height as needed */
+  padding: 10px;
+  top: 15%; /* Adjust the top position as needed */
+  left: 45%; /* Center the box horizontally */
+  transform: translateX(-50%); /* Center the box horizontally */
+  display: none;
+  z-index: 9999; /* Ensure it's above other content */
+ overflow-y: auto;
+ font-family: Tahoma;
+ font-size: 22px;
+}
+
+.artist-photo {
+  position: relative;
+}
+
+.artist-photo img {
+  width: 300px; /* Adjust the width as needed to fit the container */
+  height: 300px; /* Adjust the height as needed to fit the container */
+  object-fit: cover; /* Maintain the aspect ratio and cover the container */
+  border-radius: 5px;
+  max-height: 100%;
+}
+
+.artist-container:hover .artist-info-box {
+  display: block;
+}
+
+
+.artists-container {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping to the next line */
+}
+
+.artist-container {
+  margin-right: 10px; /* Add spacing between artists */
+}
+
+.artist-container:last-child {
+  margin-right: 0; /* Remove margin from the last artist */
+}
+
+.artist-description {
+  max-width: 300px; /* Adjust the maximum width as needed */
+  /* Add any other styles you want for the description field */
+}

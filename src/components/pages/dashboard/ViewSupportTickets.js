@@ -9,6 +9,7 @@ const ViewSupportTickets = () => {
   const [supportTickets, setSupportTickets] = useState([]);
   const [sortBy, setSortBy] = useState('Sort by Subject'); // Default sorting by subject
   const [searchText, setSearchText] = useState('');
+  const [searchByPlaceholderText, setSearchByPlaceholderText] = useState('');
   const [filteredSupportTickets, setFilteredSupportTickets] = useState([]);
 
   const [supportTicketDeletedMessage, setSupportTicketDeletedMessage] = useState(false);
@@ -97,63 +98,6 @@ const ViewSupportTickets = () => {
         console.error('Error fetching support tickets:', error);
       });
   };
-
-  // const sendSupportTicketReply = () => {
-  //   const jwtToken = localStorage.getItem('jwtToken');
-  //   const username = getUsernameFromToken(jwtToken);
-  
-  //   const url = `http://localhost:8080/support-ticket-replies/${username}`;
-  
-  //   const dtoObject = {
-  //     text: replyText,
-  //     supportTicket: selectedTicket,
-  //   };
-  
-  //   const headers = {
-  //     'Authorization': `Bearer ${jwtToken}`,
-  //     'Content-Type': 'application/json',
-  //   };
-  
-  //   const body = JSON.stringify(dtoObject);
-
-  //   fetch(url, {
-  //     method: 'POST',
-  //     headers: headers,
-  //     body: body,
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         setIsLoading(true);
-  //         console.log(isLoading);
-  //         setReplySentSuccessfully(true);
-
-  //         setTimeout(() => {
-  //           setReplySentSuccessfully(false);
-  //         }, 4000);
-
-  //         setIsLoading(false);
-  //         fetchSupportTickets();
-  //       } else {
-  //         response.json().then((errorData) => {
-  //           setErrorMessage(errorData.message || 'An error occurred while sending the reply!');
-  //         });
-
-  //         setTimeout(() => {
-  //           setErrorMessage(false);
-  //         }, 4000);
-
-  //         setIsLoading(false);
-  //         console.log(isLoading);
-
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('An error occurred:', error);
-  //       setIsLoading(false);
-  //     });
-  //     handleToggleReply();
-  //     setShowTicketDetails(false);
-  // };
 
   const sendSupportTicketReply = async () => {
     const jwtToken = localStorage.getItem('jwtToken');
@@ -260,7 +204,9 @@ const ViewSupportTickets = () => {
       placeholderText = 'Search by Phone Number';
     }
 
-    setSortBy(placeholderText);
+    setSearchByPlaceholderText(placeholderText);
+    console.log(searchBy);
+    setSortBy(searchBy);
   };
 
   const handleSearchChange = (event) => {
@@ -275,7 +221,6 @@ const ViewSupportTickets = () => {
         return ticket[sortBy] && ticket[sortBy].toLowerCase().includes(searchText);
       }
     });
-
     setFilteredSupportTickets(updatedFilteredSupportTickets);
   };
 
@@ -301,7 +246,7 @@ const ViewSupportTickets = () => {
         <input
           type="text"
           className="support-tickets-input"
-          placeholder={sortBy}
+          placeholder={searchByPlaceholderText}
           value={searchText}
           onChange={handleSearchChange}
         />
