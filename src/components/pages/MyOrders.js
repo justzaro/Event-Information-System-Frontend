@@ -96,6 +96,7 @@ function MyOrders({history, location}) {
               {order.orderItems && order.orderItems.length > 0 && order.orderItems[0].tickets && order.orderItems[0].tickets.length > 0 && (
                 <>
                   {/* Render order details */}
+                  <p>{order.id}</p>
                   <a href={`/event/${order.orderItems[0].tickets[0].event.id}`}>
                     <img
                       className="my-order-event-image"

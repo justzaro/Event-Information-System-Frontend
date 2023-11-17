@@ -1,0 +1,148 @@
+.create-artist-container {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 650px;
+    margin-top: 100px; /* Add margin-top */
+    font-family: Tahoma;
+  }
+  
+  .create-artist-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .create-artist-names {
+    display: flex;
+    justify-content: space-between;
+    width: 97%;
+  }
+  
+  .create-artist-names input {
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+    color: black;
+  }
+  
+  .create-artist-names input::placeholder {
+    color: #000;
+  }
+
+  .create-artist-image-input {
+    margin: 10px 0;
+    font-size: 22px; /* Make the input attachment text bigger */
+  }
+
+  .create-artist-description {
+    width: 92%;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 150px;
+    resize: none;
+  }
+
+  .create-artist-description::placeholder {
+    color: #000;
+  }
+  
+  .create-artist-image-input {
+    margin: 10px 0;
+  }
+  
+  .create-artist-preview-button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #FE6F57;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 26px;
+  }
+
+  .create-artist-preview-button:hover {
+    background-color: #d04e37;
+  }
+  
+  .create-artist-image-preview-button {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .create-artist-remove-button {
+    padding: 5px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+    width: 45px;
+    height: 45px;
+    margin-top: 12px;
+    font-size: 22px;
+  }
+  
+  .create-artist-remove-button:hover {
+    background-color: rgb(100, 3, 3);
+  }
+
+  .create-artist-image-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .create-artist-image-preview img {
+    max-width: 100%; /* Display the image on the whole screen */
+    max-height: 100%; /* Display the image on the whole screen */
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+  
+  .create-artist-close-button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #FE6F57;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 26px;
+  }
+  
+  .create-artist-close-button:hover {
+    background-color: #d04e37;
+  }
+
+  .create-artist-add-button {
+    margin: 10px 0;
+    padding: 15px 25px;
+    background-color: #FE6F57;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 26px;
+  }
+  

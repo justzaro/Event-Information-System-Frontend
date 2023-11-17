@@ -2,7 +2,8 @@
 .dashboard-container {
     display: flex;
     min-height: 100vh;
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    flex-direction: row;
   }
   
   /* Dashboard Menu */
@@ -13,6 +14,7 @@
     padding: 20px;
     margin-top: 70px;
     /* height: 200%; */
+    flex: 0 0 300px;
   }
   
   .dashboard-menu-item {
@@ -85,4 +87,5 @@
   .dashboard-content {
     flex: 1;
     padding: 25px;
+    overflow: auto;
   }

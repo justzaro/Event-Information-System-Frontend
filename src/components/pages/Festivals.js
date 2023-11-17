@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Festivals = () => {
   const [eventData, setEventData] = useState([]);
   const [error, setError] = useState(null);
+  const activeEvents = eventData.filter((event) => event.isActive);
 
   function extractTimeAndDate(dateTimeString) {
     const spaceIndex = dateTimeString.indexOf(' ');
@@ -43,9 +44,9 @@ const Festivals = () => {
         <h1>Eventsss</h1>
         {error ? (
           <p>Error: {error}</p>
-        ) : eventData.length > 0 ? (
+        ) : activeEvents.length > 0 ? (
           <div className={styles['event-cards-container']}>
-            {eventData.map((event, index) => (
+            {activeEvents.map((event, index) => (
               <div key={index} className={styles['event-card']}>
                 <Link to={`/festivals/${event.id}`}>                
                 <img

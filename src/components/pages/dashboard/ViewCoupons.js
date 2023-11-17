@@ -94,7 +94,7 @@ function CouponPage() {
 
   const filterAndSearchCoupons = () => {
     // Filtering coupons based on isUsed
-    const filteredCoupons = filterIsUsed === 'all' ? coupons : coupons.filter(coupon => coupon.isUsed === (filterIsUsed === 'unused'));
+    const filteredCoupons = filterIsUsed === 'all' ? coupons : coupons.filter(coupon => coupon.isUsed === (filterIsUsed === 'used'));
 
     // Filtering coupons based on search query
     return filteredCoupons.filter(coupon => {
@@ -169,14 +169,14 @@ function CouponPage() {
             </tr>
           </thead>
           <tbody>
-            {currentCoupons.map((coupon, index) => (
+            {filteredAndSearchedCoupons.map((coupon, index) => (
               <tr key={coupon.couponId}>
                 <td className="view-coupons-data">{coupon.couponId}</td>
                 <td className="view-coupons-data">{coupon.couponCode}</td>
                 <td className="view-coupons-data">{coupon.discountPercentage}%</td>
                 <td className="view-coupons-data">{coupon.createdAt}</td>
                 <td className="view-coupons-data">{coupon.expiresAt}</td>
-                <td className={`view-coupons-data view-coupons-status ${coupon.isUsed ? 'green-text' : 'orange-text'}`}>
+                <td className={`view-coupons-data view-coupons-status ${coupon.isUsed ? 'orange-text' : 'green-text'}`}>
                   {coupon.isUsed ? 'Used' : 'Unused'}
                 </td>
                 <td className="view-coupons-data view-coupons-actions">

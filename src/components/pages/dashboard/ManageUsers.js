@@ -227,6 +227,7 @@ const ManageUsers = () => {
   const closeModifyUserProfile = () => {
     setShowModifyUserProfile(false);
     setShowDimmedBackground(false);
+    setAttachedImage(null);
     // Reset any form input fields if needed
   };
 
@@ -290,7 +291,7 @@ const ManageUsers = () => {
               newSortedUsers[updatedIndex].isEnabled = !user.isEnabled;
               setSortedUsers(newSortedUsers);
             }
-            
+
             setShowUserSuccessfulEditMessage(true);
 
             setTimeout(() => {
@@ -677,164 +678,169 @@ const ManageUsers = () => {
       {showModifyUserProfile && (
 
         <div className="modify-user-profile">
+          <div className="left-content">
           <h3>Modify User Profile</h3>
-          <div className="profile-field">
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              type="text"
-              name="firstName"
-              value={profileFields.firstName}
-              onChange={handleProfileFieldChange}
-            />
-          </div>
-          <div className="profile-field">
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              type="text"
-              name="lastName"
-              value={profileFields.lastName}
-              onChange={handleProfileFieldChange}
-            />
-          </div>
-          <div className="profile-field">
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              name="username"
-              value={profileFields.username}
-              onChange={handleProfileFieldChange}
-            />
-          </div>
-          <div className="profile-field">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={profileFields.email}
-              onChange={handleProfileFieldChange}
-            />
-          </div>
-          <div className="profile-field">
-            <label>Date of Birth:</label>
-            <div className="modify-user-dob-input">
-              <select
-                name="dobDay"
-                value={dobDay}
-                onChange={handleDateOfBirthChange}
-              >
-                {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-                  <option key={day} value={day < 10 ? `0${day}` : day}>
-                    {day < 10 ? `0${day}` : day}
-                  </option>
-                ))}
-              </select>
+            <div className="profile-field">
+              <label htmlFor="firstName">First Name:</label>
+              <input
+                type="text"
+                name="firstName"
+                value={profileFields.firstName}
+                onChange={handleProfileFieldChange}
+              />
+            </div>
+            <div className="profile-field">
+              <label htmlFor="lastName">Last Name:</label>
+              <input
+                type="text"
+                name="lastName"
+                value={profileFields.lastName}
+                onChange={handleProfileFieldChange}
+              />
+            </div>
+            <div className="profile-field">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={profileFields.username}
+                onChange={handleProfileFieldChange}
+              />
+            </div>
+            <div className="profile-field">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={profileFields.email}
+                onChange={handleProfileFieldChange}
+              />
+            </div>
+            <div className="profile-field">
+              <label>Date of Birth:</label>
+              <div className="modify-user-dob-input">
+                <select
+                  name="dobDay"
+                  value={dobDay}
+                  onChange={handleDateOfBirthChange}
+                >
+                  {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+                    <option key={day} value={day < 10 ? `0${day}` : day}>
+                      {day < 10 ? `0${day}` : day}
+                    </option>
+                  ))}
+                </select>
 
-              <select
-                name="dobMonth"
-                value={dobMonth}
-                onChange={handleDateOfBirthChange}
-              >
-                {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-                  <option key={month} value={month < 10 ? `0${month}` : month}>
-                    {month < 10 ? `0${month}` : month}
-                  </option>
-                ))}
-              </select>
+                <select
+                  name="dobMonth"
+                  value={dobMonth}
+                  onChange={handleDateOfBirthChange}
+                >
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+                    <option key={month} value={month < 10 ? `0${month}` : month}>
+                      {month < 10 ? `0${month}` : month}
+                    </option>
+                  ))}
+                </select>
 
-              <select
-                name="dobYear"
-                value={dobYear}
-                onChange={handleDateOfBirthChange}
-              >
-                {Array.from({ length: 151 }, (_, i) => 1900 + i).map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
+                <select
+                  name="dobYear"
+                  value={dobYear}
+                  onChange={handleDateOfBirthChange}
+                >
+                  {Array.from({ length: 151 }, (_, i) => 1900 + i).map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="profile-field">
+              <label htmlFor="password">Password:</label>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={profileFields.password}
+                onChange={handleProfileFieldChange}
+              />
+              <FontAwesomeIcon
+                icon={showPassword ? solidEye : thinEye}
+                onClick={togglePasswordVisibility}
+                className="save-user-settings-password-toggle"
+              />
+            </div>
+            <div className="profile-field">
+              <label htmlFor="address">Address:</label>
+              <input
+                type="text"
+                name="address"
+                value={profileFields.address}
+                onChange={handleProfileFieldChange}
+              />
+            </div>
             </div>
           </div>
 
+          <div className="right-content">
 
-          <div className="profile-field">
-            <label htmlFor="password">Password:</label>
+            <button className="close-button" onClick={closeModifyUserProfile}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+
+            <br />
+            {attachedImage ? (
+              <img
+                src={attachedImage}
+                alt="Attached Image"
+              />
+            ) : (
+              <img
+                src={`http://localhost:8080/users/profile-picture/${profileFields.username}`}
+                alt="Profile Picture"
+              />
+            )}
+
+            {/* Input to attach an image from the PC */}
+            <p className="save-user-attach-image-label">Attach Image: </p>
             <input
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              value={profileFields.password}
-              onChange={handleProfileFieldChange}
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageAttachment}
+              className="custom-file-input"
             />
-            <FontAwesomeIcon
-              icon={showPassword ? solidEye : thinEye}
-              onClick={togglePasswordVisibility}
-              className="save-user-settings-password-toggle"
-            />
-          </div>
-          <div className="profile-field">
-            <label htmlFor="address">Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={profileFields.address}
-              onChange={handleProfileFieldChange}
-            />
-          </div>
-          <button className="close-button" onClick={closeModifyUserProfile}>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
 
-          {attachedImage ? (
-            <img
-              src={attachedImage}
-              alt="Attached Image"
-            />
-          ) : (
-            <img
-              src={`http://localhost:8080/users/profile-picture/${profileFields.username}`}
-              alt="Profile Picture"
-            />
-          )}
+            {attachedImage && (
+              <button
+                onClick={() => {
+                  setAttachedImage(null);
+                  const fileInput = document.getElementById('file-input'); // Add an `id` to your file input element
+                  if (fileInput) {
+                    fileInput.value = ''; // Reset the file input value to an empty string
+                  }
 
-          {/* Input to attach an image from the PC */}
-          <p className="save-user-attach-image-label">Attach Image: </p>
-          <input
-            id="file-input"
-            type="file"
-            accept="image/*"
-            onChange={handleImageAttachment}
-            className="custom-file-input"
-          />
-
-          {attachedImage && (
-            <button
-              onClick={() => {
-                setAttachedImage(null);
-                const fileInput = document.getElementById('file-input'); // Add an `id` to your file input element
-                if (fileInput) {
-                  fileInput.value = ''; // Reset the file input value to an empty string
-                }
-
-              }}
-              className="remove-image-button"
-            >
-              Remove Attached Image
-            </button>
-          )}
-          <hr />
-
-          <div className="profile-actions">
-            <button
-              onClick={saveModifiedUserProfile}
-              className="save-profile-changes-button"
-            >
-              Save Changes
-            </button>
-            <button
-              onClick={closeModifyUserProfile}
-              className="discard-profile-changes-button"
-            >
-              Cancel
-            </button>
+                }}
+                className="remove-image-button"
+              >
+                Remove Attached Image
+              </button>
+            )}
+            
+            <div className="profile-actions">
+              <hr />
+              <button
+                onClick={saveModifiedUserProfile}
+                className="save-profile-changes-button"
+              >
+                Save Changes
+              </button>
+              <button
+                onClick={closeModifyUserProfile}
+                className="discard-profile-changes-button"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
 
