@@ -11,7 +11,11 @@ const EventsOverview = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [eventTypeFilter, setEventTypeFilter] = useState('');
     const [showEventDeletedMessage, setEventDeletedMessage] = useState(null);
-    
+
+    const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+    const [confirmationType, setConfirmationType] = useState('');
+    const [confirmationEventId, setConfirmationEventId] = useState('');
+
     const fetchEvents = () => {
         fetch('http://localhost:8080/events')
             .then((response) => response.json())
@@ -46,20 +50,31 @@ const EventsOverview = () => {
         }
     };
 
-    const handleDeleteEvent = (eventId) => {
+    const handleToggleEventStatusMenu = (eventId) => {
+        // Set confirmation details
+        setConfirmationEventId(eventId);
+        const event = events.find(e => e.id === eventId);
+        setConfirmationType(event.isActive ? 'deactivate' : 'activate');
+        // Show the confirmation dialog
+        setShowConfirmationDialog(true);
+    };
+
+    const handleToggleEventActivityStatus = () => {
+        // Call the API to toggle the event activity status
         const jwtToken = localStorage.getItem('jwtToken');
         if (!jwtToken) {
-            // Handle the case where jwtToken is not available
             console.error('jwtToken is not available.');
             return;
         }
 
-        // Make the DELETE request to delete the event
-        fetch(`http://localhost:8080/events/${eventId}`, {
-            method: 'DELETE',
+        const endpoint = `http://localhost:8080/events/activity-status/${confirmationEventId}`;
+        fetch(endpoint, {
+            method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${jwtToken}`,
+                'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ action: confirmationType }),
         })
             .then((response) => {
                 if (response.ok) {
@@ -69,14 +84,14 @@ const EventsOverview = () => {
                         setEventDeletedMessage(false);
                     }, 4000);
 
-                    fetchEvents();
+                    fetchEvents(); // Update events after successful toggle
                 } else {
-                    // Handle the error, e.g., show an error message
-                    console.error('Error deleting the event.');
+                    console.error('Error toggling event activity status.');
                 }
+                // Close the confirmation dialog
+                setShowConfirmationDialog(false);
             })
             .catch((error) => {
-                // Handle any network error
                 console.error('Network error:', error);
             });
     };
@@ -94,7 +109,7 @@ const EventsOverview = () => {
         <div className="event-overview-container">
 
             {showEventDeletedMessage && (
-                 <div className="register-success-message">Event deleted successfully!</div>
+                <div className="register-success-message">Event status toggled successfully!</div>
             )}
 
             <div className="search-and-filter-container">
@@ -133,13 +148,35 @@ const EventsOverview = () => {
                         <FontAwesomeIcon
                             icon={faX}
                             className="event-close-icon"
-                            onClick={() => handleDeleteEvent(event.id)}
+                            onClick={() => handleToggleEventStatusMenu(event.id)}
                         />
                     )}
+
+                    {showConfirmationDialog && (
+                        <div className="event-activity-confirmation-overlay">
+
+                            <div className="event-activity-confirmation-dialog">
+                                <p>{`Do you want to ${confirmationType} this ${event.eventType === 'CONCERT' ? 'concert' : 'festival'}?`}</p>
+                                <button
+                                    className={confirmationType === 'activate' ? 'event-activity-status-green-button' : 'event-activity-status-red-button'}
+                                    onClick={handleToggleEventActivityStatus}
+                                >
+                                    Yes
+                                </button>
+                                <button
+                                    className={confirmationType === 'activate' ? 'event-activity-status-red-button' : 'event-activity-status-green-button'}
+                                    onClick={() => setShowConfirmationDialog(false)}
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
                     <img
                         className="event-overview-circle"
                         src={`http://localhost:8080/events/event-picture/${event.name}`}
-                        alt="Event"
+                        alt={`Event: ${event.name}`}
                     />
                     <div className="event-overview-details">
                         <div className="event-overview-name">{event.name}</div>

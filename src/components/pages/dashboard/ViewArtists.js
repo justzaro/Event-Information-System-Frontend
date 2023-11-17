@@ -99,10 +99,10 @@ const ViewArtists = () => {
         formData.append('artistDto', new Blob([JSON.stringify(artistsDto)], { type: 'application/json' }));
 
         if (selectedImage) {
-            const blob = dataURItoBlob(selectedImage);
-            formData.append('profilePicture', blob);
-          }
+            formData.append('profilePicture', selectedImage);
+        }
           
+        console.log(selectedImage);
 
         fetch(`http://localhost:8080/artists/${editArtist.id}`, {
             method: 'PUT',
@@ -140,16 +140,32 @@ const ViewArtists = () => {
     };
     
 
+    // const handleFileSelection = (e) => {
+    //     const file = e.target.files[0];
+    //     if (file) {
+    //         const reader = new FileReader();
+    
+    //         reader.onload = (e) => {
+    //             const base64Data = e.target.result;
+    //             const blob = dataURItoBlob(base64Data);
+    
+    //             setSelectedImage(blob);
+    //         };
+    
+    //         // Read the selected file as data URL
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
     const handleFileSelection = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setSelectedImage(e.target.result);
-            };
-            reader.readAsDataURL(file);
+            setSelectedImage(file);
         }
     };
+    
+    
+      
 
     return (
         <div className="view-artists-container">
@@ -243,7 +259,7 @@ const ViewArtists = () => {
                     <div className="image-container">
                         <div className="image-wrapper">
                             {selectedImage ? (
-                                <img src={selectedImage} alt="Artist Profile" />
+                            <img src={URL.createObjectURL(selectedImage)} alt="Artist Profile" />
                             ) : (
                                 <img src={`http://localhost:8080/artists/profile-picture/${editArtist.id}`} alt="Artist Profile" />
                             )}

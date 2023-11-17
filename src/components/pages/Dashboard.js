@@ -11,6 +11,7 @@ import CreateCoupons from './dashboard/CreateCoupons';
 import ViewCoupons from './dashboard/ViewCoupons';
 import ViewSupportTickets from './dashboard/ViewSupportTickets';
 import ViewArtists from './dashboard/ViewArtists';
+import CreateArtist from './dashboard/CreateArtist';
 
 const Dashboard = () => {
 
@@ -32,10 +33,12 @@ const Dashboard = () => {
         return <CreateCoupons />;
       case 'ViewCoupons':
         return <ViewCoupons />;
-        case 'ViewSupportTickets':
-          return <ViewSupportTickets />;
-          case 'ViewArtists':
-            return <ViewArtists />;
+      case 'ViewSupportTickets':
+        return <ViewSupportTickets />;
+      case 'ViewArtists':
+        return <ViewArtists />;
+      case 'CreateArtist':
+        return <CreateArtist />;
       default:
         return null;
     }
@@ -120,7 +123,7 @@ const Dashboard = () => {
 
           <div 
             className="dashboard-menu-subitem"
-            onClick={() => setSelectedSection('AddArtists')}
+            onClick={() => setSelectedSection('CreateArtist')}
           >
             Add
           </div>
