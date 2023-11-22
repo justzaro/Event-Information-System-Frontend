@@ -10,13 +10,16 @@ import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-import { cartItemsCount } from '../utility/AuthUtils';
+import { useCartItemsCount, getCartItemsCount } from '../utility/CartItemsCount';
 
 const NavigationBar = () => {
+
+  const cartItemsCount = useCartItemsCount();
 
   const [loggedIn, setLoggedIn] = useState(isAuthenticated());
   const userIsAdmin = isAdmin();
   const location = useLocation();
+
   const [cartItemCount, setCartItemCount] = useState(0); // Default value, you can change it
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -94,7 +97,7 @@ const NavigationBar = () => {
     try {
       const jwtToken = localStorage.getItem('jwtToken');
       const response = await fetch(`http://localhost:8080/comments/${commentId}/is-read`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -127,7 +130,7 @@ const NavigationBar = () => {
     try {
       const jwtToken = localStorage.getItem('jwtToken');
       const response = await fetch(`http://localhost:8080/comments/${commentId}/is-removed`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -223,6 +226,7 @@ const NavigationBar = () => {
   useEffect(() => {
     const fetchNotificationsInterval = async () => {
       await fetchNotifications();
+      console.log("Cart items count: " , {cartItemsCount});
     };
 
     fetchNotificationsInterval();
@@ -429,6 +433,7 @@ const NavigationBar = () => {
                 >
                   <FontAwesomeIcon icon={faBagShopping} className={styles['shopping-bag']} />
                   {/* maybe remove red dot if count is 0 */}
+                  {/* <div className={styles['shopping-bag-dot']}>{cartItemCount}</div> */}
                   <div className={styles['shopping-bag-dot']}>{cartItemCount}</div>
                 </Link>
               </li>

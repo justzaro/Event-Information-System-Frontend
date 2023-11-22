@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faComment, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { cartItemsCount, getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
+import { getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
+import { useCartItemsCount, setCartItemsCount } from '../utility/CartItemsCount';
 import './EventDetail.css';
 
 const EventDetail = () => {
@@ -133,14 +134,14 @@ document.addEventListener('mousemove', handleMouseMove);
         .then((response) => {
           if (response.ok) {
             // Handle success (e.g., show a success message)
+            setCartItemsCount(useCartItemsCount + 1);
+
             setShowItemSuccessfullyAddedToCart(true);
 
             setTimeout(() => {
               setShowItemSuccessfullyAddedToCart(false);
             }, 4000);
             console.log('Item added to cart successfully');
-            cartItemsCount = 2;
-            console.log(cartItemsCount);
           } else {
             // Handle error (e.g., show an error message)
             console.error('Error adding item to cart:', response.statusText);
@@ -179,7 +180,7 @@ document.addEventListener('mousemove', handleMouseMove);
           <div className="event-content">
             <div className="event-image">
               <img
-                src={`http://localhost:8080/events/event-picture/${event.name}`}
+                src={`http://localhost:8080/events/event-picture/${event.id}`}
                 alt="Event Banner"
               />
             </div>

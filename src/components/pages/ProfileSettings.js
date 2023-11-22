@@ -155,7 +155,9 @@ const ProfileSettings = () => {
         day: '',
         month: '',
         year: '',
-        address: ''
+        address: '',
+        creditCardNumber: '',
+        creditCardCvv: ''
     });
 
     const months = [
@@ -194,6 +196,7 @@ const ProfileSettings = () => {
             .then((userData) => {
                 // Update the user data in your component's state
                 const parsedDate = parseDate(userData.dateOfBirth || '');
+                console.log(userData);
                 setFormData({
                     firstName: userData.firstName || '',
                     lastName: userData.lastName || '',
@@ -203,6 +206,8 @@ const ProfileSettings = () => {
                     month: parsedDate.month,
                     year: parsedDate.year,
                     address: userData.address || '',
+                    creditCardNumber: userData.creditCardNumber || '',
+                    creditCardCvv: userData.creditCardCvv || ''
                 });
                 console.log(formData);
             })
@@ -236,7 +241,9 @@ const ProfileSettings = () => {
             username: formData.username,
             email: formData.email,
             dateOfBirth: formattedDate,
-            address: formData.address
+            address: formData.address,
+            creditCardNumber: formData.creditCardNumber,
+            creditCardCvv: formData.creditCardCvv
         };
 
         const fullFormData = new FormData();
@@ -345,6 +352,19 @@ const ProfileSettings = () => {
                                 required
                             />
                         </div>
+
+                        <div className="form-group">
+                            <label htmlFor="creditCardNumber">Credit card number:</label>
+                            <input
+                                type="text"
+                                id="creditCardNumber"
+                                name="creditCardNumber"
+                                value={formData.creditCardNumber}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
                     </div>
 
                     <div className="profile-settings-right">
@@ -409,6 +429,17 @@ const ProfileSettings = () => {
                                     id="address"
                                     name="address"
                                     value={formData.address}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="creditCardCvv">CVV:</label>
+                                <input
+                                    type="text"
+                                    id="creditCardCvv"
+                                    name="creditCardCvv"
+                                    value={formData.creditCardCvv}
                                     onChange={handleChange}
                                     required
                                 />

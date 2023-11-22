@@ -69,7 +69,7 @@ const Home = () => {
                   className={styles['no-underline-link']}
                 >
                 <img
-                  src={`http://localhost:8080/events/event-picture/${event.name}`}
+                  src={`http://localhost:8080/events/event-picture/${event.id}`}
                   alt={event.name}
                 />
                 <button className={styles['buy-tickets-button']} onClick={() => {

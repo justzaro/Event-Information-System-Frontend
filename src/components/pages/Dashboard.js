@@ -40,7 +40,7 @@ const Dashboard = () => {
       case 'CreateArtist':
         return <CreateArtist />;
       default:
-        return null;
+        return <ManageUsers />;
     }
   };
 

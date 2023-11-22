@@ -50,7 +50,7 @@ const Events = () => {
               <div key={index} className={styles['event-card']}>
                 <Link to={`/concerts/${event.id}`}>                
                 <img
-                  src={`http://localhost:8080/events/event-picture/${event.name}`}
+                  src={`http://localhost:8080/events/event-picture/${event.id}`}
                   alt={`${event.name}'s Event`}
                   className={styles['event-picture']}
                 />
