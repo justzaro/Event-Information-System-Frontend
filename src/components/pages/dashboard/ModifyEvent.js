@@ -196,7 +196,7 @@ const ModifyEvent = () => {
         isActive: event.isActive,
       });
   
-      fetch(`http://localhost:8080/events/event-picture/${event.name}`)
+      fetch(`http://localhost:8080/events/event-picture/${event.id}`)
         .then((response) => {
           if (response.ok) {
             return response.blob();

@@ -72,7 +72,7 @@ function OrderDetails() {
                         <div className="order-details-content">
                             <a href={`/event/${orderItem.tickets[0].event.id}`}>
                                 <img
-                                    src={`http://localhost:8080/events/event-picture/${orderItem.tickets[0].event.name || ''}`}
+                                    src={`http://localhost:8080/events/event-picture/${orderItem.tickets[0].event.id || ''}`}
                                     alt={orderItem.tickets[0].event.name}
                                     className="order-details-image"
                                 />

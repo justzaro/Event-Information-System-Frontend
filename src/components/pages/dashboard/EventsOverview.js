@@ -175,7 +175,7 @@ const EventsOverview = () => {
 
                     <img
                         className="event-overview-circle"
-                        src={`http://localhost:8080/events/event-picture/${event.name}`}
+                        src={`http://localhost:8080/events/event-picture/${event.id}`}
                         alt={`Event: ${event.name}`}
                     />
                     <div className="event-overview-details">

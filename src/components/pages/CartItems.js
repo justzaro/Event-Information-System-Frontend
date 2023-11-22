@@ -16,9 +16,9 @@ const CartItems = () => {
   const [couponResult, setCouponResult] = useState(null);
   const [showEmptyPromoCodeField, setShowEmptyPromoCodeField] = useState(false);
   const [showSuccessfulOrderMessage, setShowSuccessfulOrderMessage] = useState(false);
-
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     const username = getUsernameFromToken();
@@ -88,7 +88,7 @@ const CartItems = () => {
     if (username && jwtToken) {
       setIsLoading(true); // Set isLoading to false after handling errors
 
-      let orderCreationUrl = `http://localhost:8080/orders/create/${username}`;
+      let orderCreationUrl = `http://localhost:8080/orders/${username}`;
 
       // Check if a coupon value is provided
       if (couponValue.trim() !== '') {
@@ -125,9 +125,17 @@ const CartItems = () => {
 
         } else {
           const errorData = await response.json();
-          const errorMessage = errorData.message;
+          setErrorMessage(errorData.message);
           // Handle non-success HTTP responses (e.g., 404 or 500 errors)
-          console.error('Error creating order: HTTP error', errorMessage);
+
+          setShowErrorMessage(true);
+
+          setTimeout(() => {
+            // Reload the page after the wait time
+            setShowErrorMessage(false);
+          }, 3000);
+
+          console.error('Error creating order: HTTP error', errorData.message);
         }
       } catch (error) {
         console.error('Error creating order:', error);
@@ -169,6 +177,12 @@ const CartItems = () => {
       {showSuccessfulOrderMessage && (
         <div className="successful-order-message">
           Your order has been successful!
+        </div>
+      )}
+
+      {showErrorMessage && (
+        <div className="unsuccessful-order-message">
+          {errorMessage}
         </div>
       )}
 

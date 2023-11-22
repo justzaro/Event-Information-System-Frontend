@@ -131,7 +131,7 @@ const toggleArtistInfo = () => {
           <div className="event-content">
             <div className="event-image">
               <img
-                src={`http://localhost:8080/events/event-picture/${event.name}`}
+                src={`http://localhost:8080/events/event-picture/${event.id}`}
                 alt="Event Banner"
               />
             </div>

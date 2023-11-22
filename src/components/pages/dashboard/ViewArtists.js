@@ -12,10 +12,10 @@ const ViewArtists = () => {
     const [artistsPerPage] = useState(10);
     const [editArtist, setEditArtist] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
-
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [artistToDelete, setArtistToDelete] = useState(null);
     const [artistUpdatedMessage, setArtistUpdatedMessage] = useState(false);
     const [errorMessage, setErrorMessage] = useState(false);
-
     const [artistsDto, setArtistsDto] = useState({
         firstName: '',
         lastName: '',
@@ -113,10 +113,8 @@ const ViewArtists = () => {
         })
             .then((response) => {
             if (response.status === 200) {
-                // Artist profile updated successfully
-                // You may want to add a success message or perform other actions here
                 closeEditModal();
-                fetchArtists(); // Refresh the artist list, if needed
+                fetchArtists();
 
                 setArtistUpdatedMessage(true);
 
@@ -124,10 +122,8 @@ const ViewArtists = () => {
                     setArtistUpdatedMessage(false);
                 }, 4000);
             } else {
-                // Handle error response from the server
                 response.json()
                     .then((errorData) => {
-                        // Access and handle the error message
                         setErrorMessage(errorData.message);
                     })
                     .catch((error) => {
@@ -139,33 +135,56 @@ const ViewArtists = () => {
         closeEditModal();
     };
     
-
-    // const handleFileSelection = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file) {
-    //         const reader = new FileReader();
-    
-    //         reader.onload = (e) => {
-    //             const base64Data = e.target.result;
-    //             const blob = dataURItoBlob(base64Data);
-    
-    //             setSelectedImage(blob);
-    //         };
-    
-    //         // Read the selected file as data URL
-    //         reader.readAsDataURL(file);
-    //     }
-    // };
-
     const handleFileSelection = (e) => {
         const file = e.target.files[0];
         if (file) {
             setSelectedImage(file);
         }
     };
-    
-    
-      
+
+    const openDeleteConfirmationModal = (artistId) => {
+        setArtistToDelete(artistId);
+        setShowConfirmationModal(true);
+    };
+
+    const closeConfirmationModal = () => {
+        setArtistToDelete(null);
+        setShowConfirmationModal(false);
+    };
+
+    const confirmDeleteArtist = () => {
+        if (artistToDelete) {
+            const jwtToken = localStorage.getItem('jwtToken');
+
+            fetch(`http://localhost:8080/artists/${artistToDelete}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${jwtToken}`,
+                },
+            })
+            .then((response) => {
+                if (response.status === 204) {
+                    setArtistUpdatedMessage(true);
+
+                    setTimeout(() => {
+                        setArtistUpdatedMessage(false);
+                    }, 4000);
+
+                    fetchArtists();
+                } else {
+                    response.json()
+                        .then((errorData) => {
+                            setErrorMessage(errorData.message);
+                        })
+                        .catch((error) => {
+                            console.error('Error parsing the error response:', error);
+                        });
+                }
+            });
+
+            closeConfirmationModal();
+        }
+    };
 
     return (
         <div className="view-artists-container">
@@ -213,7 +232,12 @@ const ViewArtists = () => {
                                     icon={faCog}
                                     className="view-artists-action-icon view-artists-edit-icon"
                                     onClick={() => openEditModal(artist)}
-                                />                <FontAwesomeIcon icon={faTimesCircle} className="view-artists-action-icon view-artists-delete-icon" />
+                                /> 
+                                <FontAwesomeIcon
+                                    icon={faTimesCircle}
+                                    className="view-artists-action-icon view-artists-delete-icon"
+                                    onClick={() => openDeleteConfirmationModal(artist.id)}
+                                />
                             </td>
                         </tr>
                     ))}
@@ -272,6 +296,18 @@ const ViewArtists = () => {
                          <button onClick={() => setSelectedImage(null)} className="edit-artist-modal-button close-artists-button">Remove Image</button>
                      )}
                     <button onClick={closeEditModal} className="edit-artist-modal-button close-artists-button">Close</button>
+                    </div>
+                </div>
+            )}
+
+            {showConfirmationModal && (
+                <div className="modify-artist-confirmation-modal">
+                    <div className="modify-artist-confirmation-content">
+                        <p>Are you sure you want to delete this artist?</p>
+                        <div className="modify-artist-confirmation-buttons">
+                            <button onClick={confirmDeleteArtist} className="modify-artist-confirmation-button yes-button">Yes</button>
+                            <button onClick={closeConfirmationModal} className="modify-artist-confirmation-button no-button">No</button>
+                        </div>
                     </div>
                 </div>
             )}

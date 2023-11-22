@@ -391,7 +391,7 @@ const calculateTimeDifference = (postedAt) => {
             </div>
           </div>
           <img
-            src={`http://localhost:8080/posts/picture/${post.postId}`}
+            src={`http://localhost:8080/posts/${post.postId}/picture`}
             alt="Post"
             className="post-image"
           />
