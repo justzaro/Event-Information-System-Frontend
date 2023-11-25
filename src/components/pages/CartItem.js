@@ -117,8 +117,8 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
   return (
     <div className="cart-item">
       <div className="cart-column">
-        <a href={`/event/${eventId}`}>
-          <img src={`http://localhost:8080/events/event-picture/${eventName}`} className="item-image" alt={eventName} />
+        <a href={`/concerts/${eventId}`}>
+          <img src={`http://localhost:8080/events/event-picture/${eventId}`} className="item-image" alt={eventName} />
         </a>
       </div>
       <div className="cart-column">
