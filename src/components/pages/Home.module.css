@@ -76,16 +76,15 @@
   
   .event-price {
     font-size: 24px;
-    margin-top: 70px;
     font-weight: bold;
     color: #FE6F57;
   }
   
   .event-location {
-    font-size: 18px;
+    font-size: 20px;
     margin-top: -25px;
     margin-left: 28px;
-  }
+   }
   
   .event-details .location-icon {
     width: 15px;

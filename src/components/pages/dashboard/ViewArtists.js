@@ -21,7 +21,7 @@ const ViewArtists = () => {
         lastName: '',
         description: '',
       });
-      
+    const MAX_CHARACTERS = 90;
             
     const fetchArtists = () => {
         // Replace with your API call to fetch artists
@@ -226,7 +226,11 @@ const ViewArtists = () => {
                         <tr key={artist.id}>
                             <td>{artist.id}</td>
                             <td>{artist.firstName} {artist.lastName}</td>
-                            <td>{artist.description}</td>
+                            <td>
+                                {artist.description.length > MAX_CHARACTERS
+                                ? artist.description.substring(0, MAX_CHARACTERS) + "..."
+                                : artist.description}
+                            </td>
                             <td>
                                 <FontAwesomeIcon
                                     icon={faCog}

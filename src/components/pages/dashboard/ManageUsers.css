@@ -421,7 +421,7 @@
 .save-user-settings-password-toggle {
   position: absolute;
   right: 53%; /* Adjust the right position as needed */
-  top: 79.5%;
+  top: 80.5%;
   cursor: pointer;
   font-size: 26px; /* Set the icon size */
 }

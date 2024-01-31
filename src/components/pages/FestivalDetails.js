@@ -121,8 +121,8 @@ const toggleArtistInfo = () => {
               <FontAwesomeIcon icon={faHouse} className="small-icon" />
             </Link>
             <span>{">>"} </span>
-            <Link to="/events" className="event-link">
-              Events
+            <Link to="/festivals" className="event-link">
+              Festivals
             </Link>
             <span> {">>"} </span>
             <span className="event-name">{event.name}</span>

@@ -170,8 +170,8 @@ document.addEventListener('mousemove', handleMouseMove);
               <FontAwesomeIcon icon={faHouse} className="small-icon" />
             </Link>
             <span>{">>"} </span>
-            <Link to="/events" className="event-link">
-              Events
+            <Link to="/concerts" className="event-link">
+              Concerts
             </Link>
             <span> {">>"} </span>
             <span className="event-name">{event.name}</span>

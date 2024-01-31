@@ -123,9 +123,9 @@ function LogIn() {
           Log In
         </button>
 
-        <Link to="/events">
+        {/* <Link to="/events">
           <p>Forgotten Password?</p>
-        </Link>
+        </Link> */}
 
         <hr className={styles['line']} />
 

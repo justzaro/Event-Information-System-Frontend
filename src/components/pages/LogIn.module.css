@@ -13,7 +13,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 400px;
-  height: 350px;
+  height: 280px; 
   text-align: center;
   position: relative;
 }
@@ -178,7 +178,7 @@ background-color: #d04e37;
   height: 30px;
   position: absolute;
   right: 32px;
-  top: 29%;
+  top: 36%; /*29*/
   transform: translateY(-50%);
   cursor: pointer;
 }

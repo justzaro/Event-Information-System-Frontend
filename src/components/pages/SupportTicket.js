@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './SupportTicket.module.css';
-import { getUsernameFromToken } from '../utility/AuthUtils';
+import { getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
 import LoadingScreen from '../utility/LoadingScreen';
 
 const SupportTicket = () => {
@@ -34,48 +34,76 @@ const SupportTicket = () => {
       customerPhoneNumber: formData.customerPhoneNumber,
     };
   
-    const username = getUsernameFromToken();
-    const jwtToken = localStorage.getItem('jwtToken');
+    // Check if the user is authenticated
+    if (isAuthenticated()) {
+      // User is authenticated, include the username in the URL
+      const username = getUsernameFromToken();
+      const jwtToken = localStorage.getItem('jwtToken');
   
-    try {
-      setIsLoading(true); // Set isLoading to true before the fetch request
+      try {
+        setIsLoading(true);
   
-      const response = await fetch(`http://localhost:8080/support-tickets/${username}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${jwtToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(ticketData),
-      });
-  
-      if (response.ok) {
-        setShowSuccessMessage(true);
-        setFormData({
-          subject: '',
-          description: '',
-          customerFirstName: '',
-          customerLastName: '',
-          customerEmail: '',
-          customerPhoneNumber: '',
+        const response = await fetch(`http://localhost:8080/support-tickets/${username}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(ticketData),
         });
   
-        setTimeout(() => {
-          setShowSuccessMessage(false);
-        }, 4000);
-      } else {
-        setFailMessage(true);
-  
-        setTimeout(() => {
-          setFailMessage(false);
-        }, 4000);
+        handleResponse(response);
+      } catch (error) {
+        console.error('An error occurred:', error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    } finally {
-      setIsLoading(false); // Ensure that isLoading is set to false, even in case of an error
+    } else {
+      // User is not authenticated, call the endpoint without the username
+      try {
+        setIsLoading(true);
+  
+        const response = await fetch('http://localhost:8080/support-tickets', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(ticketData),
+        });
+  
+        handleResponse(response);
+      } catch (error) {
+        console.error('An error occurred:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
+  
+  const handleResponse = (response) => {
+    if (response.ok) {
+      setShowSuccessMessage(true);
+      setFormData({
+        subject: '',
+        description: '',
+        customerFirstName: '',
+        customerLastName: '',
+        customerEmail: '',
+        customerPhoneNumber: '',
+      });
+  
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 4000);
+    } else {
+      setFailMessage(true);
+  
+      setTimeout(() => {
+        setFailMessage(false);
+      }, 4000);
+    }
+  };
+  
   
 
   return (

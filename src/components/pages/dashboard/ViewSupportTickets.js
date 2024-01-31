@@ -16,7 +16,7 @@ const ViewSupportTickets = () => {
   const [errorMessage, setErrorMessage] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(20); // Adjust the number of items per page as needed.
+  const [itemsPerPage] = useState(15); // Adjust the number of items per page as needed.
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredSupportTickets.slice(indexOfFirstItem, indexOfLastItem);

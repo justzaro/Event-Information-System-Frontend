@@ -16,7 +16,7 @@ function CouponPage() {
   const [deleteCouponId, setDeleteCouponId] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [couponsPerPage] = useState(20); // Adjust as needed
+  const [couponsPerPage] = useState(15); // Adjust as needed
   const [searchQuery, setSearchQuery] = useState('');
   const [filterIsUsed, setFilterIsUsed] = useState('all'); // 'all', 'unused', 'u
 
@@ -82,9 +82,11 @@ function CouponPage() {
 
 
   // Calculate the indexes for slicing coupons
-  const indexOfLastCoupon = currentPage * couponsPerPage;
-  const indexOfFirstCoupon = indexOfLastCoupon - couponsPerPage;
-  const currentCoupons = coupons.slice(indexOfFirstCoupon, indexOfLastCoupon);
+  // const indexOfLastCoupon = currentPage * couponsPerPage;
+  // const indexOfFirstCoupon = indexOfLastCoupon - couponsPerPage;
+  // const currentCoupons = coupons.slice(indexOfFirstCoupon, indexOfLastCoupon);
+
+
   
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -117,10 +119,18 @@ function CouponPage() {
   const filteredAndSearchedCoupons = filterAndSearchCoupons();
   const totalPages = Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage);
 
+  const indexOfLastCoupon = currentPage * couponsPerPage;
+const indexOfFirstCoupon = indexOfLastCoupon - couponsPerPage;
+const currentCoupons = filteredAndSearchedCoupons.slice(indexOfFirstCoupon, indexOfLastCoupon);
+
+  // const pageNumbers = [];
+  // for (let i = 1; i <= Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage); i++) {
+  //   pageNumbers.push(i);
+  // }
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+for (let i = 1; i <= totalPages; i++) {
+  pageNumbers.push(i);
+}
   return (
     <div>
       <div className="view-coupons-search-bar">
@@ -169,7 +179,7 @@ function CouponPage() {
             </tr>
           </thead>
           <tbody>
-            {filteredAndSearchedCoupons.map((coupon, index) => (
+            {currentCoupons.map((coupon, index) => (
               <tr key={coupon.couponId}>
                 <td className="view-coupons-data">{coupon.couponId}</td>
                 <td className="view-coupons-data">{coupon.couponCode}</td>

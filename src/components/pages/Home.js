@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [events, setEvents] = useState([]);
+  const activeEvents = events.filter((event) => event.isActive);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [startIndex, setStartIndex] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0); // Track the current index manually
@@ -11,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch event data from the API endpoint
-    fetch('http://localhost:8080/events')
+    fetch('http://localhost:8080/events?type=CONCERT')
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error('Error fetching events:', error));
@@ -49,7 +50,7 @@ const Home = () => {
           &lt;
         </div>
         <div className={styles['events-container']}>
-          {events.slice(startIndex, startIndex + 5).map((event, index) => (
+          {activeEvents.slice(startIndex, startIndex + 5).map((event, index) => (
 
             <div
               key={event.id}
@@ -79,7 +80,6 @@ const Home = () => {
                 </button>
                 <div className={styles['event-details']}>
                   <p className={styles['event-name']}>{event.name}</p>
-                  <p className={styles['event-price']}>{event.ticketPrice.toFixed(2)} лв.</p>
                   <img
                     src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
                     alt="Location Icon"
@@ -89,6 +89,8 @@ const Home = () => {
 
                     {event.location.split(',')[0]}
                   </p>
+                  <p className={styles['event-price']}>{event.ticketPrice.toFixed(2)} лв.</p>
+
                 </div>
 
               </Link>

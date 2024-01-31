@@ -153,19 +153,19 @@ const ManageUsers = () => {
     profileFields.dateOfBirth = dateOfBirthFormatted;
 
     console.log(profileFields);
-
+    console.log(1);
     // Add the userUpdateDto (profileFields) as a JSON blob to the FormData
     formData.append('userUpdateDto', new Blob([JSON.stringify(profileFields)], { type: 'application/json' }));
-
+    console.log(2);
     // Add the profilePicture (attachedImage) to the FormData
     if (attachedImage) {
       const blob = dataURItoBlob(attachedImage);
       formData.append('profilePicture', blob);
     }
-
+    console.log(3);
     // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
-
+    console.log(4);
     // Check if the token exists
     if (jwtToken) {
       // Send a PUT request to update the user's profile
@@ -177,14 +177,17 @@ const ManageUsers = () => {
         },
       })
         .then((response) => {
+          console.log(5);
           if (response.status === 200) {
             // Profile updated successfully
+            console.log(6);
             setShowUserSuccessfulEditMessage(true);
 
             setTimeout(() => {
               setShowUserSuccessfulEditMessage(false);
             }, 4000);
 
+            console.log(7);
             fetchUserList();
             // You may want to add a success message or update the user's profile image here
           } else {

@@ -16,10 +16,9 @@ const AboutUs = () => {
           />
           <p className="about-us-text">
             
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent erat elit, auctor eu magna posuere, venenatis aliquam sapien. Nunc posuere, massa lobortis fermentum facilisis, diam nisi feugiat est, eget sollicitudin diam massa vitae dui. Vestibulum bibendum tortor sit amet erat facilisis, aliquam vehicula erat viverra. Praesent a turpis quis dui ultricies molestie ac eu quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque neque mi, semper ut ligula ac, viverra viverra eros. Sed ut commodo nisi. Nunc tincidunt eros at sollicitudin aliquam.
+          TicketMaster е онлайн платформа, основана през 1996 г., която предоставя обширен каталог от концерти и фестивали от цял ​​свят. Сайтът предлага на потребителите възможността да закупят билети за техните любими събития, като предлага различни опции за места и ценови категории. TicketMaster осигурява лесен и бърз начин за намиране на предстоящи събития, като включва подробна информация за изпълнителите, местоположението и датата на провеждане. Потребителите могат да разглеждат снимки от минали събития, което им предоставя предварителен поглед върху атмосферата и изпълнителските изяви.<br></br>
 <br></br>
-<br></br>
-Nulla id ante a diam semper interdum. Curabitur eu magna dui. Curabitur id posuere justo. Integer volutpat lacinia magna nec aliquam. Fusce porta accumsan libero eu vulputate. Morbi sodales nisl sodales placerat sodales. Suspendisse ac magna rhoncus, finibus velit cursus, accumsan urna. Donec id libero at nibh rutrum viverra nec id mauris. Nam turpis mauris, vulputate nec ligula in, sollicitudin blandit lectus. Etiam vestibulum volutpat felis. In eu eros sagittis augue laoreet mollis vestibulum ac nulla. Phasellus non maximus velit, nec pulvinar leo. Duis sit amet metus eros. Ut porta neque at erat tincidunt, in 
+Сайтът TicketMaster е популярен сред любителите на музиката и събитията, предоставяйки им удобна и сигурна платформа за онлайн пазаруване на билети. С постоянно обновяван каталог и различни партньорства с известни изпълнители, TicketMaster се утвърдил като водеща онлайн дестинация за закупуване на билети за разнообразни събития.
           </p>
         </div>
       </div>

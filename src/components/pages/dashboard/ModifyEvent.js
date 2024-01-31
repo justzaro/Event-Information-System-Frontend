@@ -133,11 +133,15 @@ const ModifyEvent = () => {
 
 
 
-  useEffect(() => {
-    // Fetch the list of events from 'http://localhost:8080/events'
+  const fetchEvents = () => {
     fetch('http://localhost:8080/events')
       .then((response) => response.json())
-      .then((data) => setEvents(data));
+      .then((data) => setEvents(data))
+  };
+
+  // useEffect to fetch events on component mount
+  useEffect(() => {
+    fetchEvents();
   }, []);
 
   const handleStartingMinutesChange = (e) => {
@@ -316,6 +320,8 @@ const ModifyEvent = () => {
         setTimeout(() => {
           setShowEventModifiedSuccessfullyMessage(false);
         }, 4000);
+
+        fetchEvents();
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message;
@@ -493,8 +499,8 @@ const ModifyEvent = () => {
               type="date"
               name="startDate"
               placeholder="Start Date"
-              value={formattedStartDate}
-              onChange={handleChange}
+              value={selectedEvent ? eventData.startDate : ''}
+              onChange={(e) => handleChange({ target: { name: 'startDate', value: e.target.value } })}
               className="dashboard-create-event-date-input-date"
             />
           </div>
@@ -526,8 +532,8 @@ const ModifyEvent = () => {
               type="date"
               name="endDate"
               placeholder="End Date"
-              value={formattedEndDate}
-              onChange={handleChange}
+              value={selectedEvent ? eventData.endDate : ''}
+              onChange={(e) => handleChange({ target: { name: 'endDate', value: e.target.value } })}
               className="dashboard-create-event-date-input-date"
             />
           </div>

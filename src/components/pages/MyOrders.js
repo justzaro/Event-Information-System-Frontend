@@ -95,7 +95,7 @@ function MyOrders({history, location}) {
             <div className="order-details">
               {order.orderItems && order.orderItems.length > 0 && order.orderItems[0].tickets && order.orderItems[0].tickets.length > 0 && (
                 <>
-                  <a href={`/event/${order.orderItems[0].tickets[0].event.id}`}>
+                  <a href={`/concerts/${order.orderItems[0].tickets[0].event.id}`}>
                     <img
                       className="my-order-event-image"
                       src={`http://localhost:8080/events/event-picture/${order.orderItems[0].tickets[0].event?.id || ''}`}
