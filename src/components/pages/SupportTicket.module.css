@@ -1,11 +1,3 @@
-/* .support-ticket-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  background-color: #f7f7f7;
-} */
-
 .support-ticket-container h1 {
   margin-top: 200px;
   font-size: 35px;
@@ -22,30 +14,16 @@
   background-color: transparent;
   padding: 0;
   border: none;
-  /* max-width: 750px; */
-  width: 750px; /*width:100% */
+  width: 750px;
 }
 
 .form-row {
   display: flex;
-  gap: 3px; /* gap between elements */
+  gap: 3px;
   margin-bottom: 5px;
   width: 750px;
 }
 
-/*why does 'supportText' as type work when 'type' signifies the type of the input
-and 'supportText' is invalid type?*/
-/* input[type="text"],
-textarea {
-  height: 10px; 
-  flex: 1;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 18px;
-  outline: none;
-  font-family: inherit;
-} */
 
 .form-row input, textarea {
   height: 10px; 
@@ -61,18 +39,6 @@ textarea {
 .form-row input::placeholder, textarea::placeholder {
   color: #000;
 }
-
-/* input[type="text"],
-textarea {
-  height: 10px; 
-  flex: 1;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 18px;
-  outline: none;
-  font-family: inherit;
-} */
 
 .email-input {
   max-width: 350px;
@@ -170,9 +136,6 @@ textarea {
   text-align: justify;
 }
 
-/* Existing styles ... */
-
-
 .support-ticket-container {
   display: flex;
   align-items: center;
@@ -216,8 +179,8 @@ textarea {
 }
 
 .vertical-dividing-line {
-  width: 2px; /* Adjust the width as needed */
-  background-color: #000; /* Color of the vertical line */
-  height: 44%; /* Full height of the container */
+  width: 2px;
+  background-color: #000;
+  height: 44%; 
   margin-top: 45px;
 }

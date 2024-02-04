@@ -123,7 +123,6 @@
     transform: translateY(-50%) rotate(180deg);
   }
 
-  /* Add this CSS to your ManageUsers.css file */
 
 .delete-user-confirmation-dialog {
   background: rgba(0, 0, 0, 0.5);
@@ -258,12 +257,6 @@
   font-size: 30px;
 }
 
-/* ... (Previous CSS) */
-
-/* CSS for the input fields in the Modify User Profile section */
-/* ... (Previous CSS) */
-
-/* CSS for the input fields in the Modify User Profile section */
 .modify-user-profile {
   background: #fff;
   padding: 20px;
@@ -272,28 +265,27 @@
   border-radius: 5px;
   margin-bottom: 10px;
   text-align: left;
-  position: absolute; /* Change to "absolute" to fix the position */
-  top: 55%; /* Center the box vertically */
-  left: 52%; /* Center the box horizontally */
-  transform: translate(-50%, -50%); /* Center the box precisely */
+  position: absolute;
+  top: 55%;
+  left: 52%;
+  transform: translate(-50%, -50%);
   width: 1200px;
-  z-index: 1; /* Ensure the box is on top of other elements */
+  z-index: 1; 
   border: 3px solid;
   display: flex;
   height: 750px;
 }
 
 .left-content {
-  flex: 1; /* Takes up half of the available space */
-  padding: 20px; /* Adjust padding as needed */
+  flex: 1;
+  padding: 20px;
 }
 
 .right-content {
-  flex: 1; /* Takes up half of the available space */
-  padding: 20px; /* Adjust padding as needed */
+  flex: 1;
+  padding: 20px;
 }
 
-/* Additional styles for consistency */
 .modify-user-profile h3 {
   text-align: center;
   font-size: 30px;
@@ -319,7 +311,6 @@
   font-size: 22px;
 }
 
-/* CSS for the "Modify User Profile" button */
 .modify-user-settings-button.modify-profile-button {
   background-color: #191919;
   color: #fff;
@@ -375,21 +366,18 @@
   max-height: 350px;
 }
 
-/* Style for the file input to attach an image */
 .modify-user-profile input[type="file"] {
   display: block;
   margin: 0 auto;
   margin-bottom: 10px;
 }
 
-/* Style for the attached image */
 .modify-user-profile img.attached-image {
   width: 100%;
   border: 1px solid #ddd;
   margin-top: 10px;
 }
 
-/* Style for the button to remove the attached image */
 .modify-user-profile button.remove-image-button {
   background-color: #ff4444;
   color: #fff;
@@ -420,19 +408,19 @@
 
 .save-user-settings-password-toggle {
   position: absolute;
-  right: 53%; /* Adjust the right position as needed */
+  right: 53%; 
   top: 80.5%;
   cursor: pointer;
-  font-size: 26px; /* Set the icon size */
+  font-size: 26px; 
 }
 
 .modify-user-dob-input {
-  display: flex; /* Use flexbox to align the input boxes horizontally */
+  display: flex; 
 }
 
 .modify-user-dob-input input {
-  width: 50px; /* Adjust the width as needed */
-  margin-right: 5px; /* Add some spacing between the input boxes */
+  width: 50px;
+  margin-right: 5px;
 }
 
 
@@ -442,7 +430,6 @@
   padding: 5px;
 }
 
-/* Pagination styles */
 .manage-users-pagination {
   margin-top: 10px;
   text-align: center;

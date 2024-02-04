@@ -14,7 +14,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
     const jwtToken = localStorage.getItem('jwtToken');
 
     if (jwtToken) {
-      // Make a DELETE request to remove the cart item
       fetch(`http://localhost:8080/cart/${id}`, {
         method: 'DELETE',
         headers: {
@@ -23,7 +22,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
       })
         .then((response) => {
           if (response.ok) {
-            // If the item is successfully removed, trigger the onDelete callback
             window.location.reload();
           } else {
             console.error('Failed to remove cart item.');
@@ -52,7 +50,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
     };
 
     if (username && jwtToken) {
-      // Make a DELETE request to remove the cart item
       fetch(`http://localhost:8080/cart`, {
         method: 'POST',
         headers: {
@@ -63,7 +60,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
       })
         .then((response) => {
           if (response.ok) {
-            // If the item is successfully removed, trigger the onDelete callback
             window.location.reload();
           } else {
             console.error('Failed to remove cart item.');
@@ -77,7 +73,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
 
   const handleDecrease = () => {
     if (ticketQuantity === 1) {
-      // If ticketQuantity is 1, call handleRemove to remove the item
       handleRemove();
     }
 
@@ -91,7 +86,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
     };
 
     if (username && jwtToken) {
-      // Make a DELETE request to remove the cart item
       fetch(`http://localhost:8080/cart/decrease`, {
         method: 'POST',
         headers: {
@@ -102,7 +96,6 @@ const CartItem = ({ data, onDelete, onUpdate }) => {
       })
         .then((response) => {
           if (response.ok) {
-            // If the item is successfully removed, trigger the onDelete callback
             window.location.reload();
           } else {
             console.error('Failed to remove cart item.');

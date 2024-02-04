@@ -1,5 +1,5 @@
   .green-rectangle {
-    background-color: #191717; /* Light green color */
+    background-color: #191717;
     padding: 20px;
     text-align: center;
     margin-bottom: -40px;
@@ -8,7 +8,7 @@
   .green-rectangle p {
     font-size: 20px;
     text-align: center;
-    color: #fff; /* White text color */
+    color: #fff;
   }
   
   .green-rectangle {
@@ -120,8 +120,8 @@
   }
 
   .no-underline-link {
-    text-decoration: none; /* Remove underlines */
-    color: inherit; /* Use the parent element's text color */
+    text-decoration: none;
+    color: inherit;
   }
 
   .header-text {
@@ -130,5 +130,5 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 200px; /* You can adjust the height as needed */
+    height: 200px;
   }

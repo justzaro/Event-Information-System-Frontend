@@ -28,8 +28,8 @@ const EventsOverview = () => {
     };
 
     useEffect(() => {
-        fetchEvents(); // Call fetchEvents when the component mounts
-    }, []); // Empty dependen
+        fetchEvents();
+    }, []);
 
     const handleMouseEnter = (event) => {
         setHoveredEvent(event.id);
@@ -42,7 +42,6 @@ const EventsOverview = () => {
     };
 
     const handleItemClick = (event) => {
-        // Toggle expanded state for the clicked item
         if (expandedItem === event.id) {
             setExpandedItem(null);
         } else {
@@ -51,16 +50,13 @@ const EventsOverview = () => {
     };
 
     const handleToggleEventStatusMenu = (eventId) => {
-        // Set confirmation details
         setConfirmationEventId(eventId);
         const event = events.find(e => e.id === eventId);
         setConfirmationType(event.isActive ? 'deactivate' : 'activate');
-        // Show the confirmation dialog
         setShowConfirmationDialog(true);
     };
 
     const handleToggleEventActivityStatus = () => {
-        // Call the API to toggle the event activity status
         const jwtToken = localStorage.getItem('jwtToken');
         if (!jwtToken) {
             console.error('jwtToken is not available.');
@@ -84,11 +80,10 @@ const EventsOverview = () => {
                         setEventDeletedMessage(false);
                     }, 4000);
 
-                    fetchEvents(); // Update events after successful toggle
+                    fetchEvents();
                 } else {
                     console.error('Error toggling event activity status.');
                 }
-                // Close the confirmation dialog
                 setShowConfirmationDialog(false);
             })
             .catch((error) => {

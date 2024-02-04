@@ -1,4 +1,3 @@
-// OrderDetails.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './OrderDetails.css';
@@ -42,7 +41,6 @@ function OrderDetails() {
       };
 
     if (!orderDetails) {
-        // Render loading or error message
         return <div className="order-details-loading">Loading...</div>;
     }
 
@@ -62,7 +60,7 @@ function OrderDetails() {
 
             <div className="order-details-container">
                 {orderDetails.orderItems.map((orderItem, index) => (
-                    <div key={index}>  { /* className="order-details-content" */}
+                    <div key={index}>
                         {index === 0 && (
                             <div>
                                 <div className="order-heading">Order Items</div>
@@ -112,7 +110,6 @@ function OrderDetails() {
                                 </p>
                             </div>
                         </div>
-                        {/* {index < orderDetails.orderItems.length - 1 && <hr className="order-details-horizontal-line" />} */}
                         <hr className="order-details-horizontal-line" />
 
                         

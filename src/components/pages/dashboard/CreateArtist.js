@@ -19,15 +19,15 @@ function CreateArtist() {
     setImage(null);
     const imageInput = document.getElementById('imageInput');
   if (imageInput) {
-    imageInput.value = ''; // Reset the file input value to clear the selected file
+    imageInput.value = '';
   }
 
   };
 
   const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0]; // Get the selected image
+    const selectedImage = e.target.files[0];
     if (selectedImage) {
-        setImage(selectedImage); // Set the selected image in the component state
+        setImage(selectedImage);
     }
   };
 
@@ -41,7 +41,7 @@ function CreateArtist() {
 
   const removeImage = () => {
     setImage(null);
-    document.getElementById('imageInput').value = ''; // Reset the file input value
+    document.getElementById('imageInput').value = '';
   };
 
   const addArtist = () => {
@@ -52,7 +52,6 @@ function CreateArtist() {
     };
   
     if (!image) {
-        // Check if image is not null
         setErrorMessage("Please attach an image");
         setTimeout(() => {
           setErrorMessage('');
@@ -63,14 +62,12 @@ function CreateArtist() {
     console.log(artistData);
     console.log(image);
 
-    // Create a FormData object to send the artist data
     const formData = new FormData();
     formData.append('artistDto', new Blob([JSON.stringify(artistData)], { type: 'application/json' }));
     formData.append('profilePicture', image);
   
     console.log(formData);
-
-    // Define headers for the JWT token
+    
     const headers = new Headers({
       'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
     });
@@ -82,16 +79,14 @@ function CreateArtist() {
     })
       .then((response) => {
         if (response.ok) {
-          // Handle successful response
           setArtistAddedMessage(true);
 
           setTimeout(() => {
             setArtistAddedMessage(false);
           }, 4000);
         } else {
-          // Handle error response
           response.json().then((errorData) => {
-            setErrorMessage(errorData.message); // Set the error message in state
+            setErrorMessage(errorData.message);
           });
 
           setErrorMessage(true);
@@ -102,16 +97,13 @@ function CreateArtist() {
         }
       })
       .then((data) => {
-        // Handle the data from the response (if needed)
       })
       .catch((error) => {
-        // Handle the error
         console.error(error);
       });
       resetForm();
   };
   
-
   return (
     <div className="create-artist-container">
 

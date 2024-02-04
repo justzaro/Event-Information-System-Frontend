@@ -1,5 +1,3 @@
-/* PostsPage.css */
-
 .posts-container {
   display: flex;
   flex-direction: column;
@@ -56,19 +54,19 @@
 }
 
 .post-description {
-  max-width: 600px; /* Maximum width for the description */
-  margin: -20px auto; /* Center the description horizontally */
-  text-align: left; /* Align text to the left within the description */
-  overflow-wrap: break-word; /* Enable word wrapping for long text */
-  padding: 10px 0; /* Add padding for spacing */
+  max-width: 600px;
+  margin: -20px auto;
+  text-align: left;
+  overflow-wrap: break-word;
+  padding: 10px 0;
   font-size: 19px;
   font-family: Tahoma;
 }
 
 .comments-button {
   display: flex;
-  justify-content: flex-start; /* Align the button to the left below the image */
-  margin-top: 10px; /* Adjust the spacing between the image and the button */
+  justify-content: flex-start;
+  margin-top: 10px;
 }
 
 .view-comments-button {
@@ -124,7 +122,7 @@
 
 .comment {
   display: flex;
-  align-items: flex-start; /* Align items at the top */
+  align-items: flex-start;
   margin-bottom: 10px;
   margin-top: 30px;
   justify-content: flex-start;
@@ -167,8 +165,6 @@
   margin-left: auto;
 }
 
-/* Add Post Popup Styles */
-/* Add Post Popup Styles */
 .add-post-button {
   position: fixed;
   bottom: 20px;
@@ -259,7 +255,6 @@
   background-color: #f49519;
 }
 
-/* Keyframes for spinning animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -364,12 +359,12 @@
 }
 
 .delete-confirm {
-  background-color: #e74c3c; /* Red color for confirmation */
+  background-color: #e74c3c;
   color: #fff;
 }
 
 .delete-cancel {
-  background-color: #3498db; /* Blue color for cancel */
+  background-color: #3498db;
   color: #fff;
 }
 
@@ -418,21 +413,20 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
-  position: absolute; /* Position the icon absolutely within the comment container */
-  top: px; /* Adjust the top position as needed */
-  right: 10px; /* Adjust the right position as needed */
+  position: absolute;
+  top: px;
+  right: 10px;
 }
 
 .posts-comments-dividing-hr {
-  border-top: 1px solid #191919; /* Replace #ff0000 with your desired color code */
+  border-top: 1px solid #191919;
   width: 530px;
   margin-left: -70px;
   margin-top: 10px;
 }
 
 .blur-background {
-  /* backdrop-filter: blur(5px); */
-  background: rgba(0, 0, 0, 0.6); /* Adjust the opacity (0.5 in this example) to control the dimness */
+  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;

@@ -7,11 +7,8 @@ const Home = () => {
   const activeEvents = events.filter((event) => event.isActive);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [startIndex, setStartIndex] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0); // Track the current index manually
-
 
   useEffect(() => {
-    // Fetch event data from the API endpoint
     fetch('http://localhost:8080/events?type=CONCERT')
       .then((response) => response.json())
       .then((data) => setEvents(data))
@@ -43,8 +40,6 @@ const Home = () => {
         <p className={styles['main-event-slogan']}>Browse our vast selection of events, choose your favourites and reserve your tickets!</p>
       </div>
 
-
-      {/* Event Carousel */}
       <div className={styles['events-carousel']}>
         <div className={styles['arrow']} onClick={navigateLeft}>
           &lt;
@@ -57,8 +52,6 @@ const Home = () => {
               className={`${styles['event-box']} ${hoveredIndex === index + startIndex ? styles['hovered'] : ''
                 }`}
               onClick={() => {
-                // Redirect to /event/id
-                // You can implement the redirection logic here
               }}
               onMouseEnter={() => setHoveredIndex(index + startIndex)}
               onMouseLeave={() => setHoveredIndex(null)}

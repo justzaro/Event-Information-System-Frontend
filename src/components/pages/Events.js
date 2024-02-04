@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Events.module.css'; // Import CSS module
+import styles from './Events.module.css';
 import { Link } from 'react-router-dom';
 
 const Events = () => {
@@ -28,7 +28,6 @@ const Events = () => {
   }  
 
   useEffect(() => {
-    // Fetch events data
     fetch('http://localhost:8080/events?type=CONCERT')
       .then((response) => response.json())
       .then((data) => {

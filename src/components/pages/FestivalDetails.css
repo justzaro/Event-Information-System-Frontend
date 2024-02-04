@@ -1,6 +1,3 @@
-/* EventDetail.css */
-
-  
 .event-detail-container {
     margin-top: 200px;
     margin-left: 500px;
@@ -59,7 +56,6 @@
     max-width: 800px;
     max-height: 800px;
     border-radius: 5px;
-    margin-top: 20px; /* Adjust as needed */
   }
   
   .event-description-whole-part {
@@ -216,46 +212,42 @@
     font-weight: bold;
   }
   
-  /* EventDetail.css */
-  
-  /* ... (previous styles) */
-  
   .event-link,
   .small-icon {
-  position: relative; /* Create a relative positioning context */
-  text-decoration: none; /* Remove the default underline */
-  transition: color 0.3s ease; /* Smoothly transition text color */
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
   }
   
   .event-link::before,
   .small-icon::before {
-  content: ''; /* Create a pseudo-element for the line */
+  content: '';
   position: absolute;
   width: 0px;
-  height: 100%; /* Set the initial line thickness */
-  transition: background-color 0.8s ease, width 0.4s ease; /* Smoothly transition line color and height */
+  height: 100%;
+  transition: background-color 0.8s ease, width 0.4s ease;
   z-index: -1;
   }
   
   .event-link::before,
   .small-icon::before {
-  content: ''; /* Create a pseudo-element for the line */
+  content: '';
   position: absolute;
   width: 0px;
-  height: 100%; /* Set the initial line thickness */
-  transition: background-color 0.8s ease, width 0.4s ease; /* Smoothly transition line color and height */
+  height: 100%;
+  transition: background-color 0.8s ease, width 0.4s ease;
   z-index: -1;
   }
   
   .event-link:hover::before,
   .small-icon:hover::before {
-  width: 100%; /* Expand the line to encapsulate the text */
-  background: #d11212; /* Line color when hovered */
+  width: 100%; 
+  background: #d11212;
   }
   
   .event-link:hover,
   .small-icon:hover {
-  color: #191919; /* Change text color to white when hovered */
+  color: #191919; 
   }
   
   
@@ -271,22 +263,22 @@
   width: 800px;
   height: 1px;
   background-color: #ddd;
-  transition: margin-top 0.3s ease, opacity 0.3s ease; /* Add transitions */
+  transition: margin-top 0.3s ease, opacity 0.3s ease;
   }
   
   .horizontal-line.above {
   margin-left: -1215px;
-  margin-bottom: 30px; /* Spacing between the line and text above */
+  margin-bottom: 30px; 
   }
   
   .horizontal-line.below {
-  margin-top: 30px; /* Initial spacing between the line and text below */
+  margin-top: 30px;
   margin-left: -1215px;
-  transition: margin-top 0.6s ease; /* Slow down the margin-top transition */
+  transition: margin-top 0.6s ease;
   }
   
   .event-info-toggle .horizontal-line.below.expanded {
-  margin-top: 40px; /* Adjust margin-top to move the line down */
+  margin-top: 40px;
   }
   
   .extra-info {
@@ -300,14 +292,13 @@
   height: auto;
   visibility: hidden;
   max-height: 0;
-  opacity: 0.0001; /* Initially hidden */
+  opacity: 0.0001;
   transition: max-height 1.6s ease, visibility 1.6s ease, opacity 1.6s ease;
   }
   
-  /* Show the extra info when .show-info class is applied */
   .event-info-toggle .extra-info.show-info {
-  max-height: 1000px; /* Adjust to your content's maximum height */
-  opacity: 1; /* Gradual appearance */
+  max-height: 1000px;
+  opacity: 1;
   visibility: visible;
   transition: max-height 1.6s ease, visibility 1.6s ease, opacity 1.6s ease;
   }
@@ -330,7 +321,7 @@
   
   .event-info-header:hover + .horizontal-line.above,
   .event-info-header:hover + .horizontal-line.below {
-  background-color: #ff6600; /* Change color on hover */
+  background-color: #ff6600;
   transition: background-color 0.3s ease;
   }
   
@@ -344,11 +335,9 @@
   }
   
   .see-more:hover {
-  color: #ff6600; /* Change color on hover */
+  color: #ff6600;
   transition: color 0.3s ease;
   }
-  
-  /* POP-UP MESSAGES */
   
   .not-logged-in-message {
   position: fixed;
@@ -397,5 +386,3 @@
     top: -80px;
   }
   }
-  
-  /* POP-UP MESSAGES */

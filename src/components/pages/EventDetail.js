@@ -20,17 +20,14 @@ const EventDetail = () => {
   const [showInfoIndex, setShowInfoIndex] = useState(null);
   const [showEventInfo, setShowEventInfo] = useState(null);
 
-  // Inside your JavaScript/React code
 let mouseX;
 let mouseY;
 
-// Function to handle mouse move
 function handleMouseMove(event) {
   mouseX = event.clientX;
   mouseY = event.clientY;
 }
 
-// Function to show the artist-info-box
 function showArtistInfoBox(index) {
   const artistInfoBox = document.querySelectorAll('.artist-info-box')[index];
   artistInfoBox.style.display = 'block';
@@ -38,29 +35,26 @@ function showArtistInfoBox(index) {
   artistInfoBox.style.left = mouseX + 'px';
 }
 
-// Function to hide the artist-info-box
 function hideArtistInfoBox(index) {
   const artistInfoBox = document.querySelectorAll('.artist-info-box')[index];
   artistInfoBox.style.display = 'none';
 }
 
-// Add event listeners to the artist-container elements
 const artistContainers = document.querySelectorAll('.artist-container');
 artistContainers.forEach((container, index) => {
   container.addEventListener('mouseenter', () => showArtistInfoBox(index));
   container.addEventListener('mouseleave', () => hideArtistInfoBox(index));
 });
 
-// Add event listener for mousemove to track mouse position
 document.addEventListener('mousemove', handleMouseMove);
 
 
   const handleMouseEnter = (index) => {
-    setShowInfoIndex(index); // Set the index of the artist being hovered over
+    setShowInfoIndex(index);
   };
 
   const handleMouseLeave = () => {
-    setShowInfoIndex(null); // Clear the index when mouse leaves
+    setShowInfoIndex(null);
   };
 
 
@@ -75,7 +69,6 @@ document.addEventListener('mousemove', handleMouseMove);
 
 
   useEffect(() => {
-    // Fetch the event data based on the eventId and set it in state
     fetch(`http://localhost:8080/events/${eventId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -100,8 +93,6 @@ document.addEventListener('mousemove', handleMouseMove);
     setTicketQuantity(1);
 
     if (!isAuthenticated()) {
-      // Handle the case when the user is not authenticated (e.g., show a login modal)
-      // You can customize this behavior based on your authentication implementation
 
       setShowNotLoggedInMessage(true);
 
@@ -122,7 +113,6 @@ document.addEventListener('mousemove', handleMouseMove);
         ticketQuantity: ticketQuantity,
       };
 
-      // Make a POST request to add the item to the cart
       fetch('http://localhost:8080/cart', {
         method: 'POST',
         headers: {
@@ -133,7 +123,6 @@ document.addEventListener('mousemove', handleMouseMove);
       })
         .then((response) => {
           if (response.ok) {
-            // Handle success (e.g., show a success message)
             setCartItemsCount(useCartItemsCount + 1);
 
             setShowItemSuccessfullyAddedToCart(true);
@@ -143,7 +132,7 @@ document.addEventListener('mousemove', handleMouseMove);
             }, 4000);
             console.log('Item added to cart successfully');
           } else {
-            // Handle error (e.g., show an error message)
+           
             console.error('Error adding item to cart:', response.statusText);
           }
         })
@@ -205,7 +194,7 @@ document.addEventListener('mousemove', handleMouseMove);
                       }
                     }}
                     min="1"
-                    max="10" // Adjust the maximum number of tickets
+                    max="10"
                   />
                   <button className="control-button" onClick={handleIncrease}>+</button>
                   <button className="buy-button" onClick={handleAddToCart}>Add to Cart</button>
@@ -231,13 +220,7 @@ document.addEventListener('mousemove', handleMouseMove);
               <div className="event-closing-hour">
                 <FontAwesomeIcon icon={faClock} color="#ff6600" />
                 <span className="orange-text"> Ends at:</span> {event.endDate}
-              </div>
-              {/* {event.artists.map((artist, index) => (
-                  <span key={index} className="artist-name">
-                    {artist.firstName} {artist.lastName}
-                  </span>
-                ))}    */}
-
+              </div> 
               <div className="event-info-toggle">
                 <div className="horizontal-line above"></div>
                 <div className="event-info-header">Artists Information</div>
@@ -252,12 +235,12 @@ document.addEventListener('mousemove', handleMouseMove);
                       <div
                         key={index}
                         className="artist-container"
-                        onMouseEnter={() => handleMouseEnter(index)} // Handle mouse enter event
-                        onMouseLeave={() => handleMouseLeave()} // Handle mouse leave event
+                        onMouseEnter={() => handleMouseEnter(index)}
+                        onMouseLeave={() => handleMouseLeave()}
                       >
                         <span className="artist-name">{artist.firstName} {artist.lastName}</span>
                         <div className="artist-info-box">
-                          {showInfoIndex === index && ( // Check if the mouse is over this artist
+                          {showInfoIndex === index && (
                             <div className="artist-info">
                               <div className="artist-photo">
                                 <img
@@ -296,7 +279,7 @@ document.addEventListener('mousemove', handleMouseMove);
 
                 {showEventInfo && (
                   <div className={`extra-info ${showEventInfo ? 'show-info' : ''}`}>
-                    {/* Add the extra text you want to display */}
+                    
                     {event.description}
                   </div>
                 )}

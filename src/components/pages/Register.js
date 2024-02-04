@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Register.module.css'; // Import CSS module
-
+import styles from './Register.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
 import { faEye as thinEye } from '@fortawesome/free-regular-svg-icons';
@@ -95,7 +94,7 @@ const Register = () => {
       });
 
       if (response.ok) {
-        // Registration successful, handle success here
+        
         console.log('Registration successful');
 
         setFormData({
@@ -119,7 +118,7 @@ const Register = () => {
         const errorData = await response.json();
         const errorMessage = errorData.message;
         setErrorMessage(errorMessage);
-        // Registration failed, handle error here
+        
         console.log("fail");
         setShowFailMessage(true);
 

@@ -1,4 +1,3 @@
-// CartItemsCount.js
 import { useState, useEffect } from 'react';
 
 let cartItemsCount = 0;
@@ -26,5 +25,5 @@ export const useCartItemsCount = () => {
     };
   }, []);
 
-  return value; // Return the current value, not the entire hook function
+  return value;
 };

@@ -1,7 +1,7 @@
 .view-coupons-page {
     font-family: Tahoma;
-    background-color: #333; /* Greyish background color */
-    color: white; /* White text color */
+    background-color: #333;
+    color: white;
     width: 100%;
     overflow-x: auto;
     margin-top: 20px;
@@ -14,15 +14,15 @@
   }
   
   .view-coupons-header {
-    background-color: #333; /* Dark grey background for headers */
-    color: white; /* White text color for headers */
+    background-color: #333;
+    color: white; 
   }
   
   .view-coupons-data {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
-    color: white; /* White text color for data cells */
+    color: white; 
   }
   
   .view-coupons-status {
@@ -281,7 +281,6 @@
 } 
 
 .view-coupons-search-bar {
-  /* Styles for the entire search bar container */
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -291,7 +290,6 @@
 }
 
 .view-coupons-search-bar input {
-  /* Styles for the search input */
   flex-grow: 1;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -301,20 +299,16 @@
 }
 
 .view-coupons-search-bar-icon {
-  /* Styles for the icons within the search bar */
   color: #000;
   margin-right: 15px;
   font-size: 30px;
 }
 
 .view-coupons-select {
-  /* Styles for the select elements */
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.3rem 0.5rem;
   margin-right: 1rem;
   font-size: 26px;
 }
-
-/* Add these styles to your ViewCoupons.css file */
 

@@ -11,7 +11,6 @@ const CreateCoupons = () => {
 
   const handleGenerateCoupons = () => {
     if (couponsToBeGenerated >= 0 && couponsToBeGenerated <= 300 && discountPercentage >= 0 && discountPercentage <= 90) {
-      // Assuming you have a jwtToken locally
       const jwtToken = localStorage.getItem('jwtToken');
       const data = {
         couponsToBeGenerated,
@@ -33,7 +32,6 @@ const CreateCoupons = () => {
         console.log(response.data);
       })
       .catch(error => {
-        // Handle error, e.g., show an error message
         setErrorMessage(error.response ? (error.response.data.message || 'An error occurred') : 'An error occurred');
         
         setShowErrorMessage(true);
@@ -43,7 +41,6 @@ const CreateCoupons = () => {
         }, 4000);
       });
     } else {
-      // Handle validation error, e.g., show an error message
       console.error('Input values are not within the allowed range.');
     }
 

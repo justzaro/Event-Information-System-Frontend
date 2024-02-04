@@ -1,11 +1,7 @@
-/* Styles for ViewSupportTicket component */
-
 .support-ticket-page {
   font-family: Tahoma;
   background-color: #333;
-  /* Greyish background color */
   color: white;
-  /* White text color */
   width: 100%;
   overflow-x: auto;
   margin-top: 20px;
@@ -19,9 +15,7 @@
 
 .support-ticket-header {
   background-color: #333;
-  /* Dark grey background for headers */
   color: white;
-  /* White text color for headers */
 }
 
 .support-ticket-data {
@@ -29,17 +23,12 @@
   padding: 8px;
   text-align: center;
   color: white;
-  /* White text color for data cells */
 }
-
-/* Styles for ViewSupportTicket component */
 
 .support-tickets-page {
   font-family: Tahoma;
   background-color: #333;
-  /* Greyish background color */
   color: white;
-  /* White text color */
   width: 100%;
   overflow-x: auto;
   margin-top: 20px;
@@ -53,9 +42,7 @@
 
 .support-tickets-header {
   background-color: #333;
-  /* Dark grey background for headers */
   color: white;
-  /* White text color for headers */
 }
 
 .support-tickets-data {
@@ -63,7 +50,6 @@
   padding: 8px;
   text-align: center;
   color: white;
-  /* White text color for data cells */
 }
 
 .support-tickets-action-icons {
@@ -107,8 +93,6 @@
   margin-right: 7px;
 }
 
-/* Add these styles to your CSS file */
-
 .support-tickets-search-and-filter {
   display: flex;
   align-items: center;
@@ -123,7 +107,6 @@
   margin-right: 1rem;
   font-size: 22px;
   width: 200px;
-  /* Adjust the width as needed */
 }
 
 .support-tickets-search-bar-icon {
@@ -137,7 +120,6 @@
   padding: 0.5rem;
   font-size: 22px;
   width: 300px;
-  /* Adjust the width as needed */
   margin-right: 15px;
 }
 
@@ -293,7 +275,6 @@
 }
 
 .support-tickets-search-bar {
-  /* Styles for the entire search bar container */
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -303,7 +284,6 @@
 }
 
 .support-tickets-search-bar input {
-  /* Styles for the search input */
   flex-grow: 1;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -313,14 +293,12 @@
 }
 
 .support-tickets-search-bar-icon {
-  /* Styles for the icons within the search bar */
   color: #000;
   margin-right: 15px;
   font-size: 30px;
 }
 
 .support-tickets-select {
-  /* Styles for the select elements */
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.3rem 0.5rem;
@@ -329,9 +307,6 @@
   width: 300px;
 }
 
-/* Add this to your CSS file (ViewSupportTickets.css) */
-
-/* Delete confirmation dialog styles */
 .support-tickets-delete-confirmation-dialog {
   position: fixed;
   top: 0;
@@ -350,7 +325,7 @@
   width: 100%;
   height: 100%;
   background: transparent;
-  pointer-events: none; /* Make the overlay non-interactive */
+  pointer-events: none;
 }
 
 .support-tickets-dialog {
@@ -404,11 +379,7 @@
 .support-tickets-cancel-button:hover {
   background-color: #c0392b;
 }
-/* Rest of your existing CSS */
 
-/* ... (other styles) */
-
-/* Styles for the ticket details container */
 .support-tickets-ticket-details {
   position: fixed;
   top: 0;
@@ -508,11 +479,7 @@
   background-color: #c0392b;
 }
 
-/* ... (other styles) */
-/* Styles for the "Reply" button and reply container */
 .support-tickets-reply-container {
-  /* display: flex;
-  flex-direction: column; */
   align-items: center;
   margin: 20px 0;
 }
@@ -532,7 +499,7 @@
 .support-tickets-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 10px; /* Adjust as needed */
+  margin-top: 10px;
 }
 
 .support-tickets-reply-button {
@@ -541,7 +508,7 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin: 0 5px; /* Adjust as needed */
+  margin: 0 5px;
   font-size: 24px;
   font-family: Tahoma;
 }
@@ -554,7 +521,6 @@
   background-color: #42b0d1;
 }
 
-/* Add styling for the "Previous Replies" section */
 .support-tickets-previous-replies {
   border: 1px solid #ccc;
   padding: 10px;
@@ -563,35 +529,30 @@
   border-radius: 5px;
   max-height: 790px;
   overflow-y: auto;
-  z-index: 1; /* Add this property */
+  z-index: 1;
 }
 
-/* Style the horizontal line separator */
 .support-tickets-reply-divider {
   border: 0;
   border-top: 1px solid #ccc;
   margin: 10px 0;
 }
 
-/* Style the reply text */
 .support-tickets-reply-text {
   font-size: 24px;
   margin-bottom: 10px;
   max-width: 550px;
 }
 
-/* Style the reply information (Replier and Created At) */
 .support-tickets-reply-info {
   font-size: 20px;
   color: #777;
 }
 
-/* Style the Replier username */
 .support-tickets-replier {
   margin-right: 20px;
 }
 
-/* Style the Created At date */
 .support-tickets-created-at {
   margin-left: 20px;
 }

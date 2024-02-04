@@ -24,8 +24,6 @@ const ViewArtists = () => {
     const MAX_CHARACTERS = 90;
             
     const fetchArtists = () => {
-        // Replace with your API call to fetch artists
-        // Example:
         fetch('http://localhost:8080/artists')
             .then((response) => response.json())
             .then((data) => {
@@ -36,9 +34,8 @@ const ViewArtists = () => {
 
     useEffect(() => {
         fetchArtists();
-    }, []); // Run this effect only once on initial load
+    }, []);
 
-    // Function to filter artists
     const filterArtists = () => {
         const filtered = sortedArtists.filter((artist) => {
             const query = searchQuery.toLowerCase();
@@ -51,7 +48,6 @@ const ViewArtists = () => {
         setFilteredArtists(filtered);
     };
 
-    // Call filterArtists whenever searchQuery or searchType changes
     useEffect(() => {
         filterArtists();
     }, [searchQuery, searchType]);

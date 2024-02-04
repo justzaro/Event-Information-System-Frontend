@@ -29,7 +29,7 @@
   margin-bottom: 20px;
   margin-right: -30px;
   display: flex;
-  flex-direction: column; /* Change to a column layout */
+  flex-direction: column;
   width: 375px;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -44,7 +44,7 @@
   padding: 15px;
   border: 1px solid #ccc;
   font-size: 20px;
-  margin-bottom: -10px; /* Add margin between input fields */
+  margin-bottom: -10px;
 }
 
 .large-button {
@@ -79,7 +79,7 @@ margin-top: 20px;
 .create-account-button {
 margin-right: 50px;
 margin-top: 0px;
-background-color: #FE6F57; /*#191717*/
+background-color: #FE6F57;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -131,7 +131,6 @@ background-color: #d04e37;
 }
 
 
-/* Animation for sliding the message box in */
 @keyframes slide-in {
   0% {
     top: -80px;
@@ -141,7 +140,6 @@ background-color: #d04e37;
   }
 }
 
-/* Animation for sliding the message box out */
 @keyframes slide-out {
   0% {
     top: 0;
@@ -152,9 +150,9 @@ background-color: #d04e37;
 }
 
 .large-input.show-password {
-  width: 379px; /* Adjust as needed to prevent resizing */
-  padding-right: 11px; /* Adjust as needed to prevent resizing */
-  padding-bottom: 15px; /* Adjust as needed to prevent resizing */
+  width: 379px;
+  padding-right: 11px; 
+  padding-bottom: 15px; 
   overflow: hidden;
 }
 
@@ -178,7 +176,7 @@ background-color: #d04e37;
   height: 30px;
   position: absolute;
   right: 32px;
-  top: 36%; /*29*/
+  top: 36%;
   transform: translateY(-50%);
   cursor: pointer;
 }

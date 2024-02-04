@@ -29,43 +29,37 @@ const ManageUsers = () => {
 
   const [attachedImage, setAttachedImage] = useState(null);
 
-  const ITEMS_PER_PAGE = 10; // Number of users to display per page
-  const usersPerPage = 10; // Number of users to display per page
+  const ITEMS_PER_PAGE = 10;
+  const usersPerPage = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
 
-  const [searchType, setSearchType] = useState('name'); // Default search type
-  const [isLockedFilter, setIsLockedFilter] = useState('all'); // 'all', 'locked', 'unlocked'
-  const [isEnabledFilter, setIsEnabledFilter] = useState('all'); // 'all', 'enabled', 'disabled'
-  // Calculate the start and end indices for the current page
+  const [searchType, setSearchType] = useState('name'); 
+  const [isLockedFilter, setIsLockedFilter] = useState('all');
+  const [isEnabledFilter, setIsEnabledFilter] = useState('all'); 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
-  // Function to change the current page
   const changePage = (page) => {
     setCurrentPage(page);
   };
 
-  // Calculate the total number of pages
   const totalPages = Math.ceil(sortedUsers.length / ITEMS_PER_PAGE);
 
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  // Function to handle image attachment
   const handleImageAttachment = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageUrl = e.target.result;
-        // Set the attached image to the state or wherever you want to store it
         setAttachedImage(imageUrl);
       };
       reader.readAsDataURL(file);
     } else {
-      // Clear the attached image if no file is selected
       setAttachedImage(null);
     }
   };
@@ -96,13 +90,11 @@ const ManageUsers = () => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    // Optionally, you can scroll to the top of the page here.
   };
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
-      // Optionally, you can scroll to the top of the page here.
     }
   };
 
@@ -119,11 +111,9 @@ const ManageUsers = () => {
   const [dobMonth, setDobMonth] = useState('');
   const [dobYear, setDobYear] = useState('');
 
-  // Function to handle changes in date of birth fields
   const handleDateOfBirthChange = (e) => {
     const { name, value } = e.target;
 
-    // Ensure value is a two-digit string (with leading zero if needed)
     const formattedValue = value.length === 1 ? `0${value}` : value;
 
     if (name === 'dobDay') {
@@ -144,7 +134,6 @@ const ManageUsers = () => {
   };
 
   const saveModifiedUserProfile = () => {
-    // Create a FormData object to send the data as multipart/form-data
     const formData = new FormData();
 
     const dateOfBirthFormatted = `${dobDay}-${dobMonth}-${dobYear}`;
@@ -153,22 +142,17 @@ const ManageUsers = () => {
     profileFields.dateOfBirth = dateOfBirthFormatted;
 
     console.log(profileFields);
-    console.log(1);
-    // Add the userUpdateDto (profileFields) as a JSON blob to the FormData
+    
     formData.append('userUpdateDto', new Blob([JSON.stringify(profileFields)], { type: 'application/json' }));
-    console.log(2);
-    // Add the profilePicture (attachedImage) to the FormData
+   
     if (attachedImage) {
       const blob = dataURItoBlob(attachedImage);
       formData.append('profilePicture', blob);
     }
-    console.log(3);
-    // Retrieve the JWT token from localStorage
+    
     const jwtToken = localStorage.getItem('jwtToken');
-    console.log(4);
-    // Check if the token exists
+    
     if (jwtToken) {
-      // Send a PUT request to update the user's profile
       fetch(`http://localhost:8080/users/${profileFields.username}`, {
         method: 'PUT',
         body: formData,
@@ -177,22 +161,17 @@ const ManageUsers = () => {
         },
       })
         .then((response) => {
-          console.log(5);
           if (response.status === 200) {
-            // Profile updated successfully
-            console.log(6);
             setShowUserSuccessfulEditMessage(true);
 
             setTimeout(() => {
               setShowUserSuccessfulEditMessage(false);
             }, 4000);
 
-            console.log(7);
+            
             fetchUserList();
-            // You may want to add a success message or update the user's profile image here
           } else {
             response.json().then((errorData) => {
-              // Handle error response from the server
               setErrorMessage({ message: errorData.message });
               setUserDeletedUnsuccessfullyMessage(true);
 
@@ -210,7 +189,6 @@ const ManageUsers = () => {
     closeModifyUserProfile();
   };
 
-  // Helper function to convert data URI to Blob
   function dataURItoBlob(dataURI) {
     const byteString = atob(dataURI.split(',')[1]);
     const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -231,7 +209,6 @@ const ManageUsers = () => {
     setShowModifyUserProfile(false);
     setShowDimmedBackground(false);
     setAttachedImage(null);
-    // Reset any form input fields if needed
   };
 
   const openUserSettings = (user) => {
@@ -272,12 +249,9 @@ const ManageUsers = () => {
 
   const toggleEnableUserProfile = (user) => {
     const updatedUser = { ...user, isEnabled: !user.isEnabled };
-    // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // Check if the token exists
     if (jwtToken) {
-      // Include the token in the headers of the PATCH request
       fetch(`http://localhost:8080/users/${user.username}/enabled`, {
         method: 'PATCH',
         body: JSON.stringify(updatedUser),
@@ -312,12 +286,9 @@ const ManageUsers = () => {
 
   const toggleLockUserProfile = (user) => {
     const updatedUser = { ...user, isLocked: !user.isLocked };
-    // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // Check if the token exists
     if (jwtToken) {
-      // Include the token in the headers of the PATCH request
       fetch(`http://localhost:8080/users/${user.username}/locked`, {
         method: 'PATCH',
         body: JSON.stringify(updatedUser),
@@ -354,7 +325,6 @@ const ManageUsers = () => {
   const sortUsers = (field) => {
     let direction = sortDirection;
 
-    // If sorting by the same field, toggle the sort direction
     if (sortField === field) {
       direction = sortDirection === 'asc' ? 'desc' : 'asc';
     }
@@ -362,7 +332,6 @@ const ManageUsers = () => {
     let sorted = [...sortedUsers];
 
     if (field === 'id') {
-      // For numeric sorting, convert to numbers and then sort
       sorted.sort((a, b) => {
         const numA = parseInt(a[field], 10);
         const numB = parseInt(b[field], 10);
@@ -372,7 +341,6 @@ const ManageUsers = () => {
         return 0;
       });
     } else {
-      // For other fields, perform string sorting
       sorted.sort((a, b) => {
         if (a[field] < b[field]) return direction === 'asc' ? -1 : 1;
         if (a[field] > b[field]) return direction === 'asc' ? 1 : -1;
@@ -386,13 +354,10 @@ const ManageUsers = () => {
   };
 
   const deleteUser = (username) => {
-    // Retrieve the JWT token from localStorage
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // Check if the token exists
     if (jwtToken) {
 
-      // Include the token in the headers of the DELETE request
       fetch(`http://localhost:8080/users/${username}`, {
         method: 'DELETE',
         headers: {
@@ -401,7 +366,6 @@ const ManageUsers = () => {
       })
         .then((response) => {
           if (response.status === 204) {
-            // If the user was successfully deleted, you can remove them from your state.
             const updatedUsers = users.filter((user) => user.username !== username);
             setUsers(updatedUsers);
             setSortedUsers(updatedUsers);
@@ -415,7 +379,6 @@ const ManageUsers = () => {
             fetchUserList();
           } else {
             response.json().then((errorData) => {
-              // Handle error response from the server
               setErrorMessage({ message: errorData.message });
               setUserDeletedUnsuccessfullyMessage(true);
 
@@ -453,7 +416,6 @@ const ManageUsers = () => {
         lockedFilterMatch = isLocked;
       }
 
-      // Filter based on isEnabled
       let activeFilterMatch = true;
       if (isEnabledFilter === 'active') {
         activeFilterMatch = isEnabled;
@@ -579,19 +541,6 @@ const ManageUsers = () => {
         </tbody>
       </table>
 
-      {/* {totalPages > 1 && (
-        <div className="manage-users-pagination">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={`manage-users-page-button ${currentPage === index + 1 ? 'manage-users-current-page' : ''}`}
-              onClick={() => changePage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
-      )} */}
       {totalPages > 1 && (
         <div className="manage-users-pagination">
           <button
@@ -609,7 +558,6 @@ const ManageUsers = () => {
           >
             <FontAwesomeIcon icon={faCaretLeft} />
           </button>
-          {/* Replace number buttons with page input */}
           <div className="page-input-container">
             Page
             <input
@@ -803,7 +751,6 @@ const ManageUsers = () => {
               />
             )}
 
-            {/* Input to attach an image from the PC */}
             <p className="save-user-attach-image-label">Attach Image: </p>
             <input
               id="file-input"
@@ -817,9 +764,9 @@ const ManageUsers = () => {
               <button
                 onClick={() => {
                   setAttachedImage(null);
-                  const fileInput = document.getElementById('file-input'); // Add an `id` to your file input element
+                  const fileInput = document.getElementById('file-input'); 
                   if (fileInput) {
-                    fileInput.value = ''; // Reset the file input value to an empty string
+                    fileInput.value = ''; 
                   }
 
                 }}

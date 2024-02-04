@@ -1,6 +1,3 @@
-/* EventDetail.css */
-
-  
 .event-detail-container {
   margin-top: 200px;
   margin-left: 500px;
@@ -59,7 +56,7 @@
   max-width: 800px;
   max-height: 800px;
   border-radius: 5px;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
 }
 
 .event-info {
@@ -87,11 +84,11 @@
   margin-top: 100px;
 }
 
-  .ticket-price-info {
-      font-size: 18px;
-      margin-left: -90px;
-      padding-top: 15px;
-  }
+.ticket-price-info {
+  font-size: 18px;
+  margin-left: -90px;
+  padding-top: 15px;
+}
 
 .ticket-price {
   font-size: 30px;
@@ -212,214 +209,193 @@
   font-weight: bold;
 }
 
-/* EventDetail.css */
-
-/* ... (previous styles) */
-
 .event-link,
 .small-icon {
-position: relative; /* Create a relative positioning context */
-text-decoration: none; /* Remove the default underline */
-transition: color 0.3s ease; /* Smoothly transition text color */
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .event-link::before,
 .small-icon::before {
-content: ''; /* Create a pseudo-element for the line */
-position: absolute;
-width: 0px;
-height: 100%; /* Set the initial line thickness */
-transition: background-color 0.8s ease, width 0.4s ease; /* Smoothly transition line color and height */
-z-index: -1;
-}
-
-.event-link::before,
-.small-icon::before {
-content: ''; /* Create a pseudo-element for the line */
-position: absolute;
-width: 0px;
-height: 100%; /* Set the initial line thickness */
-transition: background-color 0.8s ease, width 0.4s ease; /* Smoothly transition line color and height */
-z-index: -1;
+  content: '';
+  position: absolute;
+  width: 0px;
+  height: 100%;
+  transition: background-color 0.8s ease, width 0.4s ease;
+  z-index: -1;
 }
 
 .event-link:hover::before,
 .small-icon:hover::before {
-width: 100%; /* Expand the line to encapsulate the text */
-background: #d11212; /* Line color when hovered */
+  width: 100%;
+  background: #d11212;
 }
 
 .event-link:hover,
 .small-icon:hover {
-color: #191919; /* Change text color to white when hovered */
+  color: #191919;
 }
 
-
 .event-info-toggle {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-top: 0px;
-padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0px;
+  padding: 20px;
 }
 
 .horizontal-line {
-width: 800px;
-height: 1px;
-background-color: #ddd;
-transition: margin-top 0.3s ease, opacity 0.3s ease; /* Add transitions */
+  width: 800px;
+  height: 1px;
+  background-color: #ddd;
+  transition: margin-top 0.3s ease, opacity 0.3s ease;
 }
 
 .horizontal-line.above {
-margin-left: -1215px;
-margin-bottom: 30px; /* Spacing between the line and text above */
+  margin-left: -1215px;
+  margin-bottom: 30px;
 }
 
 .horizontal-line.below {
-margin-top: 30px; /* Initial spacing between the line and text below */
-margin-left: -1215px;
-transition: margin-top 0.6s ease; /* Slow down the margin-top transition */
+  margin-top: 30px;
+  margin-left: -1215px;
+  transition: margin-top 0.6s ease;
 }
 
 .event-info-toggle .horizontal-line.below.expanded {
-margin-top: 40px; /* Adjust margin-top to move the line down */
+  margin-top: 40px;
 }
 
 .extra-info {
-margin-top: 10px;
-margin-left: -1220px;
-max-width: 795px;
-padding-top: 20px;
-font-size: 20px;
-color: #191919;
-overflow: hidden;
-height: auto;
-visibility: hidden;
-max-height: 0;
-opacity: 0.0001; /* Initially hidden */
-transition: max-height 1.6s ease, visibility 1.6s ease, opacity 1.6s ease;
+  margin-top: 10px;
+  margin-left: -1220px;
+  max-width: 795px;
+  padding-top: 20px;
+  font-size: 20px;
+  color: #191919;
+  overflow: hidden;
+  height: auto;
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0.0001;
+  transition: max-height 1.6s ease, visibility 1.6s ease, opacity 1.6s ease;
 }
 
-/* Show the extra info when .show-info class is applied */
 .event-info-toggle .extra-info.show-info {
-max-height: 1000px; /* Adjust to your content's maximum height */
-opacity: 1; /* Gradual appearance */
-visibility: visible;
-transition: max-height 1.6s ease, visibility 1.6s ease, opacity 1.6s ease;
+  max-height: 1000px;
+  opacity: 1;
+  visibility: visible;
+  transition: max-height 1.6s ease, visibility 1.6s ease, opacity 1.6s ease;
 }
 
 .event-info-header {
-color: #191919;
-font-weight: bold;
-margin: 0;
-font-size: 25px;
-margin-left: -1780px;
+  color: #191919;
+  font-weight: bold;
+  margin: 0;
+  font-size: 25px;
+  margin-left: -1780px;
 }
 
 .event-info-artists-header {
   color: #191919;
-font-weight: bold;
-margin: 0;
-font-size: 25px;
-margin-right: 30%;
+  font-weight: bold;
+  margin: 0;
+  font-size: 25px;
+  margin-right: 30%;
 }
 
 .event-info-header:hover + .horizontal-line.above,
 .event-info-header:hover + .horizontal-line.below {
-background-color: #ff6600; /* Change color on hover */
-transition: background-color 0.3s ease;
+  background-color: #ff6600;
+  transition: background-color 0.3s ease;
 }
 
 .see-more {
-color: #191919;
-cursor: pointer;
-text-decoration: underline;
-margin-top: -25px;
-margin-left: -500px;
-font-size: 18px;
+  color: #191919;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: -25px;
+  margin-left: -500px;
+  font-size: 18px;
 }
 
 .see-more:hover {
-color: #ff6600; /* Change color on hover */
-transition: color 0.3s ease;
+  color: #ff6600;
+  transition: color 0.3s ease;
 }
 
-/* POP-UP MESSAGES */
-
 .not-logged-in-message {
-position: fixed;
-top: 0;
-left: 50%;
-transform: translateX(-50%);
-background-color: #990904;
-color: white;
-border-radius: 5px;
-padding: 10px 20px;
-animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
-z-index: 999;
-margin-top: 20px;
-font-size: 20px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #990904;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 .successful-cart-addition-message {
-position: fixed;
-top: 0;
-left: 50%;
-transform: translateX(-50%);
-background-color: rgb(16, 177, 16);
-color: white;
-border-radius: 5px;
-padding: 10px 20px;
-animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
-z-index: 999;
-margin-top: 20px;
-font-size: 20px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(16, 177, 16);
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  animation: slide-in 0.5s ease-in-out forwards, slide-out 0.5s ease-in-out 3.5s forwards;
+  z-index: 999;
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 @keyframes slide-in {
-0% {
-  top: -80px;
-}
-100% {
-  top: 0;
-}
+  0% {
+    top: -80px;
+  }
+  100% {
+    top: 0;
+  }
 }
 
 @keyframes slide-out {
-0% {
-  top: 0;
-}
-100% {
-  top: -80px;
-}
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -80px;
+  }
 }
 
-/* POP-UP MESSAGES */
-
-/* Add the following styles to your CSS */
 .artist-container {
   position: relative;
   display: inline-block;
 }
 
-/* Add the following styles to your CSS */
 .artist-info-box {
-  position: fixed; /* Use fixed positioning to overlay everything */
+  position: fixed;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 340px; /* Adjust the width as needed */
-  height: 360px; /* Adjust the height as needed */
+  width: 340px;
+  height: 360px;
+  border-radius: 15px;
   padding: 10px;
-  top: 15%; /* Adjust the top position as needed */
-  left: 45%; /* Center the box horizontally */
-  transform: translateX(-50%); /* Center the box horizontally */
+  top: 15%;
+  left: 45%;
+  transform: translateX(-50%);
   display: none;
-  z-index: 9999; /* Ensure it's above other content */
- overflow-y: auto;
- font-family: Tahoma;
- font-size: 22px;
+  z-index: 9999;
+  overflow-y: auto;
+  font-family: Tahoma;
+  font-size: 22px;
 }
 
 .artist-photo {
@@ -427,9 +403,9 @@ font-size: 20px;
 }
 
 .artist-photo img {
-  width: 300px; /* Adjust the width as needed to fit the container */
-  height: 300px; /* Adjust the height as needed to fit the container */
-  object-fit: cover; /* Maintain the aspect ratio and cover the container */
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
   border-radius: 5px;
   max-height: 100%;
 }
@@ -438,21 +414,19 @@ font-size: 20px;
   display: block;
 }
 
-
 .artists-container {
   display: flex;
-  flex-wrap: nowrap; /* Prevent wrapping to the next line */
+  flex-wrap: nowrap;
 }
 
 .artist-container {
-  margin-right: 10px; /* Add spacing between artists */
+  margin-right: 10px;
 }
 
 .artist-container:last-child {
-  margin-right: 0; /* Remove margin from the last artist */
+  margin-right: 0;
 }
 
 .artist-description {
-  max-width: 300px; /* Adjust the maximum width as needed */
-  /* Add any other styles you want for the description field */
+  max-width: 300px;
 }

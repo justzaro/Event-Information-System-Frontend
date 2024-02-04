@@ -34,9 +34,7 @@ const SupportTicket = () => {
       customerPhoneNumber: formData.customerPhoneNumber,
     };
   
-    // Check if the user is authenticated
     if (isAuthenticated()) {
-      // User is authenticated, include the username in the URL
       const username = getUsernameFromToken();
       const jwtToken = localStorage.getItem('jwtToken');
   
@@ -59,7 +57,6 @@ const SupportTicket = () => {
         setIsLoading(false);
       }
     } else {
-      // User is not authenticated, call the endpoint without the username
       try {
         setIsLoading(true);
   

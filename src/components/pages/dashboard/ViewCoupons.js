@@ -16,9 +16,9 @@ function CouponPage() {
   const [deleteCouponId, setDeleteCouponId] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [couponsPerPage] = useState(15); // Adjust as needed
+  const [couponsPerPage] = useState(15);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterIsUsed, setFilterIsUsed] = useState('all'); // 'all', 'unused', 'u
+  const [filterIsUsed, setFilterIsUsed] = useState('all');
 
   const [searchDiscountPercentage, setSearchDiscountPercentage] = useState('');
 
@@ -43,16 +43,13 @@ function CouponPage() {
   }, []);
 
   const handleDeleteCoupon = (couponId) => {
-    setDeleteCouponId(couponId); // Set the coupon ID to be deleted
+    setDeleteCouponId(couponId); 
   };
 
   const handleConfirmDelete = () => {
-    // Perform the actual deletion and then fetch updated coupons
     if (deleteCouponId) {
-      // Fetch the JWT token from local storage
       const jwtToken = localStorage.getItem('jwtToken');
 
-      // Send the DELETE request here
       axios.delete(`http://localhost:8080/coupons/${deleteCouponId}`, {
         headers: {
           'Authorization': `Bearer ${jwtToken}`,
@@ -80,14 +77,6 @@ function CouponPage() {
     setDeleteCouponId(null);
   };
 
-
-  // Calculate the indexes for slicing coupons
-  // const indexOfLastCoupon = currentPage * couponsPerPage;
-  // const indexOfFirstCoupon = indexOfLastCoupon - couponsPerPage;
-  // const currentCoupons = coupons.slice(indexOfFirstCoupon, indexOfLastCoupon);
-
-
-  
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -95,10 +84,8 @@ function CouponPage() {
   };
 
   const filterAndSearchCoupons = () => {
-    // Filtering coupons based on isUsed
     const filteredCoupons = filterIsUsed === 'all' ? coupons : coupons.filter(coupon => coupon.isUsed === (filterIsUsed === 'used'));
 
-    // Filtering coupons based on search query
     return filteredCoupons.filter(coupon => {
       const isCouponCodeMatch = coupon.couponCode.toLowerCase().includes(searchQuery.toLowerCase());
       const isDiscountPercentageMatch = searchDiscountPercentage !== '' && coupon.discountPercentage.toString().includes(searchDiscountPercentage);
@@ -110,12 +97,11 @@ function CouponPage() {
       } else if (searchDiscountPercentage !== '') {
         return isDiscountPercentageMatch;
       } else {
-        return true; // No filters applied
+        return true;
       }
     });
   };
 
-  // Use the filterAndSearchCoupons function
   const filteredAndSearchedCoupons = filterAndSearchCoupons();
   const totalPages = Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage);
 
@@ -123,10 +109,6 @@ function CouponPage() {
 const indexOfFirstCoupon = indexOfLastCoupon - couponsPerPage;
 const currentCoupons = filteredAndSearchedCoupons.slice(indexOfFirstCoupon, indexOfLastCoupon);
 
-  // const pageNumbers = [];
-  // for (let i = 1; i <= Math.ceil(filteredAndSearchedCoupons.length / couponsPerPage); i++) {
-  //   pageNumbers.push(i);
-  // }
   const pageNumbers = [];
 for (let i = 1; i <= totalPages; i++) {
   pageNumbers.push(i);

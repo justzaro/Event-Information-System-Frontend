@@ -1,9 +1,6 @@
-/* CartItems.css */
-
 .cart-items {
   width: 80%;
   margin: 0 auto;
-  ;
 }
 
 .cart-page-heading {
@@ -39,7 +36,6 @@
 .cart-column img {
   width: 200px;
   height: 100px;
-  height: 100px;
 }
 
 .cart-column {
@@ -52,58 +48,42 @@
 .cart-column .item-name,
 .item-location {
   white-space: normal;
-  /* Allows text to wrap within the column */
   overflow-wrap: break-word;
-  /* Specifies how to break lines within words */
 }
 
 .cart-column .item-actions button {
   width: 40px;
-  /* Adjust the width to make them square */
   height: 40px;
-  /* Adjust the height to make them square */
   border-radius: 5px;
   color: white;
   border: none;
   padding: 0;
-  /* Remove padding to make them square */
   cursor: pointer;
   margin: 0 5px;
   font-size: 30px;
   transform: scale(1);
-  /* Initial scale */
   transition: transform 0.2s;
-  /* Add a transition for smooth animation */
 }
 
 .cart-column .item-actions button:hover {
   transform: scale(0.85);
-  /* Scale down on hover */
 }
 
 .increase-button {
   background-color: green;
-  /* Blue color for the update button */
 }
 
 .decrease-button {
   background-color: orange;
-  /* Blue color for the update button */
 }
 
 .remove-button {
   background-color: red;
-  /* Blue color for the update button */
 }
 
 .view-event {
   background-color: rgb(35, 122, 236);
-  /* Blue color for the update button */
 }
-
-/* CartItems.css */
-
-/* ... previous styles ... */
 
 .promo-code-input {
   width: 500px;
@@ -202,7 +182,6 @@
   font-size: 20px;
 }
 
-/* Animation for sliding the message box in */
 @keyframes slide-in {
   0% {
     top: -80px;
@@ -213,7 +192,6 @@
   }
 }
 
-/* Animation for sliding the message box out */
 @keyframes slide-out {
   0% {
     top: 0;
@@ -223,12 +201,6 @@
     top: -100px;
   }
 }
-
-/* @font-face {
-  font-family: 'Euclid Circular A';
-  src: url('https://fonts.cdnfonts.com/s/euclid-circular-a/euclid-circular-a.woff2') format('woff2'),
-       url('https://fonts.cdnfonts.com/s/euclid-circular-a/euclid-circular-a.woff') format('woff');
-} */
 
 .empty-cart-message {
   text-align: center;
@@ -253,10 +225,6 @@
   padding: 5px;
 }
 
-/* CartItems.css */
-
-/* ... Previous styles ... */
-
 .white-button {
   display: block;
   width: 360px;
@@ -264,18 +232,15 @@
   padding: 10px 20px;
   background-color: #fff;
   color: #000;
-  /* Black text */
   font-size: 22px;
   cursor: pointer;
   transition: font-weight 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   border: 2px solid #000;
-  /* Black border */
   text-decoration: none;
 }
 
 .white-button:hover {
   box-shadow: inset 0 0 0 2px #000;
-  /* Inward border on hover */
   margin-left: 740px;
   width: 360px;
   height: 30px;
@@ -290,23 +255,17 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  /* Adjust the margin as needed */
 }
 
-/* Add these styles to your CSS file */
 .remove-coupon-icon {
   color: #e74c3c;
-  /* Red color for the cross icon */
   width: 30px;
   height: 30px;
   padding-left: 10px;
-  /* Add left padding as needed */
   margin-bottom: -8px;
   cursor: pointer;
-  /* Make the icon clickable */
 }
 
-/* Add these styles to your CSS file */
 .loading-screen {
   position: fixed;
   top: 0;
@@ -314,23 +273,19 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  /* Dim the background */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  /* Ensure it's on top of other content */
 }
 
 .spinner {
   border: 5px solid rgba(255, 255, 255, 0.3);
   border-top: 5px solid #3498db;
-  /* Spinner color */
   border-radius: 50%;
   width: 50px;
   height: 50px;
   animation: spin 1s linear infinite;
-  /* Define the spinning animation */
 }
 
 @keyframes spin {

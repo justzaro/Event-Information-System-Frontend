@@ -10,13 +10,9 @@
 }
 
 
-/* EventOverview Item */
-/* EventOverview Item */
-/* Update the item to use flex layout */
 .event-overview-item {
     display: flex;
     align-items: flex-start;
-    /* Adjust alignment as needed */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -25,68 +21,45 @@
     position: relative;
     transition: height 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
     width: 100%;
-    /* Expand to the available width */
     max-width: 60%;
-    /* Limit the width to the available width */
     min-height: 160px;
     margin-bottom: 30px;
 }
 
-/* Style the image */
 .event-overview-circle {
     width: 140px;
     height: 140px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 20px;
-    /* Add margin to separate the image from content */
 }
-
-
 
 .event-overview-description {
     transform: translateY(0);
-    /* Start with 0 translation */
     transition: transform 0.8s ease, height 0.8s ease, opacity 0.4s ease;
-    /* Transition for position, height, and opacity */
     height: 0;
-    /* Set an initial height */
     overflow: hidden;
     opacity: 0;
-    /* Start with 0 opacity */
     max-width: 680px;
     justify-content: flex-start;
 }
 
-/* Add an expanded class for the description */
 .event-overview-item.expanded .event-overview-description {
     height: auto;
-    /* Let the height grow as needed */
     overflow: visible;
     opacity: 1;
-    /* Show the description */
     max-width: 620px;
 }
-
-/*   
-  .event-overview-item.expanded {
-    height: 500px;
-    max-height: 500px; 
-    transition: max-height 0.4s ease;
-  } */
 
 .event-overview-item:hover {
     background-color: aliceblue;
     cursor: pointer;
 }
 
-/* EventOverview IsActive Rectangle */
 .event-overview-isActive-rectangle {
     position: absolute;
     top: 15px;
-    /* Adjust the top position */
     right: 15px;
-    /* Adjust the right position */
     background-color: green;
     color: #fff;
     padding: 6px 20px;
@@ -96,16 +69,13 @@
 .event-overview-isInactive-rectangle {
     position: absolute;
     top: 15px;
-    /* Adjust the top position */
     right: 15px;
-    /* Adjust the right position */
     background-color: red;
     color: #fff;
     padding: 6px 20px;
     border-radius: 5px;
 }
 
-/* EventOverview IsActive Text */
 .event-overview-isActive-text {
     font-size: 22px;
 }
@@ -113,9 +83,7 @@
 .event-overview-concert-rectangle {
     position: absolute;
     top: 130%;
-    /* Adjust the top position */
     right: 0%;
-    /* Adjust the right position */
     background-color: #FE6F57;
     color: #fff;
     padding: 6px 20px;
@@ -125,90 +93,57 @@
 .event-overview-festival-rectangle {
     position: absolute;
     top: 130%;
-    /* Adjust the top position */
     right: 0%;
-    /* Adjust the right position */
     background-color: rgb(122, 11, 137);
     color: #fff;
     padding: 6px 20px;
     border-radius: 5px;
 }
 
-/* EventOverview IsActive Text */
 .event-overview-event-text {
     font-size: 22px;
 }
 
-/* EventOverview Details */
-
-
-/* ... (Previous styles) */
-
-
-/* EventOverview Circle Image */
-
-
-/* EventOverview Details */
 .event-overview-details {
     display: flex;
     flex-direction: column;
     color: #000;
 }
 
-/* EventOverview Name */
 .event-overview-name {
     font-size: 22px;
-    /* Changed font size to 20px */
     font-weight: bold;
     color: #000;
-    /* Set text color to black */
     max-width: 430px;
 }
 
-/* EventOverview Type */
 .event-overview-type {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
     margin: 5px 0;
-    /* Added spacing between items */
 }
 
-/* EventOverview Date */
 .event-overview-date {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
 }
 
-/* EventOverview Location */
 .event-overview-location {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
     max-width: 420px;
 }
 
-/* EventOverview IsActive */
 .event-overview-isActive {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
     margin-top: 5px;
-    /* Added spacing */
 }
 
-/* EventOverview Description */
 .event-overview-description {
     font-size: 20px;
     color: #000;
-    /* Set text color to black */
     margin-top: 10px;
-    /* Increased spacing for description */
 }
 
 .event-overview-icon {
@@ -216,23 +151,17 @@
     right: 50px;
     top: 60%;
     transform: translateY(-50%) rotate(90deg);
-    /* Start with 0-degree rotation */
     font-size: 30px;
     color: #000;
     opacity: 0;
-    /* Initially hidden */
     transition: opacity 0.4s ease, transform 0.4s ease;
-    /* Transition for appearing effect and rotation */
 }
 
 .event-overview-item.hovered .event-overview-icon {
     opacity: 1;
-    /* Show the icon when hovered */
     transform: translateY(-50%) rotate(0deg);
-    /* Rotate the icon 90 degrees when hovered */
 }
 
-/* Add styles for the search container */
 .overview-search-container {
     display: flex;
     align-items: center;
@@ -244,15 +173,12 @@
     width: 30%;
 }
 
-/* Add styles for the search icon */
 .overview-search-icon {
     font-size: 22px;
     color: #000;
     margin-right: 10px;
-    /* Adjust the spacing between the icon and the input */
 }
 
-/* Add styles for the search bar */
 .overview-search-bar {
     border: none;
     outline: none;
@@ -262,35 +188,24 @@
     font-family: Tahoma;
 }
 
-/* Add styles for placeholder text */
-
-
-/* Add styles for the search bar when it's focused */
 .overview-search-bar:focus {
     border: 2px solid #007bff;
-    /* Customize the border color when focused */
     border-radius: 4px;
 }
 
 .event-overview-price {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
 }
 
 .event-overview-capacity {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
 }
 
 .event-overview-artists {
     font-size: 20px;
-    /* Changed font size to 20px */
     color: #000;
-    /* Set text color to black */
     max-width: 800px;
 }
 
@@ -308,31 +223,26 @@
     margin-bottom: 6px;
 }
 
-/* Add CSS styles for the event type dropdown button */
 .event-type-dropdown {
     font-size: 16px;
-    padding: 5px 20px; /* Add padding to increase button width */
-    border: 1px solid #ccc; /* Add border to the button */
+    padding: 5px 20px;
+    border: 1px solid #ccc; 
     border-radius: 5px;
     background-color: #fff;
     color: #000;
     cursor: pointer;
 }
 
-/* Style the dropdown arrow (▼) */
 .event-type-dropdown::after {
-    content: "▼"; /* Unicode for a down-pointing arrow */
-    margin-left: 10px; /* Adjust the distance between the text and the arrow */
+    content: "▼";
+    margin-left: 10px;
 }
 
-/* Customize other styles as needed */
-/* Style the event type filter container */
 .search-and-filter-container {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
-/* Style the select element */
 .event-type-filter select {
     margin-left: 16px;
     margin-bottom: 20px;
@@ -344,21 +254,18 @@
     font-family: Tahoma;
 }
 
-/* Event Close Icon */
 .event-close-icon {
     position: absolute;
-    /* top: 220px;
-    right: 52px; */
     top: 20px;
     right: 150px;
     font-size: 29px;
-    color: red; /* Customize the color as desired */
+    color: red;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
 .event-close-icon:hover {
-    transform: scale(1.2); /* Add a hover effect to the icon */
+    transform: scale(1.2); 
 }
 
 .event-activity-confirmation-overlay {
@@ -383,7 +290,6 @@
 
 }
 
-/* Larger buttons */
 .event-activity-confirmation-dialog button {
     padding: 15px;
     margin: 2px;
@@ -394,14 +300,12 @@
     outline: none;
 }
 
-/* Green button */
 .event-activity-status-green-button {
-    background-color: #4caf50; /* Green */
+    background-color: #4caf50;
     color: white;
 }
 
-/* Red button */
 .event-activity-status-red-button {
-    background-color: #f44336; /* Red */
+    background-color: #f44336;
     color: white;
 }

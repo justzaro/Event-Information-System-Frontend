@@ -20,21 +20,20 @@ const ProfileSettings = () => {
     const [imageKey, setImageKey] = useState(0);
     const [showResetButton, setShowResetButton] = useState(false);
 
-    const [showOldPassword, setShowOldPassword] = useState(false); // Initialize showPassword state
-    const [showOldConfirmedPassword, setShowOldConfirmedPassword] = useState(false); // Initialize showPassword state
-    const [showNewPassword, setShowNewPassword] = useState(false); // Initialize showNewPassword state
-
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showOldConfirmedPassword, setShowOldConfirmedPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
     const [oldPassword, setOldPassword] = useState('');
     const [confirmOldPassword, setConfirmOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [showPasswordMatchIcon, setShowPasswordMatchIcon] = useState(false);
 
     const toggleOldPasswordVisibility = () => {
-        setShowOldPassword(!showOldPassword); // Toggle the state
+        setShowOldPassword(!showOldPassword);
     };
 
     const toggleOldConfirmedPasswordVisibility = () => {
-        setShowOldConfirmedPassword(!showOldConfirmedPassword); // Toggle the state
+        setShowOldConfirmedPassword(!showOldConfirmedPassword);
     };
 
     const toggleNewPasswordVisibility = () => {
@@ -47,7 +46,6 @@ const ProfileSettings = () => {
         const username = getUsernameFromToken();
         const jwtToken = localStorage.getItem('jwtToken');
     
-        // Check if both the old password and confirm old password are filled and match
         if (oldPassword && confirmOldPassword && oldPassword === confirmOldPassword) {
             const passwordData = {
                 oldPassword: oldPassword,
@@ -108,10 +106,8 @@ const ProfileSettings = () => {
         const jwtToken = localStorage.getItem('jwtToken');
         const username = getUsernameFromToken();
 
-        // Create an empty object to represent the updated data
         const updatedData = {};
 
-        // Make a PUT request to reset the profile image to the default
         axios
             .patch(`http://localhost:8080/users/profile-picture/default/${username}`, updatedData, {
                 headers: {
@@ -120,7 +116,6 @@ const ProfileSettings = () => {
             })
             .then((response) => {
                 if (response.status === 200) {
-                    // Profile image reset successful
                     reloadImage();
                     setShowSuccessMessage(true);
 
@@ -138,7 +133,7 @@ const ProfileSettings = () => {
 
 
     const reloadImage = () => {
-        setImageKey((prevKey) => prevKey + 1); // Update the key to trigger a re-render
+        setImageKey((prevKey) => prevKey + 1);
     };
 
 
@@ -184,7 +179,7 @@ const ProfileSettings = () => {
     }
 
     const fetchUserData = () => {
-        const jwtToken = localStorage.getItem('jwtToken'); // Replace with your method of obtaining the JWT token
+        const jwtToken = localStorage.getItem('jwtToken'); 
 
         fetch(`http://localhost:8080/users/${getUsernameFromToken()}`, {
             method: 'GET',
@@ -194,7 +189,6 @@ const ProfileSettings = () => {
         })
             .then((response) => response.json())
             .then((userData) => {
-                // Update the user data in your component's state
                 const parsedDate = parseDate(userData.dateOfBirth || '');
                 console.log(userData);
                 setFormData({
@@ -450,10 +444,8 @@ const ProfileSettings = () => {
 
                 <hr className="profile-settings-divider" />
 
-                {/* New div to accommodate the profile image and upload */}
                 <div className="profile-image-container">
                     <div className="profile-image">
-                        {/* Place your profile image here */}
                         <img
                             key={imageKey}
                             src={`http://localhost:8080/users/profile-picture/${getUsernameFromToken()}`}
@@ -471,7 +463,6 @@ const ProfileSettings = () => {
                     </div>
 
                     <div className="profile-image-upload-container">
-                        {/* Form group for the input */}
                         <div className="profile-image-upload form-group">
                             <label htmlFor="profileImage">Upload Profile Picture:</label>
                             <input

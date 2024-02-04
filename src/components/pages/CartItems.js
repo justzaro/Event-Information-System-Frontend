@@ -43,7 +43,6 @@ const CartItems = () => {
   }, []);
 
   const handleRemoveCoupon = () => {
-    // Set couponResult to null
     setCouponResult(null);
     setCouponValue('');
   };
@@ -54,7 +53,6 @@ const CartItems = () => {
 
     if (username && jwtToken) {
       if (couponValue.trim() === '') {
-        // Handle the case when the input box is empty
 
         setShowEmptyPromoCodeField(true);
 
@@ -73,7 +71,7 @@ const CartItems = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          setCouponResult(data); // Assuming the response has a property 'result' with the coupon result
+          setCouponResult(data);
         })
         .catch((error) => {
           console.error('Error applying coupon:', error);
@@ -86,39 +84,35 @@ const CartItems = () => {
     const jwtToken = localStorage.getItem('jwtToken');
 
     if (username && jwtToken) {
-      setIsLoading(true); // Set isLoading to false after handling errors
+      setIsLoading(true);
 
       let orderCreationUrl = `http://localhost:8080/orders/${username}`;
 
-      // Check if a coupon value is provided
+     
       if (couponValue.trim() !== '') {
-        // Append the couponCode query parameter if a coupon value is present
         orderCreationUrl += `?couponCode=${couponValue}`;
       }
 
-      // Make a POST request to create the order
       try {
         const response = await fetch(orderCreationUrl, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${jwtToken}`,
-            'Content-Type': 'application/json', // Make sure to set the content type
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(cartItems), // Send the cart items as the request body
+          body: JSON.stringify(cartItems),
         });
 
         if (response.ok) {
-          setIsLoading(true); // Set isLoading to true while processing the order
+          setIsLoading(true);
 
           setShowSuccessfulOrderMessage(true);
 
           setTimeout(() => {
-            // Reload the page after the wait time
             setShowSuccessfulOrderMessage(false);
           }, 3000);
 
           setTimeout(() => {
-            // Reload the page after the wait time
             window.location.reload();
           }, 1000);
 
@@ -126,12 +120,10 @@ const CartItems = () => {
         } else {
           const errorData = await response.json();
           setErrorMessage(errorData.message);
-          // Handle non-success HTTP responses (e.g., 404 or 500 errors)
 
           setShowErrorMessage(true);
 
           setTimeout(() => {
-            // Reload the page after the wait time
             setShowErrorMessage(false);
           }, 3000);
 
@@ -141,15 +133,13 @@ const CartItems = () => {
         console.error('Error creating order:', error);
       }
     }
-    setIsLoading(false); // Set isLoading to false after handling errors
+    setIsLoading(false);
   };
 
   const handleDelete = (itemToDelete) => {
-    // Implement delete logic here and update the cartItems state accordingly
   };
 
   const handleUpdate = (itemToUpdate) => {
-    // Implement update logic here and update the cartItems state accordingly
   };
 
   if (cartItems.length === 0) {

@@ -13,13 +13,11 @@ import moment from 'moment';
 
 function MyOrders({history, location}) {
   const [orders, setOrders] = useState([]);
-  const [isEmptyCart, setIsEmptyCart] = useState(false); // State to track an empty cart
+  const [isEmptyCart, setIsEmptyCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 6; // Number of orders to display per page
-  const maxButtonsToShow = 4; // Maximum number of buttons to show between Next and Previous
+  const ordersPerPage = 6;
 
   useEffect(() => {
-    // Fetch user orders using the provided endpoint and JWT token
     const username = getUsernameFromToken();
     const jwtToken = localStorage.getItem('jwtToken');
 
@@ -38,7 +36,6 @@ function MyOrders({history, location}) {
     }
   }, []);
 
-  // Calculate the index range for the currently displayed orders
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
@@ -46,10 +43,9 @@ function MyOrders({history, location}) {
   const totalOrders = orders.length;
   const finalNumber = Math.ceil(totalOrders / ordersPerPage);
   
-  // Change page
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo(0, 0); // Scroll to the top
+    window.scrollTo(0, 0);
   };
 
   const handlePageChange = (newPage) => {
@@ -124,8 +120,6 @@ function MyOrders({history, location}) {
         ))}
 
       </div>
-
-      {/* Pagination controls */}
       
       {totalOrders > 1 && (
   <div className="pagination">
@@ -148,7 +142,6 @@ function MyOrders({history, location}) {
       <FontAwesomeIcon icon={faCaretLeft} />
     </button>
 
-    {/* Replace number buttons with page input */}
     <div className="page-input-container">
       Page
       <input

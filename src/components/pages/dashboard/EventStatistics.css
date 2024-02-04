@@ -25,7 +25,6 @@
   height: 150px;
   padding: 15px;
   margin: 0 90px;
-  /* Even spacing between circles */
 }
 
 .event-statistics-number {
@@ -48,30 +47,16 @@
   color: #FE6F57;
 }
 
-/* Adjust vertical alignment for circles without subtext */
 .event-statistics-item:nth-child(3) .event-statistics-circle,
 .event-statistics-item:nth-child(4) .event-statistics-circle {
   align-items: center;
 }
 
-/* .event-statistics-item:nth-child(3) .event-statistics-circle {
-    margin-bottom: 20px;
-  }
-  
-  .event-statistics-item:nth-child(4) .event-statistics-circle {
-    margin-bottom: 20px; 
-  } */
-
-/* ... (Previous CSS) */
-
-
-/* Add styles for the menu */
 .event-statistics-menu {
   background-color: #fff;
   border: 1px solid #ccc;
   position: absolute;
   top: 385px;
-  /* Adjust the distance from the subtext */
   right: 50;
   z-index: 1;
   display: flex;
@@ -107,11 +92,8 @@
 .event-statistics-filter-icon {
   position: absolute;
   top: -10px;
-  /* Adjust the top value as needed */
   left: 100px;
-  /* Adjust the right value as needed */
   z-index: 1;
-  /* Ensures the icon is on top of the pie chart */
   width: 40px;
   height: 50px;
   cursor: pointer;
@@ -160,11 +142,8 @@
 .event-statistics-filter-orders-icon {
   position: absolute;
   top: -60px;
-  /* Adjust the top value as needed */
   left: 60px;
-  /* Adjust the right value as needed */
   z-index: 1;
-  /* Ensures the icon is on top of the pie chart */
   width: 40px;
   height: 50px;
   cursor: pointer;
@@ -175,7 +154,6 @@
   border: 1px solid #ccc;
   position: absolute;
   top: 0px;
-  /* Adjust the distance from the subtext */
   right: -150px;
   z-index: 1;
   display: flex;
@@ -199,14 +177,14 @@
 }
 
 .dashboard-location-input {
-  margin-right: 10px; /* Add margin only to "Location" and "Event Type" elements */
+  margin-right: 10px;
 }
 
 .dashboard-create-event-input:hover {
-  border: 1px solid #000000; /* Add a border */
+  border: 1px solid #000000;
 }
 
 .dashboard-create-event-input:hover:disabled {
   cursor: not-allowed;
-  border: 1px solid #000000; /* Add a border */
+  border: 1px solid #000000;
 }

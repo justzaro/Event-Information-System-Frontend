@@ -32,13 +32,11 @@ const CreateEvent = () => {
   
 
   const handleArtistSelection = (artist) => {
-    // Check if the artist is already selected
     if (!selectedArtists.find((selectedArtist) => selectedArtist.id === artist.id)) {
       setSelectedArtists([...selectedArtists, artist]);
     }
   };
 
-  // Function to remove a selected artist
   const removeSelectedArtist = (artist) => {
     const updatedSelectedArtists = selectedArtists.filter(
       (selectedArtist) => selectedArtist.id !== artist.id
@@ -52,7 +50,6 @@ const CreateEvent = () => {
 
   const handleClearImage = () => {
     setImageFile(null);
-    // Clear the input field by selecting it and setting its value to an empty string
     const imageInput = document.querySelector('input[name="image"]');
     if (imageInput) {
       imageInput.value = '';
@@ -116,50 +113,43 @@ const CreateEvent = () => {
 
   const handleImageChange = (e) => {
     const image = e.target.files[0];
-    setImageFile(image); // Store the selected image separately
+    setImageFile(image);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Validate and update the state based on the input field
     if (name === 'ticketPrice') {
-      // Ensure that the value is a valid floating-point number
       
-        const floatValue = parseFloat(value.replace(',', '.')); // Handle decimal separator
+        const floatValue = parseFloat(value.replace(',', '.'));
 
         if (!isNaN(floatValue)) {
-          // Prevent negative values and set a maximum of two decimal places
           const nonNegativeValue = Math.max(0, floatValue);
           const roundedValue = Number(nonNegativeValue.toFixed(2));
   
           setEventData({
             ...eventData,
-            [name]: roundedValue.toString(), // Handle double values with 2 decimal places
+            [name]: roundedValue.toString(),
           });
         }
       
     } else if (name === 'capacity') {
-      // Ensure that the value is a valid integer
       const intValue = parseInt(value);
 
       if (!isNaN(intValue)) {
-        // Prevent negative values
         const nonNegativeValue = Math.max(0, intValue);
 
         setEventData({
           ...eventData,
-          [name]: nonNegativeValue, // Handle integer values
+          [name]: nonNegativeValue,
         });
       } else {
-        // If the input is not a valid integer, set the capacity to 0
         setEventData({
           ...eventData,
           [name]: 0,
         });
       }
     } else {
-      // Handle other input fields
       setEventData({
         ...eventData,
         [name]: value,
@@ -170,7 +160,6 @@ const CreateEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Format startDate and endDate
     const formattedStartDate = `${startingTime}:${startingMinutes} ${eventData.startDate}`;
     const formattedEndDate = `${endingTime}:${endingMinutes} ${eventData.endDate}`;
     eventData.startDate = formattedStartDate;
@@ -186,10 +175,8 @@ const CreateEvent = () => {
 
     console.log('->>>>' + eventData.isActive);
 
-    // Assuming 'jwtToken' is stored locally
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // Prepare the request data
     const formData = new FormData();
     formData.append('eventDto', new Blob([JSON.stringify(eventData)], { type: 'application/json' }));
     formData.append('eventPicture', imageFile);
@@ -317,12 +304,11 @@ const CreateEvent = () => {
                 className="artist-dropdown artist-dropdown-select"
                 multiple={true}
                 onChange={(e) => {
-                  const artistId = parseInt(e.target.value); // Convert the artist ID to a number
+                  const artistId = parseInt(e.target.value);
                   const selectedArtist = availableArtists.find((artist) => artist.id === artistId);
                   handleArtistSelection(selectedArtist);
                 }}
               >
-                {/* Render the artists dynamically based on your data */}
                 
                   {availableArtists.map((artist) => (
                     <option key={artist.id} value={artist.id}>
@@ -333,9 +319,6 @@ const CreateEvent = () => {
               </select>
             )}
           </div>
-
-        {/* Display selected artists */}
-{/* Display selected artists in a scrollable container */}
 <div className="selected-artists-container">
   <div className="selected-artists">
     {selectedArtists.map((artist) => (
@@ -456,7 +439,7 @@ const CreateEvent = () => {
               </div>
             </div>
           )}
-          <hr className="dashboard-create-event-hr" /> {/* Horizontal line */}
+          <hr className="dashboard-create-event-hr" /> 
           <button
             className="dashboard-create-event-button"
             onClick={handleSubmit}

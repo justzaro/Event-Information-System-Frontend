@@ -43,7 +43,6 @@ function App() {
 
         </Routes>
         <NavigationBar />
-        {/* <Footer /> */}
       </div>
     </Router>
   );

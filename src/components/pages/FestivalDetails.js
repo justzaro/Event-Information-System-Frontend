@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { getUsernameFromToken, isAuthenticated } from '../utility/AuthUtils';
 import './FestivalDetails.css';
@@ -28,7 +27,6 @@ const toggleArtistInfo = () => {
 
 
   useEffect(() => {
-    // Fetch the event data based on the eventId and set it in state
     fetch(`http://localhost:8080/events/${eventId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -53,8 +51,6 @@ const toggleArtistInfo = () => {
     setTicketQuantity(1);
 
     if (!isAuthenticated()) {
-      // Handle the case when the user is not authenticated (e.g., show a login modal)
-      // You can customize this behavior based on your authentication implementation
 
       setShowNotLoggedInMessage(true);
 
@@ -75,7 +71,6 @@ const toggleArtistInfo = () => {
         ticketQuantity: ticketQuantity,
       };
   
-      // Make a POST request to add the item to the cart
       fetch('http://localhost:8080/cart', {
         method: 'POST',
         headers: {
@@ -86,7 +81,6 @@ const toggleArtistInfo = () => {
       })
         .then((response) => {
           if (response.ok) {
-            // Handle success (e.g., show a success message)
             setShowItemSuccessfullyAddedToCart(true);
 
             setTimeout(() => {
@@ -94,7 +88,6 @@ const toggleArtistInfo = () => {
             }, 4000);
             console.log('Item added to cart successfully');
           } else {
-            // Handle error (e.g., show an error message)
             console.error('Error adding item to cart:', response.statusText);
           }
         })
@@ -139,39 +132,6 @@ const toggleArtistInfo = () => {
             <div className="event-info">
               <h1 className="event-name-big">{event.name}</h1>
 
-              {/* <div className="price-box">
-                <div className="ticket-price-info"><FontAwesomeIcon icon={faCircleInfo} /> Exclusive Online Price</div>
-                <div className="ticket-price">{(event.ticketPrice).toFixed(2)} BGN</div>
-                <hr className="divider" />
-                <div className="ticket-controls">
-                  <button className="control-button" onClick={handleDecrease}>-</button>
-                  <input
-                    type="number"
-                    className="ticket-input"
-                    value={ticketQuantity}
-                    onChange={(e) => {
-                      const newValue = parseInt(e.target.value, 10);
-                      if (!isNaN(newValue) && newValue >= 1 && newValue <= 10) {
-                        setTicketQuantity(newValue);
-                      }
-                    }}
-                    min="1"
-                    max="10" // Adjust the maximum number of tickets
-                  />
-                  <button className="control-button" onClick={handleIncrease}>+</button>
-                  <button className="buy-button" onClick={handleAddToCart}>Add to Cart</button>
-                </div>
-                <hr className="divider" />
-                <div className="event-location">
-                    <img
-                      src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7832205/location-icon-md.png"
-                      alt="Location Icon"
-                      className="event-details-location"
-                    />
-                    <span className="location-text"> Location:</span> {event.location}
-                </div>
-              </div> */}
-
               <div className="event-description-whole-part">
 
               <div className="event-description-heading">Description</div>
@@ -196,7 +156,6 @@ const toggleArtistInfo = () => {
 
                 {showArtistInfo && (
                   <div className={`extra-info ${showArtistInfo ? 'show-info' : ''}`}>
-                  {/* Add the extra text you want to display */}
                   {event.artists.map((artist, index) => (
                   <span key={index} className="artist-name">
                     {artist.firstName} {artist.lastName}
@@ -218,18 +177,13 @@ const toggleArtistInfo = () => {
                 
                 {showEventInfo && (
                   <div className={`extra-info ${showEventInfo ? 'show-info' : ''}`}>
-                  {/* Add the extra text you want to display */}
                   {event.description}
                   </div>
                 )}
 
-
-
                 <div className={`horizontal-line below ${showEventInfo ? 'expanded' : ''}`}></div>
               </div>
-
-                    </div>
-
+            </div>
             </div>
           </div>
         </div>

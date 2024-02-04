@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './LogIn.module.css'; // Import CSS module
+import styles from './LogIn.module.css';
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ function LogIn() {
 
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false); // State to control password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -47,12 +47,12 @@ function LogIn() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username, password }), // Send email and password in the request body
+          body: JSON.stringify({ username, password }),
         });
   
         if (response.ok) {
           const data = await response.json();
-          const jwtToken = data.token; // Assuming the token is returned as 'token' in the response
+          const jwtToken = data.token;
   
           localStorage.setItem('jwtToken', jwtToken);
           navigate('/concerts');
@@ -98,13 +98,13 @@ function LogIn() {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className={styles['large-input']} // Use styles from the module
+            className={styles['large-input']}
           />
         </div>
         <div className={styles['input-container']}>
           <input
             id="passwordInput"
-            type={showPassword ? 'text' : 'password'} // Toggle input type based on showPassword state
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -114,7 +114,7 @@ function LogIn() {
           />
 
           <FontAwesomeIcon
-            icon={showPassword ? solidEye : thinEye} // Use solid or thin version based on showPassword
+            icon={showPassword ? solidEye : thinEye}
             className={styles['eye-icon']}
             onClick={togglePasswordVisibility}
           />
@@ -122,10 +122,6 @@ function LogIn() {
         <button onClick={handleLogin} className={styles['large-button']}>
           Log In
         </button>
-
-        {/* <Link to="/events">
-          <p>Forgotten Password?</p>
-        </Link> */}
 
         <hr className={styles['line']} />
 

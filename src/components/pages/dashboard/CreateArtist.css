@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     width: 650px;
-    margin-top: 100px; /* Add margin-top */
+    margin-top: 100px;
     font-family: Tahoma;
   }
   
@@ -39,7 +39,7 @@
 
   .create-artist-image-input {
     margin: 10px 0;
-    font-size: 22px; /* Make the input attachment text bigger */
+    font-size: 22px;
   }
 
   .create-artist-description {
@@ -114,8 +114,8 @@
   }
   
   .create-artist-image-preview img {
-    max-width: 100%; /* Display the image on the whole screen */
-    max-height: 100%; /* Display the image on the whole screen */
+    max-width: 100%;
+    max-height: 100%;
     border: 1px solid #fff;
     border-radius: 5px;
   }

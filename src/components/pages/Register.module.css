@@ -1,15 +1,13 @@
-/* Registration.module.css */
-
 .registration-form {
-  border: 1px solid #ccc; /* Add border */
-  border-radius: 2px; /* Remove rounded corners */
+  border: 1px solid #ccc;
+  border-radius: 2px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: auto;
   background-color: #f4f4f4;
-  padding: 20px; /* Add some padding to the form */
+  padding: 20px;
   margin-left: 34%;
   margin-top: 7%;
   width: 30%;
@@ -27,7 +25,7 @@
   align-items: center;
   margin-bottom: 10px;
   margin-right: 100px;
-  width: 100%; /*input fields length */
+  width: 100%;
 }
 
 .registration-form p {
@@ -37,27 +35,26 @@
 
 .form-group select {
   flex: 1;
-  padding: 12px; /* Increased padding */
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 18px; /* Increased font size */
+  font-size: 18px;
   margin-right: 10px;
 }
 
-/* Remove spacing between day, month, and year dropdowns */
 .form-group select:last-child {
   margin-right: 0;
 }
 
 .form-group input {
-  flex: 1; /* Make the text input fields span 100% */
-  padding: 11px; /* Increased padding */
+  flex: 1;
+  padding: 11px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 20px; /* Increased font size */
-  margin-right: 10px; /* Add spacing between input fields */
+  font-size: 20px; 
+  margin-right: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  height: 30px; /* input fields height */
+  height: 30px;
   font-weight: 100;
 }
 
@@ -65,7 +62,7 @@
   font-weight: 100;
   color: black;
 }
-/* Remove spacing between text input fields */
+
 .form-group input:last-child {
   margin-right: 0;
 }
@@ -75,9 +72,9 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 18px 24px; /* Increased padding */
+  padding: 18px 24px;
   cursor: pointer;
-  font-size: 28px; /* Increased font size */
+  font-size: 28px;
   transition: background-color 0.3s ease;
   width: 100%;
   margin-top: 20px;
@@ -141,8 +138,8 @@
 }
 
 .register-show-password {
-  width: 379px; /* Adjust as needed to prevent resizing */
-  padding-right: 11px; /* Adjust as needed to prevent resizing */
-  padding-bottom: 15px; /* Adjust as needed to prevent resizing */
+  width: 379px;
+  padding-right: 11px;
+  padding-bottom: 15px;
   overflow: hidden;
 }

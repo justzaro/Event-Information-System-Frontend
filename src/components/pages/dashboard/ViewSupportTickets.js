@@ -7,7 +7,7 @@ import LoadingScreen from '../../utility/LoadingScreen';
 
 const ViewSupportTickets = () => {
   const [supportTickets, setSupportTickets] = useState([]);
-  const [sortBy, setSortBy] = useState('Sort by Subject'); // Default sorting by subject
+  const [sortBy, setSortBy] = useState('Sort by Subject');
   const [searchText, setSearchText] = useState('');
   const [searchByPlaceholderText, setSearchByPlaceholderText] = useState('');
   const [filteredSupportTickets, setFilteredSupportTickets] = useState([]);
@@ -16,7 +16,7 @@ const ViewSupportTickets = () => {
   const [errorMessage, setErrorMessage] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(15); // Adjust the number of items per page as needed.
+  const [itemsPerPage] = useState(15);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredSupportTickets.slice(indexOfFirstItem, indexOfLastItem);
@@ -26,7 +26,6 @@ const ViewSupportTickets = () => {
 
   const [showTicketDetails, setShowTicketDetails] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
-  // ... (other code)
 
   const [isReplying, setIsReplying] = useState(false);
   const [replyText, setReplyText] = useState('');
@@ -37,7 +36,7 @@ const ViewSupportTickets = () => {
 
   const handleToggleReply = () => {
     setIsReplying(!isReplying);
-    setReplyText(''); // Clear the reply text when toggling
+    setReplyText('');
   };
 
   const handleReplyTextChange = (event) => {
@@ -118,7 +117,7 @@ const ViewSupportTickets = () => {
     const body = JSON.stringify(dtoObject);
   
     try {
-      setIsLoading(true); // Set isLoading to true before the fetch request
+      setIsLoading(true);
   
       const response = await fetch(url, {
         method: 'POST',
@@ -145,7 +144,7 @@ const ViewSupportTickets = () => {
     } catch (error) {
       console.error('An error occurred:', error);
     } finally {
-      setIsLoading(false); // Ensure that isLoading is set to false, even in case of an error
+      setIsLoading(false);
     }
   
     handleToggleReply();
@@ -394,7 +393,7 @@ const ViewSupportTickets = () => {
                 {isReplying && (
                  <div className="support-tickets-reply-container">
                  <textarea
-                    className="support-tickets-reply-textarea" // This class name should match your CSS class
+                    className="support-tickets-reply-textarea" 
                     value={replyText}
                     onChange={handleReplyTextChange}
                     placeholder="Type your reply here..."
@@ -403,7 +402,6 @@ const ViewSupportTickets = () => {
                    <button
                      className="support-tickets-reply-button"
                      onClick={() => {
-                       // Handle sending the reply (you can implement this logic)
                        sendSupportTicketReply();
                      }}
                    >

@@ -1,12 +1,8 @@
-// CartSummary.js
 import React from 'react';
-import './CartSummary.css'; // Import the CSS file for CartSummary styles
+import './CartSummary.css';
 
 const CartSummary = ({ cartItems, couponResult }) => {
-    // Calculate the total value of items in the cart
     const totalValue = cartItems.reduce((total, item) => total + item.totalPrice, 0);
-
-    // Calculate the price to pay (totalValue - couponResult)
     const priceToPay = totalValue - couponResult;
 
     return (

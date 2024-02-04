@@ -10,7 +10,7 @@ function PostsPage() {
   const [selectedPost, setSelectedPost] = useState(null);
   const currentUser = getUsernameFromToken();
 
-  const [addingPost, setAddingPost] = useState(false); // Track if the "Add Post" popup is open
+  const [addingPost, setAddingPost] = useState(false);
   const [postDescription, setPostDescription] = useState('');
   const [postLocation, setPostLocation] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
@@ -32,7 +32,6 @@ function PostsPage() {
   const handleAddComment = (postId) => {
     const commentText = commentTexts[postId];
     console.log("comment text - " + commentText);
-    // Create a JSON object with the comment body
     const commentData = {
       commentBody: commentText,
     };
@@ -47,9 +46,6 @@ function PostsPage() {
         },
       })
       .then((response) => {
-        // Handle successful comment submission
-        // You may want to refresh the comments for the specific post here
-        // Clear the comment input field
         fetchPosts();
         setCommentTexts((prevCommentTexts) => ({
           ...prevCommentTexts,
@@ -70,8 +66,6 @@ function PostsPage() {
         }));
         
         if (!commentInput) {
-          // Handle error for null comment input
-          // For example, you can show an error message or take appropriate action
           setCommentBodyIsEmptyMessage(true);
   
           setTimeout(() => {
@@ -83,14 +77,11 @@ function PostsPage() {
           setTimeout(() => {
             setFailAddingComment(false);
           }, 4000);
-          // Handle other errors if needed
         }
-        // Handle error if needed
       });
   };
 
   const handleDeleteComment = (commentId) => {
-    // Send a request to delete the comment with commentId
     axios
       .delete(`http://localhost:8080/comments/${commentId}`, {
         headers: {
@@ -108,7 +99,6 @@ function PostsPage() {
         fetchPosts();
       })
       .catch((error) => {
-        // Handle errors if needed
         console.error(error);
       });
   };
@@ -135,12 +125,8 @@ function PostsPage() {
   };
 
   useEffect(() => {
-    // Fetch posts data when the component mounts
     fetchPosts();
-    // Refresh and fetch posts every minute
-    const refreshInterval = setInterval(fetchPosts, 60000); // 60000 milliseconds = 1 minute
-
-    // Clear the interval when the component unmounts
+    const refreshInterval = setInterval(fetchPosts, 60000); 
     return () => clearInterval(refreshInterval);
   }, []);
 
@@ -159,33 +145,25 @@ const calculateTimeDifference = (postedAt) => {
     const [day, month, year] = date.split('-').map(Number);
   
     if (!isNaN(hours) && !isNaN(minutes) && !isNaN(day) && !isNaN(month) && !isNaN(year)) {
-      // Create a Date object for the post's date and time
-      const postDate = new Date(year, month - 1, day, hours, minutes); // Months are zero-based (0-11)
+      const postDate = new Date(year, month - 1, day, hours, minutes);
   
-      // Calculate the time difference in milliseconds
       const timeDifference = currentDate - postDate;
   
-      // Calculate days, hours, and minutes
       const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const hoursDifference = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutesDifference = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
   
       if (daysDifference > 0) {
-        // Display days if difference is greater than 0
         return `${daysDifference}d`;
       } else if (hoursDifference > 0) {
-        // Display hours if difference is greater than 0
         return `${hoursDifference}h`;
       } else if (minutesDifference > 0) {
-        // Display minutes if difference is greater than 0
         return `${minutesDifference}m`;
       } else {
-        // Display seconds if no significant difference
         return 'Just now';
       }
     }
   
-    // Handle invalid date or time format
     return 'Invalid Date or Time Format';
   };
   
@@ -197,18 +175,15 @@ const calculateTimeDifference = (postedAt) => {
   };
   
   const handleAddPostClick = () => {
-    // Open the "Add Post" popup
     setAddingPost(true);
   };
 
   const handlePostAdded = () => {
-    // Close the "Add Post" popup and clear form data
     setAddingPost(false);
     setPostDescription('');
     setPostLocation('');
     setSelectedImage(null);
 
-    // Fetch the updated posts after adding a new post
     axios
       .get('http://localhost:8080/posts', {
         headers: {
@@ -224,41 +199,34 @@ const calculateTimeDifference = (postedAt) => {
   };
 
   const handleImageChange = (e) => {
-    // Handle file input change and store the selected image
     const file = e.target.files[0];
     setSelectedImage(file);
   };
 
   const handleUploadClick = () => {
-    // Create a FormData object to send the multipart request
-
     if (!selectedImage) {
-      // Handle the case where no image is attached
       setNoPostImageIsAttached(true);
 
       setTimeout(() => {
         setNoPostImageIsAttached(false);
       }, 4000);
 
-      return; // Prevent further execution of the function
+      return;
     }
 
     const formData = new FormData();
   
     const postDto = {
-      description: postDescription || "", // Set to an empty string if null
-      location: postLocation || "",       // Set to an empty string if null
+      description: postDescription || "",
+      location: postLocation || "",
     };
     
-    // Create a Blob containing the JSON data
     const postDtoBlob = new Blob([JSON.stringify(postDto)], {
       type: 'application/json',
     });
     
-    // Append the Blob to the FormData
     formData.append('postDto', postDtoBlob);
   
-    // Append the image file to the FormData
     formData.append('postPicture', selectedImage);
   
     axios
@@ -286,12 +254,10 @@ const calculateTimeDifference = (postedAt) => {
       })
       .catch((error) => {
         console.error(error);
-        // Handle error if needed
       });
   };
   
   const confirmDelete = () => {
-    // Send a request to delete the post with postToDelete as the post ID
     axios
       .delete(`http://localhost:8080/posts/${postToDelete}/${currentUser}`, {
         headers: {
@@ -299,8 +265,6 @@ const calculateTimeDifference = (postedAt) => {
         },
       })
       .then(() => {
-        // Handle successful deletion, e.g., remove the post from the UI
-        // and close the delete confirmation dialog
           
         setPostDeletedSuccessfullyMessage(true);
 
@@ -324,7 +288,6 @@ const calculateTimeDifference = (postedAt) => {
   };
 
   const cancelDelete = () => {
-    // Clear the postToDelete and close the delete confirmation dialog
     setPostToDelete(null);
     setShowDeleteConfirmation(false);
   };
@@ -387,7 +350,6 @@ const calculateTimeDifference = (postedAt) => {
                 </span>
               </span>
               <span className="post-location">{post.location}</span>
-              {/* <span className="post-date">{post.postedAt}</span> */}
             </div>
           </div>
           <img
@@ -398,7 +360,7 @@ const calculateTimeDifference = (postedAt) => {
 
           {(post.user.username === currentUser || isAdmin()) && (
             <button className="delete-post-button" onClick={() => handleDeletePost(post.postId)}>
-              <FontAwesomeIcon icon={faTimes} /> {/* Use the appropriate icon */}
+              <FontAwesomeIcon icon={faTimes} />
             </button>
           )}
 
@@ -475,9 +437,6 @@ const calculateTimeDifference = (postedAt) => {
                   </span>
                   
                   <p className="comment-body">{comment.commentBody}</p>
-                  {/* <div className="posts-comments-dividing-hr" >
-                    
-                  </div> */}
                 
                 </div>
                 {comment.user.username === currentUser && (

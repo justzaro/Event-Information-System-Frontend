@@ -3,30 +3,24 @@
     flex-direction: column;
     border: none;
     padding: 0;
-    /* Reset padding */
     margin: 19px;
     width: 18%;
     background-color: #243d52;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    /* Adjust the border radius */
     overflow: hidden;
-    /* Clip content that exceeds the rounded corners */
     transition: box-shadow 0.3s ease;
 }
 
 .event-cards-container {
     display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap onto the next row */
-    justify-content: flex-start; /* Start new rows on the left */
-    /* Other styles... */
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .event-picture {
     width: 100%;
-    /* Span to the right and left edges */
     height: 180px;
-    /* Set the desired image height */
     object-fit: cover;
     margin: 0;
     padding: 0;
@@ -51,28 +45,20 @@
 
 .icon {
     width: 17px;
-    /* Adjust icon width */
     height: 16px;
-    /* Adjust icon height */
     margin-right: 8px;
-    /* Adjust spacing between icon and text */
 }
 
 .event-date,
 .event-time,
 .event-location {
     display: flex;
-    /* Use flexbox */
     align-items: center;
-    /* Vertically center align icon and text */
 }
 
 .event-card:hover {
     box-shadow: 0 0 20px #154a75;
-    /* Change the background color on hover to navy (#001f3f) */
     cursor: pointer;
-    /* Change the cursor to indicate interactivity */
-    /* You can add additional hover styles here, like text color or box shadow */
 }
 
 .event-card a {

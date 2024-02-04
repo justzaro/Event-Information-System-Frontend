@@ -25,7 +25,7 @@ const EventStatistics = () => {
   const [selectedEventsRange, setSelectedEventsRange] = useState('7 days');
   const [selectedBookedRange, setSelectedBookedRange] = useState('7 days');
   const [menuVisible, setMenuVisible] = useState(false);
-  const [menuType, setMenuType] = useState('events'); // State to track the menu type
+  const [menuType, setMenuType] = useState('events');
 
   const [orderData, setOrderData] = useState([]);
   const [ticketsData, setTicketsData] = useState([]);
@@ -79,14 +79,12 @@ const EventStatistics = () => {
   const fetchOrderData = async (count) => {
     const jwtToken = localStorage.getItem('jwtToken');
     try {
-      // Fetch order data with the updated count
       const orderResponse = await axios.get(`http://localhost:8080/orders/prices/last/${count}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
       });
 
-      // The orders are expected to be returned in the most recent to the last order, so we need to reverse the order for display.
       const reversedOrderData = orderResponse.data.reverse();
       setOrderData(reversedOrderData);
     } catch (error) {
@@ -97,7 +95,6 @@ const EventStatistics = () => {
   const fetchTicketsData = async (count) => {
     const jwtToken = localStorage.getItem('jwtToken');
     try {
-      // Fetch order data with the updated count
       const ticketsResponse = await axios.get(`http://localhost:8080/tickets/sold-per-day-in-last-days/${count}`, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
@@ -118,7 +115,6 @@ const EventStatistics = () => {
         fetchTicketsData(30);
         fetchOrderData(30);
 
-        // Fetch the list of events
         const eventsResponse = await axios.get('http://localhost:8080/events?type=CONCERT', {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
@@ -141,12 +137,10 @@ const EventStatistics = () => {
   }, []);
 
   const handleSecondChartConcertSelect = (concert) => {
-    // Update the selected concert and fetch data for the second chart
     setSelectedNumberConcertName(concert.name);
     setSelectedNumberConcert(concert);
     setAttendanceNumberMenuVisible(false);
 
-    // Make a new request with the selected concert ID for the second chart
     const jwtToken = localStorage.getItem('jwtToken');
     axios
       .get(`http://localhost:8080/events/${concert.id}/attendance`, {
@@ -155,7 +149,6 @@ const EventStatistics = () => {
         },
       })
       .then((response) => {
-        // Update attendanceData for the second chart
         setAttendanceNumberData(response.data);
       })
       .catch((error) => {
@@ -168,7 +161,6 @@ const EventStatistics = () => {
     setSelectedConcert(concert);
     setAttendanceMenuVisible(false);
 
-    // Make a new request with the selected concert ID
     const jwtToken = localStorage.getItem('jwtToken');
     axios.get(`http://localhost:8080/events/${concert.id}/attendance`, {
       headers: {
@@ -184,13 +176,13 @@ const EventStatistics = () => {
   };
 
   const chartData = orderData.map((order, index) => ({
-    day: `${orderData.length - index}`, // Display order number
-    price: order, // Assuming the order value represents the price
+    day: `${orderData.length - index}`,
+    price: order,
   }));
 
   const ticketsChartData = ticketsData.map((order, index) => ({
-    day: `${ticketsData.length - index}`, // Display order number
-    count: order, // Assuming the order value represents the price
+    day: `${ticketsData.length - index}`,
+    count: order,
   }));
 
   const bookedData = [
@@ -206,10 +198,8 @@ const EventStatistics = () => {
   const colors = ['#FE6F57', '#119c36'];
 
   useEffect(() => {
-    // Replace 'your_jwt_token' with the actual JWT token
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // Fetch data for the four statistics circles
     const fetchData = async () => {
       try {
         const eventsResponse = await axios.get('http://localhost:8080/events/upcoming?type=1', {
@@ -254,7 +244,6 @@ const EventStatistics = () => {
   };
 
   const handleMenuClick = (value) => {
-    // Determine the type based on the selected value
     let type;
     switch (value) {
       case '7 days':
@@ -273,7 +262,7 @@ const EventStatistics = () => {
         type = 5;
         break;
       default:
-        type = 1; // Default to 7 days
+        type = 1;
     }
 
     if (menuType === 'events') {
@@ -282,16 +271,13 @@ const EventStatistics = () => {
       setSelectedBookedRange(value);
     }
 
-    // Make the GET request based on menu type (events or booked)
     const endpoint =
       menuType === 'events'
         ? `http://localhost:8080/events/upcoming?type=${type}`
         : `http://localhost:8080/events/booked?type=${type}`;
 
-    // Replace 'your_jwt_token' with the actual JWT token
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // Fetch data based on the selected type
     const fetchData = async () => {
       try {
         const response = await axios.get(endpoint, {
@@ -300,7 +286,6 @@ const EventStatistics = () => {
           },
         });
 
-        // Update the count based on the response
         if (menuType === 'events') {
           setEventsCount(response.data);
         } else {
@@ -313,7 +298,6 @@ const EventStatistics = () => {
 
     fetchData();
 
-    // Close the menu after selection
     setMenuVisible(false);
   };
 
@@ -458,7 +442,7 @@ const EventStatistics = () => {
             type="monotone"
             dataKey="price"
             stroke="#FE6F57"
-            strokeWidth={2} // Adjust this value to make the line thicker
+            strokeWidth={2}
             activeDot={{ r: 8 }} />
         </LineChart>
       </div>
@@ -521,7 +505,7 @@ const EventStatistics = () => {
             type="monotone"
             dataKey="count"
             stroke="#FE6F57"
-            strokeWidth={2} // Adjust this value to make the line thicker
+            strokeWidth={2}
             activeDot={{ r: 8 }} />
         </LineChart>
       </div>
@@ -565,9 +549,7 @@ const EventStatistics = () => {
 
                 return (
                   <text x={entry.x} y={yPosition} fill={colors[entry.index]} textAnchor="middle">
-                    {/* {`${(entry.percent * 100).toFixed(2)}%`} */}
                     {`${(entry.percent * 100)}%`}
-
                   </text>
                 );
               }}
