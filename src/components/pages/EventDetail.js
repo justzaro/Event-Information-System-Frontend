@@ -69,7 +69,7 @@ document.addEventListener('mousemove', handleMouseMove);
 
 
   useEffect(() => {
-    fetch(`http://localhost:8080/events/${eventId}`)
+    fetch(`http://192.168.1.8:8080/events/${eventId}`)
       .then((response) => response.json())
       .then((data) => {
         setEvent(data);

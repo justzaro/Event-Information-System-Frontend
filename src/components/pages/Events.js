@@ -28,7 +28,7 @@ const Events = () => {
   }  
 
   useEffect(() => {
-    fetch('http://localhost:8080/events?type=CONCERT')
+    fetch('http://192.168.1.8:8080/events?type=CONCERT')
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched eventData:', data);
